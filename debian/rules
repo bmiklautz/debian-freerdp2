@@ -1,0 +1,40 @@
+#!/usr/bin/make -f
+
+PKD   = $(word 1,$(abspath $(dir $(MAKEFILE_LIST))))
+PKG   = $(word 2,$(shell dpkg-parsechangelog -l$(PKD)/changelog | grep ^Source))
+UVER  = $(shell dpkg-parsechangelog -l$(PKD)/changelog | perl -ne 'print $$1 if m{^Version:\s+(?:\d+:)?(\d.*)(?:\-\d+.*)};')
+DTYPE = +dfsg1
+VER  ?= $(subst $(DTYPE),,$(UVER))
+
+UURL = git://github.com/FreeRDP/FreeRDP.git
+UREV = $(shell echo $(VER) | cut -d"." -f5)
+
+## http://wiki.debian.org/onlyjob/get-orig-source
+.PHONY: get-orig-source
+get-orig-source: $(PKG)_$(VER)$(DTYPE).orig.tar.xz $(info I: $(PKG)_$(VER)$(DTYPE))
+	@
+
+$(PKG)_$(VER)$(DTYPE).orig.tar.xz: $(info I: GIT Revision=$(UREV))
+	$(if $(wildcard $(PKG)-$(VER)),$(error $(PKG)-$(VER) exist, aborting..))
+	@echo "# Downloading..."
+	git clone $(UURL) $(PKG)-$(VER) \
+	    || $(RM) -r $(PKG)-$(VER)
+	cd $(PKG)-$(VER) \
+	    && git checkout "$(UREV)" \
+	    && ( echo "# Generating ChangeLog..." \
+	       ; git --no-pager log --format="%ai %aN (%h) %n%n%x09*%w(68,0,10) %s%d%n" > ChangeLog \
+	       ; touch -d "$$(git log -1 --format='%ci')" ChangeLog) \
+	    && echo "# Setting times..." \
+	    && for F in $$(git ls-tree -r --name-only HEAD); do touch --no-dereference -d "$$(git log -1 --format="%ai" -- $$F)" "$$F"; done \
+	    && echo "# Cleaning-up..." \
+	    && rm -rf \
+	        client/Android/ \
+	        client/iOS/ \
+	        client/Mac/ \
+	        client/Windows/ \
+	        scripts/OpenSSL-DownloadAndBuild.command \
+	    && $(RM) -r .git .git*
+	@echo "# Packing..."
+	find -L "$(PKG)-$(VER)" -xdev -type f -print | sort \
+	    | XZ_OPT="-6v" tar -caf "../$(PKG)_$(VER)$(DTYPE).orig.tar.xz" -T- --owner=root --group=root --mode=a+rX \
+	    && $(RM) -r "$(PKG)-$(VER)"
