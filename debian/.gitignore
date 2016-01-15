@@ -1,0 +1,9 @@
+*.log
+freerdp-x11/
+libfreerdp-client2/
+libfreerdp-server2/
+libfreerdp2-dev/
+libfreerdp2/
+libwinpr1-dev/
+libwinpr1/
+tmp/

@@ -1,5 +1,57 @@
 #!/usr/bin/make -f
 
+DEB_HOST_ARCH=$(shell dpkg-architecture -qDEB_HOST_ARCH)
+ifneq (,$(filter armhf,$(DEB_HOST_ARCH)))
+ARM_FLOAT_ABI = -DARM_FP_ABI=hard
+else
+ARM_FLOAT_ABI =
+endif
+
+NULL =
+
+DEB_CMAKE_EXTRA_FLAGS :=  -DCMAKE_INSTALL_INCLUDEDIR=include/$(shell dpkg-architecture -qDEB_BUILD_MULTIARCH) \
+                          -DCMAKE_SKIP_RPATH=FALSE \
+                          -DCMAKE_SKIP_INSTALL_RPATH=TRUE \
+                          -DWITH_PULSE=ON \
+                          -DWITH_CHANNELS=ON \
+                          -DSTATIC_CHANNELS=ON \
+                          -DWITH_CUPS=ON \
+                          -DWITH_PCSC=ON \
+                          -DWITH_JPEG=ON \
+                          -DWITH_GSTREAMER_0_10=OFF \
+                          -DWITH_GSTREAMER_1_0=ON \
+                          -DWITH_GSM=ON \
+                          -DCHANNEL_URBDRC=ON \
+                          -DCHANNEL_URBDRC_CLIENT=ON \
+                          -DWITH_SERVER=ON \
+                          -DBUILD_TESTING=OFF \
+                          -DCMAKE_BUILD_TYPE=RELWITHDEBINFO \
+                          -DWITH_WAYLAND=OFF \
+                          $(ARM_FLOAT_ABI) \
+                          $(NULL)
+%:
+	dh $@ --parallel
+
+.PHONY: override_dh_auto_configure override_dh_install override_dh_strip
+override_dh_auto_configure:
+	dh_auto_configure -- $(DEB_CMAKE_EXTRA_FLAGS)
+
+override_dh_install:
+	rm -rf debian/tmp/usr/lib/x86_64-linux-gnu/libfreerdp-shadow.so
+	rm -rf debian/tmp/usr/lib/x86_64-linux-gnu/libxfreerdp-client.so
+	mkdir -p debian/tmp/usr/lib/x86_64-linux-gnu/freerdp/
+	dh_install --fail-missing
+
+override_dh_strip:
+	dh_strip -plibfreerdp2 --dbg-package=libfreerdp2-dbg
+	dh_strip -plibfreerdp-server2 --dbg-package=libfreerdp-server2-dbg
+	dh_strip -plibfreerdp-client2 --dbg-package=libfreerdp-client2-dbg
+	dh_strip -plibrdtk0 --dbg-package=librdtk0-dbg
+	dh_strip -plibwinpr1 --dbg-package=libwinpr1-dbg
+	dh_strip -pfreerdp-x11 --dbg-package=freerdp-x11-dbg
+	dh_strip -pfreerdp-shadow-x11 --dbg-package=freerdp-shadow-x11-dbg
+	dh_strip -pwinpr-utils --dbg-package=winpr-utils-dbg
+
 PKD   = $(word 1,$(abspath $(dir $(MAKEFILE_LIST))))
 PKG   = $(word 2,$(shell dpkg-parsechangelog -l$(PKD)/changelog | grep ^Source))
 UVER  = $(shell dpkg-parsechangelog -l$(PKD)/changelog | perl -ne 'print $$1 if m{^Version:\s+(?:\d+:)?(\d.*)(?:\-\d+.*)};')
