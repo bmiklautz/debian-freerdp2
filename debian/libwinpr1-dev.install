@@ -1,4 +1,4 @@
-/usr/lib/*/libwinpr.so
-/usr/include/winpr*
-/usr/lib/*/pkgconfig/winpr1.pc
-/usr/lib/*/cmake/WinPR*
+usr/lib/*/libwinpr.so
+usr/include/winpr*
+usr/lib/*/pkgconfig/winpr1.pc
+usr/lib/*/cmake/WinPR*
