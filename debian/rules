@@ -37,9 +37,9 @@ override_dh_auto_configure:
 	dh_auto_configure -- $(DEB_CMAKE_EXTRA_FLAGS)
 
 override_dh_install:
-	rm -rf debian/tmp/usr/lib/x86_64-linux-gnu/libfreerdp-shadow.so
-	rm -rf debian/tmp/usr/lib/x86_64-linux-gnu/libxfreerdp-client.so
-	mkdir -p debian/tmp/usr/lib/x86_64-linux-gnu/freerdp/
+	rm -rf debian/tmp/usr/lib/$(DEB_HOST_MULTIARCH)/libfreerdp-shadow.so
+	rm -rf debian/tmp/usr/lib/$(DEB_HOST_MULTIARCH)/libxfreerdp-client.so
+	mkdir -p debian/tmp/usr/lib/$(DEB_HOST_MULTIARCH)/freerdp/
 	dh_install --fail-missing
 
 override_dh_strip:
