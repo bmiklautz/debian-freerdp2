@@ -1,5 +1,6 @@
 *.log
-freerdp-x11/
+freerdp2-x11/
+freerdp2-x11-dbg/
 libfreerdp-client2/
 libfreerdp-server2/
 libfreerdp2-dev/
@@ -10,9 +11,8 @@ tmp/
 *.substvars
 .debhelper/
 files
-freerdp-shadow-x11-dbg/
-freerdp-shadow-x11/
-freerdp-x11-dbg/
+freerdp2-shadow-x11-dbg/
+freerdp2-shadow-x11/
 freerdp2-dev/
 libfreerdp-client2-dbg/
 libfreerdp-server2-dbg/

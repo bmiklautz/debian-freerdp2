@@ -44,11 +44,13 @@ Homepage: http://www.freerdp.com/
 Vcs-Browser: https://anonscm.debian.org/git/collab-maint/freerdp2.git
 Vcs-Git: https://anonscm.debian.org/git/collab-maint/freerdp2.git
 
-Package: freerdp-x11
+Package: freerdp2-x11
 Architecture: any
 Section: x11
 Depends: ${misc:Depends}, ${shlibs:Depends}
 Provides: freerdp
+Replaces: freerdp-x11
+Conflicts: freerdp-x11
 Description: RDP client for Windows Terminal Services (X11 client)
  FreeRDP is a libre client/server implementation of the Remote
  Desktop Protocol (RDP).
@@ -74,7 +76,7 @@ Section: libs
 Pre-Depends: ${misc:Pre-Depends}
 Depends: ${misc:Depends}, ${shlibs:Depends}
 Multi-Arch: same
-Suggests: freerdp-x11
+Suggests: freerdp2-x11
 Description: Free Remote Desktop Protocol library (core library)
  FreeRDP is a libre client/server implementation of the Remote
  Desktop Protocol (RDP).
@@ -111,7 +113,7 @@ Section: libs
 Pre-Depends: ${misc:Pre-Depends}
 Depends: ${misc:Depends}, ${shlibs:Depends}
 Multi-Arch: same
-Suggests: freerdp-x11
+Suggests: freerdp2-x11
 Description: Windows Portable Runtime library
  WinPR is a spin-off project of FreeRDP which aims at providing a portable
  implementation of important portions of the Windows API. Just like FreeRDP,
@@ -222,13 +224,13 @@ Description: Free Remote Desktop Protocol library (debug symbols)
  .
  This package contains the debug symbols of the FreeRDP server library.
 
-Package: freerdp-x11-dbg
+Package: freerdp2-x11-dbg
 Section: debug
 Priority: extra
 Architecture: any
 Depends:
  ${misc:Depends},
- freerdp-x11 (= ${binary:Version}),
+ freerdp2-x11 (= ${binary:Version}),
 Description: RDP client for Windows Terminal Services (X11 client, debug symbols)
  FreeRDP is a libre client/server implementation of the Remote
  Desktop Protocol (RDP).
@@ -279,7 +281,7 @@ Description: Remote Desktop Protocol toolkit
  .
  This package contains the debug symbols of the remote desktop toolkit library.
 
-Package: freerdp-shadow-x11
+Package: freerdp2-shadow-x11
 Architecture: any
 Section: debug
 Depends: ${misc:Depends}, ${shlibs:Depends}
@@ -291,13 +293,13 @@ Description: RDP shadowing server (x11)
  This package contains a "shadowing" server that can be used to
  share an already started X11 DISPLAY.
 
-Package: freerdp-shadow-x11-dbg
+Package: freerdp2-shadow-x11-dbg
 Architecture: any
 Section: debug
 Priority: extra 
 Depends: ${misc:Depends},
  ${shlibs:Depends},
- freerdp-shadow-x11
+ freerdp2-shadow-x11
 Provides: freerdp
 Description: RDP shadowing server (x11)
  FreeRDP is a libre client/server implementation of the Remote

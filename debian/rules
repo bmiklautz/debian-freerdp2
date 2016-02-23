@@ -48,8 +48,8 @@ override_dh_strip:
 	dh_strip -plibfreerdp-client2 --dbg-package=libfreerdp-client2-dbg
 	dh_strip -plibrdtk0 --dbg-package=librdtk0-dbg
 	dh_strip -plibwinpr1 --dbg-package=libwinpr1-dbg
-	dh_strip -pfreerdp-x11 --dbg-package=freerdp-x11-dbg
-	dh_strip -pfreerdp-shadow-x11 --dbg-package=freerdp-shadow-x11-dbg
+	dh_strip -pfreerdp2-x11 --dbg-package=freerdp2-x11-dbg
+	dh_strip -pfreerdp2-shadow-x11 --dbg-package=freerdp2-shadow-x11-dbg
 	dh_strip -pwinpr-utils --dbg-package=winpr-utils-dbg
 
 PKD   = $(word 1,$(abspath $(dir $(MAKEFILE_LIST))))
