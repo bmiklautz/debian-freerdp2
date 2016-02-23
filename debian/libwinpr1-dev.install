@@ -1,4 +1,5 @@
 usr/lib/*/libwinpr.so
 usr/include/winpr*
+obj-*/winpr/include/winpr/wtypes.h usr/include/winpr1/winpr
 usr/lib/*/pkgconfig/winpr1.pc
 usr/lib/*/cmake/WinPR*
