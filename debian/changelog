@@ -1,3 +1,20 @@
+freerdp2 (2.0.0~git20160115.1.e2dbe5e+dfsg1-2) unstable; urgency=medium
+  [ Bernhard Miklautz]
+  * rename freerdp-x11 to freerdp2-x11 and
+    freerdp-shadow-x11 to freerdp2-shadow-x11
+  * freerdp2-dev: install missing files
+  * debian/control
+    + Use encrypted URLs for Vcs-*: field.
+    + Add B-D on dpkg-dev (>= 1.16.1.1) (required for buildflags.mk)
+  * debian/rules:
+    + Enable all hardening flags.
+
+  [ Jakub Adam]
+  * install missing files into libwinpr1-dev
+  * Use architecture-agnostic paths in debian/rules
+
+ -- Bernhard Miklautz <bernhard.miklautz@shacknet.at>  Tue, 23 Feb 2016 15:50:04 +0000
+
 freerdp2 (2.0.0~git20160115.1.e2dbe5e+dfsg1-1) unstable; urgency=medium
 
   * Initial release
