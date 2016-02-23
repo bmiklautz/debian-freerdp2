@@ -41,8 +41,8 @@ Build-Depends:
  libgstreamer-plugins-base1.0-dev
 Standards-Version: 3.9.6
 Homepage: http://www.freerdp.com/
-Vcs-Browser: http://anonscm.debian.org/gitweb?p=collab-maint/freerdp2.git
-Vcs-Git: git://anonscm.debian.org/collab-maint/freerdp2.git
+Vcs-Browser: https://anonscm.debian.org/git/collab-maint/freerdp2.git
+Vcs-Git: https://anonscm.debian.org/git/collab-maint/freerdp2.git
 
 Package: freerdp-x11
 Architecture: any
