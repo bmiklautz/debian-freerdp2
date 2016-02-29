@@ -1,11 +1,882 @@
+2016-02-29 17:39:18 +0100 Norbert Federa (b4b8239) 
+
+	* Merge pull request #3176 from bmiklautz/shadow_subsystem (HEAD,
+          origin/master, origin/HEAD, master)
+
+2016-02-29 17:10:53 +0100 Bernhard Miklautz (014f31d) 
+
+	* Merge pull request #3171 from akallabeth/crypto_simplification
+
+2016-02-29 16:59:58 +0100 Bernhard Miklautz (2550634) 
+
+	* Merge pull request #3168 from akallabeth/visibility_fixes
+
+2016-02-29 16:25:04 +0100 Bernhard Miklautz (1688738) 
+
+	* ci: build server side on windows
+
+2016-02-29 16:22:24 +0100 Bernhard Miklautz (1b926f8) 
+
+	* build: export freerdp-shadow
+
+2016-02-29 16:02:13 +0100 Bernhard Miklautz (f15c050) 
+
+	* shadow/subsystem: fix windows build
+
+2016-02-29 16:00:35 +0100 Bernhard Miklautz (5a7ac96) 
+
+	* build/win32: fix DLL version information
+
+2016-02-29 15:24:07 +0100 Armin Novak (c182be0) 
+
+	* Removed module.def from build config.
+
+2016-02-29 15:21:22 +0100 Bernhard Miklautz (92de4cf) 
+
+	* Merge pull request #3167 from
+          realjiangms/shadow_export_default_subsystem
+
+2016-02-29 15:18:47 +0100 Armin Novak (68c402a) 
+
+	* Removed windows module.def files.
+
+2016-02-29 15:18:19 +0100 Armin Novak (5acd80d) 
+
+	* Exporting channel entry points.
+
+2016-02-29 14:43:33 +0100 Armin Novak (4e4d2e1) 
+
+	* Fixed crypto tests.
+
+2016-02-29 11:12:32 +0100 Armin Novak (19568c6) 
+
+	* Fixed indentation.
+
+2016-02-29 11:10:15 +0100 Armin Novak (7e65013) 
+
+	* Fixed memory leak.
+
+2016-02-29 10:31:50 +0100 Hardening (da9d9ed) 
+
+	* Merge pull request #3165 from akallabeth/printer_fix
+
+2016-02-29 09:00:02 +0100 Armin Novak (b429d23) 
+
+	* Refactored crypto *_New functions.
+
+2016-02-28 11:12:17 +0100 Armin Novak (92c1578) 
+
+	* Updated RC4 API, fixed crashing bug.
+
+2016-02-28 10:33:25 +0100 akallabeth (e2a8083) 
+
+	* Merge pull request #3169 from realjiangms/android_fix_sound
+
+2016-02-27 01:07:30 +0800 zihao.jiang (176ad52) 
+
+	* server/shadow: Export API to set built-in subsystem modules for
+          freerdp-shadow-subsystem
+
+2016-02-27 02:20:49 +0800 zihao.jiang (17139b9) 
+
+	* android: Fix sound redirection. After #3097, the java side pass
+          command line argument to JNI for freerdp settings. However
+          there's several issues need to be fixed: 1. The argument
+          /sound should be appended if freerdp is required to play
+          sound at local device 2. The option value for "audio-mode"
+          is not correct. It should match the definition in
+          client/common/cmdline.c /* Audio Mode */ define
+          AUDIO_MODE_REDIRECT     0 /* Bring to this computer */
+          define AUDIO_MODE_PLAY_ON_SERVER   1 /* Leave at remote
+          computer */ define AUDIO_MODE_NONE         2 /* Do not
+          play */ 3. Uncomment support for WAVE_FORMAT_PCM in audin.
+          I tested on my android phone and Nokia N1 tablet. It works
+          on both device
+
+2016-02-27 23:28:49 +0100 Armin Novak (238ff3b) 
+
+	* Unified encryption functions.
+
+2016-02-27 22:39:45 +0100 Armin Novak (5805ba8) 
+
+	* Removed crypto_nonce.
+
+2016-02-27 22:13:59 +0100 Armin Novak (86436bc) 
+
+	* Added API export for uwac.
+
+2016-02-27 11:36:34 +0100 Armin Novak (11c4425) 
+
+	* Fixed dupliace FREERDP_API declarations.
+
+2016-02-26 19:25:49 +0100 Armin Novak (1036f1e) 
+
+	* Fixed default visibility.
+
+2016-02-26 18:53:45 +0100 akallabeth (9d21117) 
+
+	* Merge pull request #3157 from DavBfr/Fix-bad-malloc-size
+
+2016-02-12 11:32:18 -0800 David PHAM-VAN (8ebe5b9) 
+
+	* Fix bad malloc size in statvfs
+
+2016-02-26 15:21:19 +0100 Armin Novak (b7187d0) 
+
+	* Printer driver from command line now used.
+
+2016-02-26 14:50:27 +0100 Armin Novak (dccf40c) 
+
+	* Fixed duplicate loading of smartcard and printers.
+
+2016-02-26 09:57:35 +0100 Martin Fleisz (4f22682) 
+
+	* Merge pull request #3151 from akallabeth/timezone_refactor
+
+2016-02-26 09:52:43 +0100 Hardening (4217262) 
+
+	* Merge pull request #3156 from akallabeth/ssl_wrapper_merge
+
+2016-02-26 09:28:54 +0100 Armin Novak (fe8f5de) 
+
+	* Fixed indentation.
+
+2016-02-26 09:27:53 +0100 Armin Novak (7a253ba) 
+
+	* Replaced magic numbers with defines.
+
+2016-02-26 09:23:34 +0100 akallabeth (f44f339) 
+
+	* Merge pull request #3161 from bmiklautz/uwac_versioning
+
+2016-02-25 23:47:32 +0100 Bernhard Miklautz (d5a43dd) 
+
+	* uwac: generate .pc and cmake find-module
+
+2016-02-25 23:46:56 +0100 Bernhard Miklautz (167907e) 
+
+	* uwac: enable library versioning
+
+2016-02-25 23:38:53 +0100 Bernhard Miklautz (71836f6) 
+
+	* build winpr: export WINPR_API_VERSION
+
+2016-02-25 21:57:56 +0100 Bernhard Miklautz (541abee) 
+
+	* cmake/FindWayland: cleanup
+
+2016-02-25 16:57:48 +0100 akallabeth (16ba8f3) 
+
+	* Merge pull request #3159 from bmiklautz/disable_mipsel
+
+2016-02-25 16:57:34 +0100 Bernhard Miklautz (8bdad1e) 
+
+	* Merge pull request #3140 from hardening/printer_work
+
+2016-02-25 16:31:20 +0100 Bernhard Miklautz (ae6c235) 
+
+	* android: disable mips build
+
+2016-02-25 15:03:14 +0100 David FORT (aa7fe1d) 
+
+	* Fixed indentation
+
+2016-02-25 09:02:46 +0100 Armin Novak (fd415cd) 
+
+	* Fixed missing semicolon.
+
+2016-02-25 09:00:50 +0100 akallabeth (70f9ebe) 
+
+	* Merge pull request #3042 from hardening/uwac
+
+2016-02-25 00:41:19 +0100 David FORT (2b18d25) 
+
+	* Added some checks
+
+2016-02-24 21:45:09 +0100 Armin Novak (f997421) 
+
+	* Unified hmac functions.
+
+2016-02-24 20:39:49 +0100 Armin Novak (4ca6b9b) 
+
+	* Unified random functions and remaining MD5.
+
+2016-02-24 20:32:20 +0100 Armin Novak (6e8ea34) 
+
+	* Updated cryto wrapper API.
+
+2016-02-24 20:16:33 +0100 Armin Novak (95058c6) 
+
+	* Fixed argument checks and return values.
+
+2016-02-24 20:16:19 +0100 Armin Novak (0bfe5ba) 
+
+	* Fixed naming of static functions.
+
+2016-02-24 17:04:03 +0100 Armin Novak (ada2b16) 
+
+	* Unified RC4 functions.
+
+2016-02-24 16:46:25 +0100 Armin Novak (06da644) 
+
+	* Unified md5 functions.
+
+2016-02-24 16:36:15 +0100 Armin Novak (0e4ea39) 
+
+	* Unified sha1 functions.
+
+2016-02-24 09:43:53 +0100 Armin Novak (7795ebd) 
+
+	* Fixed return value for DST.
+
+2016-02-24 09:42:12 +0100 Armin Novak (495df6d) 
+
+	* Readded read timezone from link.
+
+2016-02-23 18:15:25 +0100 Armin Novak (1cd6697) 
+
+	* Implemented timezone detection for android
+
+2016-02-23 18:08:18 +0100 Armin Novak (447ac23) 
+
+	* Refactored timezone functions.
+
+2016-02-23 20:23:52 +0100 akallabeth (7c5fcc9) 
+
+	* Merge pull request #3149 from bmiklautz/feb22
+
+2016-02-23 19:11:32 +0100 Bernhard Miklautz (ce51592) 
+
+	* Merge pull request #3150 from xhaakon/subsystem-lib
+
+2016-02-23 10:49:52 +0100 Jakub Adam (db44d27) 
+
+	* server/shadow: Build libraries for shadow subsystems
+
+2016-02-23 17:14:08 +0100 Bernhard Miklautz (738f55a) 
+
+	* Merge pull request #3119 from akallabeth/abort_event_reset
+
+2016-02-23 16:46:16 +0100 akallabeth (a53e4f4) 
+
+	* Merge pull request #3015 from bmiklautz/pull/2936
+
+2016-02-23 15:58:48 +0100 Armin Novak (d28cb6a) 
+
+	* Removed function call with invalid arguments.
+
+2016-02-10 11:20:52 +0100 Armin Novak (24c93e4) 
+
+	* Resetting abortEvent only on connect and reconnect.
+
+2016-02-23 16:25:05 +0100 Bernhard Miklautz (dd93fd2) 
+
+	* timezon: add support for tz package
+
+2016-02-23 15:34:58 +0100 Bernhard Miklautz (be02849) 
+
+	* tcp: set the timeout to 9s
+
+2015-10-19 18:29:30 +0000 volth (8b9c402) 
+
+	* Increase TCP_USER_TIMEOUT to avoid disconnections.
+
+2016-02-23 14:09:14 +0100 David FORT (0bf2fae) 
+
+	* Fix compilation with out-of-tree builds
+
+2016-02-23 09:22:15 +0100 David FORT (c1c43f9) 
+
+	* Fixed detection of wayland libs
+
+2016-02-22 16:03:57 +0100 David FORT (5dcb3df) 
+
+	* Fix compilation and detection under debian/ubuntu
+
+2016-01-18 15:55:33 +0100 David FORT (87d6caa) 
+
+	* Integrate UWAC in to the FreeRDP source tree
+
+2016-01-12 22:29:38 +0100 David FORT (bc31c00) 
+
+	* Fixed detection of UWAC library
+
+2016-01-06 23:56:05 +0100 David FORT (ded17d9) 
+
+	* Move wayland client to UWAC
+
+2016-02-23 11:44:58 +0100 Bernhard Miklautz (35faa8b) 
+
+	* Merge pull request #3148 from mfleisz/win32_include_fix
+
+2016-02-23 09:56:17 +0100 akallabeth (05aa425) 
+
+	* Merge pull request #2851 from
+          ilammy/x11-cliprdr/improve-format-support
+
+2016-02-23 09:55:55 +0100 Martin Fleisz (1b881e4) 
+
+	* winpr/file: Add missing include (io.h) for windows builds
+
+2016-02-23 09:37:31 +0100 akallabeth (88fa29c) 
+
+	* Merge pull request #3145 from giox069/master
+
+2016-02-23 00:14:30 +0200 ilammy (93fc349) 
+
+	* client/X11: harden xf_cliprdr_parse_server_format_list()
+
+2016-02-22 17:01:43 +0100 Bernhard Miklautz (e6f013e) 
+
+	* fix spelling
+
+2016-02-22 13:54:08 +0100 akallabeth (4d85ade) 
+
+	* Merge pull request #3136 from bmiklautz/winpr_version
+
+2016-02-22 12:48:42 +0100 Bernhard Miklautz (8ac4998) 
+
+	* Merge pull request #3147 from akallabeth/win_debug_symbol_fix
+
+2016-02-22 10:27:50 +0100 Armin Novak (6c8de27) 
+
+	* Installing debug symbols only if activated.
+
+2016-02-21 17:52:52 +0100 Giovanni Panozzo (1dea980) 
+
+	* Fix char signedness in glyph offset calculation, fixes #2137
+
+2016-02-19 13:27:13 +0100 Bernhard Miklautz (503399f) 
+
+	* Merge pull request #3143 from
+          akallabeth/deny_cert_if_cred_from_stdin
+
+2016-02-19 10:22:38 +0100 Armin Novak (ae4a1ee) 
+
+	* Abort certificate accept if password is read from stdin.
+
+2016-02-18 14:19:36 +0100 David FORT (1b2b1c4) 
+
+	* Add support for saveSessionInfo PDU
+
+2016-02-11 22:45:30 +0100 David FORT (a53cb81) 
+
+	* Added missing checks
+
+2016-02-03 10:26:59 +0100 David FORT (60fed9d) 
+
+	* Mutualize definitions for the printer channel
+
+2016-02-16 17:39:22 +0100 Bernhard Miklautz (12bd0ec) 
+
+	* winpr: BUMP the API version to 1.2
+
+2016-02-15 13:52:47 +0100 Hardening (2a3e999) 
+
+	* Merge pull request #2710 from akallabeth/cert_temp_accept_v2
+
+2016-02-14 14:18:26 +0100 Hardening (0092bcf) 
+
+	* Merge pull request #3130 from pxx02134/patch-1
+
+2016-02-14 14:17:52 +0100 Hardening (f524c4c) 
+
+	* Merge pull request #3131 from pxx02134/patch-2
+
+2016-02-12 21:19:13 +0100 Hardening (ef7c867) 
+
+	* Merge pull request #3124 from nathankidd/region16_rects-handle-null
+
+2016-02-11 19:34:48 -0500 Nathan Kidd (d68e58a) 
+
+	* libfreerdp-codec: Make region16_rects() handle NULL nbRects
+
+2016-02-12 10:43:25 +0100 Bernhard Miklautz (cf6ea23) 
+
+	* Merge pull request #3123 from nfedera/fix-keyboardtype-7
+
+2016-02-11 22:21:33 +0100 Hardening (cbd1ffa) 
+
+	* Merge pull request #3110 from akallabeth/mac_os_ssl_warning_fix
+
+2016-02-11 21:40:50 +0100 Norbert Federa (92aa21c) 
+
+	* Several fixes for keyboard type 7 (japanese)
+
+2016-02-11 12:24:47 +0900 pxx02134 (2bf525d) 
+
+	* Update AndroidManifest.xml
+
+2016-02-11 12:21:11 +0900 pxx02134 (2178245) 
+
+	* Update BookmarkDB.java
+
+2016-02-10 11:17:34 +0100 Hardening (8bbbbf3) 
+
+	* Merge pull request #3116 from akallabeth/win_unicode_arg_fix
+
+2016-02-09 09:36:00 +0100 Armin Novak (8be7b25) 
+
+	* Printing help on invalid command line again.
+
+2016-02-08 14:36:31 +0100 Armin Novak (d67614a) 
+
+	* Reading unicode from command line.
+
+2016-02-08 13:10:50 +0100 Norbert Federa (bb3882b) 
+
+	* Merge pull request #3111 from colemickens/hidpi-cli
+
+2015-03-04 09:37:25 -0500 Isaac Richter (1f6ba79) 
+
+	* Enable display scaling in client
+
+2016-02-05 11:52:07 +0100 Armin Novak (f456829) 
+
+	* Fixed API for old openssl versions < 1.0.0
+
+2016-02-05 11:12:48 +0100 Hardening (7534876) 
+
+	* Merge pull request #3113 from akallabeth/remove_broken_rdpdr_check
+
+2016-02-05 10:50:26 +0100 Armin Novak (c430d5e) 
+
+	* Removed broken check, fixes #3112
+
+2016-02-05 02:32:47 +0100 Armin Novak (80d7d63) 
+
+	* Updated android API.
+
+2015-12-18 10:36:28 +0100 Armin Novak (6b406bd) 
+
+	* Not building GetLine on android and ios.
+
+2015-12-18 09:45:44 +0100 Armin Novak (5e46a6e) 
+
+	* Replaced getline with custom GetLine.
+
+2015-12-17 16:43:55 +0100 Armin Novak (b35f665) 
+
+	* Moved common code from cli clients to client lib.
+
+2015-12-17 16:43:49 +0100 Armin Novak (0e2208e) 
+
+	* Fixed warning.
+
+2015-12-14 14:02:49 +0100 Armin Novak (cbf2892) 
+
+	* Implemented temporary certificate accept.
+
+2015-12-14 14:01:12 +0100 Armin Novak (1669900) 
+
+	* Fixed allocation issue with common_name.
+
+2016-02-04 16:20:59 +0100 Martin Fleisz (56a0c4c) 
+
+	* Merge pull request #3097 from akallabeth/android_api_upgrade_v4
+
+2016-02-04 16:09:49 +0100 Armin Novak (8fdf59a) 
+
+	* Removed android SDK dependency for native build.
+
+2016-02-04 15:05:07 +0100 Bernhard Miklautz (db77cff) 
+
+	* Merge pull request #3108 from akallabeth/log_leve_adjust
+
+2016-02-04 14:33:28 +0100 Armin Novak (1f81556) 
+
+	* Removed hardcoded debug mode.
+
+2016-02-04 13:56:33 +0100 Armin Novak (74f3ebf) 
+
+	* Fixed argument for freerdp source.
+
+2016-02-04 13:04:41 +0100 Norbert Federa (94565a0) 
+
+	* Merge pull request #3109 from nfedera/fix-x11-xdgh-types-collision
+
+2016-02-04 12:57:21 +0100 Armin Novak (b6b0f57) 
+
+	* Fixed compiler warning about cast.
+
+2016-02-04 12:55:11 +0100 Armin Novak (3b0f5b5) 
+
+	* Removed obsolete APPLE preprocessor switch.
+
+2016-02-03 21:32:55 +0100 Norbert Federa (099d488) 
+
+	* fix X11/Xdg.h typedef collision fix
+
+2016-02-04 11:41:54 +0100 Armin Novak (1b3ac98) 
+
+	* rdp_print_errinfo now uses INFO log level.
+
+2016-02-04 11:40:42 +0100 Armin Novak (cdadb58) 
+
+	* Function freerdp_set_error_info fix
+
+2016-02-04 11:39:57 +0100 Armin Novak (ad36a5c) 
+
+	* Disconnect log message now uses debug level.
+
+2016-02-04 09:56:52 +0100 akallabeth (eadfff8) 
+
+	* Merge pull request #3107 from ccpp/tls-sni
+
+2016-02-04 09:06:43 +0100 Hardening (13df05b) 
+
+	* Merge pull request #3079 from akallabeth/drive_hotplug_fix
+
+2016-02-04 08:34:51 +0100 Christian Plattner (c0226d6) 
+
+	* Enable support for SNI on client side
+
+2016-02-03 13:55:37 +0100 akallabeth (b769d84) 
+
+	* Merge pull request #3105 from nfedera/fix-cmake-include-names
+
+2016-02-03 13:37:35 +0100 Norbert Federa (24a2f2a) 
+
+	* appropriate names in server & client cmake exports
+
+2016-02-03 12:56:45 +0100 Norbert Federa (157d81b) 
+
+	* Merge pull request #3104 from akallabeth/sign_mismatch_fixes
+
+2016-02-03 12:46:02 +0100 Armin Novak (96bf6fc) 
+
+	* Fixed inverted check.
+
+2016-02-03 12:45:49 +0100 Armin Novak (f835744) 
+
+	* Removed unused variable.
+
+2016-02-03 12:45:31 +0100 Armin Novak (40519f0) 
+
+	* Fixed initialization warning.
+
+2016-02-03 12:11:27 +0100 akallabeth (c17c7de) 
+
+	* Merge pull request #3094 from DavBfr/mac-adpcm
+
+2016-02-03 11:55:23 +0100 Armin Novak (d267750) 
+
+	* Fixed flac caps creation.
+
+2016-02-03 11:51:31 +0100 Armin Novak (10956f3) 
+
+	* Fixed constant definition.
+
+2016-02-03 11:45:22 +0100 Armin Novak (22f704c) 
+
+	* Fixed _socket error check.
+
+2016-02-03 11:43:01 +0100 Armin Novak (c2d2ead) 
+
+	* Fixed error check.
+
+2016-02-03 11:30:15 +0100 Armin Novak (539be1f) 
+
+	* Fixed unsigned underflow.
+
+2016-02-03 11:23:41 +0100 Armin Novak (d1c59f7) 
+
+	* Fixed invalid boolean check.
+
+2016-02-03 11:22:27 +0100 Armin Novak (a1617c7) 
+
+	* Fixed unused check.
+
+2016-02-03 11:04:35 +0100 Armin Novak (511f9e8) 
+
+	* Use ERROR_INVALID_DATA for short buffers.
+
+2016-02-03 09:46:16 +0100 Martin Fleisz (9712509) 
+
+	* Merge pull request #3103 from llyzs/memfix
+
+2016-02-03 13:34:58 +0800 Vic Lee (73f895f) 
+
+	* gcc: assigned string must not be freed.
+
+2016-02-02 11:58:05 -0800 David PHAM-VAN (506749b) 
+
+	* Activate WITH_MACAUDIO flag if the build is for OS X
+
+2016-02-02 18:47:26 +0100 Martin Fleisz (220478e) 
+
+	* Merge pull request #3101 from akallabeth/stdbool_detection_fix
+
+2016-02-02 18:24:30 +0100 Armin Novak (9b0ef3a) 
+
+	* Fixed stdint.h and stdbool.h detection.
+
+2016-02-02 17:59:56 +0100 Armin Novak (96aecca) 
+
+	* Fixed length check issue.
+
+2016-02-02 16:10:33 +0100 Armin Novak (5c97075) 
+
+	* Fixed stdbool.h and stdint.h detection.
+
+2016-02-02 10:02:00 +0100 Martin Fleisz (c862ca3) 
+
+	* Merge pull request #3099 from akallabeth/mac_fullscreen
+
+2016-02-02 09:50:23 +0100 Armin Novak (c908b95) 
+
+	* Reformatted patch.
+
+2015-03-23 13:54:04 +0100 “John (8324b3d) 
+
+	* Mac Fullscreen + window title
+
+2016-02-01 16:01:32 +0100 Armin Novak (b8106a1) 
+
+	* Updated documentation and default build config.
+
+2016-02-01 15:25:40 +0100 Armin Novak (54a7d79) 
+
+	* Restructured client project, moved to gradle build.
+
+2016-02-01 15:22:10 +0100 Armin Novak (d04eb12) 
+
+	* Added new android build scripts.
+
+2016-02-01 15:21:07 +0100 Armin Novak (61633a1) 
+
+	* Fixed android build issues.
+
+2016-02-01 15:09:51 +0100 Armin Novak (cd05ea7) 
+
+	* Fixed error checks for command line parser.
+
+2016-02-01 13:02:38 +0100 Bernhard Miklautz (8ec3903) 
+
+	* Merge pull request #3076 from
+          akallabeth/remove_fixed_size_heap_strings
+
+2016-02-01 13:00:23 +0100 akallabeth (cccc8b1) 
+
+	* Merge pull request #3096 from bmiklautz/fix/nightlies
+
+2016-02-01 12:47:00 +0100 Bernhard Miklautz (7b9881e) 
+
+	* pkg/deb: fix nightly builds
+
+2016-01-29 09:58:48 -0800 David PHAM-VAN (3f5ce2d) 
+
+	* Refactor format_supported with a nice switch() statement
+
+2016-01-25 13:53:19 -0800 David PHAM-VAN (8ef64ae) 
+
+	* Add ADPCM codec for Mac client
+
+2016-01-28 15:26:04 +0100 MartinHaimberger (e83f97b) 
+
+	* Merge pull request #3093 from hardening/last_write_checks
+
+2016-01-28 15:23:24 +0100 MartinHaimberger (83b706c) 
+
+	* Merge pull request #3092 from akallabeth/get_build_config
+
+2016-01-28 15:12:26 +0100 David FORT (b6dd7bb) 
+
+	* Check more Stream_EnsureCapacity results when writing capabilities
+
+2016-01-28 14:36:50 +0100 MartinHaimberger (99c0a73) 
+
+	* Merge pull request #3091 from akallabeth/wlog_warning_fix
+
+2016-01-28 14:30:18 +0100 akallabeth (5a2a2b8) 
+
+	* Merge pull request #3090 from akallabeth/drdynvc_size_checks
+
+2016-01-28 14:28:51 +0100 Hardening (a2aa56e) 
+
+	* Merge pull request #3067 from akallabeth/reset_abort_event
+
+2016-01-28 14:26:50 +0100 Armin Novak (035f127) 
+
+	* Added get_build_config functions.
+
+2016-01-28 12:25:44 +0100 Armin Novak (d847993) 
+
+	* Using Stream_ReminingLength for read checks.
+
+2016-01-28 12:08:57 +0100 Armin Novak (c251534) 
+
+	* Fixed return value of WLog_FileAppender_WriteImageMessage
+
+2016-01-28 12:05:14 +0100 Armin Novak (6f50589) 
+
+	* Cleared up error code usage.
+
+2016-01-28 11:45:06 +0100 Armin Novak (8595e39) 
+
+	* Fixed size checks (thanks to @virtman)
+
+2016-01-28 11:12:20 +0100 Armin Novak (57f1e26) 
+
+	* Checking capability read return. Updated copyright headers.
+
+2016-01-28 10:33:17 +0100 Martin Fleisz (7294a7f) 
+
+	* Merge pull request #3078 from akallabeth/wlog_cmd_options
+
+2016-01-28 10:32:14 +0100 Martin Fleisz (81f5060) 
+
+	* Merge pull request #3088 from clangm/patch-1
+
+2016-01-27 15:40:08 -0700 clangm (62a559a) 
+
+	* fix typo
+
+2016-01-27 23:02:11 +0100 Hardening (bb4a0c5) 
+
+	* Merge pull request #3087 from DavBfr/fix-png-load
+
+2016-01-13 15:09:03 -0800 David PHAM-VAN (3d22cbe) 
+
+	* Fix png image loading that needed write access
+
+2016-01-27 19:26:52 +0100 Armin Novak (e08ca73) 
+
+	* Improved error checks.
+
+2016-01-27 11:21:04 +0100 Armin Novak (06adbc9) 
+
+	* Fixed realloc check, renamed filter variable.
+
+2016-01-27 10:50:38 +0100 Hardening (d458bc2) 
+
+	* Merge pull request #3073 from davewheel/cert_key_in_memory
+
+2016-01-27 10:45:54 +0100 Hardening (7af1ec8) 
+
+	* Merge pull request #3083 from akallabeth/capability_set_fix
+
+2016-01-26 21:35:16 +0100 Armin Novak (974d2ef) 
+
+	* Fix #3081, client string encoding.
+
+2016-01-27 10:18:30 +0100 Martin Fleisz (a9e4ba0) 
+
+	* Merge pull request #3069 from davewheel/4upstream-1
+
+2016-01-27 10:13:32 +0100 Martin Fleisz (b2744f8) 
+
+	* Merge pull request #3082 from
+          hardening/check_client_and_server_capabilities
+
+2016-01-26 16:14:48 +0100 David FORT (708d0cb) 
+
+	* Check server and client capabilities
+
+2016-01-26 09:56:01 +0100 Martin Fleisz (b6ad805) 
+
+	* Merge pull request #3080 from hardening/capa_write
+
+2016-01-26 09:34:22 +0100 Armin Novak (106479d) 
+
+	* Fixed clientNameLen initialization.
+
+2016-01-25 19:11:35 +0100 David FORT (137825e) 
+
+	* Stream_EnsureCapacity return value aren't checked in
+          capabilities_write
+
+2016-01-24 15:21:06 +0100 Armin Novak (deffd0d) 
+
+	* Fixed argument checks for drive channel.
+
+2016-01-23 15:16:13 +0100 Armin Novak (46a079f) 
+
+	* Added new command line options for logger.
+
+2016-01-23 14:42:20 +0100 Hardening (507fba0) 
+
+	* Merge pull request #3072 from giox069/master
+
+2016-01-20 12:22:32 +0100 Giovanni Panozzo (c5a4ce7) 
+
+	* Improve error logging after calling some BIO_ functions
+
+2016-01-23 00:00:18 +0100 Hardening (bbf5c77) 
+
+	* Merge pull request #3070 from davewheel/ntlm_attrs
+
+2016-01-21 21:29:42 +0100 Bernhard Miklautz (ef6cb2b) 
+
+	* Merge pull request #3075 from akallabeth/winpr_header_install_fix
+
+2016-01-21 14:47:10 +0100 Armin Novak (73ec3d6) 
+
+	* Removed fixed size strings.
+
+2016-01-21 15:26:32 +0100 Armin Novak (78d3f45) 
+
+	* Added cmake patch from @david-geiger
+
+2016-01-21 00:17:59 +0100 davewheel (d5b8585) 
+
+	* Allow to specify the raw content of crypto materials
+
+2016-01-20 22:21:05 +0100 davewheel (a971f9e) 
+
+	* Handle more NTLM attributes
+
+2016-01-20 16:54:15 +0100 davewheel (121a234) 
+
+	* Add better handling of monitors
+
+2016-01-14 21:00:41 +0100 davewheel (ca9e908) 
+
+	* Fix a security issue in monitors packet handling
+
+2016-01-19 09:28:40 +0100 Martin Fleisz (3e19791) 
+
+	* Merge pull request #3014 from bmiklautz/winpr_nt_file
+
+2016-01-19 09:27:50 +0100 Martin Fleisz (07d5d16) 
+
+	* Merge pull request #3059 from akallabeth/zlib_memleak_fix
+
+2016-01-19 09:25:42 +0100 Martin Fleisz (059286d) 
+
+	* Merge pull request #3066 from akallabeth/srccopy_fix
+
+2016-01-19 09:24:22 +0100 Martin Fleisz (90783c7) 
+
+	* Merge pull request #3068 from akallabeth/pkg_config_fix
+
+2016-01-18 22:45:40 +0100 Armin Novak (20ada7d) 
+
+	* Fix pkg-config generation.
+
+2016-01-18 10:08:12 +0100 Armin Novak (5542fef) 
+
+	* Resetting abort event on freerdp_connect.
+
+2016-01-18 09:32:34 +0100 Armin Novak (93f3c06) 
+
+	* Fixed memory overlap check.
+
+2016-01-18 09:18:42 +0100 Armin Novak (123cd52) 
+
+	* Fixed SRCCOPY, using memmove now.
+
 2016-01-15 16:32:54 +0100 akallabeth (e2dbe5e) 
 
-	* Merge pull request #3062 from bmiklautz/build_fix (HEAD,
-          origin/master, origin/HEAD, master)
+	* Merge pull request #3062 from bmiklautz/build_fix
 
 2016-01-15 13:23:45 +0100 Bernhard Miklautz (ede0da3) 
 
 	* build: fix a problem with cmake version 2.8.11
+
+2016-01-15 10:16:08 +0100 Armin Novak (d2ab276) 
+
+	* Fix memory leak in lodepng_zlib_compress
 
 2016-01-15 09:51:51 +0100 Martin Fleisz (2db8c7e) 
 
@@ -100,6 +971,10 @@
 2016-01-12 16:38:53 +0100 Armin Novak (a9e3368) 
 
 	* Fixed broken duplicate define.
+
+2015-12-16 16:25:09 +0100 Bernhard Miklautz (aa2709a) 
+
+	* winpr: create a specific winpr nt file handle
 
 2016-01-02 11:31:39 +0100 Bernhard Miklautz (c3ce0c3) 
 
@@ -404,6 +1279,42 @@
 2015-11-17 23:29:07 +0100 Bernhard Miklautz (428ac98) 
 
 	* pkg: update version infos to 2.0
+
+2015-08-19 10:25:59 +0300 ilammy (7bce7ef) 
+
+	* client/X11: transfer raw clipboard format data
+
+2015-08-19 10:59:49 +0300 ilammy (391ed0d) 
+
+	* client/X11: transfer raw clipboard format lists
+
+2015-08-14 22:57:42 +0300 ilammy (626e40a) 
+
+	* client/X11: add raw clipboard transfer indication
+
+2015-08-18 17:07:38 +0300 ilammy (532371d) 
+
+	* client/X11: remove unused function
+
+2015-08-18 17:05:48 +0300 ilammy (46fb66e) 
+
+	* client/X11: send clipboard format data errors correctly
+
+2015-08-19 17:25:17 +0300 ilammy (d7c9a31) 
+
+	* client/X11: correctly trim terminating null bytes from strings
+
+2015-08-17 11:35:19 +0300 ilammy (b9a2973) 
+
+	* client/X11: improve named clipboard format support
+
+2015-08-16 11:56:36 +0300 ilammy (8434709) 
+
+	* client/X11: improve clipboard format search functions
+
+2015-08-15 00:15:44 +0300 ilammy (4b67513) 
+
+	* winpr/clipboard: add CF_RAW clipboard format ID
 
 2015-11-13 11:47:58 +0100 Armin Novak (f4a466b) 
 

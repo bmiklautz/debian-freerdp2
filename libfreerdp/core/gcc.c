@@ -24,6 +24,7 @@
 #endif
 
 #include <winpr/crt.h>
+#include <winpr/crypto.h>
 
 #include <freerdp/log.h>
 
@@ -591,9 +592,8 @@ BOOL gcc_read_client_core_data(wStream* s, rdpMcs* mcs, UINT16 blockLength)
 	/* clientName (32 bytes, null-terminated unicode, truncated to 15 characters) */
 	ConvertFromUnicode(CP_UTF8, 0, (WCHAR*) Stream_Pointer(s), 32 / 2, &str, 0, NULL, NULL);
 	Stream_Seek(s, 32);
-	sprintf_s(settings->ClientHostname, 31, "%s", str);
-	settings->ClientHostname[31] = 0;
-	free(str);
+	free(settings->ClientHostname);
+	settings->ClientHostname = str;
 	str = NULL;
 
 	Stream_Read_UINT32(s, settings->KeyboardType); /* KeyboardType (4 bytes) */
@@ -649,8 +649,8 @@ BOOL gcc_read_client_core_data(wStream* s, rdpMcs* mcs, UINT16 blockLength)
 
 		ConvertFromUnicode(CP_UTF8, 0, (WCHAR*) Stream_Pointer(s), 64 / 2, &str, 0, NULL, NULL);
 		Stream_Seek(s, 64); /* clientDigProductId (64 bytes) */
-		sprintf_s(settings->ClientProductId, 32, "%s", str);
-		free(str);
+		free(settings->ClientProductId);
+		settings->ClientProductId = str;
 		blockLength -= 64;
 
 		if (blockLength < 1)
@@ -761,6 +761,9 @@ BOOL gcc_read_client_core_data(wStream* s, rdpMcs* mcs, UINT16 blockLength)
 	if (settings->SupportDynamicTimeZone)
 		settings->SupportDynamicTimeZone = (earlyCapabilityFlags & RNS_UD_CS_SUPPORT_DYNAMIC_TIME_ZONE) ? TRUE : FALSE;
 
+	if (settings->SupportMonitorLayoutPdu)
+		settings->SupportMonitorLayoutPdu = (earlyCapabilityFlags & RNS_UD_CS_SUPPORT_MONITOR_LAYOUT_PDU) ? TRUE : FALSE;
+
 	if (!(earlyCapabilityFlags & RNS_UD_CS_VALID_CONNECTION_TYPE))
 		connectionType = 0;
 
@@ -865,6 +868,9 @@ void gcc_write_client_core_data(wStream* s, rdpMcs* mcs)
 
 	if (settings->SupportDynamicTimeZone)
 		earlyCapabilityFlags |= RNS_UD_CS_SUPPORT_DYNAMIC_TIME_ZONE;
+
+	if (settings->SupportMonitorLayoutPdu)
+		earlyCapabilityFlags |= RNS_UD_CS_SUPPORT_MONITOR_LAYOUT_PDU;
 
 	Stream_Write_UINT16(s, highColorDepth); /* highColorDepth */
 	Stream_Write_UINT16(s, supportedColorDepths); /* supportedColorDepths */
@@ -1173,7 +1179,7 @@ const BYTE tssk_exponent[] =
 
 BOOL gcc_write_server_security_data(wStream* s, rdpMcs* mcs)
 {
-	CryptoMd5 md5;
+	WINPR_MD5_CTX md5;
 	BYTE* sigData;
 	int expLen, keyLen, sigDataLen;
 	BYTE encryptedSignature[TSSK_KEY_LENGTH];
@@ -1343,7 +1349,7 @@ BOOL gcc_write_server_security_data(wStream* s, rdpMcs* mcs)
 
 	settings->ServerRandomLength = serverRandomLen;
 	settings->ServerRandom = (BYTE*) malloc(serverRandomLen);
-	crypto_nonce(settings->ServerRandom, serverRandomLen);
+	winpr_RAND(settings->ServerRandom, serverRandomLen);
 	Stream_Write(s, settings->ServerRandom, serverRandomLen);
 
 	sigData = Stream_Pointer(s);
@@ -1370,15 +1376,12 @@ BOOL gcc_write_server_security_data(wStream* s, rdpMcs* mcs)
 
 	memcpy(signature, initial_signature, sizeof(initial_signature));
 
-	md5 = crypto_md5_init();
-	if (!md5)
-	{
-		WLog_ERR(TAG,  "unable to allocate a md5");
+	if (!winpr_MD5_Init(&md5))
 		return FALSE;
-	}
-
-	crypto_md5_update(md5, sigData, sigDataLen);
-	crypto_md5_final(md5, signature);
+	if (!winpr_MD5_Update(&md5, sigData, sigDataLen))
+		return FALSE;
+	if (!winpr_MD5_Final(&md5, signature, sizeof(signature)))
+		return FALSE;
 
 	crypto_rsa_private_encrypt(signature, sizeof(signature), TSSK_KEY_LENGTH,
 		tssk_modulus, tssk_privateExponent, encryptedSignature);
@@ -1593,6 +1596,12 @@ BOOL gcc_read_client_monitor_data(wStream* s, rdpMcs* mcs, UINT16 blockLength)
 
 	Stream_Read_UINT32(s, flags); /* flags */
 	Stream_Read_UINT32(s, monitorCount); /* monitorCount */
+
+	if (monitorCount > settings->MonitorDefArraySize)
+	{
+		WLog_ERR(TAG, "too many announced monitors(%d), clamping to %d", monitorCount, settings->MonitorDefArraySize);
+		monitorCount = settings->MonitorDefArraySize;
+	}
 
 	if (((blockLength - 8)  / 20) < monitorCount)
 		return FALSE;
