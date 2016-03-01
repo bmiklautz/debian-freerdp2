@@ -1,3 +1,18 @@
+freerdp2 (2.0.0~git20160229.1.b4b8239+dfsg1-1) UNRELEASED; urgency=medium
+
+  * Import git snapshot from upstream:
+    - Obtained from master branch of http://github.com/FreeRDP/FreeRDP.
+      Commit hash: b4b8239bf642a6cc41b2558e55be1b44577aa5dd
+  * Enable wayland support
+    + Add package for libuwac (using wayland as a client)
+    + add package freerdp2-wayland
+  * Ship the shadowing libraries in an extra package
+    - libfreerdp-shadow2
+  * debian/control:
+    - Fix some typos and trailing white spaces
+
+ -- Bernhard Miklautz <bernhard.miklautz@shacknet.at>  Mon, 29 Feb 2016 16:50:52 +0000
+
 freerdp2 (2.0.0~git20160115.1.e2dbe5e+dfsg1-2) unstable; urgency=medium
   [ Bernhard Miklautz]
   * rename freerdp-x11 to freerdp2-x11 and

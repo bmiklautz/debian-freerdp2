@@ -103,7 +103,6 @@ Files: channels/client/addin.h
  include/freerdp/input.h
  include/freerdp/locale/keyboard.h
  include/freerdp/locale/locale.h
- include/freerdp/locale/timezone.h
  include/freerdp/message.h
  include/freerdp/metrics.h
  include/freerdp/pointer.h
@@ -134,7 +133,6 @@ Files: channels/client/addin.h
  libfreerdp/codec/zgfx.c
  libfreerdp/common/addin.c
  libfreerdp/common/assistance.c
- libfreerdp/common/settings.c
  libfreerdp/core/activation.c
  libfreerdp/core/activation.h
  libfreerdp/core/bulk.c
@@ -220,7 +218,6 @@ Files: channels/client/addin.h
  libfreerdp/locale/keyboard_xkbfile.h
  libfreerdp/locale/liblocale.h
  libfreerdp/locale/locale.c
- libfreerdp/locale/timezone.c
  libfreerdp/locale/xkb_layout_ids.c
  libfreerdp/locale/xkb_layout_ids.h
  libfreerdp/primitives/prim_YUV.c
@@ -387,7 +384,6 @@ Files: channels/client/addin.h
  winpr/libwinpr/locale/locale.c
  winpr/libwinpr/memory/memory.c
  winpr/libwinpr/memory/memory.h
- winpr/libwinpr/nt/nt.h
  winpr/libwinpr/path/path.c
  winpr/libwinpr/path/shell.c
  winpr/libwinpr/pipe/pipe.c
@@ -490,7 +486,6 @@ Files: channels/client/addin.h
  winpr/libwinpr/utils/collections/Reference.c
  winpr/libwinpr/utils/collections/Stack.c
  winpr/libwinpr/utils/collections/StreamPool.c
- winpr/libwinpr/utils/image.c
  winpr/libwinpr/utils/ini.c
  winpr/libwinpr/utils/ntlm.c
  winpr/libwinpr/utils/print.c
@@ -585,7 +580,11 @@ Files: client/X11/generate_argument_docbook.c
  resources/FreeRDP_Icon_256px.h
  scripts/LECHash.c
  scripts/LOMHash.c
- scripts/android_setup_build_env.sh
+ scripts/android-build-common.sh
+ scripts/android-build-freerdp.sh
+ scripts/android-build-jpeg.sh
+ scripts/android-build-openh264.sh
+ scripts/android-build-openssl.sh
  scripts/autoformat.sh
  scripts/format_code.sh
  scripts/xcode.sh
@@ -942,9 +941,6 @@ Files: channels/audin/client/alsa/audin_alsa.c
  channels/drdynvc/client/drdynvc_main.c
  channels/drdynvc/client/drdynvc_main.h
  channels/echo/server/echo_main.c
- channels/printer/client/printer_cups.c
- channels/printer/client/printer_main.c
- channels/printer/client/printer_main.h
  channels/rdpsnd/client/pulse/rdpsnd_pulse.c
  channels/rdpsnd/server/rdpsnd_main.c
  channels/tsmf/client/tsmf_ifman.h
@@ -1066,20 +1062,19 @@ Copyright: 2010-2011, Vic Lee
 License: Apache-2.0
  FIXME
 
-Files: channels/drive/client/drive_main.c
- channels/rdpdr/client/devman.c
- channels/rdpdr/client/devman.h
- channels/rdpdr/client/irp.c
- channels/rdpdr/client/rdpdr_capabilities.c
- channels/rdpdr/client/rdpdr_capabilities.h
- channels/rdpdr/client/rdpdr_main.c
- channels/rdpdr/client/rdpdr_main.h
- include/freerdp/channels/rdpdr.h
-Copyright: 2010-2011, Vic Lee
-  2010-2012, Marc-Andre Moreau <marcandre.moreau@gmail.com>
-  2015, DI (FH) Martin Haimberger <martin.haimberger@thincast.com>
-  2015, Thincast Technologies GmbH
-License: Apache-2.0
+Files: uwac/include/uwac/uwac-tools.h
+ uwac/include/uwac/uwac.h
+ uwac/libuwac/uwac-display.c
+ uwac/libuwac/uwac-input.c
+ uwac/libuwac/uwac-output.c
+ uwac/libuwac/uwac-priv.h
+ uwac/libuwac/uwac-tools.c
+ uwac/libuwac/uwac-utils.h
+ uwac/libuwac/uwac-window.c
+Copyright: 2014, David FORT <contact@hardening-consulting.com>
+  2014-2015, David FORT <contact@hardening-consulting.com>
+  2015, David FORT <contact@hardening-consulting.com>
+License: UNKNOWN
  FIXME
 
 Files: libfreerdp/core/autodetect.c
@@ -1095,15 +1090,15 @@ Copyright: 2014, Dell Software <Mike.McDonald@software.dell.com>
 License: Apache-2.0
  FIXME
 
-Files: client/Wayland/wlf_display.c
- client/Wayland/wlf_display.h
- client/Wayland/wlf_input.c
- client/Wayland/wlf_input.h
- client/Wayland/wlf_window.c
- client/Wayland/wlf_window.h
- client/Wayland/wlfreerdp.c
- client/Wayland/wlfreerdp.h
-Copyright: 2014, Manuel Bachmann <tarnyko@tarnyko.net>
+Files: server/shadow/shadow_audin.c
+ server/shadow/shadow_audin.h
+ server/shadow/shadow_mcevent.c
+ server/shadow/shadow_mcevent.h
+ server/shadow/shadow_rdpsnd.c
+ server/shadow/shadow_rdpsnd.h
+ server/shadow/shadow_subsystem_builtin.c
+Copyright: 2015, Jiang Zihao <zihao.jiang@yahoo.com>
+  2016, Jiang Zihao <zihao.jiang@yahoo.com>
 License: Apache-2.0
  FIXME
 
@@ -1118,6 +1113,19 @@ Copyright: 2011, Marc-Andre Moreau <marcandre.moreau@gmail.com>
   2014, DI (FH) Martin Haimberger <martin.haimberger@thincast.com>
   2014, Marc-Andre Moreau <marcandre.moreau@gmail.com>
   2015, DI (FH) Martin Haimberger <martin.haimberger@thincast.com>
+License: Apache-2.0
+ FIXME
+
+Files: channels/drive/client/drive_main.c
+ channels/rdpdr/client/devman.h
+ channels/rdpdr/client/irp.c
+ channels/rdpdr/client/rdpdr_capabilities.h
+ channels/rdpdr/client/rdpdr_main.h
+ include/freerdp/channels/rdpdr.h
+Copyright: 2010-2011, Vic Lee
+  2010-2012, Marc-Andre Moreau <marcandre.moreau@gmail.com>
+  2015, DI (FH) Martin Haimberger <martin.haimberger@thincast.com>
+  2015, Thincast Technologies GmbH
 License: Apache-2.0
  FIXME
 
@@ -1156,16 +1164,6 @@ Copyright: 2010, Marc-Andre Moreau <marcandre.moreau@gmail.com>
   2014, Hewlett-Packard Development Company, L.P
   2014, Marc-Andre Moreau <marcandre.moreau@gmail.com>
   2015, Hewlett-Packard Development Company, L.P
-License: Apache-2.0
- FIXME
-
-Files: server/shadow/shadow_audin.c
- server/shadow/shadow_audin.h
- server/shadow/shadow_mcevent.c
- server/shadow/shadow_mcevent.h
- server/shadow/shadow_rdpsnd.c
- server/shadow/shadow_rdpsnd.h
-Copyright: 2015, Jiang Zihao <zihao.jiang@yahoo.com>
 License: Apache-2.0
  FIXME
 
@@ -1263,18 +1261,6 @@ Copyright: 2011, Marc-Andre Moreau <marcandre.moreau@gmail.com>
 License: Apache-2.0
  FIXME
 
-Files: client/common/cmdline.c
- libfreerdp/core/license.c
- libfreerdp/core/security.c
- winpr/libwinpr/synch/critical.c
-Copyright: 2011, Marc-Andre Moreau <marcandre.moreau@gmail.com>
-  2011-2013, Marc-Andre Moreau <marcandre.moreau@gmail.com>
-  2012, Marc-Andre Moreau <marcandre.moreau@gmail.com>
-  2013, Norbert Federa <norbert.federa@thincast.com>
-  2014, Norbert Federa <norbert.federa@thincast.com>
-License: Apache-2.0
- FIXME
-
 Files: include/freerdp/utils/passphrase.h
  include/freerdp/utils/signal.h
  libfreerdp/utils/passphrase.c
@@ -1295,6 +1281,16 @@ Files: include/freerdp/channels/log.h
  include/freerdp/log.h
  winpr/libwinpr/log.h
 Copyright: 2014, Armin Novak <armin.novak@gmail.com>
+License: Apache-2.0
+ FIXME
+
+Files: channels/printer/client/printer_cups.c
+ channels/printer/client/printer_main.c
+ channels/printer/client/printer_main.h
+Copyright: 2010-2011, Vic Lee
+  2015, DI (FH) Martin Haimberger <martin.haimberger@thincast.com>
+  2015, Thincast Technologies GmbH
+  2016, Armin Novak <armin.novak@gmail.com>
 License: Apache-2.0
  FIXME
 
@@ -1334,18 +1330,22 @@ Copyright: 2015, David FORT <contact@hardening-consulting.com>
 License: Apache-2.0
  FIXME
 
-Files: channels/drive/client/statvfs.c
- channels/drive/client/statvfs.h
- channels/printer/client/printer_win.h
-Copyright: 2012, Gerald Richter
-License: Apache-2.0
- FIXME
-
 Files: channels/tsmf/client/tsmf_codec.c
  channels/tsmf/client/tsmf_constants.h
  channels/tsmf/client/tsmf_decoder.h
 Copyright: 2010-2011, Vic Lee
   2012, Hewlett-Packard Development Company, L.P
+License: Apache-2.0
+ FIXME
+
+Files: libfreerdp/core/license.c
+ libfreerdp/core/security.c
+ winpr/libwinpr/synch/critical.c
+Copyright: 2011, Marc-Andre Moreau <marcandre.moreau@gmail.com>
+  2011-2013, Marc-Andre Moreau <marcandre.moreau@gmail.com>
+  2012, Marc-Andre Moreau <marcandre.moreau@gmail.com>
+  2013, Norbert Federa <norbert.federa@thincast.com>
+  2014, Norbert Federa <norbert.federa@thincast.com>
 License: Apache-2.0
  FIXME
 
@@ -1413,6 +1413,16 @@ Copyright: 2014, Armin Novak <armin.novak@thincast.com>
 License: Apache-2.0
  FIXME
 
+Files: channels/rdpdr/client/rdpdr_capabilities.c
+ channels/rdpdr/client/rdpdr_main.c
+Copyright: 2010-2011, Vic Lee
+  2010-2012, Marc-Andre Moreau <marcandre.moreau@gmail.com>
+  2015, DI (FH) Martin Haimberger <martin.haimberger@thincast.com>
+  2015-2016, Thincast Technologies GmbH
+  2016, Armin Novak <armin.novak@thincast.com>
+License: Apache-2.0
+ FIXME
+
 Files: winpr/libwinpr/handle/nonehandle.c
  winpr/libwinpr/handle/nonehandle.h
 Copyright: 2014, DI (FH) Martin Haimberger <martin.haimberger@thincast.com>
@@ -1474,6 +1484,13 @@ Copyright: 2015, DI (FH) Martin Haimberger <martin.haimberger@thincast.com>
 License: Apache-2.0
  FIXME
 
+Files: client/Wayland/wlf_input.c
+ client/Wayland/wlf_input.h
+Copyright: 2014, Manuel Bachmann <tarnyko@tarnyko.net>
+  2015, David Fort <contact@hardening-consulting.com>
+License: Apache-2.0
+ FIXME
+
 Files: channels/rdpei/rdpei_common.c
  channels/rdpei/rdpei_common.h
 Copyright: 2013, Marc-Andre Moreau <marcandre.moreau@gmail.com>
@@ -1492,6 +1509,12 @@ Files: channels/serial/client/serial_main.c
 Copyright: 2011, Eduardo Fiss Beloni <beloni@ossystems.com.br>
   2011, O.S. Systems Software Ltda
   2014, Hewlett-Packard Development Company, L.P
+License: Apache-2.0
+ FIXME
+
+Files: channels/drive/client/statvfs.h
+ channels/printer/client/printer_win.h
+Copyright: 2012, Gerald Richter
 License: Apache-2.0
  FIXME
 
@@ -1517,11 +1540,9 @@ Copyright: 2009-2011, Jay Sorg
 License: Apache-2.0
  FIXME
 
-Files: include/freerdp/settings.h
- include/freerdp/types.h
-Copyright: 2009-2011, Jay Sorg
-  2010-2012, Marc-Andre Moreau <marcandre.moreau@gmail.com>
-  2011, Marc-Andre Moreau <marcandre.moreau@gmail.com>
+Files: client/Wayland/wlfreerdp.c
+ client/Wayland/wlfreerdp.h
+Copyright: 2014, Manuel Bachmann <tarnyko@tarnyko.net>
 License: Apache-2.0
  FIXME
 
@@ -1583,6 +1604,43 @@ Copyright: 2011, Anthony Tong <atong@trustedcs.com>
 License: Apache-2.0
  FIXME
 
+Files: channels/printer/client/printer_win.c
+Copyright: 2012, Gerald Richter
+  2015, DI (FH) Martin Haimberger <martin.haimberger@thincast.com>
+  2015, Thincast Technologies GmbH
+  2016, Armin Novak <armin.novak@gmail.com>
+License: Apache-2.0
+ FIXME
+
+Files: channels/rdpdr/client/devman.c
+Copyright: 2010-2011, Vic Lee
+  2010-2012, Marc-Andre Moreau <marcandre.moreau@gmail.com>
+  2015, DI (FH) Martin Haimberger <martin.haimberger@thincast.com>
+  2015, Thincast Technologies GmbH
+  2016, Armin Novak <armin.novak@gmail.com>
+License: Apache-2.0
+ FIXME
+
+Files: include/freerdp/settings.h
+Copyright: 2009-2011, Jay Sorg
+  2010-2012, Marc-Andre Moreau <marcandre.moreau@gmail.com>
+  2016, Armin Novak <armin.novak@gmail.com>
+License: Apache-2.0
+ FIXME
+
+Files: libfreerdp/common/settings.c
+Copyright: 2012, Marc-Andre Moreau <marcandre.moreau@gmail.com>
+  2016, Armin Novak <armin.novak@gmail.com>
+License: Apache-2.0
+ FIXME
+
+Files: client/common/cmdline.c
+Copyright: 2012, Marc-Andre Moreau <marcandre.moreau@gmail.com>
+  2014, Norbert Federa <norbert.federa@thincast.com>
+  2016, Armin Novak <armin.novak@gmail.com>
+License: Apache-2.0
+ FIXME
+
 Files: channels/audin/client/audin_main.c
 Copyright: 2010-2011, Vic Lee
   2015, Armin Novak <armin.novak@thincast.com>
@@ -1638,6 +1696,15 @@ Copyright: 2014, David Fort <contact@hardening-consulting.com>
 License: Apache-2.0
  FIXME
 
+Files: channels/rdpsnd/client/mac/rdpsnd_mac.c
+Copyright: 2012, Laxmikant Rashinkar <LK.Rashinkar@gmail.com>
+  2015, DI (FH) Martin Haimberger <martin.haimberger@thincast.com>
+  2015, Thincast Technologies GmbH
+  2016, David PHAM-VAN <d.phamvan@inuvika.com>
+  2016, Inuvika Inc
+License: Apache-2.0
+ FIXME
+
 Files: channels/rdpsnd/client/ios/rdpsnd_ios.c
 Copyright: 2013, Dell Software <Mike.McDonald@software.dell.com>
   2015, DI (FH) Martin Haimberger <martin.haimberger@thincast.com>
@@ -1648,13 +1715,6 @@ License: Apache-2.0
 Files: libfreerdp/core/gateway/tsg.c
 Copyright: 2012, Dmitrij Jasnov <dmitrij.jasnov@ts.fujitsu.com>
   2012, Fujitsu Technology Solutions GmbH
-  2015, DI (FH) Martin Haimberger <martin.haimberger@thincast.com>
-  2015, Thincast Technologies GmbH
-License: Apache-2.0
- FIXME
-
-Files: channels/printer/client/printer_win.c
-Copyright: 2012, Gerald Richter
   2015, DI (FH) Martin Haimberger <martin.haimberger@thincast.com>
   2015, Thincast Technologies GmbH
 License: Apache-2.0
@@ -1679,13 +1739,6 @@ License: Apache-2.0
 Files: libfreerdp/core/certificate.c
 Copyright: 2011, Jiten Pathy
   2011, Marc-Andre Moreau <marcandre.moreau@gmail.com>
-  2015, DI (FH) Martin Haimberger <martin.haimberger@thincast.com>
-  2015, Thincast Technologies GmbH
-License: Apache-2.0
- FIXME
-
-Files: channels/rdpsnd/client/mac/rdpsnd_mac.c
-Copyright: 2012, Laxmikant Rashinkar <LK.Rashinkar@gmail.com>
   2015, DI (FH) Martin Haimberger <martin.haimberger@thincast.com>
   2015, Thincast Technologies GmbH
 License: Apache-2.0
@@ -1719,10 +1772,34 @@ Copyright: 2011, Vic Lee
 License: Apache-2.0
  FIXME
 
+Files: include/freerdp/session.h
+Copyright: 2016, David FORT <contact@hardening-consulting.com>
+License: Apache-2.0
+ FIXME
+
 Files: include/freerdp/channels/rdpei.h
 Copyright: 2013, Marc-Andre Moreau <marcandre.moreau@gmail.com>
   2014, David FORT <contact@hardening-consulting.com>
   2014, Thincast Technologies Gmbh
+License: Apache-2.0
+ FIXME
+
+Files: channels/printer/printer.h
+Copyright: 2016, David Fort <contact@hardening-consulting.com>
+License: Apache-2.0
+ FIXME
+
+Files: channels/drive/client/statvfs.c
+Copyright: 2012, Gerald Richter
+  2016, David PHAM-VAN <d.phamvan@inuvika.com>
+  2016, Inuvika Inc
+License: Apache-2.0
+ FIXME
+
+Files: winpr/libwinpr/utils/image.c
+Copyright: 2014, Marc-Andre Moreau <marcandre.moreau@gmail.com>
+  2016, David PHAM-VAN <d.phamvan@inuvika.com>
+  2016, Inuvika Inc
 License: Apache-2.0
  FIXME
 
@@ -1749,6 +1826,12 @@ License: Apache-2.0
 Files: libfreerdp/primitives/primitives.c
 Copyright: 2011, Martin Fleisz <martin.fleisz@thincast.com>
   2012, Hewlett-Packard Development Company, L.P
+License: Apache-2.0
+ FIXME
+
+Files: include/freerdp/types.h
+Copyright: 2009-2011, Jay Sorg
+  2011, Marc-Andre Moreau <marcandre.moreau@gmail.com>
 License: Apache-2.0
  FIXME
 
@@ -1809,6 +1892,24 @@ License: Apache-2.0
 Files: channels/drive/client/dirent.h
 Copyright: 2006, Toni Ronkko
 License: Expat
+ FIXME
+
+Files: uwac/libuwac/uwac-os.c
+Copyright: 2012, Collabora, Ltd
+License: UNKNOWN
+ FIXME
+
+Files: uwac/libuwac/uwac-os.h
+Copyright: 2012, Collabora, Ltd
+  2014, David FORT <contact@hardening-consulting.com>
+License: UNKNOWN
+ FIXME
+
+Files: uwac/libuwac/uwac-utils.c
+Copyright: 2008, Kristian HÃ¸gsberg
+  2012, Collabora, Ltd
+  2014, David FORT <contact@hardening-consulting.com>
+License: UNKNOWN
  FIXME
 
 Files: include/freerdp/codec/region.h

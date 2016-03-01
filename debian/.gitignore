@@ -22,3 +22,11 @@ librdtk0/
 libwinpr1-dbg/
 winpr-utils-dbg/
 winpr-utils/
+freerdp2-wayland-dbg/
+freerdp2-wayland/
+libfreerdp-shadow2-dbg/
+libfreerdp-shadow2/
+libuwac0-dbg/
+libuwac0-dev/
+libuwac0/
+debhelper-build-stamp
