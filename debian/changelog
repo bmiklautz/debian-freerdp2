@@ -3,8 +3,12 @@ freerdp2 (2.0.0~git20160317.1.75ae3f5+dfsg1-1) UNRELEASED; urgency=medium
   * Import git snapshot from upstream:
     - Obtained from master branch of http://github.com/FreeRDP/FreeRDP.
       Commit hash: 75ae3f58df5a14b4a67439aca96061a9c2ea5040
+  * Reflect upstream changes
+    - increase version numbers to 2 for rdtk and winpr
+  * debian/rules
+    - get-orig-source: don't add git refs in the generated ChangeLog
 
- -- Bernhard Miklautz <bernhard.miklautz@shacknet.at>  Mon, 17 Mar 2016 11:42:03 +0000
+ -- Bernhard Miklautz <bernhard.miklautz@shacknet.at>  Thu, 17 Mar 2016 11:42:03 +0000
 
 freerdp2 (2.0.0~git20160229.1.b4b8239+dfsg1-1) UNRELEASED; urgency=medium
 

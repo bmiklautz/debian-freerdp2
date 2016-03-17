@@ -567,6 +567,7 @@ Files: client/X11/generate_argument_docbook.c
  libfreerdp/gdi/test/TestGdiRop3.c
  libfreerdp/primitives/prim_YUV_opt.c
  libfreerdp/primitives/test/TestPrimitivesYCbCr.c
+ libfreerdp/primitives/test/TestPrimitivesYUV.c
  packaging/deb/freerdp-nightly/changelog
  packaging/deb/freerdp-nightly/compat
  packaging/deb/freerdp-nightly/control
@@ -1116,19 +1117,6 @@ Copyright: 2011, Marc-Andre Moreau <marcandre.moreau@gmail.com>
 License: Apache-2.0
  FIXME
 
-Files: channels/drive/client/drive_main.c
- channels/rdpdr/client/devman.h
- channels/rdpdr/client/irp.c
- channels/rdpdr/client/rdpdr_capabilities.h
- channels/rdpdr/client/rdpdr_main.h
- include/freerdp/channels/rdpdr.h
-Copyright: 2010-2011, Vic Lee
-  2010-2012, Marc-Andre Moreau <marcandre.moreau@gmail.com>
-  2015, DI (FH) Martin Haimberger <martin.haimberger@thincast.com>
-  2015, Thincast Technologies GmbH
-License: Apache-2.0
- FIXME
-
 Files: winpr/include/winpr/comm.h
  winpr/libwinpr/comm/comm.c
  winpr/libwinpr/comm/comm_ioctl.c
@@ -1189,6 +1177,18 @@ Copyright: 2009-2011, Jay Sorg
   2009-2012, Jay Sorg
   2010-2011, Vic Lee
   2010-2012, Vic Lee
+  2015, DI (FH) Martin Haimberger <martin.haimberger@thincast.com>
+  2015, Thincast Technologies GmbH
+License: Apache-2.0
+ FIXME
+
+Files: channels/drive/client/drive_main.c
+ channels/rdpdr/client/devman.h
+ channels/rdpdr/client/irp.c
+ channels/rdpdr/client/rdpdr_capabilities.h
+ include/freerdp/channels/rdpdr.h
+Copyright: 2010-2011, Vic Lee
+  2010-2012, Marc-Andre Moreau <marcandre.moreau@gmail.com>
   2015, DI (FH) Martin Haimberger <martin.haimberger@thincast.com>
   2015, Thincast Technologies GmbH
 License: Apache-2.0
@@ -1438,22 +1438,24 @@ Copyright: 2014, David FORT <contact@hardening-consulting.com>
 License: Apache-2.0
  FIXME
 
+Files: channels/drive/client/drive_file.c
+ channels/drive/client/drive_file.h
+Copyright: 2010-2011, Vic Lee
+  2010-2012, Marc-Andre Moreau <marcandre.moreau@gmail.com>
+  2012, Gerald Richter
+  2015, DI (FH) Martin Haimberger <martin.haimberger@thincast.com>
+  2015, Thincast Technologies GmbH
+  2016, David PHAM-VAN <d.phamvan@inuvika.com>
+  2016, Inuvika Inc
+License: Apache-2.0
+ FIXME
+
 Files: channels/parallel/client/parallel_main.c
  channels/smartcard/client/smartcard_main.h
 Copyright: 2010, Eduardo Fiss Beloni <beloni@ossystems.com.br>
   2010, O.S. Systems Software Ltda
   2011, Eduardo Fiss Beloni <beloni@ossystems.com.br>
   2011, O.S. Systems Software Ltda
-  2015, DI (FH) Martin Haimberger <martin.haimberger@thincast.com>
-  2015, Thincast Technologies GmbH
-License: Apache-2.0
- FIXME
-
-Files: channels/drive/client/drive_file.c
- channels/drive/client/drive_file.h
-Copyright: 2010-2011, Vic Lee
-  2010-2012, Marc-Andre Moreau <marcandre.moreau@gmail.com>
-  2012, Gerald Richter
   2015, DI (FH) Martin Haimberger <martin.haimberger@thincast.com>
   2015, Thincast Technologies GmbH
 License: Apache-2.0
@@ -1698,6 +1700,16 @@ License: Apache-2.0
 
 Files: channels/rdpsnd/client/mac/rdpsnd_mac.c
 Copyright: 2012, Laxmikant Rashinkar <LK.Rashinkar@gmail.com>
+  2015, DI (FH) Martin Haimberger <martin.haimberger@thincast.com>
+  2015, Thincast Technologies GmbH
+  2016, David PHAM-VAN <d.phamvan@inuvika.com>
+  2016, Inuvika Inc
+License: Apache-2.0
+ FIXME
+
+Files: channels/rdpdr/client/rdpdr_main.h
+Copyright: 2010-2011, Vic Lee
+  2010-2012, Marc-Andre Moreau <marcandre.moreau@gmail.com>
   2015, DI (FH) Martin Haimberger <martin.haimberger@thincast.com>
   2015, Thincast Technologies GmbH
   2016, David PHAM-VAN <d.phamvan@inuvika.com>

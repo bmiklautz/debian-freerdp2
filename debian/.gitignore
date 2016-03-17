@@ -5,8 +5,8 @@ libfreerdp-client2/
 libfreerdp-server2/
 libfreerdp2-dev/
 libfreerdp2/
-libwinpr1-dev/
-libwinpr1/
+libwinpr2-dev/
+libwinpr2/
 tmp/
 *.substvars
 .debhelper/
@@ -17,9 +17,9 @@ freerdp2-dev/
 libfreerdp-client2-dbg/
 libfreerdp-server2-dbg/
 libfreerdp2-dbg/
-librdtk0-dbg/
-librdtk0/
-libwinpr1-dbg/
+librdtk2-dbg/
+librdtk2/
+libwinpr2-dbg/
 winpr-utils-dbg/
 winpr-utils/
 freerdp2-wayland-dbg/

@@ -51,8 +51,8 @@ override_dh_strip:
 	dh_strip -plibfreerdp2 --dbg-package=libfreerdp2-dbg
 	dh_strip -plibfreerdp-server2 --dbg-package=libfreerdp-server2-dbg
 	dh_strip -plibfreerdp-client2 --dbg-package=libfreerdp-client2-dbg
-	dh_strip -plibrdtk0 --dbg-package=librdtk0-dbg
-	dh_strip -plibwinpr1 --dbg-package=libwinpr1-dbg
+	dh_strip -plibrdtk2 --dbg-package=librdtk2-dbg
+	dh_strip -plibwinpr2 --dbg-package=libwinpr2-dbg
 	dh_strip -pfreerdp2-x11 --dbg-package=freerdp2-x11-dbg
 	dh_strip -pfreerdp2-shadow-x11 --dbg-package=freerdp2-shadow-x11-dbg
 	dh_strip -pwinpr-utils --dbg-package=winpr-utils-dbg
@@ -83,7 +83,7 @@ $(PKG)_$(VER)$(DTYPE).orig.tar.xz: $(info I: GIT Revision=$(UREV))
 	cd $(PKG)-$(VER) \
 	    && git checkout "$(UREV)" \
 	    && ( echo "# Generating ChangeLog..." \
-	       ; git --no-pager log --format="%ai %aN (%h) %n%n%x09*%w(68,0,10) %s%d%n" > ChangeLog \
+	       ; git --no-pager log --format="%ai %aN (%h) %n%n%x09*%w(68,0,10) %s%n" > ChangeLog \
 	       ; touch -d "$$(git log -1 --format='%ci')" ChangeLog) \
 	    && echo "# Setting times..." \
 	    && for F in $$(git ls-tree -r --name-only HEAD); do touch --no-dereference -d "$$(git log -1 --format="%ai" -- $$F)" "$$F"; done \

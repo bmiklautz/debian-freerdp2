@@ -109,7 +109,7 @@ Description: Free Remote Desktop Protocol library (server library)
  .
  This package contains the shared library with common server functionality.
 
-Package: libwinpr1
+Package: libwinpr2
 Architecture: any
 Section: libs
 Pre-Depends: ${misc:Pre-Depends}
@@ -128,13 +128,13 @@ Description: Windows Portable Runtime library
  .
  This package contains the WinPR shared library.
 
-Package: libwinpr1-dev
+Package: libwinpr2-dev
 Section: libdevel
 Architecture: any
 Multi-Arch: same
 Depends:
  ${misc:Depends},
- libwinpr1 (= ${binary:Version}),
+ libwinpr2 (= ${binary:Version}),
 Description: Windows Portable Runtime library (development files)
  WinPR is a spin-off project of FreeRDP which aims at providing a portable
  implementation of important portions of the Windows API. Just like FreeRDP,
@@ -153,25 +153,25 @@ Architecture: any
 Multi-Arch: same
 Depends:
  ${misc:Depends},
- libwinpr1-dev (= ${binary:Version}),
+ libwinpr2-dev (= ${binary:Version}),
  libfreerdp2 (= ${binary:Version}),
  libfreerdp-server2 (= ${binary:Version}),
  libfreerdp-client2 (= ${binary:Version}),
- librdtk0 (= ${binary:Version}),
+ librdtk2 (= ${binary:Version}),
 Description: Free Remote Desktop Protocol library (development files)
  FreeRDP is a libre client/server implementation of the Remote
  Desktop Protocol (RDP).
  .
  This package contains the FreeRDP development files.
 
-Package: libwinpr1-dbg
+Package: libwinpr2-dbg
 Section: debug
 Priority: extra
 Architecture: any
 Multi-Arch: same
 Depends:
  ${misc:Depends},
- libwinpr1 (= ${binary:Version}),
+ libwinpr2 (= ${binary:Version}),
 Description: Windows Portable Runtime library (debug symbols)
  WinPR is a spin-off project of FreeRDP which aims at providing a portable
  implementation of important portions of the Windows API. Just like FreeRDP,
@@ -257,7 +257,7 @@ Description: Windows Portable Runtime library command line utilities
  .
  This package contains WinPR command line utils (winpr-hash, winpr-makecert).
 
-Package: librdtk0
+Package: librdtk2
 Architecture: any
 Section: libs
 Pre-Depends: ${misc:Pre-Depends}
@@ -269,14 +269,14 @@ Description: Remote Desktop Protocol toolkit
  .
  This package contains the remote desktop toolkit shared library.
 
-Package: librdtk0-dbg
+Package: librdtk2-dbg
 Architecture: any
 Section: debug
 Priority: extra
 Pre-Depends: ${misc:Pre-Depends}
 Depends:
  ${misc:Depends},
- librdtk0 (= ${binary:Version})
+ librdtk2 (= ${binary:Version})
 Multi-Arch: same
 Description: Remote Desktop Protocol toolkit (debug symbols)
  FreeRDP is a libre client/server implementation of the Remote
