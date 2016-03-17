@@ -226,7 +226,7 @@ void gcc_write_conference_create_request(wStream* s, wStream* userData)
 	per_write_octet_string(s, h221_cs_key, 4, 4); /* h221NonStandard, client-to-server H.221 key, "Duca" */
 
 	/* userData::value (OCTET_STRING) */
-	per_write_octet_string(s, userData->buffer, Stream_GetPosition(userData), 0); /* array of client data blocks */
+	per_write_octet_string(s, Stream_Buffer(userData), Stream_GetPosition(userData), 0); /* array of client data blocks */
 }
 
 BOOL gcc_read_conference_create_response(wStream* s, rdpMcs* mcs)
@@ -320,7 +320,7 @@ void gcc_write_conference_create_response(wStream* s, wStream* userData)
 	per_write_octet_string(s, h221_sc_key, 4, 4); /* h221NonStandard, server-to-client H.221 key, "McDn" */
 
 	/* userData (OCTET_STRING) */
-	per_write_octet_string(s, userData->buffer, Stream_GetPosition(userData), 0); /* array of server data blocks */
+	per_write_octet_string(s, Stream_Buffer(userData), Stream_GetPosition(userData), 0); /* array of server data blocks */
 }
 
 BOOL gcc_read_client_data_blocks(wStream* s, rdpMcs* mcs, int length)
@@ -509,7 +509,7 @@ BOOL gcc_read_server_data_blocks(wStream* s, rdpMcs* mcs, int length)
 				break;
 		}
 		offset += blockLength;
-		Stream_Pointer(s) = holdp + blockLength;
+		Stream_SetPointer(s, holdp + blockLength);
 	}
 
 	return TRUE;
@@ -590,7 +590,12 @@ BOOL gcc_read_client_core_data(wStream* s, rdpMcs* mcs, UINT16 blockLength)
 	Stream_Read_UINT32(s, settings->ClientBuild); /* ClientBuild (4 bytes) */
 
 	/* clientName (32 bytes, null-terminated unicode, truncated to 15 characters) */
-	ConvertFromUnicode(CP_UTF8, 0, (WCHAR*) Stream_Pointer(s), 32 / 2, &str, 0, NULL, NULL);
+	if (ConvertFromUnicode(CP_UTF8, 0, (WCHAR*) Stream_Pointer(s), 32 / 2,
+		&str, 0, NULL, NULL) < 1)
+	{
+		WLog_ERR(TAG, "failed to convert client host name");
+		return FALSE;
+	}
 	Stream_Seek(s, 32);
 	free(settings->ClientHostname);
 	settings->ClientHostname = str;
@@ -644,10 +649,17 @@ BOOL gcc_read_client_core_data(wStream* s, rdpMcs* mcs, UINT16 blockLength)
 		settings->EarlyCapabilityFlags = (UINT32) earlyCapabilityFlags;
 		blockLength -= 2;
 
+		/* clientDigProductId (64 bytes): Contains a value that uniquely identifies the client */
+
 		if (blockLength < 64)
 			break;
 
-		ConvertFromUnicode(CP_UTF8, 0, (WCHAR*) Stream_Pointer(s), 64 / 2, &str, 0, NULL, NULL);
+		if (ConvertFromUnicode(CP_UTF8, 0, (WCHAR*) Stream_Pointer(s), 64 / 2,
+			&str, 0, NULL, NULL) < 1)
+		{
+			WLog_ERR(TAG, "failed to convert the client product identifier");
+			return FALSE;
+		}
 		Stream_Seek(s, 64); /* clientDigProductId (64 bytes) */
 		free(settings->ClientProductId);
 		settings->ClientProductId = str;

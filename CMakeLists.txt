@@ -217,10 +217,6 @@ if(CMAKE_COMPILER_IS_GNUCC)
 	if(CMAKE_BUILD_TYPE STREQUAL "Release")
 		set(CMAKE_C_FLAGS_RELEASE "-DNDEBUG")
 		set(CMAKE_CXX_FLAGS_RELEASE "-DNDEBUG")
-		if(NOT OPENBSD)
-			set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -O2")
-			set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O2")
-		endif()
 
 		CHECK_C_COMPILER_FLAG (-Wno-builtin-macro-redefined Wno-builtin-macro-redefined)
 		if(Wno-builtin-macro-redefined)
@@ -700,17 +696,17 @@ if (TARGET_ARCH MATCHES "sparc")
 endif()
 
 # Path to put FreeRDP data
-set(FREERDP_DATA_PATH "${CMAKE_INSTALL_PREFIX}/share/freerdp")
+set(FREERDP_DATA_PATH "${CMAKE_INSTALL_PREFIX}/share/freerdp${FREERDP_VERSION_MAJOR}")
 
 # Path to put plugins
 
 set(FREERDP_LIBRARY_PATH "${CMAKE_INSTALL_LIBDIR}")
 
-set(FREERDP_PLUGIN_PATH "${CMAKE_INSTALL_LIBDIR}/freerdp")
+set(FREERDP_PLUGIN_PATH "${CMAKE_INSTALL_LIBDIR}/freerdp${FREERDP_VERSION_MAJOR}")
 set(FREERDP_ADDIN_PATH "${FREERDP_PLUGIN_PATH}")
 
 # Path to put extensions
-set(FREERDP_EXTENSION_PATH "${CMAKE_INSTALL_FULL_LIBDIR}/freerdp/extensions")
+set(FREERDP_EXTENSION_PATH "${CMAKE_INSTALL_FULL_LIBDIR}/freerdp${FREERDP_VERSION_MAJOR}/extensions")
 
 # Include directories
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
