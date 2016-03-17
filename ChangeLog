@@ -1,7 +1,6 @@
 2016-03-17 11:06:39 +0100 akallabeth (75ae3f5) 
 
-	* Merge pull request #3243 from hardening/typofix (HEAD,
-          origin/master, origin/HEAD, master)
+	* Merge pull request #3243 from hardening/typofix
 
 2016-03-17 11:02:51 +0100 Bernhard Miklautz (14daecf) 
 
@@ -10618,8 +10617,7 @@
 
 2014-09-11 18:46:32 -0400 Marc-André Moreau (f5ff6e1) 
 
-	* Merge pull request #2095 from bmiklautz/feat/byemonolithic (tag:
-          1.2.0-beta1+android9)
+	* Merge pull request #2095 from bmiklautz/feat/byemonolithic
 
 2014-09-12 00:36:29 +0200 Bernhard Miklautz (2218e96) 
 
@@ -13217,8 +13215,7 @@
 
 2014-06-12 09:51:57 -0400 Marc-André Moreau (9e14f5e) 
 
-	* Merge pull request #1861 from akallabeth/tsmf-gstreamer-1.0 (tag:
-          1.2.0-beta1+android7)
+	* Merge pull request #1861 from akallabeth/tsmf-gstreamer-1.0
 
 2014-06-11 17:48:04 -0400 Marc-André Moreau (fbea223) 
 
@@ -21782,8 +21779,7 @@
 
 2013-07-10 01:00:21 -0700 Bernhard Miklautz (780d451) 
 
-	* Merge pull request #1345 from nfedera/feat-2013-07-10-01 (tag:
-          1.1.0-beta+2013071101)
+	* Merge pull request #1345 from nfedera/feat-2013-07-10-01
 
 2013-07-10 07:14:26 +0200 Norbert Federa (b9c8ac6) 
 
@@ -22778,8 +22774,7 @@
 
 2013-05-22 05:21:52 -0700 Martin Fleisz (6d31c50) 
 
-	* Merge pull request #1260 from mfleisz/andrlang (tag:
-          1.1.0-beta1+ios4, tag: 1.1.0-beta1+android5)
+	* Merge pull request #1260 from mfleisz/andrlang
 
 2013-05-22 05:18:37 -0700 Martin Fleisz (0f0aada) 
 
@@ -23204,8 +23199,7 @@
 
 2013-05-08 08:33:29 -0700 Martin Fleisz (349dff8) 
 
-	* Merge pull request #1241 from mfleisz/iostsgpw (tag:
-          1.1.0-beta1+ios3)
+	* Merge pull request #1241 from mfleisz/iostsgpw
 
 2013-05-08 17:29:52 +0200 Martin Fleisz (c55f3d6) 
 
@@ -23450,8 +23444,7 @@
 
 2013-04-30 08:17:21 -0700 Martin Fleisz (ea443ac) 
 
-	* Merge pull request #1222 from mfleisz/andrtsg (tag:
-          1.1.0-beta1+android4)
+	* Merge pull request #1222 from mfleisz/andrtsg
 
 2013-04-30 11:15:04 -0400 Benoit LeBlanc (0b9112b) 
 
@@ -23719,8 +23712,7 @@
 
 2013-04-23 04:09:00 -0700 Martin Fleisz (b9bbbf2) 
 
-	* Merge pull request #1207 from mfleisz/master (tag:
-          1.1.0-beta1+ios2, tag: 1.1.0-beta1+android3)
+	* Merge pull request #1207 from mfleisz/master
 
 2013-04-23 04:04:06 -0700 Martin Fleisz (4bb700d) 
 
@@ -24493,8 +24485,7 @@
 
 2013-03-19 09:51:24 -0700 Marc-André Moreau (c01a934) 
 
-	* Merge pull request #1117 from mfleisz/master (tag:
-          1.1.0-beta1+android2)
+	* Merge pull request #1117 from mfleisz/master
 
 2013-03-19 09:40:29 -0700 Martin Fleisz (b40e409) 
 
@@ -24526,8 +24517,7 @@
 
 2013-03-19 04:26:25 -0700 Marc-André Moreau (a805170) 
 
-	* Merge pull request #1114 from mfleisz/iosdeptarget (tag:
-          1.1.0-beta1+ios1)
+	* Merge pull request #1114 from mfleisz/iosdeptarget
 
 2013-03-19 15:33:01 -0700 Vic Lee (77d19bb) 
 
@@ -24823,7 +24813,7 @@
 
 2013-03-12 20:59:04 +0100 Bernhard Miklautz (1be90ab) 
 
-	* Changed version to 1.1.0-beta1 (tag: 1.1.0-beta1)
+	* Changed version to 1.1.0-beta1
 
 2013-03-11 15:24:50 -0700 Marc-André Moreau (06e7d73) 
 
@@ -28492,7 +28482,7 @@
 
 2012-10-29 06:53:59 -0700 Marc-André Moreau (fa09b49) 
 
-	* Merge pull request #788 from bmiklautz/issue_787 (origin/channels)
+	* Merge pull request #788 from bmiklautz/issue_787
 
 2012-10-29 06:53:20 -0700 Marc-André Moreau (9a9e871) 
 
@@ -33894,7 +33884,7 @@
 
 2012-02-09 21:01:42 -0500 Marc-André Moreau (8e62721) 
 
-	* changelog: update for 1.0.1 (tag: 1.0.1)
+	* changelog: update for 1.0.1
 
 2012-02-09 21:01:13 -0500 Marc-André Moreau (fdfc817) 
 
@@ -34595,7 +34585,7 @@
 
 2012-01-16 12:52:14 -0500 Marc-André Moreau (41558e4) 
 
-	* ChangeLog: added FreeRDP 1.0.0 changes (tag: 1.0.0)
+	* ChangeLog: added FreeRDP 1.0.0 changes
 
 2012-01-16 12:17:50 -0500 Marc-André Moreau (3f01f4f) 
 
@@ -34881,7 +34871,7 @@
 2012-01-04 20:20:58 -0500 Marc-André Moreau (a3df68a) 
 
 	* libfreerdp-core: apply glyph cache v2 patch from Pawel Jakub
-          Dawidek (tag: 1.0-beta5)
+          Dawidek
 
 2012-01-04 20:17:11 -0500 Marc-André Moreau (5f28591) 
 
@@ -35039,7 +35029,7 @@
 
 2011-12-22 13:00:34 -0800 Anthony (e411f1c) 
 
-	* Merge pull request #307 from absmall/master (tag: 1.0-beta4)
+	* Merge pull request #307 from absmall/master
 
 2011-12-22 14:23:08 -0500 Aaron Small (7ec1b56) 
 
@@ -35452,7 +35442,7 @@
 
 2011-12-06 18:01:03 -0800 Marc-André Moreau (08c1043) 
 
-	* Merge pull request #256 from sunds/master (tag: 1.0-beta3)
+	* Merge pull request #256 from sunds/master
 
 2011-12-06 16:39:08 -0800 Not Nyguen Doze (4d341f2) 
 
@@ -35768,7 +35758,7 @@
 
 2011-11-24 17:10:00 -0800 Marc-André Moreau (42735c4) 
 
-	* Merge pull request #222 from jsorg71/master (tag: 1.0-beta2)
+	* Merge pull request #222 from jsorg71/master
 
 2011-11-24 15:32:49 -0800 Jay Sorg (b32ea1b) 
 
@@ -36077,8 +36067,7 @@
 
 2011-11-11 01:02:10 +0800 Rex Tsai (7a0613b) 
 
-	* tsmf: fix when using older then libav major version 53. (tag:
-          1.0-beta1)
+	* tsmf: fix when using older then libav major version 53.
 
 2011-11-10 04:25:57 -0800 Otavio Salvador (e297d74) 
 
