@@ -1,7 +1,472 @@
+2016-03-17 11:06:39 +0100 akallabeth (75ae3f5) 
+
+	* Merge pull request #3243 from hardening/typofix (HEAD,
+          origin/master, origin/HEAD, master)
+
+2016-03-17 11:02:51 +0100 Bernhard Miklautz (14daecf) 
+
+	* Merge pull request #3240 from akallabeth/drive_fixes
+
+2016-03-17 10:44:11 +0100 David FORT (2cb3717) 
+
+	* Fixed a typo in debug messages
+
+2016-03-17 09:34:24 +0100 Armin Novak (43b13ff) 
+
+	* Replace SetFilePointerEx with SetFilePointer.
+
+2016-03-17 09:33:39 +0100 Armin Novak (f45be8d) 
+
+	* Print device name when loading channel.
+
+2016-03-16 15:19:11 +0100 Martin Fleisz (80cd647) 
+
+	* Merge pull request #3164 from akallabeth/windows_UnixChangeFileMode
+
+2016-03-16 14:05:55 +0100 Bernhard Miklautz (eb5e303) 
+
+	* Merge pull request #3215 from akallabeth/avc_444
+
+2016-03-16 13:56:39 +0100 Bernhard Miklautz (90b3bf4) 
+
+	* Merge pull request #3204 from akallabeth/rdp_file_preference_fix
+
+2016-03-16 13:46:47 +0100 Armin Novak (7faff04) 
+
+	* Assume the update rectangle is inclusive.
+
+2016-03-14 09:01:57 +0100 Armin Novak (dfdc4c3) 
+
+	* Fixed comments.
+
+2016-03-14 08:57:00 +0100 Armin Novak (9ab3532) 
+
+	* Renamed GFX defines to conform to spec.
+
+2016-03-02 15:16:49 +0100 Armin Novak (5bc333c) 
+
+	* Implemented GFX AVC444 support.
+
+2016-03-02 14:53:55 +0100 Armin Novak (3309bf8) 
+
+	* Implemented YUV444 related primitives.
+
+2016-03-02 14:39:36 +0100 Armin Novak (3a3ec85) 
+
+	* Unified RDPGFX_RECT16 and RECTANGLE_16
+
+2016-03-16 13:32:51 +0100 akallabeth (0c99d6a) 
+
+	* Merge pull request #3226 from rjcorrig/#3198
+
+2016-03-16 13:32:29 +0100 akallabeth (2ea56c6) 
+
+	* Merge pull request #3234 from bmiklautz/rdkt_version
+
+2016-03-16 08:29:21 -0400 Robert Corrigan (a4f0089) 
+
+	* winpr_detect_windows_time_zone should have void argument
+
+2016-03-16 13:15:39 +0100 Armin Novak (fd26624) 
+
+	* Parse RDP and assistance files in parser.
+
+2016-03-16 13:05:00 +0100 Armin Novak (fb44b68) 
+
+	* Removed windows extra handling for RDP files.
+
+2016-03-16 13:15:24 +0100 Bernhard Miklautz (babbc4b) 
+
+	* Increase rdtk version to 2.0.0
+
+2016-03-16 13:08:06 +0100 Armin Novak (3d23a77) 
+
+	* Updated ConvertToUnicode return check.
+
+2016-03-16 13:03:33 +0100 Bernhard Miklautz (228f6b1) 
+
+	* Merge pull request #3207 from akallabeth/mic_crash_fix
+
+2016-03-16 12:39:36 +0100 Armin Novak (059c754) 
+
+	* Fixed double free.
+
+2016-03-16 11:58:31 +0100 Bernhard Miklautz (1b15636) 
+
+	* Merge pull request #3214 from hardening/fix_systemd_appender
+
+2016-03-15 09:25:50 +0100 akallabeth (b35f306) 
+
+	* Merge pull request #3225 from mfleisz/fix_set_err_info
+
+2016-03-10 15:10:49 -0500 Robert Corrigan (16796b9) 
+
+	* winpr: Updates time zones and fixes bias values
+
+2016-03-14 15:28:56 +0100 Bernhard Miklautz (c5fd49c) 
+
+	* Merge pull request #3223 from comicfans/wayland_fix
+
+2016-03-14 15:27:15 +0100 Martin Fleisz (b2d24a4) 
+
+	* freerdp: Fix possible crash when setting error info in server-mode
+
+2016-03-14 15:13:52 +0100 Bernhard Miklautz (05bcec4) 
+
+	* Merge pull request #3224 from mfleisz/win32_bld_fix
+
+2016-03-14 14:08:48 +0100 Martin Fleisz (0249b09) 
+
+	* winpr: Fix definition of PathFileExists on Win32
+
+2016-03-14 12:51:50 +0000 comicfans44 (6603039) 
+
+	* only compile wayland client when WAYLAND_FOUND
+
+2016-03-14 13:19:08 +0100 Armin Novak (2dbc1a0) 
+
+	* Reverted WTS API changes.
+
+2016-03-08 13:19:40 +0100 Armin Novak (d06723e) 
+
+	* Fixed return value for failed malloc.
+
+2016-03-07 12:54:49 +0100 Armin Novak (36cbf1b) 
+
+	* Fixed error handling for channel load failures.
+
+2016-03-14 13:00:52 +0100 Bernhard Miklautz (6ebf452) 
+
+	* Merge pull request #3209 from akallabeth/android_translation_fix
+
+2016-03-14 10:08:25 +0100 akallabeth (4ad3428) 
+
+	* Merge pull request #3221 from bmiklautz/fix_nightlies
+
+2016-03-14 09:57:33 +0100 Bernhard Miklautz (e13a327) 
+
+	* Merge pull request #3212 from realjiangms/fix_default_audin
+
+2016-03-14 09:53:45 +0100 Armin Novak (77d82f1) 
+
+	* Removed untranslatable strings from translated files.
+
+2016-03-14 09:38:35 +0100 Bernhard Miklautz (3bae203) 
+
+	* pkg/deb: adapt channel paths
+
+2016-03-14 09:20:30 +0100 Martin Fleisz (9554177) 
+
+	* Merge pull request #3213 from akallabeth/android_build_fixes
+
+2016-03-11 11:22:59 +0100 Martin Fleisz (66ae3f2) 
+
+	* Merge pull request #3177 from akallabeth/codec_reset_fix
+
+2016-03-10 23:41:12 +0100 Hardening (19494bd) 
+
+	* Make systemd appender honor layout and log off
+
+2016-03-10 22:07:30 +0100 Armin Novak (f60b8d5) 
+
+	* Replaced version patch with make argument.
+
+2016-03-10 21:54:11 +0100 Armin Novak (4a7816d) 
+
+	* Updated OpenSSL version in script.
+
+2016-03-10 21:52:40 +0100 Armin Novak (382626f) 
+
+	* Fixed settings load/store.
+
+2016-03-10 21:18:19 +0100 Armin Novak (cabcf7c) 
+
+	* Fixed paralell building issue.
+
+2016-03-11 01:52:18 +0800 zihao.jiang (40ea6e9) 
+
+	* audin: Fixed default sys argument for audin PR #3173 fixed argument
+          parsing. However it breaks the usage without specifying
+          subsystem: "/microphone" In particular, aFreerdp
+          microphone redirect is broken as it exactly uses
+          "/microphone" This PR fixes the regression. Fix: We should
+          not call CommandLineParseArgumentsA if argc is only 1
+          (same case as rdpsnd_main.c)
+
+2016-03-10 08:22:30 +0100 Martin Fleisz (1feb03d) 
+
+	* Merge pull request #3210 from hardening/env_fix
+
+2016-03-09 14:10:31 +0100 David FORT (b3c0478) 
+
+	* Don't require HOME env var to be set for server-side code
+
+2016-03-08 20:34:19 +0100 Armin Novak (15498ea) 
+
+	* Marked non translatable strings as such.
+
+2016-03-08 16:27:51 +0100 Armin Novak (1d4fd05) 
+
+	* Reverted translation of internal VALUE arrays.
+
+2016-03-08 20:50:30 +0100 akallabeth (ff1eb25) 
+
+	* Merge pull request #3172 from
+          realjiangms/android_launch_by_scheme_2720
+
+2016-02-27 18:31:43 +0800 zihao.jiang (0927114) 
+
+	* android: Allow freerdp mobile version to be launched from URI
+          (freerdp://) It would be good if we have a easy way to
+          call aFreeRDP in another Android APP (Requirement also
+          mentioned in #2720) We can define a scheme (freerdp://) as
+          unified way to launch FreeRDP from another APP or browser
+          and connect to compatible RDP server 1. Define scheme
+          freerdp:// 2. General form could be
+          freerdp://user@hostname:port/connect?key1=value&key2=-&key3=%2b&key4=
+          3. [user] part would be translated to /u: 4.
+          [hostname:port] would be translated to /v: 5. The
+          [user@hostname:port] part would be used as app title,
+          currently it's just the progress dialog title 6. query
+          parameters would be translated to command line arguments.
+          Later same arguments will overwrite the formers:     a.
+          key1=value: 		=> /key1:value     b. key2=-: 	
+          	=> -key2     c. key3=%2b 		=> +key3
+          (%2b is url encoded +) 	d. key4= 		
+          => /key4 	e. Especially, drive=sdcard will be properly
+          handled with local sdcard path. On my device it will be
+          translated to /drive:sdcard,/storage/emulated/0
+
+2016-03-08 10:05:57 +0100 Martin Fleisz (30325f1) 
+
+	* Merge pull request #3181 from akallabeth/wlog_filter_fix
+
+2016-03-07 15:39:59 +0100 Bernhard Miklautz (9f8baf3) 
+
+	* Merge pull request #3206 from akallabeth/openssl_unification
+
+2016-03-07 13:12:38 +0100 Armin Novak (bb3448f) 
+
+	* Set variable to NULL to prevent double free.
+
+2016-03-07 11:51:13 +0100 Armin Novak (2208a84) 
+
+	* Moved assistance to winpr crypto.
+
+2016-03-07 10:55:51 +0100 akallabeth (52f1e6b) 
+
+	* Merge pull request #3086 from DavBfr/fix-rdpdr
+
+2016-03-07 10:50:35 +0100 akallabeth (ece552d) 
+
+	* Merge pull request #3200 from dwmw2/master
+
+2016-03-07 09:43:35 +0100 Armin Novak (83ef642) 
+
+	* Use common command line parser.
+
+2016-03-07 09:43:53 +0100 Armin Novak (4bb33e9) 
+
+	* Reparse command line after RDP or assistance file.
+
+2016-03-07 09:44:07 +0100 Armin Novak (36241ed) 
+
+	* Fix memory leaks if parsed multiple times.
+
+2016-03-07 09:24:44 +0100 Martin Fleisz (f0cc927) 
+
+	* Merge pull request #3202 from akallabeth/file_bsd_fix
+
+2016-03-04 09:25:04 +0100 Armin Novak (34b1236) 
+
+	* Fixed FreeBSD support for filetime settings.
+
+2016-03-04 13:22:58 +0000 David Woodhouse (701f54e) 
+
+	* winpr: Bump API version to 2.0
+
+2016-03-04 11:19:00 +0100 Hardening (fb63dd2) 
+
+	* Merge pull request #3194 from
+          nfedera/fix-convertfromunicode-hardening
+
+2016-03-04 11:17:42 +0100 Bernhard Miklautz (9fa85ae) 
+
+	* Merge pull request #1726 from grpomega/patch-3
+
+2016-03-04 00:45:26 +0100 Norbert Federa (de4adef) 
+
+	* fix logon info processing
+
+2016-03-03 20:39:31 +0100 Bernhard Miklautz (120bd2d) 
+
+	* Merge pull request #3173 from akallabeth/audin_arg_fix
+
+2016-03-03 17:34:57 +0100 Martin Fleisz (151f435) 
+
+	* Merge pull request #3196 from akallabeth/exported_symbols_fix
+
+2016-03-03 17:11:26 +0100 Armin Novak (fb88ad0) 
+
+	* Fixed symbol export for sound plugins.
+
+2016-03-03 16:21:12 +0100 Norbert Federa (ef4b29e) 
+
+	* ConvertFromUnicode fixes and misc hardening
+
+2016-03-03 13:58:42 +0100 Bernhard Miklautz (167fd47) 
+
+	* Merge pull request #3192 from akallabeth/plugin_path_fix
+
+2016-03-03 12:07:10 +0100 Armin Novak (ee2839f) 
+
+	* Caching log filter after first use.
+
+2016-03-03 12:12:21 +0100 Martin Fleisz (f150575) 
+
+	* Merge pull request #3191 from hardening/saveInfoPdu_fix
+
+2016-03-03 11:45:12 +0100 David FORT (f5ce5e7) 
+
+	* Fix parsing of saveSessionInfo PDU
+
+2016-03-03 11:36:26 +0100 Armin Novak (767e6bb) 
+
+	* Updated freerdp plugin path to use major version.
+
+2016-03-03 11:06:24 +0100 Martin Fleisz (2710ebf) 
+
+	* Merge pull request #3187 from akallabeth/client_name_fix
+
+2016-03-03 09:08:30 +0100 Armin Novak (7dcba9a) 
+
+	* Removed additional '\0' from TUNNEL_AUTH message.
+
+2016-03-02 20:53:19 +0100 Hardening (9afa928) 
+
+	* Merge pull request #3184 from xhaakon/fix-ubuntu-gcc-build
+
+2016-02-23 15:27:33 +0100 Jakub Adam (bc750e9) 
+
+	* Fix build on older 32-bit Ubuntu releases
+
+2016-03-02 19:02:01 +0100 Armin Novak (0ea7aea) 
+
+	* Remember filter log level.
+
+2016-03-01 17:10:22 -0800 David PHAM-VAN (40504c5) 
+
+	* Fix Uninitialized Variable
+
+2016-03-02 19:03:46 +0100 akallabeth (e71369d) 
+
+	* Merge pull request #3183 from bmiklautz/timezone_regression
+
+2016-02-26 10:32:54 -0800 David PHAM-VAN (f4eb278) 
+
+	* Mount only removable devices and network drives in Windows; Adds
+          consistency with Linux and Mac
+
+2016-02-26 10:31:14 -0800 David PHAM-VAN (31d9599) 
+
+	* Move first_hotplug call to parent thread to avoid parallel access
+          to devman dictionary
+
+2016-02-26 10:19:21 -0800 David PHAM-VAN (2f28b6c) 
+
+	* Improve code using more winpr functions
+
+2015-09-07 12:16:03 +0200 David PHAM-VAN (2e1e6a4) 
+
+	* Add hotplug support for MacOS
+
+2016-01-07 11:04:10 -0800 David PHAM-VAN (a20950f) 
+
+	* Implement FileAllocationInformation
+
+2016-03-02 12:37:48 -0500 Bernhard Miklautz (7075353) 
+
+	* winpr: fix regression in timezone detection
+
+2016-03-02 10:33:41 -0500 Bernhard Miklautz (ee40be2) 
+
+	* Merge pull request #3182 from xhaakon/shadow-pkg-config
+
+2016-03-02 10:20:12 +0100 Jakub Adam (9f0b14f) 
+
+	* shadow/subsystem: fix pkgconfig file
+
+2016-03-01 17:30:08 +0100 Armin Novak (5bb68a0) 
+
+	* Fixed broken resource cleanup.
+
+2016-03-01 17:14:35 +0100 Armin Novak (ce8f3f2) 
+
+	* Fixed context reset of sample server.
+
+2016-03-01 16:56:36 +0100 Armin Novak (09e957f) 
+
+	* Fixed broken check.
+
+2016-03-01 16:39:53 +0100 Armin Novak (8997c6c) 
+
+	* Added log messages for unsupported surface commands.
+
+2016-03-01 16:17:28 +0100 Armin Novak (2e110c7) 
+
+	* Fixed codec reset, now resetting resolution too.
+
+2016-03-02 14:11:15 +0100 Armin Novak (41fdac2) 
+
+	* Respecting filter in WLog_GetLogLevel
+
+2016-03-02 09:43:46 +0100 Martin Fleisz (857c373) 
+
+	* Merge pull request #3163 from akallabeth/set_file_time
+
+2016-03-02 09:43:24 +0100 Martin Fleisz (cfe5923) 
+
+	* Merge pull request #3179 from akallabeth/minor_fixes
+
+2016-02-26 12:53:23 +0100 Armin Novak (c74e37d) 
+
+	* Implemented UnixChangeFileMode for windows.
+
+2016-03-02 09:16:59 +0100 Armin Novak (65cddbc) 
+
+	* Removed obsolete log message.
+
+2016-03-02 09:16:49 +0100 Armin Novak (227ecc4) 
+
+	* Fixed uninitialized variable.
+
+2016-03-01 23:34:57 +0100 Hardening (49a0a9c) 
+
+	* Merge pull request #3178 from hendwolt/master
+
+2016-03-01 21:49:21 +0100 Hendrik Woltersdorf (a5bb05b) 
+
+	* fix wayland-client.h not found
+
+2016-03-01 16:44:19 +0100 Bernhard Miklautz (e02af82) 
+
+	* Merge pull request #3160 from akallabeth/stream_fixes
+
+2016-03-01 11:40:11 +0100 Armin Novak (a79072a) 
+
+	* Added tests for remaining stream functions.
+
+2016-03-01 11:39:21 +0100 Armin Novak (e7814d5) 
+
+	* Fixed stream API for Stream_Copy.
+
+2016-03-01 10:29:51 +0100 Armin Novak (a98e0f9) 
+
+	* Reverted opaque structures.
+
 2016-02-29 17:39:18 +0100 Norbert Federa (b4b8239) 
 
-	* Merge pull request #3176 from bmiklautz/shadow_subsystem (HEAD,
-          origin/master, origin/HEAD, master)
+	* Merge pull request #3176 from bmiklautz/shadow_subsystem
 
 2016-02-29 17:10:53 +0100 Bernhard Miklautz (014f31d) 
 
@@ -48,6 +513,18 @@
 
 	* Fixed crypto tests.
 
+2016-02-29 12:54:31 +0100 Armin Novak (b690470) 
+
+	* Replaced stream manipulation with EnsureCapacity.
+
+2016-02-29 12:51:54 +0100 Armin Novak (46fa7ec) 
+
+	* Fixed invalid stream copy length.
+
+2016-02-29 12:34:53 +0100 Armin Novak (8482fbf) 
+
+	* Fixed formatting.
+
 2016-02-29 11:12:32 +0100 Armin Novak (19568c6) 
 
 	* Fixed indentation.
@@ -63,6 +540,10 @@
 2016-02-29 09:00:02 +0100 Armin Novak (b429d23) 
 
 	* Refactored crypto *_New functions.
+
+2016-02-28 19:56:57 +0100 Armin Novak (71bea3e) 
+
+	* Fixed argument parsing for audin.
 
 2016-02-28 11:12:17 +0100 Armin Novak (92c1578) 
 
@@ -101,6 +582,10 @@
 
 	* Removed crypto_nonce.
 
+2016-02-27 22:16:41 +0100 Armin Novak (4929844) 
+
+	* Fixed const argument for Stream_Write.
+
 2016-02-27 22:13:59 +0100 Armin Novak (86436bc) 
 
 	* Added API export for uwac.
@@ -128,6 +613,19 @@
 2016-02-26 14:50:27 +0100 Armin Novak (dccf40c) 
 
 	* Fixed duplicate loading of smartcard and printers.
+
+2016-02-26 12:13:02 +0100 Armin Novak (98d4a93) 
+
+	* Added support for android SetFileTime. Deactivated libjpeg support
+          for android.
+
+2016-02-26 11:22:56 +0100 Armin Novak (5537230) 
+
+	* Fixed missing iOS UTIME_OMIT.
+
+2016-02-26 10:48:53 +0100 Armin Novak (436be24) 
+
+	* Implemented SetFileTime
 
 2016-02-26 09:57:35 +0100 Martin Fleisz (4f22682) 
 
@@ -164,6 +662,18 @@
 2016-02-25 21:57:56 +0100 Bernhard Miklautz (541abee) 
 
 	* cmake/FindWayland: cleanup
+
+2016-02-25 20:13:56 +0100 Armin Novak (cf9543e) 
+
+	* Converted Stream defines to inline functions.
+
+2016-02-25 20:01:12 +0100 Armin Novak (e79eee2) 
+
+	* Fixed Stream API misuse.
+
+2016-02-25 19:37:20 +0100 Armin Novak (b61ab5e) 
+
+	* Fixed stream copy in update_message_SurfaceCommand
 
 2016-02-25 16:57:48 +0100 akallabeth (16ba8f3) 
 
@@ -15948,6 +16458,10 @@
 2014-03-06 12:48:48 -0500 Marc-André Moreau (77e91aa) 
 
 	* libwinpr-crt: add byteswap macros
+
+2014-03-06 10:04:53 -0600 grpomega (c005e81) 
+
+	* Need Week instead of Day for TZ transistion
 
 2014-03-05 18:03:39 -0500 Marc-André Moreau (95127d5) 
 
