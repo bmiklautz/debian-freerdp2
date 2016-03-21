@@ -157,6 +157,7 @@ Depends:
  libfreerdp2 (= ${binary:Version}),
  libfreerdp-server2 (= ${binary:Version}),
  libfreerdp-client2 (= ${binary:Version}),
+ libfreerdp-shadow2 (= ${binary:Version}),
  librdtk2 (= ${binary:Version}),
 Description: Free Remote Desktop Protocol library (development files)
  FreeRDP is a libre client/server implementation of the Remote
