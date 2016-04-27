@@ -60,7 +60,6 @@ override_dh_strip:
 	dh_strip -pwinpr-utils --dbg-package=winpr-utils-dbg
 	dh_strip -pfreerdp2-wayland --dbg-package=freerdp2-wayland-dbg
 	dh_strip -plibuwac0 --dbg-package=libuwac0-dbg
-	dh_strip -plibfreerdp-shadow2 --dbg-package=libfreerdp-shadow2-dbg
 
 
 PKD   = $(word 1,$(abspath $(dir $(MAKEFILE_LIST))))
