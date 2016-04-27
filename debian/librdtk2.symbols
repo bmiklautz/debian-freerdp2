@@ -1,0 +1,10 @@
+librdtk.so.2 librdtk2 #MINVER#
+ rdtk_button_draw@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
+ rdtk_engine_free@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
+ rdtk_engine_new@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
+ rdtk_font_draw_text@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
+ rdtk_label_draw@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
+ rdtk_surface_fill@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
+ rdtk_surface_free@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
+ rdtk_surface_new@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
+ rdtk_text_field_draw@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
