@@ -4,7 +4,6 @@ usr/lib/*/libfreerdp-client.so
 usr/lib/*/librdtk.so
 usr/lib/*/libfreerdp-shadow.so
 usr/lib/*/libfreerdp-shadow-subsystem.so
-usr/lib/*/libwinpr-makecert-tool.a
 usr/include/freerdp*
 usr/include/rdtk*
 usr/lib/*/pkgconfig/freerdp*.pc
