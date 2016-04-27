@@ -97,6 +97,18 @@ Description: Free Remote Desktop Protocol library (client library)
  .
  This package contains the shared library for common client functionality.
 
+Package: libxfreerdp-client2
+Architecture: any
+Section: libs
+Pre-Depends: ${misc:Pre-Depends}
+Depends: ${misc:Depends}, ${shlibs:Depends}
+Multi-Arch: same
+Description: Free Remote Desktop Protocol library (X11 client library)
+ FreeRDP is a libre client/server implementation of the Remote
+ Desktop Protocol (RDP).
+ .
+ This package contains the shared library for X11 client functionality.
+
 Package: libfreerdp-server2
 Architecture: any
 Section: libs
@@ -213,6 +225,20 @@ Description: Free Remote Desktop Protocol client library (debug symbols)
  Desktop Protocol (RDP).
  .
  This package contains the debug symbols of the FreeRDP client library.
+
+Package: libxfreerdp-client2-dbg
+Section: debug
+Priority: extra
+Architecture: any
+Multi-Arch: same
+Depends:
+ ${misc:Depends},
+ libxfreerdp-client2 (= ${binary:Version}),
+Description: Free Remote Desktop Protocol library (X11 client library, debug symbols)
+ FreeRDP is a libre client/server implementation of the Remote
+ Desktop Protocol (RDP).
+ .
+ This package contains the debug symbols of the FreeRDP X11 client library.
 
 Package: libfreerdp-server2-dbg
 Section: debug
