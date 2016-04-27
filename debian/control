@@ -243,8 +243,8 @@ Description: RDP client for Windows Terminal Services (X11 client, debug symbols
  x-client library.
 
 Package: winpr-utils
+Multi-Arch: foreign
 Section: utils
-Priority: extra
 Architecture: any
 Depends: ${misc:Depends}, ${shlibs:Depends}
 Description: Windows Portable Runtime library command line utilities
