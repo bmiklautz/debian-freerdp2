@@ -1,12 +1,34 @@
 freerdp2 (2.0.0~git20160317.1.75ae3f5+dfsg1-1) UNRELEASED; urgency=medium
 
+  [ Bernhard Miklautz ]
   * Import git snapshot from upstream:
     - Obtained from master branch of http://github.com/FreeRDP/FreeRDP.
       Commit hash: 75ae3f58df5a14b4a67439aca96061a9c2ea5040
   * Reflect upstream changes
     - increase version numbers to 2 for rdtk and winpr
   * debian/rules
-    - get-orig-source: don't add git refs in the generated ChangeLog
+    + get-orig-source: don't add git refs in the generated ChangeLog
+
+  [ Mike Gabriel ]
+  * debian/control:
+    + Bump Standards: to 3.9.7. No changes needed.
+    + Make bin:pkg winpr-utils Priority: optional to match priority of
+      bin:pkg freerdp2-dev.
+    + Make bin:pkg winpr-utils Multi-Arch: foreign.
+    + freerdp2-shadow-x11 is not a debug package. Thus, dropping Section:
+      debug field.
+  * Split-off libxfreerdp-client.so.2.0.0 into its own bin:pkg.
+  * debian/*.symbols:
+    + Add .symbols files for all shared libraries.
+  * debian/freerdp2-x11.lintian-overrides:
+    + Override not required anymore.
+  * debian/libfreerdp-client2.install:
+    + Don't ship empty directory.
+  * debian/{freerdp2-dev.install,rules}:
+    + Don't install static libraries into dev:pkg freerdp2-dev.
+    + Ship libxfreerdp-client.so in freerdp2-dev bin:pkg.
+  * debian/patches:
+    + Add 1001_typo-fixes.patch. Provide spelling fixes in messages.
 
  -- Bernhard Miklautz <bernhard.miklautz@shacknet.at>  Thu, 17 Mar 2016 11:42:03 +0000
 
