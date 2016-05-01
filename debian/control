@@ -341,7 +341,6 @@ Description: FreeRDP Remote Desktop Protocol shadow (debug symbols)
 
 Package: freerdp2-shadow-x11
 Architecture: any
-Section: debug
 Depends: ${misc:Depends}, ${shlibs:Depends}
 Provides: freerdp
 Description: FreeRDP x11 shadowing server
