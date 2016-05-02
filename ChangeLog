@@ -1,3 +1,175 @@
+2016-05-02 18:44:40 +0200 Bernhard Miklautz (a7ca42e) 
+
+	* Merge pull request #3313 from bmiklautz/typos
+
+2016-05-02 18:31:43 +0200 Bernhard Miklautz (9d98759) 
+
+	* libfreerd/color: fix typo
+
+2016-05-02 18:09:24 +0200 akallabeth (38beb29) 
+
+	* Merge pull request #3311 from bmiklautz/static_rdtk
+
+2016-05-02 18:08:46 +0200 akallabeth (9591d2e) 
+
+	* Merge pull request #3312 from bmiklautz/commtests
+
+2016-05-02 17:44:25 +0200 Bernhard Miklautz (29adf0c) 
+
+	* rdtk: fix windows build
+
+2016-05-02 16:59:25 +0200 Bernhard Miklautz (81d30cc) 
+
+	* Disable comm tests per default
+
+2016-05-02 16:10:31 +0200 Bernhard Miklautz (1bad57c) 
+
+	* Don't export/install rdtk
+
+2016-04-26 11:01:40 +0200 Bernhard Miklautz (bd7ed27) 
+
+	* Merge pull request #3305 from akallabeth/dynamic_channel_crash_fix
+
+2016-04-26 09:59:40 +0200 akallabeth (a62d962) 
+
+	* Merge pull request #3250 from mfleisz/cssp_v3
+
+2016-04-26 09:35:54 +0200 Armin Novak (48b11cf) 
+
+	* Dynamic channel internal functions now static.
+
+2016-04-26 09:34:12 +0200 Armin Novak (ee186be) 
+
+	* ListDictionary handle NULL list argument.
+
+2016-04-19 17:57:53 +0200 Hardening (ca2d015) 
+
+	* Merge pull request #3296 from akallabeth/clipboard_file_fix
+
+2016-04-19 16:44:31 +0200 Armin Novak (8917a3d) 
+
+	* Fix CB_FILECONTENTS_REQUEST message decoding.
+
+2016-04-19 15:32:56 +0200 Norbert Federa (8110435) 
+
+	* Merge pull request #3294 from bmiklautz/misc_build
+
+2016-04-19 15:21:49 +0200 Norbert Federa (a4cec9f) 
+
+	* Merge pull request #3287 from bmiklautz/linking_fixes2
+
+2016-04-19 14:55:26 +0200 Hardening (d4b7301) 
+
+	* Merge pull request #3293 from
+          nfedera/mitigate-cbclientaddress-verification
+
+2016-04-19 14:33:26 +0200 Bernhard Miklautz (0ebc6f1) 
+
+	* build: disable -Wl,--no-undefined per default
+
+2016-04-19 14:09:58 +0200 Norbert Federa (9f148e6) 
+
+	* core: allow TS Gateway protocol violation
+
+2016-04-19 12:46:54 +0200 Bernhard Miklautz (4a9da95) 
+
+	* Tests: Disable TESTS_WTSAPI_EXTRA per default
+
+2016-04-15 14:48:46 +0200 Bernhard Miklautz (470e147) 
+
+	* Merge pull request #3285 from rjcorrig/kb3148851
+
+2016-04-15 14:32:40 +0200 Bernhard Miklautz (62cb5fa) 
+
+	* build: add missing dependencies
+
+2016-04-13 13:34:43 -0400 Robert Corrigan (f8c42da) 
+
+	* KB3148851: Updates to Russian Time Zones for 2016
+
+2016-04-11 20:47:53 +0200 Hardening (11d1138) 
+
+	* Merge pull request #3274 from bmiklautz/linking_fixes
+
+2016-04-11 11:10:08 +0200 Hardening (c9f4485) 
+
+	* Merge pull request #3276 from
+          nfedera/nf-fix-ms-android-protocol-violation
+
+2016-04-11 10:50:27 +0200 Norbert Federa (4ae77b8) 
+
+	* core: allow ms android client protocol violation
+
+2016-04-08 15:28:40 +0200 akallabeth (45ab979) 
+
+	* Merge pull request #3275 from
+          nfedera/fix-server-establish-keys-typo
+
+2016-04-08 14:47:35 +0200 Norbert Federa (6ee4453) 
+
+	* core: fix broken rdp security (server side)
+
+2016-04-07 14:39:16 +0200 Bernhard Miklautz (7838072) 
+
+	* build: add missing dependencies
+
+2016-04-07 14:52:52 +0200 Bernhard Miklautz (0e2c4f2) 
+
+	* Merge pull request #3273 from
+          realjiangms/fix_android_crash_rotate_3258
+
+2016-04-07 14:35:57 +0200 Bernhard Miklautz (8fe88ac) 
+
+	* build: use --no-undefined if available
+
+2016-04-07 20:19:22 +0800 zihao.jiang (748982c) 
+
+	* Fix android rotation crash
+
+2016-03-31 11:43:38 +0200 Bernhard Miklautz (a0d9969) 
+
+	* Merge pull request #3254 from akallabeth/avc444_cmd_arg
+
+2016-03-31 11:01:45 +0200 Armin Novak (81450dd) 
+
+	* Cleaned up empty if.
+
+2016-03-30 15:20:53 +0200 akallabeth (445059b) 
+
+	* Merge pull request #3259 from bmiklautz/overlinking
+
+2016-03-29 15:10:00 +0200 Bernhard Miklautz (bafe1aa) 
+
+	* usbdrc: remove unused dependencies
+
+2016-03-25 16:28:17 +0100 Bernhard Miklautz (9e8c6c9) 
+
+	* First shot on fixing over linking
+
+2016-03-01 12:45:25 +0100 Bernhard Miklautz (b184f58) 
+
+	* winpr/TestFileGetStdHandle: rename variable stdout
+
+2016-03-24 16:25:22 +0100 Armin Novak (50873be) 
+
+	* Added advanced gfx command line options.
+
+2016-03-21 16:58:09 +0100 Martin Fleisz (5d956eb) 
+
+	* core: correctly set last error on credssp errors
+
+2016-03-21 10:23:18 +0100 Martin Fleisz (34a7c18) 
+
+	* core: Propagate credssp error code by setting last error
+
+2016-03-18 13:45:51 +0100 Martin Fleisz (98528ea) 
+
+	* winpr: Fix definition of NTSTATUS_FROM_WIN32
+
+2016-03-18 13:32:13 +0100 Martin Fleisz (1c2d315) 
+
+	* core: Add support for CredSSP version 3
+
 2016-03-17 11:06:39 +0100 akallabeth (75ae3f5) 
 
 	* Merge pull request #3243 from hardening/typofix
