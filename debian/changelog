@@ -1,7 +1,13 @@
 freerdp2 (2.0.0~git20160502.1.a7ca42e+dfsg1-1) UNRELEASED; urgency=medium
-  * Import git snapshot from upstream:
+
+  [ Bernhard Miklautz ]
+  * import git snapshot from upstream:
     - Obtained from master branch of http://github.com/FreeRDP/FreeRDP.
       Commit hash: a7ca42ec17e545b90d6a08c84bd4967e8b472c01
+  * integrate upstream changes
+    - remove rdtk - not exported as library anymore
+  * debian/patches
+    - remove 1001_typo-fixes.patch - already upstream
 
  -- Bernhard Miklautz <bernhard.miklautz@shacknet.at>  Mon, 02 May 2016 18:42:42 +0200
 

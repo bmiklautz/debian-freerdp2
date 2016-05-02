@@ -2,14 +2,10 @@ usr/lib/*/libfreerdp.so
 usr/lib/*/libfreerdp-server.so
 usr/lib/*/libfreerdp-client.so
 usr/lib/*/libxfreerdp-client.so
-usr/lib/*/librdtk.so
 usr/lib/*/libfreerdp-shadow.so
 usr/lib/*/libfreerdp-shadow-subsystem.so
 usr/include/freerdp*
-usr/include/rdtk*
 usr/lib/*/pkgconfig/freerdp*.pc
-usr/lib/*/pkgconfig/rdtk*.pc
 usr/lib/*/cmake/FreeRDP*
-usr/lib/*/cmake/RdTk*
 obj-*/include/freerdp/version.h usr/include/freerdp2/freerdp/
 obj-*/include/freerdp/build-config.h usr/include/freerdp2/freerdp/

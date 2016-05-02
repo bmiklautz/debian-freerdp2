@@ -53,7 +53,6 @@ override_dh_strip:
 	dh_strip -plibfreerdp-shadow2 --dbg-package=libfreerdp-shadow2-dbg
 	dh_strip -plibfreerdp-client2 --dbg-package=libfreerdp-client2-dbg
 	dh_strip -plibxfreerdp-client2 --dbg-package=libxfreerdp-client2-dbg
-	dh_strip -plibrdtk2 --dbg-package=librdtk2-dbg
 	dh_strip -plibwinpr2 --dbg-package=libwinpr2-dbg
 	dh_strip -pfreerdp2-x11 --dbg-package=freerdp2-x11-dbg
 	dh_strip -pfreerdp2-shadow-x11 --dbg-package=freerdp2-shadow-x11-dbg

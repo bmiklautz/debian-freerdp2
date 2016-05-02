@@ -17,8 +17,6 @@ freerdp2-dev/
 libfreerdp-client2-dbg/
 libfreerdp-server2-dbg/
 libfreerdp2-dbg/
-librdtk2-dbg/
-librdtk2/
 libwinpr2-dbg/
 winpr-utils-dbg/
 winpr-utils/
@@ -30,3 +28,5 @@ libuwac0-dbg/
 libuwac0-dev/
 libuwac0/
 debhelper-build-stamp
+libxfreerdp-client2
+libxfreerdp-client2-dbg

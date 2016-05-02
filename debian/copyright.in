@@ -851,7 +851,6 @@ Files: channels/client/addin.c
  libfreerdp/core/info.c
  libfreerdp/core/mcs.c
  libfreerdp/core/mcs.h
- libfreerdp/core/nla.c
  libfreerdp/core/server.c
  server/Mac/mf_audin.c
  server/Mac/mf_rdpsnd.c
@@ -866,8 +865,7 @@ Files: channels/client/addin.c
  winpr/libwinpr/utils/wlog/BinaryAppender.c
  winpr/libwinpr/utils/wlog/PacketMessage.c
  winpr/libwinpr/wtsapi/wtsapi.c
-Copyright: 2010-2012, Marc-Andre Moreau <marcandre.moreau@gmail.com>
-  2011, Marc-Andre Moreau <marcandre.moreau@gmail.com>
+Copyright: 2011, Marc-Andre Moreau <marcandre.moreau@gmail.com>
   2012, Marc-Andre Moreau <marcandre.moreau@gmail.com>
   2013, DI (FH) Martin Haimberger <martin.haimberger@thincast.com>
   2013, Marc-Andre Moreau <marcandre.moreau@gmail.com>
@@ -1753,6 +1751,14 @@ Copyright: 2011, Jiten Pathy
   2011, Marc-Andre Moreau <marcandre.moreau@gmail.com>
   2015, DI (FH) Martin Haimberger <martin.haimberger@thincast.com>
   2015, Thincast Technologies GmbH
+License: Apache-2.0
+ FIXME
+
+Files: libfreerdp/core/nla.c
+Copyright: 2010-2012, Marc-Andre Moreau <marcandre.moreau@gmail.com>
+  2015, DI (FH) Martin Haimberger <martin.haimberger@thincast.com>
+  2015, Thincast Technologies GmbH
+  2016, Martin Fleisz <martin.fleisz@thincast.com>
 License: Apache-2.0
  FIXME
 
