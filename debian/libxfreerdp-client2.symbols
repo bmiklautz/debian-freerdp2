@@ -1,5 +1,0 @@
-libxfreerdp-client.so.2 libxfreerdp-client2 #MINVER#
- RdpClientEntry@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- xf_detect_monitors@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- xf_exit_code_from_disconnect_reason@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- xf_list_monitors@Base 2.0.0~git20160317.1.75ae3f5+dfsg1

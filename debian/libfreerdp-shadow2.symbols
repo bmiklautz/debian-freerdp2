@@ -2,12 +2,6 @@ libfreerdp-shadow-subsystem.so.2 libfreerdp-shadow2 #MINVER#
  X11_ShadowSubsystemEntry@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  shadow_subsystem_set_entry_builtin@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
 libfreerdp-shadow.so.2 libfreerdp-shadow2 #MINVER#
- makecert_context_free@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- makecert_context_new@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- makecert_context_output_certificate_file@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- makecert_context_output_private_key_file@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- makecert_context_process@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- makecert_context_set_output_file_name@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  shadow_capture_align_clip_rect@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  shadow_capture_compare@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  shadow_client_boardcast_msg@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
