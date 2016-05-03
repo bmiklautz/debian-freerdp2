@@ -1,3 +1,31 @@
+2016-05-03 17:04:45 +0200 Bernhard Miklautz (f828595) 
+
+	* Merge pull request #3282 from akallabeth/input_arg_checks
+
+2016-05-03 16:27:15 +0200 Bernhard Miklautz (221a292) 
+
+	* Merge pull request #3263 from akallabeth/tofu
+
+2016-05-03 16:19:37 +0200 akallabeth (dd009af) 
+
+	* Merge pull request #3314 from bmiklautz/refactoringx
+
+2016-04-13 09:47:48 +0200 Armin Novak (115f59d) 
+
+	* Added argument checks for exported input functions.
+
+2016-05-03 14:47:53 +0200 Bernhard Miklautz (c52984f) 
+
+	* pkg/deb: update the package
+
+2016-05-03 14:16:11 +0200 Bernhard Miklautz (59fbfdb) 
+
+	* Add library libwinpr-tools
+
+2016-05-03 10:44:42 +0200 Bernhard Miklautz (8cb873b) 
+
+	* client/X11: fix build without client interface
+
 2016-05-02 18:44:40 +0200 Bernhard Miklautz (a7ca42e) 
 
 	* Merge pull request #3313 from bmiklautz/typos
@@ -125,6 +153,10 @@
 2016-04-07 20:19:22 +0800 zihao.jiang (748982c) 
 
 	* Fix android rotation crash
+
+2016-03-31 12:16:55 +0200 Armin Novak (5344576) 
+
+	* Added command line option /cert-tofu
 
 2016-03-31 11:43:38 +0200 Bernhard Miklautz (a0d9969) 
 
