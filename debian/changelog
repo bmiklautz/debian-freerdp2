@@ -10,6 +10,8 @@ freerdp2 (2.0.0~git20160503.1.f828595+dfsg1-1) UNRELEASED; urgency=medium
     + build with WITH_CLIENT_INTERFACE=OFF this removes libxfreerdp-client
   * debian/libfreerdp-shadow2.symbols
     + remove symbols obsoleted by libwinpr-tools
+  * debian/control
+    + add dependency in libwinpr2-dev to libwinpr-tools2
 
  -- Bernhard Miklautz <bernhard.miklautz@shacknet.at>  Tue, 03 May 2016 18:54:42 +0200
 

@@ -148,6 +148,7 @@ Multi-Arch: same
 Depends:
  ${misc:Depends},
  libwinpr2 (= ${binary:Version}),
+ libwinpr-tools2 (= ${binary:Version}),
 Description: Windows Portable Runtime library (development files)
  WinPR is a spin-off project of FreeRDP which aims at providing a portable
  implementation of important portions of the Windows API. Just like FreeRDP,
