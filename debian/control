@@ -147,6 +147,7 @@ Architecture: any
 Multi-Arch: same
 Depends:
  ${misc:Depends},
+ libssl-dev,
  libwinpr2 (= ${binary:Version}),
  libwinpr-tools2 (= ${binary:Version}),
 Description: Windows Portable Runtime library (development files)
