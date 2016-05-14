@@ -15,6 +15,17 @@ endif
 
 NULL =
 
+DEB_HOST_ARCH_OS=$(shell dpkg-architecture -qDEB_HOST_ARCH_OS)
+ifneq (,$(filter linux,$(DEB_HOST_ARCH_OS)))
+LINUX_URBDRC_CLIENT = -DCHANNEL_URBDRC=ON \
+                      -DCHANNEL_URBDRC_CLIENT=ON \
+                      $(NULL)
+else
+LINUX_URBDRC_CLIENT = -DCHANNEL_URBDRC=OFF \
+                      -DCHANNEL_URBDRC_CLIENT=OFF \
+                      $(NULL)
+endif
+
 DEB_CMAKE_EXTRA_FLAGS :=  -DCMAKE_INSTALL_INCLUDEDIR=include/$(shell dpkg-architecture -qDEB_HOST_MULTIARCH) \
                           -DCMAKE_SKIP_RPATH=FALSE \
                           -DCMAKE_SKIP_INSTALL_RPATH=TRUE \
@@ -27,8 +38,7 @@ DEB_CMAKE_EXTRA_FLAGS :=  -DCMAKE_INSTALL_INCLUDEDIR=include/$(shell dpkg-archit
                           -DWITH_GSTREAMER_0_10=OFF \
                           -DWITH_GSTREAMER_1_0=ON \
                           -DWITH_GSM=ON \
-                          -DCHANNEL_URBDRC=ON \
-                          -DCHANNEL_URBDRC_CLIENT=ON \
+                          $(LINUX_URBDRC_CLIENT) \
                           -DWITH_SERVER=ON \
                           -DBUILD_TESTING=OFF \
                           -DCMAKE_BUILD_TYPE=RELWITHDEBINFO \
