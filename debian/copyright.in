@@ -507,7 +507,6 @@ Files: client/X11/generate_argument_docbook.c
  libfreerdp/core/test/TestConnect.c
  libfreerdp/core/test/TestSettings.c
  libfreerdp/core/test/TestVersion.c
- libfreerdp/crypto/test/known_hosts/known_hosts
  libfreerdp/gdi/test/TestGdiBitBlt.c
  libfreerdp/gdi/test/TestGdiClip.c
  libfreerdp/gdi/test/TestGdiCreate.c
@@ -1593,6 +1592,14 @@ Copyright: 2011, Anthony Tong <atong@trustedcs.com>
   2015, Thincast Technologies GmbH
   2016, David PHAM-VAN <d.phamvan@inuvika.com>
 License: Apache (v2.0)
+
+Files: channels/smartcard/client/smartcard_operations.c
+Copyright: 2011, Anthony Tong <atong@trustedcs.com>
+  2011, O.S. Systems Software Ltda
+  2015, DI (FH) Martin Haimberger <martin.haimberger@thincast.com>
+  2015, Thincast Technologies GmbH
+  Alexi Volkov <alexi@myrealbox.com> 2006,
+License: Apache-2.0
  FIXME
 
 Files: channels/smartcard/client/smartcard_operations.c
@@ -2028,8 +2035,8 @@ License: UNKNOWN
  FIXME
 
 Files: uwac/libuwac/uwac-utils.c
-Copyright: 2008, Kristian HÃ¸gsberg
-  2012, Collabora, Ltd.
+Copyright: 2008, Kristian Høgsberg
+  2012, Collabora, Ltd
   2014, David FORT <contact@hardening-consulting.com>
 License: UNKNOWN
  FIXME
@@ -2043,5 +2050,21 @@ License: UNKNOWN
 Files: winpr/libwinpr/thread/test/TestThreadExitThread.c
 Copyright: 2015, Hewlett-Packard Development Company, L.P.
 License: UNKNOWN
+ FIXME
+
+Files: winpr/libwinpr/crt/casing.c
+Copyright: was claimed by the wine
+License: UNKNOWN
+ FIXME
+
+Files: winpr/libwinpr/utils/lodepng/lodepng.c
+Copyright: 2005-2014, Lode Vandevenne
+  2015, Armin Novak
+License: Zlib
+ FIXME
+
+Files: winpr/libwinpr/utils/lodepng/lodepng.h
+Copyright: 2005-2014, Lode Vandevenne
+License: Zlib
  FIXME
 
