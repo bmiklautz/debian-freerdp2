@@ -1,0 +1,3 @@
+# https://github.com/FreeRDP/FreeRDP/issues/3346
+winpr-utils: binary-without-manpage usr/bin/winpr-hash
+winpr-utils: binary-without-manpage usr/bin/winpr-makecert
