@@ -1289,9 +1289,21 @@ Copyright: 2012-2013, A Tasty Pixel
 License: zlib/libpng
 
 Files: winpr/libwinpr/utils/lodepng/lodepng.c
- winpr/libwinpr/utils/lodepng/lodepng.h
+Copyright: 2005-2014, Lode Vandevenne
+ 2015, Armin Novak
+License: Zlib
+
+Files: winpr/libwinpr/utils/lodepng/lodepng.h
 Copyright: 2005-2014, Lode Vandevenne
 License: zlib/libpng
+
+Files: channels/smartcard/client/smartcard_operations.c
+Copyright: 2011, Anthony Tong <atong@trustedcs.com>
+  2006, Alexi Volkov <alexi@myrealbox.com>
+  2011, O.S. Systems Software Ltda.
+  2015, DI (FH) Martin Haimberger <martin.haimberger@thincast.com>
+  2015, Thincast Technologies GmbH
+License: Apache-2.0
 
 Files: resources/conv_to_ewm_prop.py
 Copyright: 2011, Anthony Tong <atong@trustedcs.com>
