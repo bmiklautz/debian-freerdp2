@@ -66,7 +66,7 @@ Description: RDP client for Windows Terminal Services (X11 client)
   * Windows Vista
   * Windows 2008/2008r2/2011SBS Server
   * Windows 7
-  * Windows 2012 Server
+  * Windows 2012/2012r2 Server
   * Windows 8
   * Windows 10
  .
@@ -412,7 +412,7 @@ Description: RDP client for Windows Terminal Services (wayland client)
   * Windows Vista
   * Windows 2008/2008r2/2011SBS Server
   * Windows 7
-  * Windows 2012 Server
+  * Windows 2012/2012r2 Server
   * Windows 8
   * Windows 10
  .
