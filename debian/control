@@ -134,12 +134,12 @@ Section: libs
 Pre-Depends: ${misc:Pre-Depends}
 Depends: ${misc:Depends}, ${shlibs:Depends}
 Multi-Arch: same
-Description: Free Remote Desktop Protocol library (X11 client library)
+Description: Windows Portable Runtime Tools library
  FreeRDP is a libre client/server implementation of the Remote
  Desktop Protocol (RDP).
  .
- This package contains the shared library for utilities and tools.
-
+ This package contains the shared library for Windows Portable Runtime
+ utilities and tools.
 
 Package: libwinpr2-dev
 Section: libdevel
@@ -200,6 +200,21 @@ Description: Windows Portable Runtime library (debug symbols)
  .
  This package contains the debug symbols of the WinPR shared libraries.
 
+Package: libwinpr-tools2-dbg
+Section: debug
+Priority: extra
+Architecture: any
+Multi-Arch: same
+Depends:
+ ${misc:Depends},
+ libwinpr-tools2 (= ${binary:Version}),
+Description: Windows Portable Runtime Tools library (debug symbols)
+ FreeRDP is a libre client/server implementation of the Remote
+ Desktop Protocol (RDP).
+ .
+ This package contains the debug symbols for the Windows Portable Runtime
+ utilities and tools shared library.
+
 Package: libfreerdp2-dbg
 Section: debug
 Priority: extra
@@ -227,20 +242,6 @@ Description: Free Remote Desktop Protocol client library (debug symbols)
  Desktop Protocol (RDP).
  .
  This package contains the debug symbols of the FreeRDP client library.
-
-Package: libwinpr-tools2-dbg
-Section: debug
-Priority: extra
-Architecture: any
-Multi-Arch: same
-Depends:
- ${misc:Depends},
- libwinpr-tools2 (= ${binary:Version}),
-Description: Free Remote Desktop Protocol library (X11 client library, debug symbols)
- FreeRDP is a libre client/server implementation of the Remote
- Desktop Protocol (RDP).
- .
- This package contains the shared library for utilities and tools.
 
 Package: libfreerdp-server2-dbg
 Section: debug
