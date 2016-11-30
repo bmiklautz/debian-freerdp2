@@ -2,6 +2,7 @@
 #include <winpr/crt.h>
 #include <winpr/tchar.h>
 #include <winpr/path.h>
+#include <winpr/file.h>
 #include <winpr/wlog.h>
 
 int TestWLog(int argc, char* argv[])
@@ -11,6 +12,15 @@ int TestWLog(int argc, char* argv[])
 	wLog* logB;
 	wLogLayout* layout;
 	wLogAppender* appender;
+	char* tmp_path = NULL;
+	char* wlog_file = NULL;
+	int result = 1;
+
+        if (!(tmp_path = GetKnownPath(KNOWN_PATH_TEMP)))
+        {
+                fprintf(stderr, "Failed to get temporary directory!\n");
+		goto out;
+        }
 
 	WLog_Init();
 
@@ -20,9 +30,9 @@ int TestWLog(int argc, char* argv[])
 
 	appender = WLog_GetLogAppender(root);
 	if(!WLog_ConfigureAppender(appender, "outputfilename", "test_w.log"))
-		return 1;
-	if(!WLog_ConfigureAppender(appender, "outputfilepath", "/tmp/"))
-		return 1;
+		goto out;
+	if(!WLog_ConfigureAppender(appender, "outputfilepath", tmp_path))
+		goto out;
 
 	layout = WLog_GetLogLayout(root);
 	WLog_Layout_SetPrefixFormat(root, layout, "[%lv:%mn] [%fl|%fn|%ln] - ");
@@ -49,5 +59,13 @@ int TestWLog(int argc, char* argv[])
 
 	WLog_Uninit();
 
-	return 0;
+	if ((wlog_file = GetCombinedPath(tmp_path, "test_w.log")))
+		DeleteFileA(wlog_file);
+
+	result = 0;
+out:
+	free(wlog_file);
+	free(tmp_path);
+
+	return result;
 }

@@ -5,6 +5,7 @@
  * Copyright 2013 Marc-Andre Moreau <marcandre.moreau@gmail.com>
  * Copyright 2015 Thincast Technologies GmbH
  * Copyright 2015 DI (FH) Martin Haimberger <martin.haimberger@thincast.com>
+ * Copyright 2016 David PHAM-VAN <d.phamvan@inuvika.com>
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -317,6 +318,9 @@ static UINT disp_plugin_initialize(IWTSPlugin* pPlugin, IWTSVirtualChannelManage
  */
 static UINT disp_plugin_terminated(IWTSPlugin* pPlugin)
 {
+	DISP_PLUGIN* disp = (DISP_PLUGIN*) pPlugin;
+	free(disp->listener_callback);
+	free(disp->iface.pInterface);
 	free(pPlugin);
 	return CHANNEL_RC_OK;
 }
@@ -338,7 +342,7 @@ UINT disp_send_monitor_layout(DispClientContext* context, UINT32 NumMonitors, DI
 	return disp_send_display_control_monitor_layout_pdu(callback, NumMonitors, Monitors);
 }
 
-#ifdef STATIC_CHANNELS
+#ifdef BUILTIN_CHANNELS
 #define DVCPluginEntry		disp_DVCPluginEntry
 #else
 #define DVCPluginEntry		FREERDP_API DVCPluginEntry

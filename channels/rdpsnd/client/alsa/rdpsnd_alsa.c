@@ -647,7 +647,7 @@ static UINT rdpsnd_alsa_parse_addin_args(rdpsndDevicePlugin* device, ADDIN_ARGV*
 	return CHANNEL_RC_OK;
 }
 
-#ifdef STATIC_CHANNELS
+#ifdef BUILTIN_CHANNELS
 #define freerdp_rdpsnd_client_subsystem_entry	alsa_freerdp_rdpsnd_client_subsystem_entry
 #else
 #define freerdp_rdpsnd_client_subsystem_entry	FREERDP_API freerdp_rdpsnd_client_subsystem_entry
@@ -686,7 +686,7 @@ UINT freerdp_rdpsnd_client_subsystem_entry(PFREERDP_RDPSND_DEVICE_ENTRY_POINTS p
 	{
 		if ((error = rdpsnd_alsa_parse_addin_args((rdpsndDevicePlugin *) alsa, args)))
 		{
-			WLog_ERR(TAG, "rdpsnd_alsa_parse_addin_args failed with error %lu", error);
+			WLog_ERR(TAG, "rdpsnd_alsa_parse_addin_args failed with error %u", error);
 			goto error_parse_args;
 		}
 	}

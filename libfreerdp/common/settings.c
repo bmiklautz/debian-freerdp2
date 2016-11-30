@@ -903,6 +903,9 @@ BOOL freerdp_get_param_bool(rdpSettings* settings, int id)
 		case FreeRDP_AuthenticationLevel:
 			return settings->AuthenticationLevel;
 
+		case FreeRDP_VmConnectMode:
+			return settings->VmConnectMode;
+
 		case FreeRDP_MstscCookieMode:
 			return settings->MstscCookieMode;
 
@@ -1352,6 +1355,10 @@ int freerdp_set_param_bool(rdpSettings* settings, int id, BOOL param)
 
 		case FreeRDP_AuthenticationLevel:
 			settings->AuthenticationLevel = param;
+			break;
+
+		case FreeRDP_VmConnectMode:
+			settings->VmConnectMode = param;
 			break;
 
 		case FreeRDP_MstscCookieMode:
@@ -2391,6 +2398,12 @@ char* freerdp_get_param_string(rdpSettings* settings, int id)
 		case FreeRDP_AuthenticationServiceClass:
 			return settings->AuthenticationServiceClass;
 
+		case FreeRDP_AllowedTlsCiphers:
+			return settings->AllowedTlsCiphers;
+
+		case FreeRDP_NtlmSamFile:
+			return settings->NtlmSamFile;
+
 		case FreeRDP_PreconnectionBlob:
 			return settings->PreconnectionBlob;
 
@@ -2565,6 +2578,14 @@ int freerdp_set_param_string(rdpSettings* settings, int id, const char* param)
 
 		case FreeRDP_AuthenticationServiceClass:
 			tmp = &settings->AuthenticationServiceClass;
+			break;
+
+		case FreeRDP_AllowedTlsCiphers:
+			tmp = &settings->AllowedTlsCiphers;
+			break;
+
+		case FreeRDP_NtlmSamFile:
+			tmp = &settings->NtlmSamFile;
 			break;
 
 		case FreeRDP_PreconnectionBlob:

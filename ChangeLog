@@ -1,3 +1,2353 @@
+2016-11-28 10:01:15 +0100 MartinHaimberger (e60d0d5) 
+
+	* Merge pull request #3629 from nfedera/fix-wlog-format-and-arguments
+
+2016-11-25 12:40:11 +0100 Norbert Federa (c6e6b44) 
+
+	* countless WLog/printf format specifier fixes
+
+2016-11-25 13:44:23 +0100 akallabeth (215fbe8) 
+
+	* Merge pull request #3613 from mfleisz/rlgr_api_revamp
+
+2016-11-25 13:41:07 +0100 Martin Fleisz (9e474b4) 
+
+	* Merge pull request #3623 from akallabeth/mouse_wheel_event_check
+
+2016-11-25 12:06:52 +0100 Bernhard Miklautz (90c02ad) 
+
+	* Merge pull request #3625 from mfleisz/hash_comp_fix
+
+2016-11-25 11:50:28 +0100 Martin Fleisz (971c853) 
+
+	* winpr: Fix compile error after #3615
+
+2016-11-25 11:49:16 +0100 Bernhard Miklautz (e0382e0) 
+
+	* Merge pull request #3614 from mfleisz/warning_fixes
+
+2016-11-25 11:12:10 +0100 akallabeth (3e6c54f) 
+
+	* Merge pull request #3624 from mfleisz/comp_fix
+
+2016-11-25 11:07:58 +0100 akallabeth (f234879) 
+
+	* Merge pull request #3615 from nfedera/openssl_1.1.0
+
+2016-11-25 10:47:00 +0100 Martin Fleisz (cf4b8a1) 
+
+	* primitives: Fix compiler error
+
+2016-11-25 10:39:20 +0100 Norbert Federa (b2ad980) 
+
+	* disable ERR_remove_thread_state if not required
+
+2016-11-25 10:38:56 +0100 Martin Fleisz (506aa78) 
+
+	* Merge pull request #3619 from akallabeth/image_copy_ignore_alpha
+
+2016-11-25 10:21:26 +0100 Martin Fleisz (b16df59) 
+
+	* Merge pull request #3618 from akallabeth/x11_scanline_full_fix
+
+2016-11-24 14:53:19 +0100 Norbert Federa (53bd988) 
+
+	* winpr/crypt api changes and memory leak fixes
+
+2016-11-21 17:28:54 +0100 Norbert Federa (7befab8) 
+
+	* Support for OpenSSL 1.1.0
+
+2016-11-24 15:45:23 +0100 Martin Fleisz (2a6dbab) 
+
+	* Merge pull request #3591 from
+          akallabeth/android_load_library_workaround
+
+2016-11-10 10:18:55 +0100 Armin Novak (3f6bd60) 
+
+	* Fixed addin loader, prefer system library paths.
+
+2016-11-24 13:18:41 +0100 Armin Novak (a0fed88) 
+
+	* Check hwheel capability before sending mouse event.
+
+2016-11-24 12:59:30 +0100 Martin Fleisz (0febd9c) 
+
+	* Merge pull request #3563 from akallabeth/android_update
+
+2016-11-24 12:09:35 +0100 Bernhard Miklautz (fa230ce) 
+
+	* Merge pull request #3621 from akallabeth/optimized_tests
+
+2016-11-24 11:58:01 +0100 Bernhard Miklautz (3550d0c) 
+
+	* Merge pull request #3620 from mfleisz/wtsapi_fix
+
+2016-11-24 10:50:16 +0100 Armin Novak (9818ed3) 
+
+	* Reduced number of test runs. Fixes 3617.
+
+2016-11-24 10:37:21 +0100 Armin Novak (b9072bf) 
+
+	* Added optimized write functions.
+
+2016-11-24 10:36:57 +0100 Armin Novak (4cc2918) 
+
+	* Added optimized write functions.
+
+2016-11-24 10:35:36 +0100 Martin Fleisz (d30a138) 
+
+	* wtsapi: Fix issue with setting custom API table
+
+2016-11-24 10:01:45 +0100 Armin Novak (d1e2dd3) 
+
+	* Moved format size calculation out of loop.
+
+2016-11-24 09:42:30 +0100 akallabeth (aaae190) 
+
+	* Merge pull request #3610 from FreeRDP/mh-channels-new-api
+
+2016-11-24 09:27:19 +0100 Armin Novak (1c4c578) 
+
+	* Ignore alpha channel in freerdp_image_copy
+
+2016-11-24 09:02:06 +0100 Armin Novak (3c25ffb) 
+
+	* Unified scanline padding function.
+
+2016-11-23 17:57:47 +0100 Norbert Federa (812def3) 
+
+	* Merge pull request #3612 from akallabeth/align_fix
+
+2016-11-23 17:11:05 +0100 Martin Fleisz (4f1e3d0) 
+
+	* codec: Fix some warnings on VC2010 (and probably others too)
+
+2016-11-23 15:47:32 +0100 Martin Fleisz (faefe54) 
+
+	* Merge pull request #3603 from realjiangms/fix_shadow_resize
+
+2016-11-23 14:22:42 +0100 Martin Fleisz (c112111) 
+
+	* codec: Use context functions for rfx decoding
+
+2016-11-23 04:22:03 -0800 Martin Haimberger (778767c) 
+
+	* fixed error
+
+2016-11-23 13:21:59 +0100 Martin Fleisz (6c9df44) 
+
+	* codec: Revamp of rfx rlgr API This PR contains following changes: -
+          Give rlgr encode/decode APIs a similar interface - Make
+          rlgr encode API accessible again - Make it possible to
+          exchange rlgr functions - Make use of RLGR1/3 defines
+          instead of 0/1 in decoding
+
+2016-11-23 04:17:56 -0800 Martin Haimberger (7fe28a8) 
+
+	* virtualChannel: removed static variable usage from
+
+2016-11-23 12:54:20 +0100 Armin Novak (61a1c8c) 
+
+	* Fixed broken scanline alignment.
+
+2016-11-22 05:47:20 -0800 Martin Haimberger (d29848f) 
+
+	* rdpsnd: using new VirtualChannelEx api
+
+2016-11-22 03:33:41 -0800 Martin Haimberger (088a04f) 
+
+	* rdpdr: using new VirtualChannelEx api
+
+2016-11-22 03:27:05 -0800 Martin Haimberger (41b1790) 
+
+	* remdesk: Using new VirtualChannelEx api
+
+2016-11-22 03:18:38 -0800 Martin Haimberger (5c4fb88) 
+
+	* rail: using new VirtualChannelEx api
+
+2016-11-22 03:08:33 -0800 Martin Haimberger (2273a15) 
+
+	* encomsp: using new VirtualChannelEx api
+
+2016-11-22 14:00:08 +0100 Martin Fleisz (3f39dc4) 
+
+	* Merge pull request #3608 from mfleisz/msvc10_fixes
+
+2016-11-22 12:12:08 +0100 Martin Fleisz (e45c300) 
+
+	* codec: Fix compilation with VS2010
+
+2016-11-22 02:33:23 -0800 Martin Haimberger (3daf4f6) 
+
+	* cliprdr: using new VirtualChannelEx api
+
+2016-11-18 12:46:14 +0100 Martin Fleisz (06d4753) 
+
+	* Merge pull request #3594 from akallabeth/line_draw_color_format
+
+2016-11-17 15:41:17 +0100 Martin Fleisz (f8bcd70) 
+
+	* Merge pull request #3581 from akallabeth/alignment_fix
+
+2016-11-17 14:36:02 +0800 zihao.jiang (e3506bf) 
+
+	* X11/client: call gdi resize on hw desktop resize. The gdi primary
+          buffer is used in client/X11/xf_gdi.c, it should be big
+          enough to hold the full screen update
+
+2016-11-16 19:27:55 +0100 akallabeth (1571669) 
+
+	* Merge pull request #3593 from ccpp/gateway-http-bugfix
+
+2016-11-16 11:37:14 -0500 Marc-André Moreau (128ce8a) 
+
+	* Merge pull request #3597 from awakecoding/tls_channel_fix
+
+2016-11-16 09:52:24 -0500 Marc-André Moreau (36db0cc) 
+
+	* channels: properly handle VirtualChannelEntryEx in static virtual
+          channel loading
+
+2016-11-15 12:37:50 -0500 Marc-André Moreau (f74380b) 
+
+	* channels/drdynvc: fix channel entry point name
+
+2016-11-15 11:41:01 -0500 Marc-André Moreau (dee7661) 
+
+	* channels: remove thread-local storage usage
+
+2016-11-15 10:58:38 -0500 Marc-André Moreau (2cce8e9) 
+
+	* channels: migrate drdynvc to extended virtual channel API
+
+2016-11-15 09:09:30 -0500 Marc-André Moreau (2259e91) 
+
+	* channels: prepare virtual channel system for extended virtual
+          channel API
+
+2016-11-14 16:44:45 -0500 Marc-André Moreau (23eae31) 
+
+	* channels: start working on extended virtual channel API
+
+2016-11-14 15:23:05 -0500 Marc-André Moreau (70c4646) 
+
+	* channels: restore global tables for initHandle, openHandle mappings
+          instead of thread local storage
+
+2016-11-14 09:36:16 +0100 Armin Novak (1203315) 
+
+	* Fixed line drawing color format #3592
+
+2016-11-13 03:26:01 +0100 Christian Plattner (b6e97cb) 
+
+	* Bugfix in RDP Gateway HTTP: read/skip full HTTP body for non-RPC
+          responses
+
+2016-11-10 08:56:34 +0100 akallabeth (f910bbe) 
+
+	* Merge pull request #3572 from rjcorrig/maclogin
+
+2016-11-03 22:50:08 +0100 David Fort (ea24c1f) 
+
+	* Merge pull request #3578 from
+          realjiangms/fix_server_for_limit_frames
+
+2016-11-03 15:57:35 +0100 Bernhard Miklautz (2ceab37) 
+
+	* Merge pull request #3584 from awakecoding/master
+
+2016-11-03 10:12:48 -0400 Marc-André Moreau (e8004d5) 
+
+	* drdynvc: ignore some messages sent for invalid channel ids with MMR
+          and Windows Server 2012 R2, fix issue #3422
+
+2016-11-02 17:58:47 +0100 Martin Fleisz (50c5b40) 
+
+	* Merge pull request #3577 from
+          akallabeth/error_message_channel_thread
+
+2016-10-31 07:56:10 +0100 Armin Novak (95a3144) 
+
+	* Scanline alignment for GFX cache.
+
+2016-10-29 13:18:17 +0800 zihao.jiang (7676b29) 
+
+	* cleanup unnecessary code per comments
+
+2016-10-29 00:28:10 +0800 zihao.jiang (b58ee58) 
+
+	* keeping the old callback and adding the new one at the end of the
+          struct, so that it can be potentially binary compatible.
+
+2016-10-27 22:59:16 +0200 Armin Novak (f62d004) 
+
+	* Fixed surface alignment.
+
+2016-10-27 23:43:09 +0800 zihao.jiang (ddc326d) 
+
+	* Fix server side code to be aware of rereadEvent
+
+2016-10-27 14:41:05 +0200 Armin Novak (5bc691c) 
+
+	* Improved error handling if channel is missing.
+
+2016-10-27 14:36:48 +0200 Armin Novak (6276f3d) 
+
+	* Added log messages for invalid function call.
+
+2016-10-21 09:29:51 +0200 David Fort (043243f) 
+
+	* Merge pull request #3560 from akallabeth/gfx_10_2
+
+2016-10-20 11:22:08 -0400 Robert Corrigan (405e7eb) 
+
+	* Code style fixes
+
+2016-10-20 12:53:23 +0200 akallabeth (a6f4117) 
+
+	* Merge pull request #3364 from hardening/limit_frames
+
+2016-10-20 09:59:54 +0200 Armin Novak (97cbc42) 
+
+	* Added reference to capability specifications
+
+2016-10-14 18:24:14 -0400 Robert Corrigan (91e6255) 
+
+	* Run password dialog as a modal sheet and set window title to
+          server:port
+
+2016-10-19 15:45:17 +0200 Martin Fleisz (f5a6645) 
+
+	* Merge pull request #3571 from akallabeth/clang_fixes
+
+2016-10-19 13:31:54 +0200 Martin Fleisz (f2abcaa) 
+
+	* Merge pull request #3554 from akallabeth/color_refactor
+
+2016-10-19 12:41:43 +0200 Armin Novak (e9b5b55) 
+
+	* directly using FREERDP_PIXEL_FORMAT.
+
+2016-10-19 11:10:35 +0200 Armin Novak (5211bc0) 
+
+	* Fixed NULL dereferences.
+
+2016-10-19 11:06:47 +0200 Armin Novak (4ceda8a) 
+
+	* Fixed uninitialized return.
+
+2016-10-19 11:06:25 +0200 Armin Novak (5c446dd) 
+
+	* Fixed missing NULL checks.
+
+2016-10-19 11:05:12 +0200 Armin Novak (ab733d7) 
+
+	* Fixed NULL pointer dereferences.
+
+2016-10-19 10:26:01 +0200 Martin Fleisz (92befb0) 
+
+	* Merge pull request #3570 from rjcorrig/tz201610
+
+2016-10-18 15:28:44 -0400 Robert Corrigan (2973b9c) 
+
+	* Updates time zone data to October 2016
+
+2016-10-18 17:06:41 +0200 Martin Fleisz (5f90656) 
+
+	* Merge pull request #3568 from hardening/wayland_fixes
+
+2016-10-18 15:45:15 +0200 Martin Fleisz (fc3bda8) 
+
+	* Merge pull request #3569 from akallabeth/gdi_resize_fix
+
+2016-10-18 15:16:58 +0200 Armin Novak (30b5b01) 
+
+	* Fixed invalid arguments for gdi_resize_ex
+
+2016-10-17 18:56:52 +0200 David Fort (02b4b5b) 
+
+	* Added a command line parameter to set the time passed in packet
+          loop
+
+2016-10-17 11:27:10 +0200 David Fort (237451d) 
+
+	* Implement callbacks for version 5 of wl_pointer
+
+2016-10-17 15:34:17 +0200 David Fort (20344f2) 
+
+	* Merge pull request #3567 from mfleisz/file_mode_fix
+
+2016-10-17 14:49:26 +0200 Martin Fleisz (e8fbdf5) 
+
+	* crypto: Remove unneeded update (+) flag from file open mode
+
+2016-10-17 10:24:30 +0200 Armin Novak (43755c2) 
+
+	* Android: fixed visibility, reformatted
+
+2016-10-17 10:21:05 +0200 Armin Novak (6ca5a13) 
+
+	* Android: fixed warnings, reformatted.
+
+2016-10-17 09:05:54 +0200 Armin Novak (4dfdf83) 
+
+	* Updated symbol visibility of GFX channel.
+
+2016-10-16 15:08:47 +0200 Armin Novak (b6907aa) 
+
+	* Deactivated unsupported operations.
+
+2016-10-16 10:28:06 +0200 Armin Novak (39b624a) 
+
+	* GFX: support 10.2 stack.
+
+2016-10-13 22:02:25 +0200 David Fort (f92860d) 
+
+	* Applied astyle formatting
+
+2016-10-13 22:01:53 +0200 David Fort (9a25538) 
+
+	* Updated the astyle formatting
+
+2016-10-09 22:36:04 +0200 David Fort (60cffef) 
+
+	* Release the reread event on transport_free
+
+2016-10-08 22:37:31 +0200 David Fort (fd7ebdc) 
+
+	* Took in account comment remarks
+
+2016-07-06 18:31:22 +0200 David Fort (03abf19) 
+
+	* test-connect: use a random port instead of always 3389
+
+2016-07-06 18:30:12 +0200 David Fort (5b08035) 
+
+	* sample-server: add a "local only" option to just listen on an UNIX
+          socket
+
+2016-05-03 17:24:07 +0200 David Fort (71fd5cc) 
+
+	* Limit the time passed in transport check loop
+
+2016-10-14 12:50:04 +0200 Armin Novak (8ef1808) 
+
+	* Adjusted non X11 implementations.
+
+2016-10-14 10:01:02 +0200 Armin Novak (9c50e1a) 
+
+	* Replaced _VF formats with copy flags.
+
+2016-10-14 10:12:27 +0200 akallabeth (9adc132) 
+
+	* Merge pull request #3497 from realjiangms/fix_gfx_win10
+
+2016-10-14 10:10:45 +0200 Bernhard Miklautz (da56839) 
+
+	* Merge pull request #3544 from akallabeth/multi_warn_fixes
+
+2016-10-12 11:24:29 +0200 Bernhard Miklautz (d7582b1) 
+
+	* Adapt makefile specific file paths
+
+2016-10-11 11:21:13 +0200 Armin Novak (8fbc885) 
+
+	* Removed unused variable.
+
+2016-10-11 11:20:54 +0200 Armin Novak (d1a28c5) 
+
+	* Fixed uninitialized variable.
+
+2016-10-11 11:20:26 +0200 Armin Novak (99ade05) 
+
+	* Fixed uninitialized variable.
+
+2016-10-11 11:17:22 +0200 Armin Novak (ae56897) 
+
+	* Fixed uninitialized variables.
+
+2016-10-11 11:14:49 +0200 Armin Novak (85e17ad) 
+
+	* Fixed uninitialized arguments, WLog tag.
+
+2016-10-11 11:13:54 +0200 Armin Novak (12aae50) 
+
+	* Properly escaping __FILE__ replacement.
+
+2016-10-13 13:01:53 +0200 Bernhard Miklautz (5a5f091) 
+
+	* Merge pull request #3545 from akallabeth/legacy_rfx_fixes
+
+2016-10-13 10:28:57 +0200 Bernhard Miklautz (de44204) 
+
+	* Merge pull request #3537 from akallabeth/gdi_speedup
+
+2016-10-11 16:13:19 +0200 Armin Novak (79e8a6d) 
+
+	* Reverted NSC format, decoded data is always BGRA!
+
+2016-10-12 17:35:10 +0200 Martin Fleisz (75b5571) 
+
+	* Merge pull request #3547 from
+          realjiangms/fix_after_color_conversion_nsc_server
+
+2016-10-12 09:32:59 +0200 Armin Novak (714e704) 
+
+	* Color format for surface bits unified.
+
+2016-10-12 09:32:05 +0200 Armin Novak (25c7372) 
+
+	* Fixed offset and stride for X11 surface bits.
+
+2016-10-12 09:21:21 +0200 Armin Novak (985ca17) 
+
+	* Respecting tile offsets.
+
+2016-10-11 18:44:50 +0200 Armin Novak (8286fa4) 
+
+	* Fixed format flip and offsets for GDI.
+
+2016-10-11 23:31:12 +0800 zihao.jiang (5e1f745) 
+
+	* Fix nsc server side after color conversion. We use new color format
+          system and PIXEL_FORMAT_BGRX32 is the unified buffer color
+          format. Add support for PIXEL_FORMAT_BGRX32 in nsc
+
+2016-10-11 15:47:32 +0200 Bernhard Miklautz (bd1ec5f) 
+
+	* Merge pull request #3538 from akallabeth/mac_server_fix
+
+2016-10-11 13:10:54 +0200 Armin Novak (c3058ba) 
+
+	* Optimized ROP for GDI_SRCCOPY and GDI_DSTCOPY.
+
+2016-10-11 12:14:52 +0200 Armin Novak (c2787d7) 
+
+	* Optimized gdi_FillRect
+
+2016-10-10 11:25:47 +0200 Armin Novak (c405e15) 
+
+	* Inlined heavily used function.
+
+2016-10-10 11:09:06 +0200 Armin Novak (94c6473) 
+
+	* Inlined heavily used functions.
+
+2016-10-11 14:34:07 +0200 Armin Novak (404ae7d) 
+
+	* Fixed Windows 7 RFX issues.
+
+2016-10-11 13:15:13 +0200 akallabeth (1d03fd3) 
+
+	* Merge pull request #3470 from untoldone/master
+
+2016-10-11 09:44:53 +0200 Bernhard Miklautz (4085d45) 
+
+	* Merge pull request #3531 from rjcorrig/macdialogfix
+
+2016-10-11 09:29:49 +0200 Martin Fleisz (9afc0cc) 
+
+	* Merge pull request #3536 from akallabeth/memory_leak_fixes
+
+2016-10-11 09:25:43 +0200 akallabeth (1b783fd) 
+
+	* Merge pull request #3540 from
+          realjiangms/fix_after_color_conversion_gfx_h264
+
+2016-10-11 09:25:19 +0200 akallabeth (1ea2481) 
+
+	* Merge pull request #3541 from
+          realjiangms/fix_after_color_conversion_nsc
+
+2016-09-09 15:31:21 +0800 zihao.jiang (3fb92ae) 
+
+	* server/shadow: Fix black screen with win10 Request full screen
+          update on RDPGFX_CAPS_ADVERTISE_PDU. Win10 client seems to
+          clean the screen after gfx channel opened. If there
+          happens to be no screen update from server, we will get
+          black screen in mstsc client.
+
+2016-10-11 01:39:08 +0800 zihao.jiang (34b4bca) 
+
+	* Fix nsc client after after color conversion huge fix nsc codec
+          client doesn't work: 1. We should mark invalid region for
+          software gdi 2. Checked the code before color conversion
+          fix, the correct color format should be
+          PIXEL_FORMAT_BGRX32_VF (corresponds to old
+          PIXEL_FORMAT_XRGB32_VF) 3. For gdi:hw: xfc->bitmap_buffer
+          is never used/initialized. However gdi->primary_buffer is
+          always maintained. So use primary_buffer to hold the
+          decoded bitmap data
+
+2016-10-11 00:23:48 +0800 zihao.jiang (ac08f6a) 
+
+	* Regression fix: The usage of RDPGFX_SURFACE_COMMAND::format is
+          changed after color conversion huge fix. Fix server side
+          rdpgfx code to match the change.
+
+2016-10-10 16:04:09 +0200 Bernhard Miklautz (aa67398) 
+
+	* Merge pull request #3533 from akallabeth/glyph_cache_disable
+
+2016-10-10 13:34:57 +0200 Armin Novak (c6ae62f) 
+
+	* Fixed memory leak in certificate check.
+
+2016-10-10 12:23:57 +0200 Martin Fleisz (38f9d0f) 
+
+	* Merge pull request #3529 from akallabeth/warning_fixes
+
+2016-10-10 12:10:29 +0200 Armin Novak (cf2ec62) 
+
+	* Reformatted file.
+
+2016-10-10 12:07:27 +0200 Armin Novak (bc39f28) 
+
+	* Fixed regression from rebase.
+
+2016-10-10 11:33:31 +0200 Armin Novak (fa71427) 
+
+	* Removed unused function.
+
+2016-10-10 11:31:57 +0200 Martin Fleisz (06a04a0) 
+
+	* Merge pull request #3534 from akallabeth/x11_pointer_color
+
+2016-10-10 11:28:45 +0200 Martin Fleisz (071b79a) 
+
+	* Merge pull request #3535 from akallabeth/leak_check
+
+2016-10-10 10:38:54 +0200 Armin Novak (eecc4b1) 
+
+	* Fixed leak in bitmap handling.
+
+2016-10-10 10:26:54 +0200 Armin Novak (bc69730) 
+
+	* Fixed memory leak in pointer free.
+
+2016-10-10 09:29:09 +0200 Armin Novak (930045e) 
+
+	* Added leak detector option, made conflicting options exclusive.
+
+2016-10-10 09:19:43 +0200 Armin Novak (249bb12) 
+
+	* Fixed pointer color mapping.
+
+2016-10-10 09:07:28 +0200 Armin Novak (8f75516) 
+
+	* Deactivated glyph cache.
+
+2016-10-10 09:06:05 +0200 Armin Novak (afc4408) 
+
+	* Reformatted file.
+
+2016-10-08 01:39:07 -0400 Robert Corrigan (ecf9eed) 
+
+	* Runs Mac password dialog on main UI thread
+
+2016-10-07 14:11:04 +0200 Armin Novak (7709542) 
+
+	* Using C99 compatible variadic macros.
+
+2016-10-07 14:09:42 +0200 Armin Novak (6fdc872) 
+
+	* Fixed comma at end of enum
+
+2016-10-07 14:08:54 +0200 Armin Novak (1122627) 
+
+	* Fixed function argument and variable types.
+
+2016-10-07 14:08:33 +0200 Armin Novak (fb1dcf2) 
+
+	* Fixed invalid const type.
+
+2016-10-07 14:07:51 +0200 Armin Novak (edacd7c) 
+
+	* Thread using proper function pointer type.
+
+2016-10-07 14:06:46 +0200 Armin Novak (14fcfbb) 
+
+	* Addin loader using proper function pointer defines.
+
+2016-10-07 14:04:40 +0200 Armin Novak (943e295) 
+
+	* WLog using C99 compatible variadic macros.
+
+2016-10-06 16:18:19 +0200 Martin Fleisz (267dea9) 
+
+	* Merge pull request #3524 from bmiklautz/cleanup_3381
+
+2016-10-06 15:40:11 +0200 Bernhard Miklautz (e54c504) 
+
+	* winpr/wait: add missing parameters
+
+2016-10-06 14:56:26 +0200 Martin Fleisz (38c88d4) 
+
+	* Merge pull request #3500 from akallabeth/color_conversion_fix_v6
+
+2016-10-06 13:41:52 +0200 Armin Novak (649d270) 
+
+	* Fixed GDI_RGN->null initialization.
+
+2016-10-06 13:31:25 +0200 Armin Novak (8f1adf6) 
+
+	* Refactored ClipboardSetData.
+
+2016-10-06 13:06:20 +0200 Armin Novak (2db0473) 
+
+	* Fixed memory leak.
+
+2016-10-06 13:04:06 +0200 Armin Novak (9d0f753) 
+
+	* Fixed use after free.
+
+2016-10-06 11:05:31 +0200 Armin Novak (cba6766) 
+
+	* Added documentation, removed unused function.
+
+2016-10-06 10:21:00 +0200 Armin Novak (0e2b518) 
+
+	* Added color format documentation.
+
+2016-10-04 17:07:49 +0200 Armin Novak (376dc21) 
+
+	* Fixed uninitialized value.
+
+2016-10-04 16:54:11 +0200 Armin Novak (9a1c608) 
+
+	* Unified RFX server color format.
+
+2016-10-04 16:04:20 +0200 Bernhard Miklautz (ddced3f) 
+
+	* Fix compiler warnings
+
+2016-10-04 15:12:11 +0200 Bernhard Miklautz (143b875) 
+
+	* wtsvc: add missing DRDYNVC_STATE_FAILED
+
+2016-10-04 14:14:39 +0200 Armin Novak (97e8f9e) 
+
+	* Fixed broken return check.
+
+2016-10-04 14:14:01 +0200 Armin Novak (70f3d43) 
+
+	* Removed broken return check.
+
+2016-10-04 14:12:51 +0200 Armin Novak (4fa2bd2) 
+
+	* Fixed memory leak and argument checks.
+
+2016-10-04 10:31:04 +0200 Armin Novak (b03e471) 
+
+	* Fixed NULL pointer checks.
+
+2016-10-04 10:06:27 +0200 Armin Novak (ded84b1) 
+
+	* Fixed error message.
+
+2016-10-04 10:05:27 +0200 Armin Novak (b0b6dce) 
+
+	* Fixed NULL pointer checks.
+
+2016-10-04 09:57:52 +0200 Armin Novak (2cf5f1b) 
+
+	* Fixed missing NULL pointer checks.
+
+2016-10-04 09:00:01 +0200 Armin Novak (0c81f4a) 
+
+	* Reformatted file.
+
+2016-10-04 09:00:01 +0200 Armin Novak (b372d63) 
+
+	* Reformatted file.
+
+2016-10-04 09:00:01 +0200 Armin Novak (86d414b) 
+
+	* Reformatted file.
+
+2016-10-04 09:00:01 +0200 Armin Novak (8e12f0f) 
+
+	* Reformatted file.
+
+2016-10-04 09:00:01 +0200 Armin Novak (1a22cb3) 
+
+	* Reformatted file.
+
+2016-10-04 09:00:01 +0200 Armin Novak (9a34e43) 
+
+	* Reformatted file.
+
+2016-10-04 09:00:01 +0200 Armin Novak (032b59f) 
+
+	* Reformatted file.
+
+2016-10-04 09:00:00 +0200 Armin Novak (994fed8) 
+
+	* Reformatted file.
+
+2016-10-04 09:00:00 +0200 Armin Novak (d8751a3) 
+
+	* Reformatted file.
+
+2016-10-04 09:00:00 +0200 Armin Novak (ec26629) 
+
+	* Reformatted file.
+
+2016-10-04 09:00:00 +0200 Armin Novak (5ba9f82) 
+
+	* Reformatted file.
+
+2016-10-04 09:00:00 +0200 Armin Novak (3b9c74e) 
+
+	* Reformatted file.
+
+2016-10-04 09:00:00 +0200 Armin Novak (dec268d) 
+
+	* Reformatted file.
+
+2016-10-04 09:00:00 +0200 Armin Novak (ab231f8) 
+
+	* Reformatted file.
+
+2016-10-04 09:00:00 +0200 Armin Novak (569c6a5) 
+
+	* Reformatted file.
+
+2016-10-04 09:00:00 +0200 Armin Novak (a4014b4) 
+
+	* Reformatted file.
+
+2016-10-04 09:00:00 +0200 Armin Novak (14ed774) 
+
+	* Reformatted file.
+
+2016-10-04 09:00:00 +0200 Armin Novak (226ee43) 
+
+	* Reformatted file.
+
+2016-10-04 09:00:00 +0200 Armin Novak (6cd2a43) 
+
+	* Reformatted file.
+
+2016-10-04 09:00:00 +0200 Armin Novak (377b955) 
+
+	* Reformatted file.
+
+2016-10-04 09:00:00 +0200 Armin Novak (b1c5461) 
+
+	* Reformatted file.
+
+2016-10-04 09:00:00 +0200 Armin Novak (4d179fd) 
+
+	* Reformatted file.
+
+2016-10-04 09:00:00 +0200 Armin Novak (b0b3273) 
+
+	* Reformatted file.
+
+2016-10-04 09:00:00 +0200 Armin Novak (1b6cf57) 
+
+	* Reformatted file.
+
+2016-10-04 09:00:00 +0200 Armin Novak (07010e6) 
+
+	* Reformatted file.
+
+2016-10-04 08:54:42 +0200 Armin Novak (dd676c7) 
+
+	* Fixed missing NULL checks.
+
+2016-10-03 13:18:21 +0200 Armin Novak (5a2c249) 
+
+	* Disabled glyph-cache
+
+2016-09-26 12:12:37 +0200 Armin Novak (9f5da48) 
+
+	* Reformatted files touched in last 2 commits.
+
+2016-09-26 12:12:14 +0200 Armin Novak (64590e7) 
+
+	* Set pEntryPointsEx->ppInterface NULL on error.
+
+2016-09-26 12:02:33 +0200 Armin Novak (88a3b8d) 
+
+	* Initializing channel context in each thread.
+
+2016-09-20 09:50:44 +0200 Armin Novak (d55690d) 
+
+	* Fixed RFX encoding.
+
+2016-09-20 09:25:13 +0200 Armin Novak (9ab0471) 
+
+	* Fixed shadow server color encoding.
+
+2016-09-20 08:58:04 +0200 Armin Novak (f5fff76) 
+
+	* Made some functions static.
+
+2016-09-13 13:42:42 +0200 Armin Novak (3220b15) 
+
+	* Added missing event handle.
+
+2016-09-13 09:53:16 +0200 Armin Novak (f2d7766) 
+
+	* Moved common async input handling to core library.
+
+2016-09-06 14:20:07 +0200 Armin Novak (b8b8447) 
+
+	* Fixed post disconnect hook.
+
+2016-09-09 08:58:26 +0200 Armin Novak (4e11883) 
+
+	* Fixed X11 cursor decoding.
+
+2016-08-29 09:40:53 +0200 Armin Novak (83c6a79) 
+
+	* Removed broken X11 command.
+
+2016-08-25 09:47:50 +0200 Armin Novak (f2bb83e) 
+
+	* Fixed rebase related issues.
+
+2016-08-18 11:54:29 +0200 Armin Novak (296bc02) 
+
+	* Fixed ellipse test.
+
+2016-08-18 10:03:28 +0200 Armin Novak (399c318) 
+
+	* Fixed test loop.
+
+2016-08-18 10:01:12 +0200 Armin Novak (196386f) 
+
+	* Android client support script fixes.
+
+2016-08-17 09:26:59 +0200 Armin Novak (161685b) 
+
+	* Fixed some more glyph chache bugs.
+
+2016-08-17 09:01:27 +0200 Armin Novak (dbab3dd) 
+
+	* Fixed tests and not intialized values.
+
+2016-08-16 14:30:18 +0200 Armin Novak (0c57065) 
+
+	* GlyphCache: Erasing destination if not redundant.
+
+2016-08-16 11:27:27 +0200 Armin Novak (b7f3235) 
+
+	* Fixed pattern checks.
+
+2016-08-11 09:36:06 +0200 Armin Novak (823b1ec) 
+
+	* Added proper brush support to fill rect.
+
+2016-08-11 13:40:22 +0200 Armin Novak (9471f82) 
+
+	* Fixed missing include preventing symbol export.
+
+2016-08-10 18:11:36 +0200 Armin Novak (ad4f6d8) 
+
+	* Fixed MacOS includes.
+
+2016-08-10 18:05:00 +0200 Armin Novak (739d45e) 
+
+	* Fixed includes for iOS
+
+2016-08-10 17:57:21 +0200 Armin Novak (e23a7e2) 
+
+	* Removed obsolete code.
+
+2016-08-10 17:01:54 +0200 Armin Novak (c242467) 
+
+	* Fixed some X11 functions.
+
+2016-08-10 14:53:03 +0200 Armin Novak (50c509e) 
+
+	* Fixed barrier test.
+
+2016-08-10 14:45:55 +0200 Armin Novak (b320e3c) 
+
+	* windows fixes.
+
+2016-08-10 13:44:55 +0200 Armin Novak (416801a) 
+
+	* Fixed warning.
+
+2016-08-10 13:33:34 +0200 Armin Novak (22ddec8) 
+
+	* Moved pre and post channel hooks.
+
+2016-08-10 13:12:54 +0200 Armin Novak (2e76529) 
+
+	* Updated Order support.
+
+2016-08-10 12:49:36 +0200 Armin Novak (4b3d3cd) 
+
+	* Warning fixes.
+
+2016-08-10 12:49:36 +0200 Armin Novak (44b8756) 
+
+	* Warning fixes.
+
+2016-08-10 12:42:57 +0200 Armin Novak (a3fd9bf) 
+
+	* Fixed warnings.
+
+2016-08-10 12:39:26 +0200 Armin Novak (1454400) 
+
+	* Fixed windows defines for *LIST*
+
+2016-08-10 11:06:34 +0200 Armin Novak (9c64e77) 
+
+	* Disabled thread local storage on iOS.
+
+2016-08-10 11:03:13 +0200 Armin Novak (35bf9e6) 
+
+	* Fixed missing mac server symbols.
+
+2016-08-10 10:50:10 +0200 Armin Novak (14dc629) 
+
+	* Fixed expressions.
+
+2016-08-10 10:46:01 +0200 Armin Novak (4f62d84) 
+
+	* Refactored interlocked typedefs, avoid namespace collisions.
+
+2016-08-10 10:29:59 +0200 Armin Novak (64c5d78) 
+
+	* Fixed clang warnings.
+
+2016-08-10 10:29:02 +0200 Armin Novak (ada4abc) 
+
+	* Using add_definitions for symbols now.
+
+2016-08-10 09:37:34 +0200 Armin Novak (0c55180) 
+
+	* Fixed gdi_init for windows server.
+
+2016-08-10 09:12:55 +0200 Armin Novak (c7448c0) 
+
+	* Added FREERDP_LOCAL
+
+2016-08-09 22:51:58 +0200 Armin Novak (6d6b991) 
+
+	* Fixed BitBlt function for overlapping areas.
+
+2016-08-09 22:37:32 +0200 Armin Novak (5554d80) 
+
+	* Code cleanup.
+
+2016-08-09 22:37:02 +0200 Armin Novak (122f25e) 
+
+	* Fixed channel cleanup.
+
+2016-08-09 16:48:02 +0200 Armin Novak (d35823c) 
+
+	* Moved channel init code to core library.
+
+2016-08-09 12:04:06 +0200 Armin Novak (dadc526) 
+
+	* Removed static channel variables.
+
+2016-08-08 15:15:55 +0200 Armin Novak (2e40c9c) 
+
+	* Windows GDI color decoding.
+
+2016-08-08 09:29:36 +0200 Armin Novak (f16ffae) 
+
+	* Fixed glyph cache issues.
+
+2016-08-06 15:37:50 +0200 Armin Novak (0d56de5) 
+
+	* Glyph offset fix.
+
+2016-08-05 19:38:46 +0200 Armin Novak (b765374) 
+
+	* Refactored BitBlt, implementing everything now.
+
+2016-08-05 14:10:53 +0200 Armin Novak (f17f147) 
+
+	* Fixed font drawing.
+
+2016-08-05 13:14:55 +0200 Armin Novak (f086410) 
+
+	* Updated iOS client.
+
+2016-08-05 12:05:08 +0200 Armin Novak (081b579) 
+
+	* Added ios home and temp dir support.
+
+2016-08-04 16:58:07 +0200 Armin Novak (dd9354d) 
+
+	* Added argument checks.
+
+2016-08-04 16:57:27 +0200 Armin Novak (9fcfc38) 
+
+	* Fixed planar decoding.
+
+2016-08-04 16:28:38 +0200 Armin Novak (0acfc64) 
+
+	* Fixed log message.
+
+2016-08-04 16:14:12 +0200 Armin Novak (844f7b7) 
+
+	* Made logging less verbose.
+
+2016-08-04 16:13:37 +0200 Armin Novak (0f9ab81) 
+
+	* Fixed command line setting.
+
+2016-08-04 14:50:53 +0200 Armin Novak (b888059) 
+
+	* Fixed color conversion issues.
+
+2016-08-04 14:37:19 +0200 Armin Novak (c8d4438) 
+
+	* Fixed android settings.
+
+2016-08-04 13:25:52 +0200 Armin Novak (c3e6240) 
+
+	* Fixed android client.
+
+2016-08-04 13:25:12 +0200 Armin Novak (4027a1d) 
+
+	* Added error checks.
+
+2016-08-04 13:24:53 +0200 Armin Novak (04846ca) 
+
+	* Added missing API export.
+
+2016-08-04 13:24:35 +0200 Armin Novak (a978ccc) 
+
+	* Added argument checks.
+
+2016-08-04 13:24:11 +0200 Armin Novak (ab4725d) 
+
+	* Fixed error message parameter.
+
+2016-08-04 13:23:50 +0200 Armin Novak (fb36121) 
+
+	* Added signal handler for android.
+
+2016-08-04 09:16:54 +0200 Armin Novak (fddf710) 
+
+	* Fixed OpenSSL build headers.
+
+2016-08-04 09:02:40 +0200 Armin Novak (7b5d0d5) 
+
+	* Updated build script error checking.
+
+2016-08-03 21:22:06 +0200 Armin Novak (3b21209) 
+
+	* Fixed xfreerdp GDI color order.
+
+2016-08-03 18:44:38 +0200 Armin Novak (8898980) 
+
+	* Removed obsolete generation script.
+
+2016-08-03 18:44:26 +0200 Armin Novak (346515a) 
+
+	* Wayland client overhaul.
+
+2016-08-03 18:44:15 +0200 Armin Novak (543631d) 
+
+	* Added better argument checks.
+
+2016-08-03 18:42:49 +0200 Armin Novak (3820c91) 
+
+	* Added wayland OS minor version.
+
+2016-08-03 15:29:24 +0200 Armin Novak (376f6a4) 
+
+	* Fixed OS X client.
+
+2016-08-03 15:29:12 +0200 Armin Novak (896f500) 
+
+	* Fixed h264 dummy init.
+
+2016-08-03 14:22:55 +0200 Armin Novak (90cd2a8) 
+
+	* Fixed color pointer.
+
+2016-08-03 14:16:20 +0200 Armin Novak (c8a7065) 
+
+	* Refactored xfContext.
+
+2016-08-03 12:37:40 +0200 Armin Novak (fbdb00a) 
+
+	* Simplified windows context.
+
+2016-08-03 12:09:24 +0200 Armin Novak (71a7306) 
+
+	* Reformatted client code.
+
+2016-08-03 11:31:42 +0200 Armin Novak (bc5aa1b) 
+
+	* Added more GDI orders.
+
+2016-08-03 10:54:50 +0200 Armin Novak (9af71b9) 
+
+	* Fixed color conversion from order.
+
+2016-08-03 09:55:19 +0200 Armin Novak (a76b0df) 
+
+	* Fixed reading of colors from order.
+
+2016-08-02 17:11:27 +0200 Armin Novak (60ac638) 
+
+	* 32bpp cursor fix.
+
+2016-08-02 15:21:28 +0200 Armin Novak (c00fc57) 
+
+	* Cursor color decoding fixes.
+
+2016-08-02 14:16:49 +0200 Armin Novak (984bec7) 
+
+	* Simplified gdi_patblt
+
+2016-08-02 11:46:11 +0200 Armin Novak (00890c2) 
+
+	* Exporting all symbols from DLL for test builds on windows.
+
+2016-08-02 11:39:25 +0200 Armin Novak (0b6c7a3) 
+
+	* Fixed windows color cursor.
+
+2016-08-02 11:20:57 +0200 Armin Novak (d1a3362) 
+
+	* Fixed windows software GDI issues.
+
+2016-08-02 10:23:04 +0200 Armin Novak (66cf000) 
+
+	* Fixed broken test.
+
+2016-08-02 10:03:18 +0200 Armin Novak (e3b43b9) 
+
+	* Fixed some bitblt issues.
+
+2016-08-02 09:30:50 +0200 Armin Novak (5fa9344) 
+
+	* Deactivated broken tests.
+
+2016-08-02 08:43:26 +0200 Armin Novak (9034867) 
+
+	* Added brush helper function to retrieve style.
+
+2016-08-01 18:14:17 +0200 Armin Novak (cd65c49) 
+
+	* Fixed mac compile errors.
+
+2016-08-01 17:31:59 +0200 Armin Novak (b505220) 
+
+	* Fixed Get/SetPixel function tests.
+
+2016-08-01 17:08:35 +0200 Armin Novak (f3d9e8d) 
+
+	* Fixed (some) planar codec tests.
+
+2016-08-01 16:37:26 +0200 Armin Novak (e4d8906) 
+
+	* Fixed splitting of color planes.
+
+2016-08-01 16:36:32 +0200 Armin Novak (c7f8d00) 
+
+	* Fixed RGBX32 format split color mixup.
+
+2016-08-01 13:13:04 +0200 Armin Novak (d3538fc) 
+
+	* Fixed gdi LineTo and tests.
+
+2016-08-01 10:15:21 +0200 Armin Novak (ebfe4fb) 
+
+	* Fixed compile issues.
+
+2016-08-01 09:41:41 +0200 Armin Novak (88be64f) 
+
+	* Fixed apple file times.
+
+2016-07-21 16:51:42 +0200 Armin Novak (35f1347) 
+
+	* Fixed warnings and mac build.
+
+2016-07-21 16:10:41 +0200 Armin Novak (aad0a5c) 
+
+	* Updated mac build script.
+
+2016-07-21 15:36:15 +0200 Armin Novak (7818ca1) 
+
+	* Fixed windows compile.
+
+2016-07-21 15:36:01 +0200 Armin Novak (d0f09c8) 
+
+	* Fixed warnings and stride default.
+
+2016-07-21 13:00:57 +0200 Armin Novak (7dbeeb2) 
+
+	* Fixed hardware GDI.
+
+2016-07-21 12:53:44 +0200 Armin Novak (a372009) 
+
+	* Internal functions static.
+
+2016-07-21 12:42:23 +0200 Armin Novak (a06ceb6) 
+
+	* Fixed duplicate setting of callback.
+
+2016-07-21 12:41:55 +0200 Armin Novak (0e1b385) 
+
+	* Internal functions static.
+
+2016-07-21 11:57:51 +0200 Armin Novak (9d82c47) 
+
+	* Removed duplicate code.
+
+2016-07-21 10:07:42 +0200 Armin Novak (8675280) 
+
+	* Simplified bitmap drawing.
+
+2016-07-21 09:24:09 +0200 Armin Novak (ec0d68b) 
+
+	* Fixed bitmap update decoding.
+
+2016-07-20 16:50:20 +0200 Armin Novak (c22d16b) 
+
+	* Reverted bitmap update changes.
+
+2016-07-20 16:03:08 +0200 Armin Novak (3898b56) 
+
+	* Fixed drawing orders.
+
+2016-07-20 15:58:05 +0200 Armin Novak (e3f88ad) 
+
+	* Fixed BitBlt_PSDPxax
+
+2016-07-20 15:34:06 +0200 Armin Novak (032bdef) 
+
+	* Unified bitmap drawing.
+
+2016-07-20 11:40:30 +0200 Armin Novak (b8ff3cb) 
+
+	* Fixed (a lot of) GDI drawing issues.
+
+2016-07-20 10:31:07 +0200 Armin Novak (bb82d48) 
+
+	* Fixed part of font cache issue.
+
+2016-07-20 10:06:45 +0200 Armin Novak (3f90966) 
+
+	* Bug fixes.
+
+2016-07-19 16:15:38 +0200 Armin Novak (85bbe2a) 
+
+	* API refactoring.
+
+2016-07-19 13:18:30 +0200 Armin Novak (f680b62) 
+
+	* Fixed PATINVERT.
+
+2016-07-19 13:02:08 +0200 Armin Novak (e650fdb) 
+
+	* Bugfixes.
+
+2016-07-19 12:15:01 +0200 Armin Novak (b719178) 
+
+	* Removed obsolete DEBUG_GDI
+
+2016-07-18 17:45:30 +0200 Armin Novak (17fd552) 
+
+	* Cleanups.
+
+2016-07-18 16:15:52 +0200 Armin Novak (bc49c16) 
+
+	* Removed obsolete options.
+
+2016-07-18 14:42:55 +0200 Armin Novak (7a20ff5) 
+
+	* Refactored bitmap API.
+
+2016-07-18 14:30:26 +0200 Armin Novak (8b69b16) 
+
+	* Refactored Glyph API.
+
+2016-07-18 14:16:13 +0200 Armin Novak (9d5ca34) 
+
+	* Fixed pointer initialisation for X11.
+
+2016-07-18 12:36:22 +0200 Armin Novak (04fb4e4) 
+
+	* Fixed rectangle clipping and warnings.
+
+2016-07-18 12:33:42 +0200 Armin Novak (3c8d0bb) 
+
+	* Added address sanitizer to options.
+
+2016-07-18 11:16:36 +0200 Armin Novak (c229a19) 
+
+	* Updated codec API, unified drawing order color decoding.
+
+2016-07-18 11:11:59 +0200 Armin Novak (e32ed83) 
+
+	* Updated interleaved and planar API.
+
+2016-07-15 16:45:36 +0200 Armin Novak (bc8217e) 
+
+	* Removed palette, using GDI one.
+
+2016-07-15 16:45:26 +0200 Armin Novak (6525a56) 
+
+	* Fixed 24bit color format.
+
+2016-07-15 16:34:51 +0200 Armin Novak (39d6ad3) 
+
+	* Fixed source format for bitmap decompress.
+
+2016-07-15 16:23:00 +0200 Armin Novak (f9a89ae) 
+
+	* Bug fixes, refactoring.
+
+2016-07-15 16:22:09 +0200 Armin Novak (960bc26) 
+
+	* Further refactored tests.
+
+2016-07-15 15:51:08 +0200 Armin Novak (9f0a9c3) 
+
+	* Refactored GDI.
+
+2016-07-15 12:14:14 +0200 Armin Novak (c5b6e7e) 
+
+	* Fixed GDI tests.
+
+2016-07-14 17:55:53 +0200 Armin Novak (2594262) 
+
+	* Fixed progressive decoding.
+
+2016-07-14 17:39:39 +0200 Armin Novak (1608799) 
+
+	* Cleaned up clear codec.
+
+2016-07-14 16:08:06 +0200 Armin Novak (8fffda5) 
+
+	* Fixed clearcodec and codecs reset.
+
+2016-07-14 12:44:17 +0200 Armin Novak (dc12641) 
+
+	* Fixed a windows 8.1 issue.
+
+2016-07-14 12:42:24 +0200 Armin Novak (5e9c9f9) 
+
+	* Code refactoring.
+
+2016-07-13 17:33:23 +0200 Armin Novak (e6e8f2d) 
+
+	* Added ROP to string function.
+
+2016-07-13 16:06:59 +0200 Armin Novak (9fc8dc6) 
+
+	* Removed gdi->codecs, unused.
+
+2016-07-13 15:15:41 +0200 Armin Novak (076b92d) 
+
+	* Fixed primitives misuse.
+
+2016-07-13 14:58:11 +0200 Armin Novak (a6cef5c) 
+
+	* Fixed GFX related issues.
+
+2016-07-13 14:04:48 +0200 Armin Novak (99c4187) 
+
+	* Updated primitives API and tests.
+
+2016-07-13 13:13:28 +0200 Armin Novak (e860fde) 
+
+	* Fixed function arguments.
+
+2016-07-13 13:12:27 +0200 Armin Novak (7d01fe1) 
+
+	* Fixed planar tests, deactivated them for clear
+
+2016-07-11 11:52:56 +0200 Armin Novak (03907c8) 
+
+	* Fixed issues.
+
+2016-07-11 11:29:26 +0200 Armin Novak (d986770) 
+
+	* Fixed warnings.
+
+2016-07-11 11:05:38 +0200 Armin Novak (bbae42d) 
+
+	* Compile fix
+
+2016-04-25 09:42:59 +0200 Armin Novak (5039a82) 
+
+	* GDI fixes.
+
+2016-04-23 11:25:55 +0200 Armin Novak (e1c3adf) 
+
+	* freerdp_image_copy fixes, 8bit color improvements.
+
+2016-04-20 09:57:42 +0200 Armin Novak (c12c5dd) 
+
+	* Added overlapped copy support.
+
+2016-04-19 22:11:12 +0200 Armin Novak (716c5c5) 
+
+	* 256 color support.
+
+2016-04-19 21:30:28 +0200 Armin Novak (48d1b4e) 
+
+	* Fixed color ordering for GDI.
+
+2016-04-13 23:37:23 +0200 Armin Novak (016f3a4) 
+
+	* xxx.
+
+2016-04-13 23:18:55 +0200 Armin Novak (b668b0d) 
+
+	* Api update.
+
+2016-04-13 23:13:04 +0200 Armin Novak (ac8c722) 
+
+	* Api update.
+
+2016-04-13 23:10:08 +0200 Armin Novak (0e7bb50) 
+
+	* Bitmaps now remember their format.
+
+2016-04-13 23:06:33 +0200 Armin Novak (bb92655) 
+
+	* Fixed clear codec.
+
+2016-04-13 12:32:51 +0200 Armin Novak (5633f52) 
+
+	* Fixed crashes.
+
+2016-04-11 17:30:29 +0200 Armin Novak (da956e0) 
+
+	* ...
+
+2016-04-11 14:14:17 +0200 Armin Novak (24599af) 
+
+	* More color fixes.
+
+2016-04-05 17:07:45 +0200 Armin Novak (df35c13) 
+
+	* Fixed color conversion, unified GFX and updated API.
+
+2016-10-06 12:19:57 +0200 Bernhard Miklautz (bfdab0e) 
+
+	* Merge pull request #3523 from rjcorrig/tz201609
+
+2016-10-05 09:21:11 -0400 Marc-André Moreau (1d06087) 
+
+	* Merge pull request #3515 from akallabeth/apple_time_fix
+
+2016-10-05 13:14:06 +0200 Bernhard Miklautz (1acd6c4) 
+
+	* Merge pull request #3522 from ondrejholy/fix-pulse-asserts
+
+2016-10-04 09:50:37 -0400 Robert Corrigan (fc7378f) 
+
+	* Updated time zone definitions to Sept 2016
+
+2015-06-11 13:25:35 +0200 Ondrej Holy (2fec57f) 
+
+	* rdpsnd/pulse: Fix crashes in pulseaudio
+
+2016-10-03 22:40:28 +0200 David Fort (425942d) 
+
+	* Merge pull request #3511 from
+          nonamed108/fix_for_xcode8_clock_gettime
+
+2016-09-30 09:32:52 +0200 David Fort (dbb353d) 
+
+	* Merge pull request #3501 from DavBfr/fix-few-memory-leaks
+
+2016-09-27 13:28:39 +0200 Armin Novak (3eb136d) 
+
+	* Fixed SetFileTime for mac.
+
+2016-09-27 12:33:44 +0200 akallabeth (3a9cc2c) 
+
+	* Merge pull request #3512 from nathankidd/redundant-rfx-conversion
+
+2016-09-23 19:07:09 -0400 Nathan Kidd (24aa71e) 
+
+	* client/X11: Only upconvert < 24 bit RFX tiles
+
+2016-09-22 15:42:43 -0500 ed.velez (ed697fa) 
+
+	* fix_for_xcode8_clock_gettime
+
+2016-09-01 11:34:38 -0700 David PHAM-VAN (d5dc5b4) 
+
+	* Fix smartcard channel disconnect
+
+2016-07-06 12:12:40 -0700 David PHAM-VAN (f5f3913) 
+
+	* Fix Memory Leaks in Printer Redirection
+
+2016-06-28 14:39:29 -0700 David PHAM-VAN (fe2e426) 
+
+	* Fix Memory Leaks in RdpSnd
+
+2016-06-28 14:39:14 -0700 David PHAM-VAN (4265177) 
+
+	* Fix Memory Leaks in RdpDR
+
+2016-06-28 14:39:01 -0700 David PHAM-VAN (1bca1e7) 
+
+	* Fix Memory Leaks in Disp channel
+
+2016-09-09 11:16:29 +0200 David Fort (1855e36) 
+
+	* Merge pull request #3482 from realjiangms/fix_gfx_win8
+
+2016-08-27 21:51:29 +0800 zihao.jiang (2c00240) 
+
+	* server/shadow: Fix regression with rdp8.0 Shadow server crash with
+          rdp8.0 with gfx enabled. Root Cause: rdp8.0 is not support
+          in shadow gfx and rdpgfx_caps_advertise returns an error.
+          However setChannelError crashs because
+          context->errorDescription is NULL 1. Fix shadow gfx to
+          handle rdp8.0 2. Initialize context->errorDescription for
+          server side new-context
+
+2016-08-25 09:00:56 +0200 Martin Fleisz (3586e33) 
+
+	* Merge pull request #3435 from akallabeth/uuid_find_fix
+
+2016-08-25 08:17:52 +0200 Martin Fleisz (71765b7) 
+
+	* Merge pull request #3284 from ondrejholy/endianness
+
+2016-08-24 11:08:00 +0200 David Fort (5394a04) 
+
+	* Merge pull request #3316 from realjiangms/server_gfx
+
+2016-08-24 10:40:31 +0200 akallabeth (4c9782d) 
+
+	* Merge pull request #3476 from FreeRDP/mh-fix-transport
+
+2016-08-22 02:17:11 -0700 Martin Haimberger (e9e0764) 
+
+	* libfreerdp/core: transport_write unchecked parameters
+
+2016-08-21 01:02:13 +0800 zihao.jiang (92ca985) 
+
+	* rdpgfx/server: Fix for windows10 clients 1. Fix order of gfx reset
+          and new-surface. Windows10 client will show black screen
+          with this issue(FreeRDP itself is dramatically immune to
+          this issue) 2. Handle RDPGFX_QOE_FRAME_ACKNOWLEDGE_PDU for
+          FPS control
+
+2016-08-20 01:36:37 +0800 zihao.jiang (5d4e9a2) 
+
+	* rdpgfx/server: More minor fix
+
+2016-08-16 14:49:56 +0800 zihao.jiang (7d0fa79) 
+
+	* rdpgfx/server: More minor fix according to comments: Not use sizeof
+          on packet memory structure for stream length
+          check/estimating and use number directly. Most of the
+          packet size could be obviously calculated/verified from
+          code and comments in same function. Macro is defined for
+          those were referenced multiple times.
+
+2016-08-13 18:27:19 -0700 Michael M. Wasser (75a483d) 
+
+	* mac BUILD_SHARED_LIBS=ON fix
+
+2016-06-03 02:33:31 +0800 zihao.jiang (a15b8ff) 
+
+	* rdpgfx/server: Minor fix: allow configurable codec parameter
+
+2016-05-28 13:43:33 +0800 zihao.jiang (26c98e4) 
+
+	* rdpgfx/server: Minor fix: use switch for pdu length estimation
+
+2016-05-27 02:11:52 +0800 zihao.jiang (992e0e9) 
+
+	* rdpgfx: more minor changes 1. Fix style for
+          channels/rdpgfx/server/rdpgfx_main.c according to
+          scripts/format_code.sh 2. Refactor and introduce APIs to
+          allow rdpgfx server channel running in existing thread
+          (similar to rdpsnd)
+
+2016-05-04 00:48:59 +0800 zihao.jiang (2b6bd26) 
+
+	* rdpgfx: various fixes according to comments 1. Fix stream leak in
+          rdpgfx 2. Make src data const in zgfx. Harden zgfx to be
+          independent to byte order 3. Fix written bytes return
+          value in channel write 4. Add check for return value in
+          shadow_client.c 5. Add gfx callback to send surface
+          command with frame marker pdu. 6. Check remain length for
+          recv subroutine 7. Fix compile errors
+
+2016-04-24 01:49:10 +0800 zihao.jiang (746a754) 
+
+	* rdpgfx: Implementation for server side channel server/shadow:
+          support h264 codec with gfx channel
+
+2016-07-22 09:34:49 -0400 Marc-André Moreau (5b2455f) 
+
+	* Merge pull request #3451 from awakecoding/nla_server_fix
+
+2016-07-22 09:06:07 -0400 Marc-André Moreau (14cb6d3) 
+
+	* freerdp: make modifications to NLA server-side fixes according to
+          PR comments
+
+2016-07-21 18:58:24 -0400 Marc-André Moreau (801dc0f) 
+
+	* freerdp: add configurable NTLM SAM file option for server-side NLA
+
+2016-07-21 17:53:20 -0400 Marc-André Moreau (1ffbd77) 
+
+	* freerdp: fix sending of TLS alert on NLA failure, add better
+          handling of server-side NLA in shadow server
+
+2016-07-20 09:26:04 -0400 Marc-André Moreau (9ef863b) 
+
+	* Merge pull request #3449 from awakecoding/android_toolchain_fix
+
+2016-07-19 21:53:23 -0400 Marc-André Moreau (a04f324) 
+
+	* cmake: fix Android toolchain missing usage of CMAKE_PREFIX_PATH
+
+2016-07-18 14:53:53 +0200 Bernhard Miklautz (05d63c6) 
+
+	* Merge pull request #3445 from lanoxx/master
+
+2016-07-18 13:23:00 +0200 akallabeth (cd9bdd5) 
+
+	* Merge pull request #3447 from bmiklautz/package_updates
+
+2016-07-18 12:33:44 +0200 Bernhard Miklautz (add4db4) 
+
+	* pkg: update packages
+
+2016-07-17 22:29:09 +0200 Sebastian Geiger (d1c7843) 
+
+	* docs: Make doxygen silent
+
+2016-07-08 11:14:25 +0200 Martin Fleisz (5d7027a) 
+
+	* Merge pull request #3438 from akallabeth/android_build_paths
+
+2016-07-07 12:41:34 +0000 Bernhard Miklautz (c4e3db0) 
+
+	* Merge pull request #3436 from akallabeth/openh264_1_6_support
+
+2016-07-07 10:38:51 +0200 akallabeth (79a360b) 
+
+	* Merge pull request #3405 from hardening/wlog_man
+
+2016-07-06 17:21:46 +0200 Armin Novak (40bfc17) 
+
+	* Added gradle.properties to extend heap size.
+
+2016-07-06 17:17:39 +0200 Armin Novak (48b4c5b) 
+
+	* Fixed android libfreerdp install paths.
+
+2016-07-06 13:58:10 +0200 Norbert Federa (89c2527) 
+
+	* Merge pull request #3384 from akallabeth/android64_build
+
+2016-07-06 13:02:35 +0200 Armin Novak (d5b7c19) 
+
+	* Updated gradle.
+
+2016-07-06 11:59:08 +0200 Armin Novak (f5fef88) 
+
+	* Disabled OpenH264 build for pull request tester.
+
+2016-07-06 11:50:53 +0200 Armin Novak (730ff20) 
+
+	* Using android build-tools 24 (23 is broken)
+
+2016-07-05 15:35:41 +0200 David Fort (070b2c6) 
+
+	* Merge pull request #3402 from doughdemon/master
+
+2016-07-05 15:15:19 +0200 David Fort (4a67ba8) 
+
+	* Merge pull request #3433 from akallabeth/wlog_callbac_init_fix
+
+2016-07-05 13:22:28 +0200 Armin Novak (2ceb38a) 
+
+	* Proper wLogMessage initialisation.
+
+2016-07-05 13:00:54 +0200 Armin Novak (d96fbd1) 
+
+	* Initialise WLog PrefixString for each message type.
+
+2016-07-04 12:33:52 +0200 Armin Novak (44fc5b5) 
+
+	* Added support for OpenH264 1.6
+
+2016-06-30 22:43:05 +0200 David Fort (a132545) 
+
+	* Merge pull request #3428 from
+          nfedera/fix-getcomputernameex-lentgh-calculation
+
+2016-06-30 17:15:40 +0200 Norbert Federa (333a111) 
+
+	* winpr/sspi/ntlm: fix computer name len calculation
+
+2016-06-27 15:28:22 +0200 Bernhard Miklautz (c42d2ef) 
+
+	* Merge pull request #3426 from nfedera/fix-read-extended-info-packet
+
+2016-06-27 10:56:40 +0200 Norbert Federa (ae9460f) 
+
+	* protocol violation: rdp_read_extended_info_packet
+
+2016-06-27 10:11:19 +0200 Armin Novak (b7f8dc3) 
+
+	* Fixed UUID find.
+
+2016-06-22 15:32:11 +0200 Martin Fleisz (0d7a6b5) 
+
+	* Merge pull request #3418 from llyzs/rdpsnd_server_latency
+
+2016-06-21 15:10:09 +0200 David Fort (1fdcae9) 
+
+	* Add an environment variables section to the man
+
+2016-06-21 14:05:29 +0800 Vic Lee (019a569) 
+
+	* rdpsnd/server: decrease audio latency and make it configurable.
+
+2016-06-15 22:39:03 +0200 David Fort (0905cc2) 
+
+	* man pages needed love
+
+2016-06-13 22:16:36 +0200 David Fort (db6efd0) 
+
+	* Add a dedicated man page for wLog
+
+2016-06-16 16:16:37 +0200 Bernhard Miklautz (e86f7c2) 
+
+	* Merge pull request #3408 from hendwolt/master
+
+2016-06-16 14:46:27 +0200 Martin Fleisz (f166f5d) 
+
+	* Merge pull request #3410 from nfedera/fix-symbols
+
+2016-06-16 11:47:33 +0200 Norbert Federa (27c4396) 
+
+	* winpr: fix win32 linking issues
+
+2016-06-15 18:01:38 +0200 Norbert Federa (6a3b48d) 
+
+	* freerdp: remove static inet_ntop
+
+2016-06-15 13:54:31 +0200 Norbert Federa (7a68eeb) 
+
+	* cmake: remove some void statements and fix winpr source group
+
+2016-06-15 13:36:27 +0200 Norbert Federa (90cdfa7) 
+
+	* cmake: replaced STATIC_CHANNELS with BUILTIN_CHANNELS
+
+2016-06-15 13:30:38 +0200 Norbert Federa (0ed98c4) 
+
+	* channels/audin/client/winmm: requires winpr
+
+2016-06-14 20:43:35 +0200 Hendrik Woltersdorf (8ea61fe) 
+
+	* fix errors in xdg-shell-xml for protocol creation
+
+2016-06-14 13:57:00 +0200 Bernhard Miklautz (50649ac) 
+
+	* Merge pull request #3407 from nfedera/enable-tests-on-windows
+
+2016-06-14 12:57:30 +0200 Norbert Federa (675ea70) 
+
+	* ci: build tests on windows from now on
+
+2016-06-14 12:54:01 +0200 Bernhard Miklautz (0cb37b0) 
+
+	* Merge pull request #3406 from nfedera/fix-winpr-ntlm
+
+2016-06-14 12:37:37 +0200 Norbert Federa (26ed09a) 
+
+	* winpr/sspi/ntlm: fix GetComputerNameExA parameters
+
+2016-06-14 10:20:52 +0200 akallabeth (f0bdd62) 
+
+	* Merge pull request #3404 from nfedera/fix-pathmakepath
+
+2016-06-13 19:19:28 +0200 Norbert Federa (62d73dc) 
+
+	* winpr: fix PathMakePathA and TestWLog
+
+2016-06-13 10:06:51 +0200 Bernhard Miklautz (ee4d118) 
+
+	* Merge pull request #3403 from TingPing/freerdp-client.pc
+
+2016-06-12 22:10:00 -0400 TingPing (9fe5da8) 
+
+	* Fix include path in freerdp-client.pc
+
+2016-06-12 17:54:52 +0200 Felix Janda (cd581cf) 
+
+	* Make iOS workaround iOS specific
+
+2016-06-08 11:43:11 +0200 Ondrej Holy (b8f33aa) 
+
+	* winpr/crt: Make TestString endian-independent
+
+2016-06-08 11:42:27 +0200 Ondrej Holy (bbcc047) 
+
+	* winpr/crt: Fix endianness in string utils
+
+2016-06-10 15:08:49 +0200 Bernhard Miklautz (f818bab) 
+
+	* Merge pull request #3399 from nfedera/fix-winpr-library2
+
+2016-06-10 13:10:39 +0200 Norbert Federa (581c000) 
+
+	* winpr/library: fix GetModuleFileName and tests
+
+2016-06-08 11:03:40 -0400 Marc-André Moreau (0c8af43) 
+
+	* Merge pull request #3397 from awakecoding/master
+
+2016-06-08 10:51:58 -0400 Marc-André Moreau (f905861) 
+
+	* wayk-now: add missing inet_pton implementation on Windows
+
+2016-06-08 11:50:43 +0200 Bernhard Miklautz (b71f60c) 
+
+	* Merge pull request #3393 from nfedera/fix-winpr-library-wtimer-test
+
+2016-06-08 08:21:13 +0200 Hardening (a0520f8) 
+
+	* Merge pull request #3394 from nfedera/fix-client-x11-locked-mutex
+
+2016-06-07 18:57:27 +0200 Norbert Federa (374f97a) 
+
+	* client/x11: don't close locked mutex
+
+2016-06-07 17:20:56 +0200 Norbert Federa (f2c825b) 
+
+	* winpr: fix some tests
+
+2016-06-07 15:33:49 +0200 MartinHaimberger (0abb285) 
+
+	* Merge pull request #3392 from nfedera/fix-winpr-barrier-deadlock
+
+2016-06-07 13:06:50 +0200 Norbert Federa (f969e60) 
+
+	* winpr/synch: fix barrier deadlock in release build
+
+2016-06-07 09:34:12 +0200 Bernhard Miklautz (aa15327) 
+
+	* Merge pull request #3391 from
+          nfedera/fix-initializewaitabletimer-result
+
+2016-06-06 23:06:12 +0200 Norbert Federa (a35a1e3) 
+
+	* winpr/synch: fix InitializeWaitableTimer result
+
+2016-06-06 16:21:39 +0200 Norbert Federa (6e15931) 
+
+	* Merge pull request #3390 from nfedera/fix-winpr-barrier2
+
+2016-06-06 15:33:16 +0200 Norbert Federa (131ffaa) 
+
+	* winpr/synch: improve barrier test
+
+2016-06-06 13:54:39 +0200 Bernhard Miklautz (bd71b36) 
+
+	* Merge pull request #3388 from nfedera/fix-winpr-pool-synch
+
+2016-06-06 13:44:48 +0200 Bernhard Miklautz (11ecda2) 
+
+	* Merge pull request #3386 from nfedera/fix-winpr-barrier
+
+2016-06-06 13:39:36 +0200 Bernhard Miklautz (a24d1fd) 
+
+	* Merge pull request #3389 from
+          nfedera/fix-winpr-synch-timer-queue-segfault
+
+2016-06-06 13:18:00 +0200 Norbert Federa (e35049c) 
+
+	* winpr/synch: fix timerqueue segfault
+
+2016-06-06 11:32:25 +0200 Armin Novak (8e552e2) 
+
+	* Updated readme for android.
+
+2016-06-06 09:23:41 +0200 akallabeth (8c4f3ba) 
+
+	* Merge pull request #3387 from
+          nfedera/fix-wfreerdp-verify-cert-callback
+
+2016-06-04 17:13:07 +0200 Norbert Federa (882f593) 
+
+	* wfreerdp: fix invalid VerifyCertificate callback
+
+2016-06-04 17:04:12 +0200 Norbert Federa (c16bee7) 
+
+	* winpr: several pool and synch fixes
+
+2016-06-04 13:40:01 +0200 Norbert Federa (2dba082) 
+
+	* winpr/synch/barrier: fix return value and test
+
+2016-06-04 00:55:27 +0200 Norbert Federa (85f4426) 
+
+	* winpr/synch: add spinning support to barrier
+
+2016-06-03 18:56:36 +0200 Norbert Federa (341eed1) 
+
+	* winpr/synch: rewrite barrier implementation & test
+
+2016-06-03 18:53:14 +0200 Bernhard Miklautz (8ea8b7c) 
+
+	* Merge pull request #3381 from nfedera/fix-winpr-misc
+
+2016-06-03 14:23:06 +0200 Armin Novak (dd9cb25) 
+
+	* Fixed defined symbols for function check.
+
+2016-06-03 13:02:30 +0200 Armin Novak (de662b9) 
+
+	* Setting lib64 preference now.
+
+2016-06-03 13:02:13 +0200 Armin Novak (20568af) 
+
+	* Updated toolchain file, added new variable for lib64 detection.
+
+2016-06-03 13:01:59 +0200 Armin Novak (10460d3) 
+
+	* Fixed android library detection.
+
+2016-06-03 09:39:48 +0200 Armin Novak (be33a11) 
+
+	* Fixed missing arch.
+
+2016-06-02 15:38:57 +0200 Norbert Federa (458f606) 
+
+	* winpr/thread: fix SwitchToThread
+
+2016-06-02 15:33:00 +0200 Armin Novak (e405464) 
+
+	* Fixed pthread_mutex_timedlock detection.
+
+2016-06-02 14:25:13 +0200 Armin Novak (fc2f43e) 
+
+	* Added android64 support.
+
+2016-06-02 08:32:12 +0200 Ondrej Holy (1903537) 
+
+	* winpr/crt: Make TestUnicodeConversion endian-independent
+
+2016-06-02 10:49:42 +0200 Bernhard Miklautz (215e7b5) 
+
+	* Merge pull request #3382 from giox069/master
+
+2016-06-02 10:23:28 +0200 Giovanni Panozzo (01a8db2) 
+
+	* Fix some memory leaks in freerdp_settings_free()
+
+2016-06-01 16:26:26 +0200 Norbert Federa (e718fb3) 
+
+	* fix race conditions, tests and some invalid return values
+
+2016-05-31 16:04:16 +0200 Ondrej Holy (44ce6b0) 
+
+	* winpr/stream: Make TestStream endian-independent
+
+2016-05-31 09:41:09 +0200 Norbert Federa (42d2b69) 
+
+	* Merge pull request #3379 from nfedera/fix-winpr-wtsapi
+
+2016-05-31 09:37:31 +0200 akallabeth (345478b) 
+
+	* Merge pull request #3376 from realjiangms/fix_client_gfx
+
+2016-05-30 19:25:20 +0200 Bernhard Miklautz (9daf129) 
+
+	* Merge pull request #3371 from realjiangms/fix_x11_shadow_race
+
+2016-05-30 17:54:59 +0200 Norbert Federa (c6aeba6) 
+
+	* winpr/wtsapi: fixed race conditions and tests
+
+2016-05-30 14:59:34 +0200 MartinHaimberger (69f738f) 
+
+	* Merge pull request #3377 from nfedera/fix-channel-name-parsing
+
+2016-05-30 14:40:23 +0200 Norbert Federa (7a42a8d) 
+
+	* freerdp/core/gcc: channel name hardening
+
+2016-04-27 13:43:16 +0200 Ondrej Holy (0e353cc) 
+
+	* winpr/ntlm: Fix endianness in NTLM authentication
+
+2016-04-22 14:43:40 +0200 Ondrej Holy (95a1b53) 
+
+	* winpr/ntlm: Fix endianness in ntlm_av_pair_list
+
+2016-04-27 13:35:09 +0200 Ondrej Holy (8d468ea) 
+
+	* winpr/crt: Fix endianness in WCHAR case conversions
+
+2016-04-13 16:26:42 +0200 Ondrej Holy (f722dc5) 
+
+	* winpr/crt: Fix endianness in unicode conversions
+
+2016-04-11 11:05:21 +0200 Ondrej Holy (e326e43) 
+
+	* codec/xcrush: Fix endianness in compression
+
+2016-04-06 17:02:23 +0200 Ondrej Holy (250998e) 
+
+	* winpr: Be sure data points to BYTE in endian.h
+
+2016-04-06 16:49:37 +0200 Ondrej Holy (11221e7) 
+
+	* winpr: Fix Data_Read_UINT16
+
+2016-04-22 15:31:01 +0200 Ondrej Holy (6d2ab9c) 
+
+	* winpr: Fix 64-bit architecture detection
+
+2016-05-30 13:00:32 +0200 Bernhard Miklautz (ca03b51) 
+
+	* Merge pull request #3375 from nfedera/fix-sizet-format-segfaults
+
+2016-05-29 02:13:47 +0800 zihao.jiang (e7d9e91) 
+
+	* channels/rdpgfx: Make freerdp_client_codecs_prepare calls codec
+          reset. It fix broken h264 client from #3328. Also it
+          doesn't make sense that we don't need width and height for
+          codec initialization while we need them for codec reset
+
+2016-05-27 15:53:49 +0200 Norbert Federa (e8c4910) 
+
+	* fix segfaults casused by size_t format specifier
+
+2016-05-27 14:53:12 +0200 Hardening (00dd6f8) 
+
+	* Merge pull request #3372 from nfedera/fix-winpr-test-library
+
+2016-05-26 12:19:36 +0200 Norbert Federa (d2b2a92) 
+
+	* winpr/library: fix win32 test and some cleanup
+
+2016-05-27 11:19:50 +0200 Hardening (9f37f46) 
+
+	* Merge pull request #3374 from nfedera/fix-winpr-path
+
+2016-05-26 18:36:02 +0200 Norbert Federa (a45ac8d) 
+
+	* winpr/path: fix PathCchFindExtensionA and more
+
+2016-05-26 14:07:48 +0200 Hardening (ef1ddff) 
+
+	* Merge pull request #3373 from nfedera/fix-winpr-test-pipe
+
+2016-05-26 13:52:30 +0200 Norbert Federa (9370d98) 
+
+	* winpr/pipe: fix CreateNamedPipe test
+
+2016-05-26 00:20:37 +0800 zihao.jiang (4227983) 
+
+	* Server/shadow: Protect X operations on shared subystem X11 display
+          with X11 display lock
+
+2016-05-25 17:25:07 +0200 Bernhard Miklautz (17c125d) 
+
+	* Merge pull request #3369 from realjiangms/fix_mouseback_2796
+
+2016-05-25 17:24:30 +0800 zihao.jiang (9f4465e) 
+
+	* Server/shadow: Fix issue 2796. Mouse cursor draw back issue
+
+2016-05-25 16:39:22 +0200 Bernhard Miklautz (8aec19d) 
+
+	* Merge pull request #3370 from
+          nfedera/fix-winpr-test-thread-createprocess
+
+2016-05-25 15:47:58 +0200 Norbert Federa (1b231f9) 
+
+	* winpr/thread: fix TestThreadCreateProcess
+
+2016-05-25 11:08:31 +0200 MartinHaimberger (9bfe3a6) 
+
+	* Merge pull request #3365 from nfedera/fix-winpr-synch-tests
+
+2016-05-24 22:33:27 +0200 Norbert Federa (aded51f) 
+
+	* winpr/synch: fix tests
+
+2016-05-24 15:41:45 +0200 akallabeth (53de4b8) 
+
+	* Merge pull request #3363 from nfedera/fix-mutex-implementation
+
+2016-05-24 13:35:11 +0200 Norbert Federa (386d290) 
+
+	* winpr/synch: fix mutex implementation
+
+2016-05-23 16:21:49 +0200 akallabeth (cf127eb) 
+
+	* Merge pull request #3357 from realjiangms/fix_rdpsnd_race
+
+2016-05-23 13:38:18 +0200 Martin Fleisz (a722fbf) 
+
+	* Merge pull request #3359 from bmiklautz/eventfd_leak
+
+2016-05-23 13:22:33 +0200 akallabeth (21e3515) 
+
+	* Merge pull request #3349 from byteboon/master
+
+2016-05-23 13:04:44 +0200 Bernhard Miklautz (5d03053) 
+
+	* winpr/event: fix file descriptor leak
+
+2016-05-20 01:02:08 +0800 zihao.jiang (444b678) 
+
+	* shadow/rdpsnd: Fix race condition in rdpsnd channel server. The
+          output buffer and format parameters are not protected.
+          This cause some data inconsistence if rdpsnd has own
+          thread
+
+2016-05-19 23:39:49 +0200 Hardening (aeabb95) 
+
+	* Merge pull request #3356 from rinov/master
+
+2016-05-20 01:17:49 +0900 rinov (c42edd9) 
+
+	* Update mf_mountain_lion.c
+
+2016-05-18 17:30:25 +0200 Norbert Federa (ca53e8b) 
+
+	* Merge pull request #3353 from bmiklautz/no_shared_libs
+
+2016-05-18 17:13:45 +0200 Bernhard Miklautz (41298d6) 
+
+	* build: fix builds with -DBUILD_SHARED_LIBS=OFF
+
+2016-05-16 09:53:38 -0700 byteboon (158be3a) 
+
+	* fixed kerberos authentication
+
+2016-05-13 11:32:48 +0200 Hardening (4e66df7) 
+
+	* Merge pull request #3333 from akallabeth/memleak_fixes
+
+2016-05-13 09:41:42 +0200 Bernhard Miklautz (9e3695f) 
+
+	* Merge pull request #3340 from rjcorrig/kb3153731
+
+2016-05-12 14:38:23 -0400 Marc-André Moreau (1b97593) 
+
+	* Merge pull request #3341 from awakecoding/xcrush_fix
+
+2016-05-12 14:24:53 -0400 Marc-André Moreau (a75d89d) 
+
+	* libfreerdp-codec: make proper xcrush context reset fix
+
+2016-05-12 13:12:24 -0400 Robert Corrigan (73e13b0) 
+
+	* KB3153731: May 2016 DST update for Azerbaijan, Chile, Haiti and
+          Morocco
+
+2016-05-12 17:48:40 +0200 Martin Fleisz (eadc9e1) 
+
+	* Merge pull request #3335 from bmiklautz/wfreerdp_naming
+
+2016-05-12 09:41:57 -0400 Marc-André Moreau (ed326f6) 
+
+	* Merge pull request #3339 from awakecoding/xcrush_fix
+
+2016-05-12 09:22:24 -0400 Marc-André Moreau (892531d) 
+
+	* libfreerdp-codec: fix xcrush decompression, revert remote control
+          fix
+
+2016-05-12 11:47:10 +0200 Bernhard Miklautz (1ea3d4d) 
+
+	* wfreerdp: fix name build without client interface
+
+2016-05-12 10:01:30 +0200 Armin Novak (eacf2b5) 
+
+	* Fixed memory leaks.
+
+2016-05-12 09:28:12 +0200 Armin Novak (704d69d) 
+
+	* Fixed NULL pointer access.
+
+2016-05-11 17:00:35 -0400 Marc-André Moreau (9b7c53c) 
+
+	* Merge pull request #3329 from awakecoding/hv_fix
+
+2016-05-11 16:47:50 -0400 Marc-André Moreau (b24df90) 
+
+	* Merge pull request #3330 from awakecoding/xcrush_fix
+
+2016-05-11 16:35:20 -0400 Marc-André Moreau (a0630de) 
+
+	* libfreerdp-codec: fix xcrush context flush
+
+2016-05-11 15:52:36 -0400 Marc-André Moreau (e4714f3) 
+
+	* freerdp: fix Hyper-V connectivity, fix issues #2421 and #3325
+
+2016-05-11 14:15:07 -0400 Marc-André Moreau (5b9b86d) 
+
+	* Merge pull request #3328 from awakecoding/gfx_fix
+
+2016-05-11 13:53:34 -0400 Marc-André Moreau (56f9b18) 
+
+	* libfreerdp-codec: fix error on empty RFX tileset, which can
+          sometimes happen
+
+2016-05-11 13:42:54 -0400 Marc-André Moreau (54cdd6a) 
+
+	* channels/rdpgfx: fix resetting of codec contexts
+
+2016-05-11 13:27:45 -0400 Marc-André Moreau (171198b) 
+
+	* Merge pull request #3260 from awakecoding/master
+
+2016-05-11 13:13:02 -0400 Marc-André Moreau (6b73757) 
+
+	* Merge branch 'master' of github.com:awakecoding/FreeRDP
+
+2016-05-11 13:12:44 -0400 Marc-André Moreau (d4c809c) 
+
+	* winpr: fix definitions of synchronization barrier and interlocked
+          functions
+
+2016-05-11 11:05:17 -0400 Marc-André Moreau (915b9a1) 
+
+	* Merge branch 'master' of github.com:FreeRDP/FreeRDP
+
+2016-05-11 09:44:26 +0200 akallabeth (c5940d8) 
+
+	* Merge pull request #3318 from bmiklautz/multilayoutpdu
+
+2016-05-11 09:40:18 +0200 akallabeth (6abdd4c) 
+
+	* Merge pull request #3321 from bmiklautz/client_interface
+
+2016-05-09 10:25:31 +0200 Bernhard Miklautz (2c0e73b) 
+
+	* client: disable the client interface per default
+
+2016-05-04 09:47:23 +0200 Bernhard Miklautz (a61a642) 
+
+	* core: don't advertise multi layout PDUs
+
 2016-05-03 17:04:45 +0200 Bernhard Miklautz (f828595) 
 
 	* Merge pull request #3282 from akallabeth/input_arg_checks
@@ -166,9 +2516,29 @@
 
 	* Cleaned up empty if.
 
+2016-03-30 10:58:36 -0400 Marc-André Moreau (a192967) 
+
+	* libwinpr-path: fix missing shlwapi.lib import
+
+2016-03-30 10:47:01 -0400 Marc-André Moreau (8fcc2aa) 
+
+	* Merge branch 'master' of github.com:awakecoding/FreeRDP
+
+2016-03-30 10:31:34 -0400 Marc-André Moreau (0d15539) 
+
+	* wfreerdp: fix Windows XP clipboard missing imports
+
 2016-03-30 15:20:53 +0200 akallabeth (445059b) 
 
 	* Merge pull request #3259 from bmiklautz/overlinking
+
+2016-03-29 20:34:52 -0400 Marc-André Moreau (cedf6d9) 
+
+	* freerdp: more UWP porting
+
+2016-03-29 16:03:15 -0400 Marc-André Moreau (4d629a7) 
+
+	* freerdp: UWP porting
 
 2016-03-29 15:10:00 +0200 Bernhard Miklautz (bafe1aa) 
 
@@ -181,6 +2551,10 @@
 2016-03-01 12:45:25 +0100 Bernhard Miklautz (b184f58) 
 
 	* winpr/TestFileGetStdHandle: rename variable stdout
+
+2016-03-25 12:20:51 -0400 Marc-André Moreau (2201ac5) 
+
+	* winpr: fix PathFileExists on UWP
 
 2016-03-24 16:25:22 +0100 Armin Novak (50873be) 
 
@@ -298,6 +2672,10 @@
 
 	* Merge pull request #3214 from hardening/fix_systemd_appender
 
+2016-03-15 20:19:15 -0400 Marc-André Moreau (9211f44) 
+
+	* Merge branch 'master' of github.com:FreeRDP/FreeRDP
+
 2016-03-15 09:25:50 +0100 akallabeth (b35f306) 
 
 	* Merge pull request #3225 from mfleisz/fix_set_err_info
@@ -361,6 +2739,10 @@
 2016-03-14 09:20:30 +0100 Martin Fleisz (9554177) 
 
 	* Merge pull request #3213 from akallabeth/android_build_fixes
+
+2016-03-11 14:42:16 -0500 Marc-André Moreau (3cbd7c0) 
+
+	* freerdp: fix freerdp_connect possible incorrect status code
 
 2016-03-11 11:22:59 +0100 Martin Fleisz (66ae3f2) 
 
@@ -443,6 +2825,18 @@
 2016-03-08 10:05:57 +0100 Martin Fleisz (30325f1) 
 
 	* Merge pull request #3181 from akallabeth/wlog_filter_fix
+
+2016-03-07 21:21:17 -0500 Marc-André Moreau (c78a142) 
+
+	* Merge branch 'master' of github.com:awakecoding/FreeRDP
+
+2016-03-07 21:21:06 -0500 Marc-André Moreau (d61c2d4) 
+
+	* winpr: fix ini utils leak
+
+2016-03-07 10:19:50 -0500 Marc-André Moreau (ceefc4b) 
+
+	* Merge branch 'master' of github.com:FreeRDP/FreeRDP
 
 2016-03-07 15:39:59 +0100 Bernhard Miklautz (9f8baf3) 
 
@@ -1080,6 +3474,10 @@
 
 	* Mutualize definitions for the printer channel
 
+2016-02-16 13:42:08 -0500 Marc-André Moreau (8fa25aa) 
+
+	* mfreerdp: fix build on 32-bit with mac audio
+
 2016-02-16 17:39:22 +0100 Bernhard Miklautz (12bd0ec) 
 
 	* winpr: BUMP the API version to 1.2
@@ -1124,6 +3522,10 @@
 
 	* Update BookmarkDB.java
 
+2016-02-10 10:51:27 -0500 Marc-André Moreau (0547a31) 
+
+	* winpr: fix ini loader on Windows
+
 2016-02-10 11:17:34 +0100 Hardening (8bbbbf3) 
 
 	* Merge pull request #3116 from akallabeth/win_unicode_arg_fix
@@ -1131,6 +3533,10 @@
 2016-02-09 09:36:00 +0100 Armin Novak (8be7b25) 
 
 	* Printing help on invalid command line again.
+
+2016-02-08 10:19:36 -0500 Marc-André Moreau (2f568aa) 
+
+	* winpr: fix GetComputerNameEx for UWP
 
 2016-02-08 14:36:31 +0100 Armin Novak (d67614a) 
 
@@ -1140,9 +3546,17 @@
 
 	* Merge pull request #3111 from colemickens/hidpi-cli
 
+2016-02-05 16:28:45 -0500 Marc-André Moreau (d0f413d) 
+
+	* winpr: initial port to Universal Windows Platform (UWP)
+
 2015-03-04 09:37:25 -0500 Isaac Richter (1f6ba79) 
 
 	* Enable display scaling in client
+
+2016-02-05 11:39:45 -0500 Marc-André Moreau (bfca674) 
+
+	* Merge branch 'master' of github.com:FreeRDP/FreeRDP
 
 2016-02-05 11:52:07 +0100 Armin Novak (f456829) 
 
@@ -1947,6 +4361,10 @@
 
 	* Fix compilation error under Visual Studio 2010
 
+2015-11-26 09:43:23 -0500 Marc-André Moreau (8cc799f) 
+
+	* libwinpr-synch: fix non-Win32 build
+
 2015-11-26 09:56:19 +0100 Hardening (3375865) 
 
 	* Merge pull request #2983 from nitomartinez/master
@@ -1955,6 +4373,18 @@
 
 	* Fix formatting: else if in its own line and no brackets for single
           statements
+
+2015-11-25 14:41:32 -0500 Marc-André Moreau (c0c9c93) 
+
+	* winpr: more Win32 fixes
+
+2015-11-25 13:46:25 -0500 Marc-André Moreau (c6eacd4) 
+
+	* Merge branch 'master' of github.com:awakecoding/FreeRDP
+
+2015-11-25 13:46:10 -0500 Marc-André Moreau (2f5d159) 
+
+	* winpr: fix WinXP backwards compatibility
 
 2015-11-25 08:36:49 +0100 Nito Martinez (89d8a68) 
 
@@ -2151,6 +4581,10 @@
 
 	* winpr/argv: fix CommandLineToArgvA memory access
 
+2015-11-05 11:57:47 -0500 Marc-André Moreau (5350d8e) 
+
+	* mfreerdp: fix dynamic desktop resize
+
 2015-11-04 18:11:19 +0100 David FORT (5fbf26a) 
 
 	* Add an UDP appender to wLog
@@ -2312,6 +4746,10 @@
 2015-10-22 10:35:43 +0200 Hardening (94d107c) 
 
 	* Merge pull request #2927 from MartinHaimberger/mh-log-returnvalues
+
+2015-10-21 11:36:37 -0400 Marc-André Moreau (1b5f574) 
+
+	* winpr: fix OpenSSL includes
 
 2015-10-21 12:57:12 +0200 MartinHaimberger (16069e6) 
 

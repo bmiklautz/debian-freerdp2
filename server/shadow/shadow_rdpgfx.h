@@ -1,8 +1,7 @@
 /**
  * FreeRDP: A Remote Desktop Protocol Implementation
- * GDI Drawing Functions
  *
- * Copyright 2010-2011 Marc-Andre Moreau <marcandre.moreau@gmail.com>
+ * Copyright 2016 Jiang Zihao <zihao.jiang@yahoo.com>
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,26 +16,23 @@
  * limitations under the License.
  */
 
-#ifndef FREERDP_GDI_DRAWING_H
-#define FREERDP_GDI_DRAWING_H
+#ifndef FREERDP_SHADOW_SERVER_RDPGFX_H
+#define FREERDP_SHADOW_SERVER_RDPGFX_H
 
-#include <freerdp/api.h>
-#include <freerdp/gdi/gdi.h>
+#include <freerdp/server/shadow.h>
 
-#ifdef __cplusplus
- extern "C" {
-#endif
-
-FREERDP_API int gdi_GetROP2(HGDI_DC hdc);
-FREERDP_API int gdi_SetROP2(HGDI_DC hdc, int fnDrawMode);
-FREERDP_API GDI_COLOR gdi_GetBkColor(HGDI_DC hdc);
-FREERDP_API GDI_COLOR gdi_SetBkColor(HGDI_DC hdc, GDI_COLOR crColor);
-FREERDP_API int gdi_GetBkMode(HGDI_DC hdc);
-FREERDP_API int gdi_SetBkMode(HGDI_DC hdc, int iBkMode);
-FREERDP_API GDI_COLOR gdi_SetTextColor(HGDI_DC hdc, GDI_COLOR crColor);
+#include <winpr/crt.h>
+#include <winpr/synch.h>
 
 #ifdef __cplusplus
- }
+extern "C" {
 #endif
 
-#endif /* FREERDP_GDI_DRAWING_H */
+int shadow_client_rdpgfx_init(rdpShadowClient* client);
+void shadow_client_rdpgfx_uninit(rdpShadowClient* client);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif /* FREERDP_SHADOW_SERVER_RDPGFX_H */

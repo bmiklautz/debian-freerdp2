@@ -45,7 +45,6 @@ static const char* const INFO_TYPE_LOGON_STRINGS[4] =
 
 BOOL rdp_compute_client_auto_reconnect_cookie(rdpRdp* rdp)
 {
-	WINPR_HMAC_CTX hmac;
 	BYTE ClientRandom[32];
 	BYTE AutoReconnectRandom[32];
 	ARC_SC_PRIVATE_PACKET* serverCookie;
@@ -70,11 +69,7 @@ BOOL rdp_compute_client_auto_reconnect_cookie(rdpRdp* rdp)
 
 	/* SecurityVerifier = HMAC_MD5(AutoReconnectRandom, ClientRandom) */
 
-	if (!winpr_HMAC_Init(&hmac, WINPR_MD_MD5, AutoReconnectRandom, 16))
-		return FALSE;
-	if (!winpr_HMAC_Update(&hmac, ClientRandom, 32))
-		return FALSE;
-	if (!winpr_HMAC_Final(&hmac, clientCookie->securityVerifier, 16))
+	if (!winpr_HMAC(WINPR_MD_MD5, AutoReconnectRandom, 16, ClientRandom, 32, clientCookie->securityVerifier, 16))
 		return FALSE;
 
 	return TRUE;
@@ -293,23 +288,51 @@ BOOL rdp_read_extended_info_packet(rdpRdp* rdp, wStream* s)
 		WLog_DBG(TAG, "rdp client dir: [%s]", settings->ClientDir);
 	}
 
+	/**
+	 * down below all fields are optional but if one field is not present,
+	 * then all of the subsequent fields also MUST NOT be present.
+	 */
+
+	/* optional: clientTimeZone (172 bytes) */
+	if (Stream_GetRemainingLength(s) == 0)
+		return TRUE;
 	if (!rdp_read_client_time_zone(s, settings))
 		return FALSE;
 
-	if (Stream_GetRemainingLength(s) < 10)
+	/* optional: clientSessionId (4 bytes), should be set to 0 */
+	if (Stream_GetRemainingLength(s) == 0)
+		return TRUE;
+	if (Stream_GetRemainingLength(s) < 4)
 		return FALSE;
+	Stream_Seek_UINT32(s);
 
-	Stream_Seek_UINT32(s); /* clientSessionId (4 bytes), should be set to 0 */
-	Stream_Read_UINT32(s, settings->PerformanceFlags); /* performanceFlags (4 bytes) */
+	/* optional: performanceFlags (4 bytes) */
+	if (Stream_GetRemainingLength(s) == 0)
+		return TRUE;
+	if (Stream_GetRemainingLength(s) < 4)
+		return FALSE;
+	Stream_Read_UINT32(s, settings->PerformanceFlags);
 	freerdp_performance_flags_split(settings);
 
-	Stream_Read_UINT16(s, cbAutoReconnectLen); /* cbAutoReconnectLen (2 bytes) */
+	/* optional: cbAutoReconnectLen (2 bytes) */
+	if (Stream_GetRemainingLength(s) == 0)
+		return TRUE;
+	if (Stream_GetRemainingLength(s) < 2)
+		return FALSE;
+	Stream_Read_UINT16(s, cbAutoReconnectLen);
 
+	/* optional: autoReconnectCookie (28 bytes) */
+	/* must be present if cbAutoReconnectLen is > 0 */
 	if (cbAutoReconnectLen > 0)
-		return rdp_read_client_auto_reconnect_cookie(rdp, s); /* autoReconnectCookie */
+		return rdp_read_client_auto_reconnect_cookie(rdp, s);
+
+	/* TODO */
 
 	/* reserved1 (2 bytes) */
 	/* reserved2 (2 bytes) */
+	/* cbDynamicDSTTimeZoneKeyName (2 bytes) */
+	/* dynamicDSTTimeZoneKeyName (variable) */
+	/* dynamicDaylightTimeDisabled (2 bytes) */
 
 	return TRUE;
 }
@@ -838,7 +861,7 @@ BOOL rdp_recv_logon_info_v1(rdpRdp* rdp, wStream* s, logon_info *info)
 	{
 		if ((cbDomain % 2) || cbDomain > 52)
 		{
-			WLog_ERR(TAG, "protocol error: invalid cbDomain value: %lu", cbDomain);
+			WLog_ERR(TAG, "protocol error: invalid cbDomain value: %lu", (unsigned long) cbDomain);
 			goto fail;
 		}
 		wstr = (WCHAR*) Stream_Pointer(s);
@@ -865,7 +888,7 @@ BOOL rdp_recv_logon_info_v1(rdpRdp* rdp, wStream* s, logon_info *info)
 	{
 		if ((cbUserName % 2) || cbUserName > 512)
 		{
-			WLog_ERR(TAG, "protocol error: invalid cbUserName value: %lu", cbUserName);
+			WLog_ERR(TAG, "protocol error: invalid cbUserName value: %lu", (unsigned long) cbUserName);
 			goto fail;
 		}
 		wstr = (WCHAR*) Stream_Pointer(s);
@@ -928,7 +951,7 @@ BOOL rdp_recv_logon_info_v2(rdpRdp* rdp, wStream* s, logon_info *info)
 	{
 		if ((cbDomain % 2) || cbDomain > 52)
 		{
-			WLog_ERR(TAG, "protocol error: invalid cbDomain value: %lu", cbDomain);
+			WLog_ERR(TAG, "protocol error: invalid cbDomain value: %lu", (unsigned long) cbDomain);
 			goto fail;
 		}
 		if (Stream_GetRemainingLength(s) < (size_t) cbDomain)
@@ -960,7 +983,7 @@ BOOL rdp_recv_logon_info_v2(rdpRdp* rdp, wStream* s, logon_info *info)
 	{
 		if ((cbUserName % 2) || cbUserName < 2 || cbUserName > 512)
 		{
-			WLog_ERR(TAG, "protocol error: invalid cbUserName value: %lu", cbUserName);
+			WLog_ERR(TAG, "protocol error: invalid cbUserName value: %lu", (unsigned long) cbUserName);
 			goto fail;
 		}
 		if (Stream_GetRemainingLength(s) < (size_t) cbUserName)

@@ -42,12 +42,16 @@ if(CMAKE_C_COMPILER_ID MATCHES "Clang" OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
 endif()
 
 if(NOT WIN32)
-    option(WITH_VALGRIND_MEMCHECK "Compile with valgrind helpers." OFF)
+    CMAKE_DEPENDENT_OPTION(WITH_VALGRIND_MEMCHECK "Compile with valgrind helpers." OFF "NOT WITH_SANITIZE_ADDRESS; NOT WITH_SANITIZE_LEAK" OFF)
+    CMAKE_DEPENDENT_OPTION(WITH_SANITIZE_ADDRESS "Compile with gcc/clang address sanitizer." OFF "NOT WITH_VALGRIND_MEMCHECK; NOT WITH_SANITIZE_LEAK" OFF)
+    CMAKE_DEPENDENT_OPTION(WITH_SANITIZE_LEAK "Compile with gcc/clang leak sanitizer." OFF "NOT WITH_VALGRIND_MEMCHECK; NOT WITH_SANITIZE_ADDRESS" OFF)
 else()
-    option(WITH_MEDIA_FOUNDATION "Enable H264 media foundation decoder." ON)
+	if(NOT UWP)
+    	option(WITH_MEDIA_FOUNDATION "Enable H264 media foundation decoder." ON)
+    endif()
 endif()
 
-if(MSVC)
+if(WIN32 AND NOT UWP)
 	option(WITH_NATIVE_SSPI "Use native SSPI modules" ON)
 	option(WITH_WINMM "Use Windows Multimedia" ON)
 	option(WITH_WIN8 "Use Windows 8 libraries" OFF)
@@ -66,7 +70,7 @@ cmake_dependent_option(WITH_CLIENT "Build client binaries" ON "WITH_CLIENT_COMMO
 
 option(WITH_SERVER "Build server binaries" OFF)
 
-option(STATIC_CHANNELS "Build channels statically" ON)
+option(BUILTIN_CHANNELS "Combine all channels into their respective base library" ON)
 
 option(WITH_CHANNELS "Build virtual channel plugins" ON)
 
@@ -81,7 +85,7 @@ endif()
 
 option(WITH_THIRD_PARTY "Build third-party components" OFF)
 
-option(WITH_CLIENT_INTERFACE "Build clients as a library with an interface" ON)
+option(WITH_CLIENT_INTERFACE "Build clients as a library with an interface" OFF)
 option(WITH_SERVER_INTERFACE "Build servers as a library with an interface" ON)
 
 option(WITH_DEBUG_ALL "Print all debug messages." OFF)
@@ -98,14 +102,12 @@ option(WITH_DEBUG_CHANNELS "Print channel manager debug messages." ${DEFAULT_DEB
 option(WITH_DEBUG_CLIPRDR "Print clipboard redirection debug messages" ${DEFAULT_DEBUG_OPTION})
 option(WITH_DEBUG_DVC "Print dynamic virtual channel debug messages." ${DEFAULT_DEBUG_OPTION})
 option(WITH_DEBUG_TSMF "Print TSMF virtual channel debug messages." ${DEFAULT_DEBUG_OPTION})
-option(WITH_DEBUG_GDI "Print graphics debug messages." ${DEFAULT_DEBUG_OPTION})
 option(WITH_DEBUG_KBD "Print keyboard related debug messages." ${DEFAULT_DEBUG_OPTION})
 option(WITH_DEBUG_LICENSE "Print license debug messages." ${DEFAULT_DEBUG_OPTION})
 option(WITH_DEBUG_NEGO "Print negotiation related debug messages." ${DEFAULT_DEBUG_OPTION})
 option(WITH_DEBUG_NLA "Print authentication related debug messages." ${DEFAULT_DEBUG_OPTION})
 option(WITH_DEBUG_NTLM "Print NTLM debug messages" ${DEFAULT_DEBUG_OPTION})
 option(WITH_DEBUG_TSG "Print Terminal Server Gateway debug messages" ${DEFAULT_DEBUG_OPTION})
-option(WITH_DEBUG_ORDERS "Print drawing orders debug messages" ${DEFAULT_DEBUG_OPTION})
 option(WITH_DEBUG_RAIL "Print RemoteApp debug messages" ${DEFAULT_DEBUG_OPTION})
 option(WITH_DEBUG_RDP "Print RDP debug messages" ${DEFAULT_DEBUG_OPTION})
 option(WITH_DEBUG_REDIR "Redirection debug messages" ${DEFAULT_DEBUG_OPTION})
