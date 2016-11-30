@@ -1,3 +1,12 @@
+freerdp2 (2.0.0~git20161130.1.e60d0d5+dfsg1-1) UNRELEASED; urgency=medium
+
+  [ Bernhard Miklautz ]
+  * import git snapshot from upstream:
+    - Obtained from master branch of http://github.com/FreeRDP/FreeRDP.
+      Commit hash: f8285956097451f829d7da3455c45e3de39092e6
+
+ -- Bernhard Miklautz <bernhard.miklautz@shacknet.at>  Wed, 30 Nov 2016 10:58:42 +0100
+
 freerdp2 (2.0.0~git20160503.1.f828595+dfsg1-1) UNRELEASED; urgency=medium
 
   [ Bernhard Miklautz ]
