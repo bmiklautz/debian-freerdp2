@@ -82,11 +82,9 @@ libwinpr.so.2 libwinpr2 #MINVER#
  ByteSwapUnicode@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  CallWindowProcA@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  CallWindowProcW@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- CallbackMayRunLong@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  CancelIo@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  CancelIoEx@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  CancelSynchronousIo@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- CancelThreadpoolIo@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  CancelWaitableTimer@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  CertCloseStore@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  CertEnumCertificatesInStore@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
@@ -124,13 +122,6 @@ libwinpr.so.2 libwinpr2 #MINVER#
  ClipboardSetOwner@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  ClipboardUnlock@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  CloseHandle@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- CloseThreadpool@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- CloseThreadpoolCleanupGroup@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- CloseThreadpoolCleanupGroupMembers@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- CloseThreadpoolIo@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- CloseThreadpoolTimer@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- CloseThreadpoolWait@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- CloseThreadpoolWork@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  CommConfigDialogA@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  CommConfigDialogW@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  CommCreateFileA@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
@@ -192,12 +183,6 @@ libwinpr.so.2 libwinpr2 #MINVER#
  CreateSemaphoreA@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  CreateSemaphoreW@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  CreateThread@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- CreateThreadpool@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- CreateThreadpoolCleanupGroup@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- CreateThreadpoolIo@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- CreateThreadpoolTimer@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- CreateThreadpoolWait@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- CreateThreadpoolWork@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  CreateTimerQueue@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  CreateTimerQueueTimer@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  CreateWaitObjectEvent@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
@@ -263,14 +248,11 @@ libwinpr.so.2 libwinpr2 #MINVER#
  DeleteCriticalSection@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  DeleteFileA@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  DeleteFileW@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- DeleteSynchronizationBarrier@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  DeleteTimerQueue@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  DeleteTimerQueueEx@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  DeleteTimerQueueTimer@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- DestroyThreadpoolEnvironment@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  DestroyWindow@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  DeviceIoControl@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- DisassociateCurrentThreadFromCallback@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  DisconnectNamedPipe@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  DispatchMessageA@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  DispatchMessageW@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
@@ -280,7 +262,6 @@ libwinpr.so.2 libwinpr2 #MINVER#
  DsMakeSpnW@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  DuplicateHandle@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  EnterCriticalSection@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- EnterSynchronizationBarrier@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  EnumDynamicTimeZoneInformation@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  EnvironmentBlockToEnvpA@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  EscapeCommFunction@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
@@ -307,7 +288,6 @@ libwinpr.so.2 libwinpr2 #MINVER#
  FreeEnvironmentStringsA@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  FreeEnvironmentStringsW@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  FreeLibrary@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- FreeLibraryWhenCallbackReturns@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  GetCombinedPath@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  GetCommConfig@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  GetCommMask@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
@@ -386,7 +366,6 @@ libwinpr.so.2 libwinpr2 #MINVER#
  GetSystemTime@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  GetSystemTimeAdjustment@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  GetSystemTimeAsFileTime@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- GetTickCount64@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  GetTickCount@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  GetTickCountPrecise@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  GetTimeZoneInformation@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
@@ -442,10 +421,6 @@ libwinpr.so.2 libwinpr2 #MINVER#
  IniFile_SetKeyValueString@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  IniFile_WriteBuffer@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  IniFile_WriteFile@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- InitOnceBeginInitialize@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- InitOnceComplete@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- InitOnceExecuteOnce@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- InitOnceInitialize@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  InitSecurityInterfaceExA@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  InitSecurityInterfaceExW@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  InitializeCriticalSection@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
@@ -455,8 +430,6 @@ libwinpr.so.2 libwinpr2 #MINVER#
  InitializeSListHead@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  InitializeSRWLock@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  InitializeSecurityDescriptor@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- InitializeSynchronizationBarrier@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- InitializeThreadpoolEnvironment@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  InsertHeadList@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  InsertTailList@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  Inspect_GetOpenCardNameA@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
@@ -559,10 +532,8 @@ libwinpr.so.2 libwinpr2 #MINVER#
  IsNamedPipeFileNameA@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  IsProcessorFeaturePresent@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  IsProcessorFeaturePresentEx@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- IsThreadpoolTimerSet@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  IsValidSecurityDescriptor@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  LeaveCriticalSection@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- LeaveCriticalSectionWhenCallbackReturns@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  LinkedList_AddFirst@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  LinkedList_AddLast@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  LinkedList_Clear@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
@@ -886,11 +857,9 @@ libwinpr.so.2 libwinpr2 #MINVER#
  RegisterClassExW@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  RegisterClassW@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  ReleaseMutex@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- ReleaseMutexWhenCallbackReturns@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  ReleaseSRWLockExclusive@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  ReleaseSRWLockShared@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  ReleaseSemaphore@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- ReleaseSemaphoreWhenCallbackReturns@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  RemoveDirectoryA@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  RemoveDirectoryW@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  RemoveDllDirectory@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
@@ -1134,7 +1103,6 @@ libwinpr.so.2 libwinpr2 #MINVER#
  SetErrorMode@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  SetEvent@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  SetEventFileDescriptor@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- SetEventWhenCallbackReturns@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  SetFilePointer@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  SetFilePointerEx@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  SetFileTime@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
@@ -1153,15 +1121,6 @@ libwinpr.so.2 libwinpr2 #MINVER#
  SetStdHandle@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  SetStdHandleEx@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  SetSystemTime@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- SetThreadpoolCallbackCleanupGroup@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- SetThreadpoolCallbackLibrary@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- SetThreadpoolCallbackPool@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- SetThreadpoolCallbackPriority@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- SetThreadpoolCallbackRunsLong@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- SetThreadpoolThreadMaximum@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- SetThreadpoolThreadMinimum@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- SetThreadpoolTimer@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- SetThreadpoolWait@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  SetTimeZoneInformation@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  SetUnhandledExceptionFilter@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  SetWaitableTimer@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
@@ -1184,7 +1143,6 @@ libwinpr.so.2 libwinpr2 #MINVER#
  Stack_Peek@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  Stack_Pop@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  Stack_Push@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- StartThreadpoolIo@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  StrSep@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  StreamPool_AddRef@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  StreamPool_Clear@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
@@ -1200,7 +1158,6 @@ libwinpr.so.2 libwinpr2 #MINVER#
  Stream_Free@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  Stream_New@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  Stream_Release@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- SubmitThreadpoolWork@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  SuspendThread@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  SwitchToThread@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  SystemTimeToFileTime@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
@@ -1218,7 +1175,6 @@ libwinpr.so.2 libwinpr2 #MINVER#
  TryAcquireSRWLockExclusive@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  TryAcquireSRWLockShared@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  TryEnterCriticalSection@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- TrySubmitThreadpoolCallback@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  TzSpecificLocalTimeToSystemTime@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  TzSpecificLocalTimeToSystemTimeEx@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  USleep@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
@@ -1323,6 +1279,7 @@ libwinpr.so.2 libwinpr2 #MINVER#
  WTSRegisterWtsApiFunctionTable@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  WTSSendMessageA@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  WTSSendMessageW@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
+ WTSSessionStateToString@Base 2.0.0~git20161130.1.e60d0d5+dfsg1
  WTSSetListenerSecurityA@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  WTSSetListenerSecurityW@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  WTSSetUserConfigA@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
@@ -1350,10 +1307,6 @@ libwinpr.so.2 libwinpr2 #MINVER#
  WaitForMultipleObjectsEx@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  WaitForSingleObject@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  WaitForSingleObjectEx@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- WaitForThreadpoolIoCallbacks@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- WaitForThreadpoolTimerCallbacks@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- WaitForThreadpoolWaitCallbacks@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- WaitForThreadpoolWorkCallbacks@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  WaitMessage@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  WaitNamedPipeA@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  WaitNamedPipeW@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
@@ -1474,38 +1427,71 @@ libwinpr.so.2 libwinpr2 #MINVER#
  wcstok_s@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  winpr_BinToHexString@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  winpr_CArrayDump@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
+ winpr_CancelThreadpoolIo@Base 2.0.0~git20161130.1.e60d0d5+dfsg1
+ winpr_Cipher_BytesToKey@Base 2.0.0~git20161130.1.e60d0d5+dfsg1
  winpr_Cipher_Final@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  winpr_Cipher_Free@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  winpr_Cipher_New@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  winpr_Cipher_Update@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  winpr_CleanupSSL@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
+ winpr_CloseThreadpool@Base 2.0.0~git20161130.1.e60d0d5+dfsg1
+ winpr_CloseThreadpoolCleanupGroup@Base 2.0.0~git20161130.1.e60d0d5+dfsg1
+ winpr_CloseThreadpoolCleanupGroupMembers@Base 2.0.0~git20161130.1.e60d0d5+dfsg1
+ winpr_CloseThreadpoolIo@Base 2.0.0~git20161130.1.e60d0d5+dfsg1
+ winpr_CloseThreadpoolTimer@Base 2.0.0~git20161130.1.e60d0d5+dfsg1
+ winpr_CloseThreadpoolWait@Base 2.0.0~git20161130.1.e60d0d5+dfsg1
+ winpr_CloseThreadpoolWork@Base 2.0.0~git20161130.1.e60d0d5+dfsg1
+ winpr_CreateThreadpool@Base 2.0.0~git20161130.1.e60d0d5+dfsg1
+ winpr_CreateThreadpoolCleanupGroup@Base 2.0.0~git20161130.1.e60d0d5+dfsg1
+ winpr_CreateThreadpoolIo@Base 2.0.0~git20161130.1.e60d0d5+dfsg1
+ winpr_CreateThreadpoolTimer@Base 2.0.0~git20161130.1.e60d0d5+dfsg1
+ winpr_CreateThreadpoolWait@Base 2.0.0~git20161130.1.e60d0d5+dfsg1
+ winpr_CreateThreadpoolWork@Base 2.0.0~git20161130.1.e60d0d5+dfsg1
+ winpr_DeleteSynchronizationBarrier@Base 2.0.0~git20161130.1.e60d0d5+dfsg1
  winpr_Digest@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  winpr_Digest_Final@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
+ winpr_Digest_Free@Base 2.0.0~git20161130.1.e60d0d5+dfsg1
  winpr_Digest_Init@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
+ winpr_Digest_New@Base 2.0.0~git20161130.1.e60d0d5+dfsg1
  winpr_Digest_Update@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
+ winpr_DisassociateCurrentThreadFromCallback@Base 2.0.0~git20161130.1.e60d0d5+dfsg1
+ winpr_EnterSynchronizationBarrier@Base 2.0.0~git20161130.1.e60d0d5+dfsg1
+ winpr_FreeLibraryWhenCallbackReturns@Base 2.0.0~git20161130.1.e60d0d5+dfsg1
+ winpr_GetTickCount64@Base 2.0.0~git20161130.1.e60d0d5+dfsg1
  winpr_HMAC@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  winpr_HMAC_Final@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
+ winpr_HMAC_Free@Base 2.0.0~git20161130.1.e60d0d5+dfsg1
  winpr_HMAC_Init@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
+ winpr_HMAC_New@Base 2.0.0~git20161130.1.e60d0d5+dfsg1
  winpr_HMAC_Update@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  winpr_HexDump@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
+ winpr_InitOnceBeginInitialize@Base 2.0.0~git20161130.1.e60d0d5+dfsg1
+ winpr_InitOnceComplete@Base 2.0.0~git20161130.1.e60d0d5+dfsg1
+ winpr_InitOnceExecuteOnce@Base 2.0.0~git20161130.1.e60d0d5+dfsg1
+ winpr_InitOnceInitialize@Base 2.0.0~git20161130.1.e60d0d5+dfsg1
  winpr_InitializeSSL@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- winpr_MD4@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- winpr_MD4_Final@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- winpr_MD4_Init@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- winpr_MD4_Update@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- winpr_MD5@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- winpr_MD5_Final@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- winpr_MD5_Init@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- winpr_MD5_Update@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
+ winpr_InitializeSynchronizationBarrier@Base 2.0.0~git20161130.1.e60d0d5+dfsg1
+ winpr_IsThreadpoolTimerSet@Base 2.0.0~git20161130.1.e60d0d5+dfsg1
+ winpr_LeaveCriticalSectionWhenCallbackReturns@Base 2.0.0~git20161130.1.e60d0d5+dfsg1
  winpr_RAND@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  winpr_RAND_pseudo@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  winpr_RC4_Free@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  winpr_RC4_New@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  winpr_RC4_Update@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- winpr_SHA1@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- winpr_SHA1_Final@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- winpr_SHA1_Init@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- winpr_SHA1_Update@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
+ winpr_ReleaseMutexWhenCallbackReturns@Base 2.0.0~git20161130.1.e60d0d5+dfsg1
+ winpr_ReleaseSemaphoreWhenCallbackReturns@Base 2.0.0~git20161130.1.e60d0d5+dfsg1
+ winpr_SetEventWhenCallbackReturns@Base 2.0.0~git20161130.1.e60d0d5+dfsg1
+ winpr_SetThreadpoolThreadMaximum@Base 2.0.0~git20161130.1.e60d0d5+dfsg1
+ winpr_SetThreadpoolThreadMinimum@Base 2.0.0~git20161130.1.e60d0d5+dfsg1
+ winpr_SetThreadpoolTimer@Base 2.0.0~git20161130.1.e60d0d5+dfsg1
+ winpr_SetThreadpoolWait@Base 2.0.0~git20161130.1.e60d0d5+dfsg1
+ winpr_StartThreadpoolIo@Base 2.0.0~git20161130.1.e60d0d5+dfsg1
+ winpr_SubmitThreadpoolWork@Base 2.0.0~git20161130.1.e60d0d5+dfsg1
+ winpr_TrySubmitThreadpoolCallback@Base 2.0.0~git20161130.1.e60d0d5+dfsg1
+ winpr_WaitForThreadpoolIoCallbacks@Base 2.0.0~git20161130.1.e60d0d5+dfsg1
+ winpr_WaitForThreadpoolTimerCallbacks@Base 2.0.0~git20161130.1.e60d0d5+dfsg1
+ winpr_WaitForThreadpoolWaitCallbacks@Base 2.0.0~git20161130.1.e60d0d5+dfsg1
+ winpr_WaitForThreadpoolWorkCallbacks@Base 2.0.0~git20161130.1.e60d0d5+dfsg1
  winpr_backtrace@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  winpr_backtrace_free@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  winpr_backtrace_symbols@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
@@ -1522,8 +1508,6 @@ libwinpr.so.2 libwinpr2 #MINVER#
  winpr_image_read_buffer@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  winpr_image_write@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  winpr_log_backtrace@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- winpr_openssl_BytesToKey@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- winpr_pool_dummy@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  winpr_strerror@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  wmemmove_s@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  wprintfx@Base 2.0.0~git20160317.1.75ae3f5+dfsg1

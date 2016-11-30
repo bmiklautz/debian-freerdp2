@@ -1,36 +1,10 @@
 libfreerdp.so.2 libfreerdp2 #MINVER#
- BitBlt_16bpp@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- BitBlt_32bpp@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- BitBlt_8bpp@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  Bitmap_Alloc@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- Bitmap_Free@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- Bitmap_New@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  Bitmap_SetDimensions@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  Bitmap_SetRectangle@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- Bitmap_SetSurface@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- FillRect_16bpp@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- FillRect_32bpp@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- FillRect_8bpp@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  FreeRDP_InitWtsApi@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  Glyph_Alloc@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- Glyph_BeginDraw@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- Glyph_Draw@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- Glyph_EndDraw@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- Glyph_Free@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- Glyph_New@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- LineTo_16bpp@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- LineTo_32bpp@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- LineTo_8bpp@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- PatBlt_16bpp@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- PatBlt_32bpp@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- PatBlt_8bpp@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  Pointer_Alloc@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- Pointer_Free@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- Pointer_New@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- Pointer_Set@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- Pointer_SetDefault@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- Pointer_SetNull@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- Pointer_SetPosition@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  WTSChannelGetHandleById@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  WTSChannelGetHandleByName@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  WTSChannelGetId@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
@@ -39,6 +13,7 @@ libfreerdp.so.2 libfreerdp2 #MINVER#
  WTSIsChannelJoinedById@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  WTSIsChannelJoinedByName@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  WTSVirtualChannelManagerCheckFileDescriptor@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
+ WTSVirtualChannelManagerGetDrdynvcState@Base 2.0.0~git20161130.1.e60d0d5+dfsg1
  WTSVirtualChannelManagerGetEventHandle@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  WTSVirtualChannelManagerGetFileDescriptor@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  WTSVirtualChannelManagerIsChannelJoined@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
@@ -76,9 +51,7 @@ libfreerdp.so.2 libfreerdp2 #MINVER#
  ber_write_sequence_tag@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  ber_write_universal_tag@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  bitmap_cache_free@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- bitmap_cache_get@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  bitmap_cache_new@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- bitmap_cache_put@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  bitmap_cache_register_callbacks@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  bitmap_interleaved_context_free@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  bitmap_interleaved_context_new@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
@@ -167,7 +140,6 @@ libfreerdp.so.2 libfreerdp2 #MINVER#
  freerdp_addin_replace_argument_value@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  freerdp_addin_set_argument@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  freerdp_addin_set_argument_value@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- freerdp_alpha_cursor_convert@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  freerdp_assistance_bin_to_hex_string@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  freerdp_assistance_construct_expert_blob@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  freerdp_assistance_decrypt@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
@@ -182,45 +154,32 @@ libfreerdp.so.2 libfreerdp2 #MINVER#
  freerdp_assistance_parse_file_buffer@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  freerdp_bitmap_compress@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  freerdp_bitmap_compress_planar@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- freerdp_bitmap_flip@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- freerdp_bitmap_planar_compress_plane_rle@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  freerdp_bitmap_planar_context_free@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  freerdp_bitmap_planar_context_new@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  freerdp_bitmap_planar_context_reset@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- freerdp_bitmap_planar_delta_encode_plane@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- freerdp_bitmap_planar_delta_encode_planes@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
+ freerdp_channel_add_init_handle_data@Base 2.0.0~git20161130.1.e60d0d5+dfsg1
+ freerdp_channel_add_open_handle_data@Base 2.0.0~git20161130.1.e60d0d5+dfsg1
+ freerdp_channel_get_init_handle_data@Base 2.0.0~git20161130.1.e60d0d5+dfsg1
+ freerdp_channel_get_open_handle_data@Base 2.0.0~git20161130.1.e60d0d5+dfsg1
+ freerdp_channel_remove_init_handle_data@Base 2.0.0~git20161130.1.e60d0d5+dfsg1
+ freerdp_channel_remove_open_handle_data@Base 2.0.0~git20161130.1.e60d0d5+dfsg1
  freerdp_channels_check_fds@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  freerdp_channels_client_load@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- freerdp_channels_close@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
+ freerdp_channels_client_load_ex@Base 2.0.0~git20161130.1.e60d0d5+dfsg1
  freerdp_channels_data@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- freerdp_channels_disconnect@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- freerdp_channels_free@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  freerdp_channels_get_event_handle@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  freerdp_channels_get_fds@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  freerdp_channels_get_static_channel_interface@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  freerdp_channels_load_plugin@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- freerdp_channels_new@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- freerdp_channels_post_connect@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- freerdp_channels_pre_connect@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  freerdp_channels_process_pending_messages@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  freerdp_check_event_handles@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  freerdp_check_fds@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  freerdp_client_codecs_prepare@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  freerdp_client_codecs_reset@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  freerdp_client_populate_settings_from_assistance_file@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- freerdp_clrconv_free@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- freerdp_clrconv_new@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- freerdp_color_convert_bgr@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- freerdp_color_convert_bgr_rgb@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- freerdp_color_convert_rgb@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- freerdp_color_convert_rgb_bgr@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- freerdp_color_convert_var@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- freerdp_color_convert_var_bgr@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- freerdp_color_convert_var_rgb@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  freerdp_connect@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  freerdp_context_free@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  freerdp_context_new@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- freerdp_convert_gdi_order_color@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  freerdp_detect_keyboard_layout_from_system_locale@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  freerdp_device_clone@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  freerdp_device_collection_add@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
@@ -260,7 +219,6 @@ libfreerdp.so.2 libfreerdp2 #MINVER#
  freerdp_get_param_string@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  freerdp_get_param_uint32@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  freerdp_get_param_uint64@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- freerdp_get_pixel@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  freerdp_get_system_locale_id@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  freerdp_get_system_locale_name_from_id@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  freerdp_get_transport_sent@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
@@ -268,21 +226,10 @@ libfreerdp.so.2 libfreerdp2 #MINVER#
  freerdp_get_version_string@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  freerdp_glyph_convert@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  freerdp_handle_signals@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- freerdp_icon_convert@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- freerdp_image15_copy@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- freerdp_image16_copy@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- freerdp_image24_copy@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- freerdp_image32_copy@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- freerdp_image8_copy@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- freerdp_image_convert@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  freerdp_image_copy@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  freerdp_image_copy_from_monochrome@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  freerdp_image_copy_from_pointer_data@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- freerdp_image_copy_from_retina@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  freerdp_image_fill@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- freerdp_image_flip@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- freerdp_image_move@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- freerdp_image_swap_color_order@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  freerdp_input_send_extended_mouse_event@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  freerdp_input_send_focus_in_event@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  freerdp_input_send_keyboard_event@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
@@ -305,7 +252,6 @@ libfreerdp.so.2 libfreerdp2 #MINVER#
  freerdp_load_dynamic_channel_addin_entry@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  freerdp_message_queue_process_message@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  freerdp_message_queue_process_pending_messages@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- freerdp_mono_image_convert@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  freerdp_new@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  freerdp_passphrase_read@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  freerdp_peer_context_free@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
@@ -325,12 +271,10 @@ libfreerdp.so.2 libfreerdp2 #MINVER#
  freerdp_set_param_string@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  freerdp_set_param_uint32@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  freerdp_set_param_uint64@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- freerdp_set_pixel@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  freerdp_settings_clone@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  freerdp_settings_free@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  freerdp_settings_new@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  freerdp_shall_disconnect@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- freerdp_split_color_planes@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  freerdp_static_channel_clone@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  freerdp_static_channel_collection_add@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  freerdp_static_channel_collection_find@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
@@ -342,7 +286,6 @@ libfreerdp.so.2 libfreerdp2 #MINVER#
  gdi_CRectToRgn@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  gdi_CRgnToCRect@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  gdi_CRgnToRect@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- gdi_ClipCoords@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  gdi_CopyOverlap@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  gdi_CopyRect@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  gdi_CreateBitmap@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
@@ -350,43 +293,21 @@ libfreerdp.so.2 libfreerdp2 #MINVER#
  gdi_CreateCompatibleBitmap@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  gdi_CreateCompatibleDC@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  gdi_CreateDC@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- gdi_CreateHatchBrush@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- gdi_CreatePalette@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- gdi_CreatePatternBrush@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  gdi_CreatePen@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  gdi_CreateRect@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  gdi_CreateRectRgn@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- gdi_CreateSolidBrush@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  gdi_DeleteDC@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  gdi_DeleteObject@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  gdi_Ellipse@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  gdi_EqualRgn@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  gdi_FillRect@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- gdi_GetBkColor@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- gdi_GetBkMode@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- gdi_GetClipRgn@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  gdi_GetDC@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- gdi_GetPenColor_16bpp@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- gdi_GetPenColor_32bpp@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- gdi_GetPenColor_8bpp@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
+ gdi_GetPenColor@Base 2.0.0~git20161130.1.e60d0d5+dfsg1
  gdi_GetPixel@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- gdi_GetPixel_16bpp@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- gdi_GetPixel_32bpp@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- gdi_GetPixel_8bpp@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- gdi_GetPointer_16bpp@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- gdi_GetPointer_32bpp@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- gdi_GetPointer_8bpp@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- gdi_GetROP2@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- gdi_GetSystemPalette@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
+ gdi_GetPointer@Base 2.0.0~git20161130.1.e60d0d5+dfsg1
  gdi_InvalidateRegion@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- gdi_LineTo@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- gdi_MoveToEx@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- gdi_PatBlt@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  gdi_PolyPolygon@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- gdi_PolyPolyline@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  gdi_Polygon@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- gdi_Polyline@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- gdi_PolylineTo@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  gdi_PtInRect@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  gdi_RectToCRgn@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  gdi_RectToRgn@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
@@ -394,40 +315,25 @@ libfreerdp.so.2 libfreerdp2 #MINVER#
  gdi_RgnToCRect@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  gdi_RgnToRect@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  gdi_SelectObject@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- gdi_SetBkColor@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- gdi_SetBkMode@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- gdi_SetClipRgn@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- gdi_SetNullClipRgn@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  gdi_SetPixel@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- gdi_SetPixel_16bpp@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- gdi_SetPixel_32bpp@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- gdi_SetPixel_8bpp@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- gdi_SetROP2@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  gdi_SetRect@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  gdi_SetRectRgn@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  gdi_SetRgn@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- gdi_SetTextColor@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
+ gdi_decode_color@Base 2.0.0~git20161130.1.e60d0d5+dfsg1
  gdi_free@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- gdi_get_bitmap_pointer@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- gdi_get_brush_pointer@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- gdi_get_color_16bpp@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- gdi_get_color_32bpp@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- gdi_get_color_8bpp@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  gdi_get_pixel_format@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  gdi_graphics_pipeline_init@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  gdi_graphics_pipeline_uninit@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  gdi_init@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
+ gdi_init_ex@Base 2.0.0~git20161130.1.e60d0d5+dfsg1
  gdi_resize@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
+ gdi_resize_ex@Base 2.0.0~git20161130.1.e60d0d5+dfsg1
  gdi_rop3_code@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  getChannelError@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  getChannelErrorDescription@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  getChannelErrorEventHandle@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- glyph_cache_fragment_get@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- glyph_cache_fragment_put@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  glyph_cache_free@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- glyph_cache_get@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  glyph_cache_new@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- glyph_cache_put@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  glyph_cache_register_callbacks@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  graphics_free@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  graphics_new@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
@@ -463,10 +369,9 @@ libfreerdp.so.2 libfreerdp2 #MINVER#
  ncrush_context_new@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  ncrush_context_reset@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  ncrush_decompress@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
+ new_flags@Base 2.0.0~git20161130.1.e60d0d5+dfsg1
  nine_grid_cache_free@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- nine_grid_cache_get@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  nine_grid_cache_new@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- nine_grid_cache_put@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  nine_grid_cache_register_callbacks@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  nsc_compose_message@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  nsc_context_free@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
@@ -477,16 +382,13 @@ libfreerdp.so.2 libfreerdp2 #MINVER#
  nsc_message_free@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  nsc_process_message@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  nsc_write_message@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- offscreen_cache_delete@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  offscreen_cache_free@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  offscreen_cache_get@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  offscreen_cache_new@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- offscreen_cache_put@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  offscreen_cache_register_callbacks@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
+ orig_flags@Base 2.0.0~git20161130.1.e60d0d5+dfsg1
  palette_cache_free@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- palette_cache_get@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  palette_cache_new@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- palette_cache_put@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  palette_cache_register_callbacks@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  pcap_add_record@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  pcap_close@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
@@ -520,13 +422,10 @@ libfreerdp.so.2 libfreerdp2 #MINVER#
  per_write_selection@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  planar_decompress@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  pointer_cache_free@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- pointer_cache_get@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  pointer_cache_new@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- pointer_cache_put@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  pointer_cache_register_callbacks@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- primitives_deinit@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  primitives_get@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- primitives_init@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
+ primitives_get_generic@Base 2.0.0~git20161130.1.e60d0d5+dfsg1
  profiler_create@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  profiler_enter@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  profiler_exit@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
@@ -571,12 +470,9 @@ libfreerdp.so.2 libfreerdp2 #MINVER#
  rfx_encode_message@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  rfx_encode_messages@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  rfx_message_free@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- rfx_message_get_rect@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  rfx_message_get_rect_count@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- rfx_message_get_tile@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  rfx_message_get_tile_count@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  rfx_process_message@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- rfx_rlgr_decode@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  rfx_write_message@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  ringbuffer_capacity@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  ringbuffer_commit_read_bytes@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
@@ -595,6 +491,8 @@ libfreerdp.so.2 libfreerdp2 #MINVER#
  stopwatch_reset@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  stopwatch_start@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  stopwatch_stop@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
+ terminal_fildes@Base 2.0.0~git20161130.1.e60d0d5+dfsg1
+ terminal_needs_reset@Base 2.0.0~git20161130.1.e60d0d5+dfsg1
  tls_accept@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  tls_connect@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  tls_free@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
@@ -613,6 +511,7 @@ libfreerdp.so.2 libfreerdp2 #MINVER#
  xcrush_context_reset@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  xcrush_decompress@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  zgfx_compress@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
+ zgfx_compress_to_stream@Base 2.0.0~git20161130.1.e60d0d5+dfsg1
  zgfx_context_free@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  zgfx_context_new@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  zgfx_context_reset@Base 2.0.0~git20160317.1.75ae3f5+dfsg1

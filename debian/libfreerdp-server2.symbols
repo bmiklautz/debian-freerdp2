@@ -20,6 +20,10 @@ libfreerdp-server.so.2 libfreerdp-server2 #MINVER#
  rdpei_server_resume@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  rdpei_server_send_sc_ready@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  rdpei_server_suspend@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
+ rdpgfx_server_context_free@Base 2.0.0~git20161130.1.e60d0d5+dfsg1
+ rdpgfx_server_context_new@Base 2.0.0~git20161130.1.e60d0d5+dfsg1
+ rdpgfx_server_get_event_handle@Base 2.0.0~git20161130.1.e60d0d5+dfsg1
+ rdpgfx_server_handle_messages@Base 2.0.0~git20161130.1.e60d0d5+dfsg1
  rdpsnd_server_context_free@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  rdpsnd_server_context_new@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  rdpsnd_server_context_reset@Base 2.0.0~git20160317.1.75ae3f5+dfsg1

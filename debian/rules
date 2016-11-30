@@ -20,7 +20,7 @@ DEB_CMAKE_EXTRA_FLAGS :=  -DCMAKE_INSTALL_INCLUDEDIR=include/$(shell dpkg-archit
                           -DCMAKE_SKIP_INSTALL_RPATH=TRUE \
                           -DWITH_PULSE=ON \
                           -DWITH_CHANNELS=ON \
-                          -DSTATIC_CHANNELS=ON \
+                          -DBUILTIN_CHANNELS=ON \
                           -DWITH_CUPS=ON \
                           -DWITH_PCSC=ON \
                           -DWITH_JPEG=ON \
