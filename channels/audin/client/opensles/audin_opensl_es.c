@@ -112,7 +112,7 @@ static void* audin_opensles_thread_func(void* arg)
         if (status == WAIT_FAILED)
         {
             error = GetLastError();
-            WLog_ERR(TAG, "WaitForSingleObject failed with error %lu!", error);
+            WLog_ERR(TAG, "WaitForSingleObject failed with error %u!", error);
             break;
         }
 
@@ -125,7 +125,7 @@ static void* audin_opensles_thread_func(void* arg)
 		rc = android_RecIn(opensles->stream, buffer.s, raw_size);
 		if (rc < 0)
 		{
-			WLog_ERR(TAG, "android_RecIn %lu", rc);
+			WLog_ERR(TAG, "android_RecIn %d", rc);
 			continue;
 		}
 
@@ -401,7 +401,7 @@ static UINT audin_opensles_close(IAudinDevice* device)
 	if (WaitForSingleObject(opensles->thread, INFINITE) == WAIT_FAILED)
     {
         error = GetLastError();
-        WLog_ERR(TAG, "WaitForSingleObject failed with error %lu", error);
+        WLog_ERR(TAG, "WaitForSingleObject failed with error %u", error);
         return error;
     }
 	CloseHandle(opensles->stopEvent);
@@ -473,7 +473,7 @@ static UINT audin_opensles_parse_addin_args(AudinOpenSLESDevice* device,
 	return CHANNEL_RC_OK;
 }
 
-#ifdef STATIC_CHANNELS
+#ifdef BUILTIN_CHANNELS
 #define freerdp_audin_client_subsystem_entry \
 	opensles_freerdp_audin_client_subsystem_entry
 #else

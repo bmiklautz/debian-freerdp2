@@ -1,14 +1,14 @@
 /**
  * FreeRDP: A Remote Desktop Protocol Implementation
- * GDI Palette Functions
+ * Graphics Pipeline Extension
  *
- * Copyright 2010-2011 Marc-Andre Moreau <marcandre.moreau@gmail.com>
+ * Copyright 2016 Jiang Zihao <zihao.jiang@yahoo.com>
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ *   http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -17,21 +17,24 @@
  * limitations under the License.
  */
 
-#ifndef FREERDP_GDI_PALETTE_H
-#define FREERDP_GDI_PALETTE_H
+#ifndef FREERDP_CHANNEL_RDPGFX_SERVER_MAIN_H
+#define FREERDP_CHANNEL_RDPGFX_SERVER_MAIN_H
 
-#include <freerdp/api.h>
-#include <freerdp/gdi/gdi.h>
+#include <freerdp/server/rdpgfx.h>
+#include <freerdp/codec/zgfx.h>
 
-#ifdef __cplusplus
- extern "C" {
-#endif
+struct _rdpgfx_server_private
+{
+	ZGFX_CONTEXT* zgfx;
+	BOOL ownThread;
+	HANDLE thread;
+	HANDLE stopEvent;
+	HANDLE channelEvent;
+	void* rdpgfx_channel;
+	DWORD SessionId;
+	wStream* input_stream;
+	BOOL isOpened;
+	BOOL isReady;
+};
 
-FREERDP_API HGDI_PALETTE gdi_CreatePalette(HGDI_PALETTE palette);
-FREERDP_API HGDI_PALETTE gdi_GetSystemPalette(void);
-
-#ifdef __cplusplus
- }
-#endif
-
-#endif /* FREERDP_GDI_PALETTE_H */
+#endif /* FREERDP_CHANNEL_RDPGFX_SERVER_MAIN_H */

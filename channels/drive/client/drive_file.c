@@ -43,6 +43,7 @@
 #include <sys/stat.h>
 
 #include <winpr/crt.h>
+#include <winpr/path.h>
 #include <winpr/file.h>
 #include <winpr/stream.h>
 
@@ -546,7 +547,7 @@ BOOL drive_file_set_information(DRIVE_FILE* file, UINT32 FsInformationClass, UIN
 			hFd = CreateFileA(file->fullpath, GENERIC_READ | GENERIC_WRITE, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
 			if (hFd == INVALID_HANDLE_VALUE)
 			{
-				WLog_ERR(TAG, "Unable to set file time %s to %d", file->fullpath);
+				WLog_ERR(TAG, "Unable to create file %s", file->fullpath);
 				return FALSE;
 			}
 			if (liCreationTime.QuadPart != 0)
@@ -575,7 +576,7 @@ BOOL drive_file_set_information(DRIVE_FILE* file, UINT32 FsInformationClass, UIN
 			}
 			if (!SetFileTime(hFd, pftCreationTime, pftLastAccessTime, pftLastWriteTime))
 			{
-				WLog_ERR(TAG, "Unable to set file time %s to %d", file->fullpath);
+				WLog_ERR(TAG, "Unable to set file time on %s", file->fullpath);
 				CloseHandle(hFd);
 				return FALSE;
 			}
@@ -591,13 +592,13 @@ BOOL drive_file_set_information(DRIVE_FILE* file, UINT32 FsInformationClass, UIN
 			hFd = CreateFileA(file->fullpath, GENERIC_READ | GENERIC_WRITE, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
 			if (hFd == INVALID_HANDLE_VALUE)
 			{
-				WLog_ERR(TAG, "Unable to truncate %s to %d", file->fullpath, size);
+				WLog_ERR(TAG, "Unable to truncate %s to %lld", file->fullpath, (long long) size);
 				return FALSE;
 			}
 			liSize.QuadPart = size;
 			if (SetFilePointer(hFd, liSize.LowPart, &liSize.HighPart, FILE_BEGIN) == 0)
 			{
-				WLog_ERR(TAG, "Unable to truncate %s to %d", file->fullpath, size);
+				WLog_ERR(TAG, "Unable to truncate %s to %lld", file->fullpath, (long long) size);
 				CloseHandle(hFd);
 				return FALSE;
 			}

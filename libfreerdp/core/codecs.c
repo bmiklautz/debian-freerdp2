@@ -27,7 +27,8 @@
 
 #define TAG FREERDP_TAG("core.codecs")
 
-BOOL freerdp_client_codecs_prepare(rdpCodecs* codecs, UINT32 flags)
+BOOL freerdp_client_codecs_prepare(rdpCodecs* codecs, UINT32 flags,
+                                   UINT32 width, UINT32 height)
 {
 	if ((flags & FREERDP_CODEC_INTERLEAVED) && !codecs->interleaved)
 	{
@@ -76,7 +77,6 @@ BOOL freerdp_client_codecs_prepare(rdpCodecs* codecs, UINT32 flags)
 
 	if (flags & FREERDP_CODEC_ALPHACODEC)
 	{
-
 	}
 
 	if ((flags & FREERDP_CODEC_PROGRESSIVE) && !codecs->progressive)
@@ -97,16 +97,13 @@ BOOL freerdp_client_codecs_prepare(rdpCodecs* codecs, UINT32 flags)
 		}
 	}
 
-	return TRUE;
+	return freerdp_client_codecs_reset(codecs, flags, width, height);
 }
 
-BOOL freerdp_client_codecs_reset(rdpCodecs* codecs, UINT32 flags,
-				 UINT32 width, UINT32 height)
+BOOL freerdp_client_codecs_reset(rdpCodecs* codecs, UINT32 flags, UINT32 width,
+                                 UINT32 height)
 {
 	BOOL rc = TRUE;
-
-	if (!freerdp_client_codecs_prepare(codecs, flags))
-		return FALSE;
 
 	if (flags & FREERDP_CODEC_INTERLEAVED)
 	{
@@ -120,7 +117,7 @@ BOOL freerdp_client_codecs_reset(rdpCodecs* codecs, UINT32 flags,
 	{
 		if (codecs->planar)
 		{
-			rc &= freerdp_bitmap_planar_context_reset(codecs->planar);
+			rc &= freerdp_bitmap_planar_context_reset(codecs->planar, width, height);
 		}
 	}
 
@@ -150,7 +147,6 @@ BOOL freerdp_client_codecs_reset(rdpCodecs* codecs, UINT32 flags,
 
 	if (flags & FREERDP_CODEC_ALPHACODEC)
 	{
-
 	}
 
 	if (flags & FREERDP_CODEC_PROGRESSIVE)
@@ -175,7 +171,6 @@ BOOL freerdp_client_codecs_reset(rdpCodecs* codecs, UINT32 flags,
 rdpCodecs* codecs_new(rdpContext* context)
 {
 	rdpCodecs* codecs;
-
 	codecs = (rdpCodecs*) calloc(1, sizeof(rdpCodecs));
 
 	if (codecs)
