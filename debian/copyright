@@ -3,22 +3,86 @@ Upstream-Name: FreeRDP
 Upstream-Contact: FreeRDP project <freerdp-devel@lists.sourceforge.net>
 Source: http://github.com/FreeRDP/FreeRDP
 
-Files: channels/client/addin.h
+Files: channels/audin/client/alsa/CMakeLists.txt
+ channels/audin/client/CMakeLists.txt
+ channels/audin/client/pulse/CMakeLists.txt
+ channels/audin/client/winmm/CMakeLists.txt
+ channels/audin/CMakeLists.txt
+ channels/audin/server/CMakeLists.txt
+ channels/client/addin.h
+ channels/client/CMakeLists.txt
  channels/client/tables.h
+ channels/cliprdr/client/CMakeLists.txt
+ channels/cliprdr/CMakeLists.txt
  channels/cliprdr/server/cliprdr_main.h
+ channels/cliprdr/server/CMakeLists.txt
+ channels/CMakeLists.txt
+ channels/disp/client/CMakeLists.txt
+ channels/disp/CMakeLists.txt
+ channels/drdynvc/client/CMakeLists.txt
+ channels/drdynvc/CMakeLists.txt
+ channels/drdynvc/server/CMakeLists.txt
  channels/drdynvc/server/drdynvc_main.h
+ channels/drive/client/CMakeLists.txt
+ channels/drive/CMakeLists.txt
+ channels/echo/client/CMakeLists.txt
+ channels/echo/CMakeLists.txt
+ channels/echo/server/CMakeLists.txt
+ channels/encomsp/client/CMakeLists.txt
+ channels/encomsp/CMakeLists.txt
+ channels/encomsp/server/CMakeLists.txt
  channels/encomsp/server/encomsp_main.h
+ channels/parallel/client/CMakeLists.txt
+ channels/parallel/CMakeLists.txt
+ channels/printer/client/CMakeLists.txt
+ channels/printer/CMakeLists.txt
+ channels/rail/client/CMakeLists.txt
+ channels/rail/CMakeLists.txt
+ channels/rdpdr/CMakeLists.txt
+ channels/rdpdr/server/CMakeLists.txt
+ channels/rdpei/client/CMakeLists.txt
  channels/rdpei/client/rdpei_main.h
+ channels/rdpei/CMakeLists.txt
+ channels/rdpgfx/client/CMakeLists.txt
  channels/rdpgfx/client/rdpgfx_main.h
+ channels/rdpgfx/CMakeLists.txt
+ channels/rdpsnd/client/alsa/CMakeLists.txt
+ channels/rdpsnd/client/CMakeLists.txt
+ channels/rdpsnd/client/pulse/CMakeLists.txt
+ channels/rdpsnd/client/winmm/CMakeLists.txt
+ channels/rdpsnd/CMakeLists.txt
+ channels/rdpsnd/server/CMakeLists.txt
+ channels/remdesk/client/CMakeLists.txt
+ channels/remdesk/CMakeLists.txt
+ channels/remdesk/server/CMakeLists.txt
  channels/remdesk/server/remdesk_main.h
+ channels/serial/client/CMakeLists.txt
+ channels/serial/CMakeLists.txt
+ channels/server/CMakeLists.txt
+ channels/smartcard/client/CMakeLists.txt
+ channels/smartcard/CMakeLists.txt
+ channels/tsmf/client/alsa/CMakeLists.txt
+ channels/tsmf/client/ffmpeg/CMakeLists.txt
+ channels/tsmf/client/pulse/CMakeLists.txt
+ channels/tsmf/CMakeLists.txt
+ channels/urbdrc/CMakeLists.txt
+ client/CMakeLists.txt
+ client/common/client.c
+ client/common/CMakeLists.txt
+ client/common/compatibility.c
+ client/common/compatibility.h
+ client/common/file.c
+ client/DirectFB/CMakeLists.txt
  client/DirectFB/df_event.c
  client/DirectFB/df_event.h
  client/DirectFB/df_graphics.c
  client/DirectFB/df_graphics.h
  client/DirectFB/dfreerdp.c
  client/DirectFB/dfreerdp.h
+ client/Sample/CMakeLists.txt
  client/Wayland/wlf_channels.c
  client/Wayland/wlf_channels.h
+ client/X11/cli/CMakeLists.txt
  client/X11/xf_channels.c
  client/X11/xf_channels.h
  client/X11/xf_client.h
@@ -32,10 +96,6 @@ Files: channels/client/addin.h
  client/X11/xf_rail.c
  client/X11/xf_rail.h
  client/X11/xf_window.h
- client/common/client.c
- client/common/compatibility.c
- client/common/compatibility.h
- client/common/file.c
  include/freerdp/addin.h
  include/freerdp/altsec.h
  include/freerdp/assistance.h
@@ -52,10 +112,10 @@ Files: channels/client/addin.h
  include/freerdp/channels/rail.h
  include/freerdp/channels/rdpgfx.h
  include/freerdp/channels/remdesk.h
- include/freerdp/client.h
  include/freerdp/client/channels.h
  include/freerdp/client/cmdline.h
  include/freerdp/client/file.h
+ include/freerdp/client.h
  include/freerdp/client/rail.h
  include/freerdp/client/remdesk.h
  include/freerdp/codec/audio.h
@@ -65,9 +125,9 @@ Files: channels/client/addin.h
  include/freerdp/codec/mppc.h
  include/freerdp/codec/ncrush.h
  include/freerdp/codec/progressive.h
+ include/freerdp/codecs.h
  include/freerdp/codec/xcrush.h
  include/freerdp/codec/zgfx.h
- include/freerdp/codecs.h
  include/freerdp/constants.h
  include/freerdp/crypto/ber.h
  include/freerdp/crypto/certificate.h
@@ -96,11 +156,13 @@ Files: channels/client/addin.h
  libfreerdp/cache/bitmap.c
  libfreerdp/cache/brush.c
  libfreerdp/cache/cache.c
+ libfreerdp/cache/CMakeLists.txt
  libfreerdp/cache/glyph.c
  libfreerdp/cache/nine_grid.c
  libfreerdp/cache/offscreen.c
  libfreerdp/cache/palette.c
  libfreerdp/cache/pointer.c
+ libfreerdp/CMakeLists.txt
  libfreerdp/codec/audio.c
  libfreerdp/codec/mppc.c
  libfreerdp/codec/ncrush.c
@@ -109,6 +171,7 @@ Files: channels/client/addin.h
  libfreerdp/codec/zgfx.c
  libfreerdp/common/addin.c
  libfreerdp/common/assistance.c
+ libfreerdp/common/CMakeLists.txt
  libfreerdp/core/activation.c
  libfreerdp/core/activation.h
  libfreerdp/core/bulk.c
@@ -117,6 +180,7 @@ Files: channels/client/addin.h
  libfreerdp/core/capabilities.h
  libfreerdp/core/certificate.h
  libfreerdp/core/client.h
+ libfreerdp/core/CMakeLists.txt
  libfreerdp/core/codecs.c
  libfreerdp/core/connection.h
  libfreerdp/core/errinfo.c
@@ -158,12 +222,15 @@ Files: channels/client/addin.h
  libfreerdp/core/update.h
  libfreerdp/crypto/base64.c
  libfreerdp/crypto/ber.c
+ libfreerdp/crypto/CMakeLists.txt
  libfreerdp/crypto/crypto.c
  libfreerdp/crypto/er.c
  libfreerdp/crypto/per.c
  libfreerdp/crypto/tls.c
+ libfreerdp/gdi/CMakeLists.txt
  libfreerdp/gdi/gdi.h
  libfreerdp/gdi/pen.c
+ libfreerdp/locale/CMakeLists.txt
  libfreerdp/locale/keyboard.c
  libfreerdp/locale/keyboard_layout.c
  libfreerdp/locale/keyboard_sun.c
@@ -176,9 +243,12 @@ Files: channels/client/addin.h
  libfreerdp/locale/locale.c
  libfreerdp/locale/xkb_layout_ids.h
  libfreerdp/primitives/prim_YUV.c
+ libfreerdp/utils/CMakeLists.txt
  libfreerdp/utils/pcap.c
+ rdtk/CMakeLists.txt
  rdtk/include/rdtk/api.h
  rdtk/include/rdtk/rdtk.h
+ rdtk/librdtk/CMakeLists.txt
  rdtk/librdtk/rdtk_button.c
  rdtk/librdtk/rdtk_button.h
  rdtk/librdtk/rdtk_engine.c
@@ -195,39 +265,25 @@ Files: channels/client/addin.h
  rdtk/librdtk/rdtk_surface.h
  rdtk/librdtk/rdtk_text_field.c
  rdtk/librdtk/rdtk_text_field.h
+ rdtk/sample/CMakeLists.txt
  rdtk/sample/rdtk_x11.c
  scripts/TimeZones.cs
  scripts/WindowsZones.cs
  scripts/xkb.pl
+ server/CMakeLists.txt
+ server/common/CMakeLists.txt
+ server/common/server.c
+ server/Mac/CMakeLists.txt
  server/Mac/mf_rdpsnd.h
+ server/Sample/CMakeLists.txt
  server/Sample/sf_audin.h
  server/Sample/sf_encomsp.h
  server/Sample/sf_rdpsnd.h
  server/Sample/sfreerdp.h
- server/Windows/cli/wfreerdp.c
- server/Windows/cli/wfreerdp.h
- server/Windows/wf_input.c
- server/Windows/wf_input.h
- server/Windows/wf_peer.h
- server/Windows/wf_rdpsnd.h
- server/Windows/wf_settings.c
- server/Windows/wf_settings.h
- server/Windows/wf_update.h
- server/common/server.c
+ server/shadow/CMakeLists.txt
  server/shadow/Mac/mac_shadow.c
  server/shadow/Mac/mac_shadow.h
- server/shadow/Win/win_dxgi.c
- server/shadow/Win/win_dxgi.h
- server/shadow/Win/win_rdp.c
- server/shadow/Win/win_rdp.h
- server/shadow/Win/win_shadow.c
- server/shadow/Win/win_shadow.h
- server/shadow/Win/win_wds.c
- server/shadow/Win/win_wds.h
- server/shadow/X11/x11_shadow.c
- server/shadow/X11/x11_shadow.h
  server/shadow/shadow.c
- server/shadow/shadow.h
  server/shadow/shadow_capture.c
  server/shadow/shadow_capture.h
  server/shadow/shadow_channels.c
@@ -237,6 +293,7 @@ Files: channels/client/addin.h
  server/shadow/shadow_encoder.c
  server/shadow/shadow_encoder.h
  server/shadow/shadow_encomsp.h
+ server/shadow/shadow.h
  server/shadow/shadow_input.c
  server/shadow/shadow_input.h
  server/shadow/shadow_lobby.c
@@ -249,6 +306,30 @@ Files: channels/client/addin.h
  server/shadow/shadow_subsystem.h
  server/shadow/shadow_surface.c
  server/shadow/shadow_surface.h
+ server/shadow/Win/win_dxgi.c
+ server/shadow/Win/win_dxgi.h
+ server/shadow/Win/win_rdp.c
+ server/shadow/Win/win_rdp.h
+ server/shadow/Win/win_shadow.c
+ server/shadow/Win/win_shadow.h
+ server/shadow/Win/win_wds.c
+ server/shadow/Win/win_wds.h
+ server/shadow/X11/x11_shadow.c
+ server/shadow/X11/x11_shadow.h
+ server/Windows/cli/CMakeLists.txt
+ server/Windows/cli/wfreerdp.c
+ server/Windows/cli/wfreerdp.h
+ server/Windows/CMakeLists.txt
+ server/Windows/wf_input.c
+ server/Windows/wf_input.h
+ server/Windows/wf_peer.h
+ server/Windows/wf_rdpsnd.h
+ server/Windows/wf_settings.c
+ server/Windows/wf_settings.h
+ server/Windows/wf_update.h
+ third-party/CMakeLists.txt
+ winpr/CMakeLists.txt
+ winpr/include/CMakeLists.txt
  winpr/include/winpr/asn1.h
  winpr/include/winpr/bcrypt.h
  winpr/include/winpr/bitstream.h
@@ -290,8 +371,8 @@ Files: channels/client/addin.h
  winpr/include/winpr/security.h
  winpr/include/winpr/smartcard.h
  winpr/include/winpr/spec.h
- winpr/include/winpr/sspi.h
  winpr/include/winpr/sspicli.h
+ winpr/include/winpr/sspi.h
  winpr/include/winpr/string.h
  winpr/include/winpr/sysinfo.h
  winpr/include/winpr/tchar.h
@@ -304,61 +385,94 @@ Files: channels/client/addin.h
  winpr/include/winpr/winsock.h
  winpr/include/winpr/wtypes.h.in
  winpr/libwinpr/asn1/asn1.c
+ winpr/libwinpr/asn1/CMakeLists.txt
  winpr/libwinpr/bcrypt/bcrypt.c
+ winpr/libwinpr/bcrypt/CMakeLists.txt
  winpr/libwinpr/clipboard/clipboard.c
  winpr/libwinpr/clipboard/clipboard.h
+ winpr/libwinpr/clipboard/CMakeLists.txt
  winpr/libwinpr/clipboard/synthetic.c
+ winpr/libwinpr/CMakeLists.txt
+ winpr/libwinpr/com/CMakeLists.txt
  winpr/libwinpr/com/com.c
+ winpr/libwinpr/comm/CMakeLists.txt
+ winpr/libwinpr/comm/test/CMakeLists.txt
+ winpr/libwinpr/credentials/CMakeLists.txt
  winpr/libwinpr/credentials/credentials.c
+ winpr/libwinpr/credui/CMakeLists.txt
  winpr/libwinpr/credui/credui.c
  winpr/libwinpr/crt/alignment.c
  winpr/libwinpr/crt/buffer.c
+ winpr/libwinpr/crt/CMakeLists.txt
  winpr/libwinpr/crt/conversion.c
  winpr/libwinpr/crt/memory.c
  winpr/libwinpr/crt/string.c
  winpr/libwinpr/crt/unicode.c
  winpr/libwinpr/crypto/cert.c
  winpr/libwinpr/crypto/cipher.c
+ winpr/libwinpr/crypto/CMakeLists.txt
  winpr/libwinpr/crypto/crypto.c
  winpr/libwinpr/crypto/crypto.h
  winpr/libwinpr/crypto/hash.c
  winpr/libwinpr/crypto/rand.c
+ winpr/libwinpr/dsparse/CMakeLists.txt
  winpr/libwinpr/dsparse/dsparse.c
+ winpr/libwinpr/environment/CMakeLists.txt
+ winpr/libwinpr/error/CMakeLists.txt
  winpr/libwinpr/error/error.c
+ winpr/libwinpr/error/test/CMakeLists.txt
+ winpr/libwinpr/file/CMakeLists.txt
  winpr/libwinpr/file/pattern.c
  winpr/libwinpr/handle/handle.h
+ winpr/libwinpr/heap/CMakeLists.txt
  winpr/libwinpr/heap/heap.c
+ winpr/libwinpr/input/CMakeLists.txt
  winpr/libwinpr/input/keycode.c
  winpr/libwinpr/input/scancode.c
  winpr/libwinpr/input/virtualkey.c
+ winpr/libwinpr/interlocked/CMakeLists.txt
  winpr/libwinpr/interlocked/interlocked.c
+ winpr/libwinpr/interlocked/test/CMakeLists.txt
+ winpr/libwinpr/io/CMakeLists.txt
  winpr/libwinpr/io/device.c
  winpr/libwinpr/io/io.c
  winpr/libwinpr/io/io.h
+ winpr/libwinpr/io/test/CMakeLists.txt
+ winpr/libwinpr/library/CMakeLists.txt
  winpr/libwinpr/library/library.c
+ winpr/libwinpr/library/test/TestLibraryA/CMakeLists.txt
+ winpr/libwinpr/library/test/TestLibraryB/CMakeLists.txt
+ winpr/libwinpr/locale/CMakeLists.txt
  winpr/libwinpr/locale/locale.c
+ winpr/libwinpr/memory/CMakeLists.txt
  winpr/libwinpr/memory/memory.c
  winpr/libwinpr/memory/memory.h
+ winpr/libwinpr/nt/CMakeLists.txt
+ winpr/libwinpr/path/CMakeLists.txt
  winpr/libwinpr/path/path.c
  winpr/libwinpr/path/shell.c
+ winpr/libwinpr/pipe/CMakeLists.txt
  winpr/libwinpr/pipe/pipe.c
  winpr/libwinpr/pipe/pipe.h
  winpr/libwinpr/pool/callback.c
  winpr/libwinpr/pool/callback_cleanup.c
  winpr/libwinpr/pool/cleanup_group.c
+ winpr/libwinpr/pool/CMakeLists.txt
  winpr/libwinpr/pool/io.c
  winpr/libwinpr/pool/pool.c
  winpr/libwinpr/pool/pool.h
  winpr/libwinpr/pool/synch.c
  winpr/libwinpr/pool/timer.c
  winpr/libwinpr/pool/work.c
+ winpr/libwinpr/registry/CMakeLists.txt
  winpr/libwinpr/registry/registry.c
  winpr/libwinpr/registry/registry_reg.c
  winpr/libwinpr/registry/registry_reg.h
+ winpr/libwinpr/rpc/CMakeLists.txt
  winpr/libwinpr/rpc/midl.c
- winpr/libwinpr/rpc/ndr.c
  winpr/libwinpr/rpc/ndr_array.c
  winpr/libwinpr/rpc/ndr_array.h
+ winpr/libwinpr/rpc/ndr.c
  winpr/libwinpr/rpc/ndr_context.c
  winpr/libwinpr/rpc/ndr_context.h
  winpr/libwinpr/rpc/ndr_correlation.c
@@ -376,8 +490,10 @@ Files: channels/client/addin.h
  winpr/libwinpr/rpc/ndr_union.c
  winpr/libwinpr/rpc/ndr_union.h
  winpr/libwinpr/rpc/rpc.c
+ winpr/libwinpr/security/CMakeLists.txt
  winpr/libwinpr/security/security.c
  winpr/libwinpr/security/security.h
+ winpr/libwinpr/smartcard/CMakeLists.txt
  winpr/libwinpr/smartcard/smartcard.c
  winpr/libwinpr/smartcard/smartcard.h
  winpr/libwinpr/smartcard/smartcard_inspect.c
@@ -386,28 +502,31 @@ Files: channels/client/addin.h
  winpr/libwinpr/smartcard/smartcard_pcsc.h
  winpr/libwinpr/smartcard/smartcard_winscard.c
  winpr/libwinpr/smartcard/smartcard_winscard.h
+ winpr/libwinpr/sspicli/CMakeLists.txt
+ winpr/libwinpr/sspicli/sspicli.c
+ winpr/libwinpr/sspi/CMakeLists.txt
  winpr/libwinpr/sspi/CredSSP/credssp.c
  winpr/libwinpr/sspi/CredSSP/credssp.h
- winpr/libwinpr/sspi/NTLM/ntlm.c
- winpr/libwinpr/sspi/NTLM/ntlm.h
+ winpr/libwinpr/sspi/Negotiate/negotiate.c
  winpr/libwinpr/sspi/NTLM/ntlm_av_pairs.c
  winpr/libwinpr/sspi/NTLM/ntlm_av_pairs.h
+ winpr/libwinpr/sspi/NTLM/ntlm.c
  winpr/libwinpr/sspi/NTLM/ntlm_compute.c
  winpr/libwinpr/sspi/NTLM/ntlm_compute.h
+ winpr/libwinpr/sspi/NTLM/ntlm.h
  winpr/libwinpr/sspi/NTLM/ntlm_message.c
  winpr/libwinpr/sspi/NTLM/ntlm_message.h
- winpr/libwinpr/sspi/Negotiate/negotiate.c
  winpr/libwinpr/sspi/Schannel/schannel.c
  winpr/libwinpr/sspi/Schannel/schannel.h
  winpr/libwinpr/sspi/Schannel/schannel_openssl.c
  winpr/libwinpr/sspi/Schannel/schannel_openssl.h
  winpr/libwinpr/sspi/sspi.c
- winpr/libwinpr/sspi/sspi.h
  winpr/libwinpr/sspi/sspi_export.c
+ winpr/libwinpr/sspi/sspi.h
  winpr/libwinpr/sspi/sspi_winpr.c
  winpr/libwinpr/sspi/sspi_winpr.h
- winpr/libwinpr/sspicli/sspicli.c
  winpr/libwinpr/synch/address.c
+ winpr/libwinpr/synch/CMakeLists.txt
  winpr/libwinpr/synch/condition.c
  winpr/libwinpr/synch/event.c
  winpr/libwinpr/synch/mutex.c
@@ -416,10 +535,14 @@ Files: channels/client/addin.h
  winpr/libwinpr/synch/srw.c
  winpr/libwinpr/synch/synch.h
  winpr/libwinpr/synch/timer.c
+ winpr/libwinpr/sysinfo/CMakeLists.txt
  winpr/libwinpr/thread/argv.c
+ winpr/libwinpr/thread/CMakeLists.txt
  winpr/libwinpr/thread/processor.c
  winpr/libwinpr/thread/tls.c
+ winpr/libwinpr/timezone/CMakeLists.txt
  winpr/libwinpr/timezone/timezone.c
+ winpr/libwinpr/utils/CMakeLists.txt
  winpr/libwinpr/utils/cmdline.c
  winpr/libwinpr/utils/collections/ArrayList.c
  winpr/libwinpr/utils/collections/BipBuffer.c
@@ -462,145 +585,22 @@ Files: channels/client/addin.h
  winpr/libwinpr/utils/wlog/TextMessage.c
  winpr/libwinpr/utils/wlog/wlog.c
  winpr/libwinpr/utils/wlog/wlog.h
+ winpr/libwinpr/winhttp/CMakeLists.txt
  winpr/libwinpr/winhttp/winhttp.c
+ winpr/libwinpr/winsock/CMakeLists.txt
  winpr/libwinpr/winsock/winsock.c
+ winpr/libwinpr/wnd/CMakeLists.txt
  winpr/libwinpr/wnd/wnd.c
  winpr/libwinpr/wnd/wnd.h
+ winpr/libwinpr/wtsapi/CMakeLists.txt
  winpr/libwinpr/wtsapi/wtsapi_win32.c
  winpr/libwinpr/wtsapi/wtsapi_win32.h
+ winpr/test/CMakeLists.txt
+ winpr/tools/hash-cli/CMakeLists.txt
  winpr/tools/hash-cli/hash.c
  winpr/tools/makecert-cli/main.c
- winpr/tools/makecert/makecert.c
- winpr/tools/hash-cli/CMakeLists.txt
  winpr/tools/makecert/CMakeLists.txt
- winpr/test/CMakeLists.txt
- winpr/libwinpr/winhttp/CMakeLists.txt
- winpr/libwinpr/library/test/TestLibraryA/CMakeLists.txt
- winpr/libwinpr/library/test/TestLibraryB/CMakeLists.txt
- winpr/libwinpr/library/CMakeLists.txt
- winpr/libwinpr/crypto/CMakeLists.txt
- winpr/libwinpr/timezone/CMakeLists.txt
- winpr/libwinpr/com/CMakeLists.txt
- winpr/libwinpr/error/test/CMakeLists.txt
- winpr/libwinpr/error/CMakeLists.txt
- winpr/libwinpr/wtsapi/CMakeLists.txt
- winpr/libwinpr/thread/CMakeLists.txt
- winpr/libwinpr/synch/CMakeLists.txt
- winpr/libwinpr/smartcard/CMakeLists.txt
- winpr/libwinpr/wnd/CMakeLists.txt
- winpr/libwinpr/winsock/CMakeLists.txt
- winpr/libwinpr/dsparse/CMakeLists.txt
- winpr/libwinpr/locale/CMakeLists.txt
- winpr/libwinpr/sspicli/CMakeLists.txt
- winpr/libwinpr/credentials/CMakeLists.txt
- winpr/libwinpr/credui/CMakeLists.txt
- winpr/libwinpr/sspi/CMakeLists.txt
- winpr/libwinpr/security/CMakeLists.txt
- winpr/libwinpr/bcrypt/CMakeLists.txt
- winpr/libwinpr/io/test/CMakeLists.txt
- winpr/libwinpr/io/CMakeLists.txt
- winpr/libwinpr/comm/test/CMakeLists.txt
- winpr/libwinpr/comm/CMakeLists.txt
- winpr/libwinpr/environment/CMakeLists.txt
- winpr/libwinpr/interlocked/test/CMakeLists.txt
- winpr/libwinpr/interlocked/CMakeLists.txt
- winpr/libwinpr/path/CMakeLists.txt
- winpr/libwinpr/nt/CMakeLists.txt
- winpr/libwinpr/utils/CMakeLists.txt
- winpr/libwinpr/asn1/CMakeLists.txt
- winpr/libwinpr/input/CMakeLists.txt
- winpr/libwinpr/sysinfo/CMakeLists.txt
- winpr/libwinpr/registry/CMakeLists.txt
- winpr/libwinpr/memory/CMakeLists.txt
- winpr/libwinpr/pool/CMakeLists.txt
- winpr/libwinpr/heap/CMakeLists.txt
- winpr/libwinpr/clipboard/CMakeLists.txt
- winpr/libwinpr/pipe/CMakeLists.txt
- winpr/libwinpr/crt/CMakeLists.txt
- winpr/libwinpr/CMakeLists.txt
- winpr/libwinpr/file/CMakeLists.txt
- winpr/libwinpr/rpc/CMakeLists.txt
- winpr/include/CMakeLists.txt
- winpr/CMakeLists.txt
- channels/cliprdr/server/CMakeLists.txt
- channels/cliprdr/CMakeLists.txt
- channels/cliprdr/client/CMakeLists.txt
- channels/rdpgfx/CMakeLists.txt
- channels/rdpgfx/client/CMakeLists.txt
- channels/disp/CMakeLists.txt
- channels/disp/client/CMakeLists.txt
- channels/smartcard/CMakeLists.txt
- channels/smartcard/client/CMakeLists.txt
- channels/drive/CMakeLists.txt
- channels/drive/client/CMakeLists.txt
- channels/tsmf/CMakeLists.txt
- channels/tsmf/client/ffmpeg/CMakeLists.txt
- channels/tsmf/client/alsa/CMakeLists.txt
- channels/tsmf/client/pulse/CMakeLists.txt
- channels/rdpei/CMakeLists.txt
- channels/rdpei/client/CMakeLists.txt
- channels/drdynvc/server/CMakeLists.txt
- channels/drdynvc/CMakeLists.txt
- channels/drdynvc/client/CMakeLists.txt
- channels/remdesk/server/CMakeLists.txt
- channels/remdesk/CMakeLists.txt
- channels/remdesk/client/CMakeLists.txt
- channels/echo/server/CMakeLists.txt
- channels/echo/CMakeLists.txt
- channels/echo/client/CMakeLists.txt
- channels/rdpdr/server/CMakeLists.txt
- channels/rdpdr/CMakeLists.txt
- channels/rail/CMakeLists.txt
- channels/rail/client/CMakeLists.txt
- channels/parallel/CMakeLists.txt
- channels/parallel/client/CMakeLists.txt
- channels/encomsp/server/CMakeLists.txt
- channels/encomsp/CMakeLists.txt
- channels/encomsp/client/CMakeLists.txt
- channels/rdpsnd/server/CMakeLists.txt
- channels/rdpsnd/CMakeLists.txt
- channels/rdpsnd/client/winmm/CMakeLists.txt
- channels/rdpsnd/client/alsa/CMakeLists.txt
- channels/rdpsnd/client/pulse/CMakeLists.txt
- channels/rdpsnd/client/CMakeLists.txt
- channels/serial/CMakeLists.txt
- channels/serial/client/CMakeLists.txt
- channels/printer/CMakeLists.txt
- channels/printer/client/CMakeLists.txt
- channels/urbdrc/CMakeLists.txt
- channels/server/CMakeLists.txt
- channels/audin/server/CMakeLists.txt
- channels/audin/CMakeLists.txt
- channels/audin/client/winmm/CMakeLists.txt
- channels/audin/client/alsa/CMakeLists.txt
- channels/audin/client/pulse/CMakeLists.txt
- channels/audin/client/CMakeLists.txt
- channels/CMakeLists.txt
- channels/client/CMakeLists.txt
- third-party/CMakeLists.txt
- rdtk/librdtk/CMakeLists.txt
- rdtk/sample/CMakeLists.txt
- rdtk/CMakeLists.txt
- libfreerdp/crypto/CMakeLists.txt
- libfreerdp/common/CMakeLists.txt
- libfreerdp/core/CMakeLists.txt
- libfreerdp/locale/CMakeLists.txt
- libfreerdp/gdi/CMakeLists.txt
- libfreerdp/utils/CMakeLists.txt
- libfreerdp/cache/CMakeLists.txt
- libfreerdp/CMakeLists.txt
- server/common/CMakeLists.txt
- server/Sample/CMakeLists.txt
- server/Windows/cli/CMakeLists.txt
- server/Windows/CMakeLists.txt
- server/shadow/CMakeLists.txt
- server/Mac/CMakeLists.txt
- server/CMakeLists.txt
- client/DirectFB/CMakeLists.txt
- client/common/CMakeLists.txt
- client/Sample/CMakeLists.txt
- client/CMakeLists.txt
- client/X11/cli/CMakeLists.txt
+ winpr/tools/makecert/makecert.c
 Copyright: 2009, Marc-Andre Moreau <marcandre.moreau@gmail.com>
   2009-2012, Marc-Andre Moreau <marcandre.moreau@gmail.com>
   2010-2011, Marc-Andre Moreau <marcandre.moreau@gmail.com>
