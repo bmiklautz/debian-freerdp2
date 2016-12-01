@@ -1,9 +1,10 @@
 Source: freerdp2
 Section: x11
 Priority: optional
-Maintainer: Mike Gabriel <sunweaver@debian.org>
+Maintainer: Debian Remote Maintainers <pkg-remote-team@lists.alioth.debian.org>
 Uploaders:
- Bernhard Miklautz <bernhard.miklautz@shacknet.at>
+ Mike Gabriel <sunweaver@debian.org>,
+ Bernhard Miklautz <bernhard.miklautz@shacknet.at>,
 Build-Depends:
  debhelper (>= 9),
  autotools-dev,
@@ -44,8 +45,8 @@ Build-Depends:
  libxkbcommon-dev
 Standards-Version: 3.9.8
 Homepage: http://www.freerdp.com/
-Vcs-Browser: https://anonscm.debian.org/git/collab-maint/freerdp2.git
-Vcs-Git: https://anonscm.debian.org/git/collab-maint/freerdp2.git
+Vcs-Browser: https://anonscm.debian.org/git/pkg-remote/freerdp2.git
+Vcs-Git: https://anonscm.debian.org/git/pkg-remote/freerdp2.git
 
 Package: freerdp2-x11
 Architecture: any
