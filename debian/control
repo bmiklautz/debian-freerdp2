@@ -181,97 +181,6 @@ Description: Free Remote Desktop Protocol library (development files)
  .
  This package contains the FreeRDP development files.
 
-Package: libwinpr2-dbg
-Section: debug
-Priority: extra
-Architecture: any
-Multi-Arch: same
-Depends:
- ${misc:Depends},
- libwinpr2 (= ${binary:Version}),
-Description: Windows Portable Runtime library (debug symbols)
- WinPR is a spin-off project of FreeRDP which aims at providing a portable
- implementation of important portions of the Windows API. Just like FreeRDP,
- WinPR is released under the Apache license. Unlike Wine, WinPR does not provide
- binary compatibility, and does not require applications to be built for
- Windows. Instead, WinPR provides API compatibility for applications targeting
- non-Windows environments. When on Windows, the original native API is being
- used instead of the equivalent WinPR implementation, without having to modify
- the code using it.
- .
- This package contains the debug symbols of the WinPR shared libraries.
-
-Package: libwinpr-tools2-dbg
-Section: debug
-Priority: extra
-Architecture: any
-Multi-Arch: same
-Depends:
- ${misc:Depends},
- libwinpr-tools2 (= ${binary:Version}),
-Description: Windows Portable Runtime Tools library (debug symbols)
- FreeRDP is a libre client/server implementation of the Remote
- Desktop Protocol (RDP).
- .
- This package contains the debug symbols for the Windows Portable Runtime
- utilities and tools shared library.
-
-Package: libfreerdp2-dbg
-Section: debug
-Priority: extra
-Architecture: any
-Multi-Arch: same
-Depends:
- ${misc:Depends},
- libfreerdp2 (= ${binary:Version}),
-Description: Free Remote Desktop Protocol library (debug symbols)
- FreeRDP is a libre client/server implementation of the Remote
- Desktop Protocol (RDP).
- .
- This package contains the debug symbols of the FreeRDP shared libraries.
-
-Package: libfreerdp-client2-dbg
-Section: debug
-Priority: extra
-Architecture: any
-Multi-Arch: same
-Depends:
- ${misc:Depends},
- libfreerdp-client2 (= ${binary:Version}),
-Description: Free Remote Desktop Protocol client library (debug symbols)
- FreeRDP is a libre client/server implementation of the Remote
- Desktop Protocol (RDP).
- .
- This package contains the debug symbols of the FreeRDP client library.
-
-Package: libfreerdp-server2-dbg
-Section: debug
-Priority: extra
-Architecture: any
-Multi-Arch: same
-Depends:
- ${misc:Depends},
- libfreerdp-server2 (= ${binary:Version}),
-Description: Free Remote Desktop Protocol server (debug symbols)
- FreeRDP is a libre client/server implementation of the Remote
- Desktop Protocol (RDP).
- .
- This package contains the debug symbols of the FreeRDP server library.
-
-Package: freerdp2-x11-dbg
-Section: debug
-Priority: extra
-Architecture: any
-Depends:
- ${misc:Depends},
- freerdp2-x11 (= ${binary:Version}),
-Description: RDP client for Windows Terminal Services (X11 client, debug symbols)
- FreeRDP is a libre client/server implementation of the Remote
- Desktop Protocol (RDP).
- .
- This package contains the debug symbols of the xfreerdp executable and
- x-client library.
-
 Package: winpr-utils
 Multi-Arch: foreign
 Section: utils
@@ -301,21 +210,6 @@ Description: FreeRDP Remote Desktop Protocol shadow libraries
  .
  This package contains the shadow libraries.
 
-Package: libfreerdp-shadow2-dbg
-Architecture: any
-Section: debug
-Priority: extra
-Pre-Depends: ${misc:Pre-Depends}
-Depends:
- ${misc:Depends},
- libfreerdp-shadow2 (= ${binary:Version})
-Multi-Arch: same
-Description: FreeRDP Remote Desktop Protocol shadow (debug symbols)
- FreeRDP is a libre client/server implementation of the Remote
- Desktop Protocol (RDP).
- .
- This package contains the debug symbols of the shadow library
-
 Package: freerdp2-shadow-x11
 Architecture: any
 Depends: ${misc:Depends}, ${shlibs:Depends}
@@ -326,38 +220,6 @@ Description: FreeRDP x11 shadowing server
  .
  This package contains a "shadowing" server that can be used to
  share an already started X11 DISPLAY.
-
-Package: freerdp2-shadow-x11-dbg
-Architecture: any
-Section: debug
-Priority: extra
-Depends: ${misc:Depends},
- freerdp2-shadow-x11 (= ${binary:Version})
-Provides: freerdp
-Description: FreeRDP x11 shadowing server (debug symbols)
- FreeRDP is a libre client/server implementation of the Remote
- Desktop Protocol (RDP).
- .
- This package contains the debug symbols for the FreeRDP
- shadowing cli and library.
-
-Package: winpr-utils-dbg
-Section: debug
-Priority: extra
-Architecture: any
-Depends: ${misc:Depends},
- winpr-utils (= ${binary:Version})
-Description: Windows Portable Runtime command line utilities (debug symbols)
- WinPR is a spin-off project of FreeRDP which aims at providing a portable
- implementation of important portions of the Windows API. Just like FreeRDP,
- WinPR is released under the Apache license. Unlike Wine, WinPR does not provide
- binary compatibility, and does not require applications to be built for
- Windows. Instead, WinPR provides API compatibility for applications targeting
- non-Windows environments. When on Windows, the original native API is being
- used instead of the equivalent WinPR implementation, without having to modify
- the code using it.
- .
- This package contains debug symbols of the WinPR command line utilities.
 
 Package: libuwac0
 Architecture: any
@@ -370,20 +232,6 @@ Description: Using wayland as a client library
  functionality for wayland clients.
  .
  This package contains the using wayland as a client library.
-
-Package: libuwac0-dbg
-Architecture: any
-Section: debug
-Priority: extra
-Pre-Depends: ${misc:Pre-Depends}
-Depends: ${misc:Depends},
- libuwac0 (= ${binary:Version})
-Multi-Arch: same
-Description: Using wayland as a client (debug symbols)
- Using wayland as a client (uwac) is a library to provide common
- functionality for wayland clients.
- .
- This package contains the debug symbols of libuwac.
 
 Package: libuwac0-dev
 Section: libdevel
@@ -419,16 +267,3 @@ Description: RDP client for Windows Terminal Services (wayland client)
   * Windows 10
  .
  This package contains the wayland based client.
-
-Package: freerdp2-wayland-dbg
-Section: debug
-Priority: extra
-Architecture: any
-Depends:
- ${misc:Depends},
- freerdp2-wayland (= ${binary:Version}),
-Description: RDP client for Windows Terminal Services (wayland client, debug symbols)
- FreeRDP is a libre client/server implementation of the Remote
- Desktop Protocol (RDP).
- .
- This package contains the debug symbols of the wlfreerdp executable.

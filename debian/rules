@@ -59,18 +59,17 @@ override_dh_install:
 	dh_install --fail-missing
 
 override_dh_strip:
-	dh_strip -plibfreerdp2 --dbg-package=libfreerdp2-dbg
-	dh_strip -plibfreerdp-server2 --dbg-package=libfreerdp-server2-dbg
-	dh_strip -plibfreerdp-shadow2 --dbg-package=libfreerdp-shadow2-dbg
-	dh_strip -plibfreerdp-client2 --dbg-package=libfreerdp-client2-dbg
-	dh_strip -plibwinpr2 --dbg-package=libwinpr2-dbg
-	dh_strip -plibwinpr-tools2 --dbg-package=libwinpr-tools2-dbg
-	dh_strip -pfreerdp2-x11 --dbg-package=freerdp2-x11-dbg
-	dh_strip -pfreerdp2-shadow-x11 --dbg-package=freerdp2-shadow-x11-dbg
-	dh_strip -pwinpr-utils --dbg-package=winpr-utils-dbg
-	dh_strip -pfreerdp2-wayland --dbg-package=freerdp2-wayland-dbg
-	dh_strip -plibuwac0 --dbg-package=libuwac0-dbg
-
+	dh_strip -plibfreerdp2 --dbgsym-migration='libfreerdp2-dbg (<< 2.0.0~git20161130.1.e60d0d5+dfsg1-1~exp1~)'
+	dh_strip -plibfreerdp-server2 --dbgsym-migration='libfreerdp-server2-dbg (<< 2.0.0~git20161130.1.e60d0d5+dfsg1-1~exp1~)'
+	dh_strip -plibfreerdp-shadow2 --dbgsym-migration='libfreerdp-shadow2-dbg (<< 2.0.0~git20161130.1.e60d0d5+dfsg1-1~exp1~)'
+	dh_strip -plibfreerdp-client2 --dbgsym-migration='libfreerdp-client2-dbg (<< 2.0.0~git20161130.1.e60d0d5+dfsg1-1~exp1~)'
+	dh_strip -plibwinpr2 --dbgsym-migration='libwinpr2-dbg (<< 2.0.0~git20161130.1.e60d0d5+dfsg1-1~exp1~)'
+	dh_strip -plibwinpr-tools2 --dbgsym-migration='libwinpr-tools2-dbg (<< 2.0.0~git20161130.1.e60d0d5+dfsg1-1~exp1~)'
+	dh_strip -pfreerdp2-x11 --dbgsym-migration='freerdp2-x11-dbg (<< 2.0.0~git20161130.1.e60d0d5+dfsg1-1~exp1~)'
+	dh_strip -pfreerdp2-shadow-x11 --dbgsym-migration='freerdp2-shadow-x11-dbg (<< 2.0.0~git20161130.1.e60d0d5+dfsg1-1~exp1~)'
+	dh_strip -pwinpr-utils --dbgsym-migration='winpr-utils-dbg (<< 2.0.0~git20161130.1.e60d0d5+dfsg1-1~exp1~)'
+	dh_strip -pfreerdp2-wayland --dbgsym-migration='freerdp2-wayland-dbg (<< 2.0.0~git20161130.1.e60d0d5+dfsg1-1~exp1~)'
+	dh_strip -plibuwac0 --dbgsym-migration='libuwac0-dbg (<< 2.0.0~git20161130.1.e60d0d5+dfsg1-1~exp1~)'
 
 PKD   = $(word 1,$(abspath $(dir $(MAKEFILE_LIST))))
 PKG   = $(word 2,$(shell dpkg-parsechangelog -l$(PKD)/changelog | grep ^Source))
