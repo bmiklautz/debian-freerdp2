@@ -1,4 +1,7 @@
-freerdp2 (2.0.0~git20161130.1.e60d0d5+dfsg1-1) UNRELEASED; urgency=medium
+freerdp2 (2.0.0~git20161130.1.e60d0d5+dfsg1-1~exp1) experimental; urgency=medium
+
+  * Initial (experimental) upload to Debian of FreeRDP v2. (Closes: #824358,
+    #814676).
 
   [ Bernhard Miklautz ]
   * import git snapshot from upstream:
@@ -11,7 +14,31 @@ freerdp2 (2.0.0~git20161130.1.e60d0d5+dfsg1-1) UNRELEASED; urgency=medium
   * libwinpr2
     + include wlog.1 man page
 
- -- Bernhard Miklautz <bernhard.miklautz@shacknet.at>  Wed, 30 Nov 2016 12:58:42 +0100
+  [ Mike Gabriel ]
+  * debian/control:
+    + Maintenance umbrella is: Debian Remote Maintainers team.
+    + Mention Windows 2012r2 explicitly in LONG_DESCRIPTIONs (freerdp-x11,
+      freerdp-wayland).
+    + Tidy up SYNOPSES and LONG_DESCRIPTIONs for new libwinpr-tools2(-dbg)
+      shared libraries.
+    + Bump Standards-Version: to 3.9.8. No changes needed.
+  * debian/{control,rules}:
+    + Build with -DCHANNEL_URBDRC_CLIENT=ON and -DCHANNEL_URBDRC=ON only on
+      Linux OSes.
+    + dbgsym: Don't build dbg:packages anymore.
+      See https://wiki.debian.org/AutomaticDebugPackages.
+  * debian/copyright:
+    + Update auto-generated copyright.in template.
+    + Update to match latest upstream Git snapshot.
+    + Finalize for initial upload to Debian.
+  * lintian:
+    + Some executables (winpr-hash, winpr-makecert, wlfreerdp,
+      freerdp-shadow-cli) don't yet have man pages. This is work in progress on
+      the upstream part.
+    + Ignore spelling error that was originally done by Microsoft and now is
+      part of the RDP protocol.
+
+ -- Mike Gabriel <sunweaver@debian.org>  Thu, 01 Dec 2016 02:19:59 +0100
 
 freerdp2 (2.0.0~git20160503.1.f828595+dfsg1-1) UNRELEASED; urgency=medium
 
@@ -92,7 +119,7 @@ freerdp2 (2.0.0~git20160229.1.b4b8239+dfsg1-1) UNRELEASED; urgency=medium
 
  -- Bernhard Miklautz <bernhard.miklautz@shacknet.at>  Mon, 29 Feb 2016 16:50:52 +0000
 
-freerdp2 (2.0.0~git20160115.1.e2dbe5e+dfsg1-2) unstable; urgency=medium
+freerdp2 (2.0.0~git20160115.1.e2dbe5e+dfsg1-2) UNRELEASED; urgency=medium
   [ Bernhard Miklautz]
   * rename freerdp-x11 to freerdp2-x11 and
     freerdp-shadow-x11 to freerdp2-shadow-x11
@@ -109,7 +136,7 @@ freerdp2 (2.0.0~git20160115.1.e2dbe5e+dfsg1-2) unstable; urgency=medium
 
  -- Bernhard Miklautz <bernhard.miklautz@shacknet.at>  Tue, 23 Feb 2016 15:50:04 +0000
 
-freerdp2 (2.0.0~git20160115.1.e2dbe5e+dfsg1-1) unstable; urgency=medium
+freerdp2 (2.0.0~git20160115.1.e2dbe5e+dfsg1-1) UNRELEASED; urgency=medium
 
   * Initial release
   * Import git snapshot from upstream:
