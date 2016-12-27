@@ -167,6 +167,10 @@ Package: freerdp2-dev
 Section: devel
 Architecture: any
 Multi-Arch: same
+Breaks:
+ libfreerdp-dev (<< 2~),
+Replaces:
+ libfreerdp-dev (<< 2~),
 Depends:
  ${misc:Depends},
  libwinpr2-dev (= ${binary:Version}),
