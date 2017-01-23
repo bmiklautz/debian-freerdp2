@@ -1,3 +1,12 @@
+freerdp2 (2.0.0~git20161130.1.e60d0d5+dfsg1-1) unstable; urgency=medium
+
+  * Upload to unstable.
+  * debian/control:
+    + Add B:/R: rules (freerdp2-dev): freerdp2-dev has files of the same name
+      as libfreerdp-dev from FreeRDP 1.1. (Closes: #848235).
+
+ -- Mike Gabriel <sunweaver@debian.org>  Tue, 27 Dec 2016 11:39:55 +0100
+
 freerdp2 (2.0.0~git20161130.1.e60d0d5+dfsg1-1~exp1) experimental; urgency=medium
 
   * Initial (experimental) upload to Debian of FreeRDP v2. (Closes: #824358,
