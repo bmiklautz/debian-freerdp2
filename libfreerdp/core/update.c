@@ -33,6 +33,7 @@
 #include "surface.h"
 #include "message.h"
 #include "info.h"
+#include "window.h"
 
 #include <freerdp/log.h>
 #include <freerdp/peer.h>
@@ -180,7 +181,7 @@ BOOL update_read_bitmap_update(rdpUpdate* update, wStream* s,
 		return FALSE;
 
 	Stream_Read_UINT16(s, bitmapUpdate->number); /* numberRectangles (2 bytes) */
-	WLog_Print(update->log, WLOG_TRACE, "BitmapUpdate: %d", bitmapUpdate->number);
+	WLog_Print(update->log, WLOG_TRACE, "BitmapUpdate: %"PRIu32"", bitmapUpdate->number);
 
 	if (bitmapUpdate->number > bitmapUpdate->count)
 	{
@@ -314,7 +315,7 @@ BOOL update_read_pointer_color(wStream* s, POINTER_COLOR_UPDATE* pointer_color,
                                int xorBpp)
 {
 	BYTE* newMask;
-	int scanlineSize;
+	UINT32 scanlineSize;
 
 	if (Stream_GetRemainingLength(s) < 14)
 		return FALSE;
@@ -375,7 +376,7 @@ BOOL update_read_pointer_color(wStream* s, POINTER_COLOR_UPDATE* pointer_color,
 
 		if (scanlineSize * pointer_color->height != pointer_color->lengthXorMask)
 		{
-			WLog_ERR(TAG,  "invalid lengthXorMask: width=%d height=%d, %d instead of %d",
+			WLog_ERR(TAG,  "invalid lengthXorMask: width=%"PRIu32" height=%"PRIu32", %"PRIu32" instead of %"PRIu32"",
 			         pointer_color->width, pointer_color->height,
 			         pointer_color->lengthXorMask, scanlineSize * pointer_color->height);
 			return FALSE;
@@ -407,7 +408,7 @@ BOOL update_read_pointer_color(wStream* s, POINTER_COLOR_UPDATE* pointer_color,
 
 		if (scanlineSize * pointer_color->height != pointer_color->lengthAndMask)
 		{
-			WLog_ERR(TAG,  "invalid lengthAndMask: %d instead of %d",
+			WLog_ERR(TAG,  "invalid lengthAndMask: %"PRIu32" instead of %"PRIu32"",
 			         pointer_color->lengthAndMask, scanlineSize * pointer_color->height);
 			return FALSE;
 		}
@@ -436,7 +437,7 @@ BOOL update_read_pointer_new(wStream* s, POINTER_NEW_UPDATE* pointer_new)
 
 	if ((pointer_new->xorBpp < 1) || (pointer_new->xorBpp > 32))
 	{
-		WLog_ERR(TAG,  "invalid xorBpp %d", pointer_new->xorBpp);
+		WLog_ERR(TAG,  "invalid xorBpp %"PRIu32"", pointer_new->xorBpp);
 		return FALSE;
 	}
 
@@ -631,6 +632,8 @@ void update_post_disconnect(rdpUpdate* update)
 
 	if (update->asynchronous)
 		update_message_proxy_free(update->proxy);
+
+	update->initialState = TRUE;
 }
 
 static BOOL update_begin_paint(rdpContext* context)
@@ -672,7 +675,7 @@ static BOOL update_end_paint(rdpContext* context)
 
 	if (update->numberOrders > 0)
 	{
-		WLog_ERR(TAG,  "sending %d orders", update->numberOrders);
+		WLog_ERR(TAG,  "sending %"PRIu16" orders", update->numberOrders);
 		fastpath_send_update_pdu(context->rdp->fastpath, FASTPATH_UPDATETYPE_ORDERS, s,
 		                         FALSE);
 	}
@@ -1714,7 +1717,12 @@ static BOOL update_send_switch_surface_order(
 	BYTE orderType;
 	BYTE controlFlags;
 	int headerLength;
-	rdpUpdate* update = context->update;
+	rdpUpdate* update;
+
+	if (!context || !switch_surface || !context->update)
+		return FALSE;
+
+	update = context->update;
 	headerLength = 1;
 	orderType = ORDER_TYPE_SWITCH_SURFACE;
 	controlFlags = ORDER_SECONDARY | (orderType << 2);
@@ -1890,7 +1898,7 @@ BOOL update_read_refresh_rect(rdpUpdate* update, wStream* s)
 	if (Stream_GetRemainingLength(s) < ((size_t) numberOfAreas * 4 * 2))
 		return FALSE;
 
-	areas = (RECTANGLE_16*) malloc(sizeof(RECTANGLE_16) * numberOfAreas);
+	areas = (RECTANGLE_16*) calloc(numberOfAreas, sizeof(RECTANGLE_16));
 
 	if (!areas)
 		return FALSE;
@@ -1955,6 +1963,27 @@ static BOOL update_send_set_keyboard_indicators(rdpContext* context,
 	return ret;
 }
 
+static BOOL update_send_set_keyboard_ime_status(rdpContext* context,
+        UINT16 imeId, UINT32 imeState, UINT32 imeConvMode)
+{
+	wStream* s;
+	rdpRdp* rdp = context->rdp;
+	BOOL ret;
+	s = rdp_data_pdu_init(rdp);
+
+	if (!s)
+		return FALSE;
+
+	/* unitId should be 0 according to MS-RDPBCGR 2.2.8.2.2.1 */
+	Stream_Write_UINT16(s, imeId);
+	Stream_Write_UINT32(s, imeState);
+	Stream_Write_UINT32(s, imeConvMode);
+	ret = rdp_send_data_pdu(rdp, s, DATA_PDU_TYPE_SET_KEYBOARD_IME_STATUS,
+	                        rdp->mcs->userId);
+	Stream_Release(s);
+	return ret;
+}
+
 void update_register_server_callbacks(rdpUpdate* update)
 {
 	update->BeginPaint = update_begin_paint;
@@ -1969,6 +1998,7 @@ void update_register_server_callbacks(rdpUpdate* update)
 	update->SurfaceFrameBits = update_send_surface_frame_bits;
 	update->PlaySound = update_send_play_sound;
 	update->SetKeyboardIndicators = update_send_set_keyboard_indicators;
+	update->SetKeyboardImeStatus = update_send_set_keyboard_ime_status;
 	update->SaveSessionInfo = rdp_send_save_session_info;
 	update->primary->DstBlt = update_send_dstblt;
 	update->primary->PatBlt = update_send_patblt;
@@ -2010,6 +2040,21 @@ static void update_free_queued_message(void* obj)
 {
 	wMessage* msg = (wMessage*)obj;
 	update_message_queue_free_message(msg);
+}
+
+static void update_free_window_state(WINDOW_STATE_ORDER* window_state)
+{
+    if (!window_state)
+        return;
+
+    free(window_state->titleInfo.string);
+    window_state->titleInfo.string = NULL;
+
+    free(window_state->windowRects);
+    window_state->windowRects = NULL;
+
+    free(window_state->visibilityRects);
+    window_state->visibilityRects = NULL;
 }
 
 rdpUpdate* update_new(rdpRdp* rdp)
@@ -2058,7 +2103,7 @@ rdpUpdate* update_new(rdpRdp* rdp)
 
 	deleteList = &(update->altsec->create_offscreen_bitmap.deleteList);
 	deleteList->sIndices = 64;
-	deleteList->indices = malloc(deleteList->sIndices * 2);
+	deleteList->indices = calloc(deleteList->sIndices, 2);
 
 	if (!deleteList->indices)
 		goto error_indices;
@@ -2110,6 +2155,9 @@ void update_free(rdpUpdate* update)
 		free(update->primary);
 		free(update->secondary);
 		free(update->altsec);
+		free(update->window->monitored_desktop.windowIds);
+		update_free_window_state(&update->window->window_state);
+		update_free_window_icon_info(update->window->window_icon.iconInfo);
 		free(update->window);
 		MessageQueue_Free(update->queue);
 		free(update);

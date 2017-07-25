@@ -2,6 +2,7 @@
 #include <winpr/crt.h>
 #include <winpr/print.h>
 #include <winpr/crypto.h>
+#include <winpr/ssl.h>
 
 
 
@@ -53,7 +54,7 @@ static BOOL test_crypto_cipher_aes_128_cbc()
 
 	if (xlen != ilen)
 	{
-		fprintf(stderr, "%s: error, xlen (%u) != ilen (%u) (encrypt)\n", __FUNCTION__, (unsigned)xlen, (unsigned)ilen);
+		fprintf(stderr, "%s: error, xlen (%"PRIuz") != ilen (%"PRIuz") (encrypt)\n", __FUNCTION__, xlen, ilen);
 		goto out;
 	}
 
@@ -92,7 +93,7 @@ static BOOL test_crypto_cipher_aes_128_cbc()
 
 	if (xlen != ilen)
 	{
-		fprintf(stderr, "%s: error, xlen (%u) != ilen (%u) (decrypt)\n", __FUNCTION__, (unsigned)xlen, (unsigned)ilen);
+		fprintf(stderr, "%s: error, xlen (%"PRIuz") != ilen (%"PRIuz") (decrypt)\n", __FUNCTION__, xlen, ilen);
 		goto out;
 	}
 
@@ -124,7 +125,7 @@ static BOOL test_crypto_cipher_rc4()
 
 	if (!(text = (BYTE*) calloc(1, len)))
 	{
-		fprintf(stderr, "%s: failed to allocate text buffer (len=%u)\n", __FUNCTION__, (unsigned)len);
+		fprintf(stderr, "%s: failed to allocate text buffer (len=%"PRIuz")\n", __FUNCTION__, len);
 		goto out;
 	}
 
@@ -216,6 +217,8 @@ static BOOL test_crypto_cipher_key()
 
 int TestCryptoCipher(int argc, char* argv[])
 {
+	winpr_InitializeSSL(WINPR_SSL_INIT_DEFAULT);
+
 	if (!test_crypto_cipher_aes_128_cbc())
 		return -1;
 

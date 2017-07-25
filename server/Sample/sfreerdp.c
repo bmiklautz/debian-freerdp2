@@ -64,7 +64,7 @@ BOOL test_peer_context_new(freerdp_peer* client, testPeerContext* context)
 		goto fail_rfx_context;
 
 	context->rfx_context->mode = RLGR3;
-	rfx_context_set_pixel_format(context->rfx_context, PIXEL_FORMAT_BGRX32);
+	rfx_context_set_pixel_format(context->rfx_context, PIXEL_FORMAT_RGB24);
 
 	if (!(context->nsc_context = nsc_context_new()))
 		goto fail_nsc_context;
@@ -266,7 +266,7 @@ static BOOL test_peer_load_icon(freerdp_peer* client)
 	/* Max */
 	fgets(line, sizeof(line), fp);
 
-	if (!(rgb_data = malloc(context->icon_width * context->icon_height * 3)))
+	if (!(rgb_data = calloc(context->icon_height, context->icon_width * 3)))
 		goto out_fail;
 
 	for (i = 0; i < context->icon_width * context->icon_height * 3; i++)
@@ -278,8 +278,7 @@ static BOOL test_peer_load_icon(freerdp_peer* client)
 	}
 
 	/* background with same size, which will be used to erase the icon from old position */
-	if (!(context->bg_data = malloc(context->icon_width * context->icon_height *
-	                                3)))
+	if (!(context->bg_data = calloc(context->icon_height, context->icon_width * 3)))
 		goto out_fail;
 
 	memset(context->bg_data, 0xA0, context->icon_width * context->icon_height * 3);
@@ -510,7 +509,7 @@ static void* tf_debug_channel_thread_func(void* arg)
 		}
 
 		Stream_SetPosition(s, BytesReturned);
-		WLog_DBG(TAG, "got %lu bytes", (unsigned long) BytesReturned);
+		WLog_DBG(TAG, "got %"PRIu32" bytes", BytesReturned);
 	}
 
 	Stream_Free(s, TRUE);
@@ -526,7 +525,7 @@ BOOL tf_peer_post_connect(freerdp_peer* client)
 	 * The server may start sending graphics output and receiving keyboard/mouse input after this
 	 * callback returns.
 	 */
-	WLog_DBG(TAG, "Client %s is activated (osMajorType %d osMinorType %d)",
+	WLog_DBG(TAG, "Client %s is activated (osMajorType %"PRIu32" osMinorType %"PRIu32")",
 	         client->local ? "(local)" : client->hostname,
 	         client->settings->OsMajorType, client->settings->OsMinorType);
 
@@ -539,7 +538,7 @@ BOOL tf_peer_post_connect(freerdp_peer* client)
 	}
 
 	WLog_DBG(TAG, "");
-	WLog_DBG(TAG, "Client requested desktop: %dx%dx%d",
+	WLog_DBG(TAG, "Client requested desktop: %"PRIu32"x%"PRIu32"x%"PRIu32"",
 	         client->settings->DesktopWidth, client->settings->DesktopHeight,
 	         client->settings->ColorDepth);
 #if (SAMPLE_SERVER_USE_CLIENT_RESOLUTION == 1)
@@ -552,7 +551,7 @@ BOOL tf_peer_post_connect(freerdp_peer* client)
 #else
 	client->settings->DesktopWidth = context->rfx_context->width;
 	client->settings->DesktopHeight = context->rfx_context->height;
-	WLog_DBG(TAG, "Resizing client to %dx%d", client->settings->DesktopWidth,
+	WLog_DBG(TAG, "Resizing client to %"PRIu32"x%"PRIu32"", client->settings->DesktopWidth,
 	         client->settings->DesktopHeight);
 	client->update->DesktopResize(client->update->context);
 #endif
@@ -631,7 +630,7 @@ BOOL tf_peer_activate(freerdp_peer* client)
 
 BOOL tf_peer_synchronize_event(rdpInput* input, UINT32 flags)
 {
-	WLog_DBG(TAG, "Client sent a synchronize event (flags:0x%X)", flags);
+	WLog_DBG(TAG, "Client sent a synchronize event (flags:0x%"PRIX32")", flags);
 	return TRUE;
 }
 
@@ -640,7 +639,7 @@ BOOL tf_peer_keyboard_event(rdpInput* input, UINT16 flags, UINT16 code)
 	freerdp_peer* client = input->context->peer;
 	rdpUpdate* update = client->update;
 	testPeerContext* context = (testPeerContext*) input->context;
-	WLog_DBG(TAG, "Client sent a keyboard event (flags:0x%X code:0x%X)", flags,
+	WLog_DBG(TAG, "Client sent a keyboard event (flags:0x%04"PRIX16" code:0x%04"PRIX16")", flags,
 	         code);
 
 	if ((flags & 0x4000) && code == 0x22) /* 'g' key */
@@ -697,14 +696,14 @@ BOOL tf_peer_keyboard_event(rdpInput* input, UINT16 flags, UINT16 code)
 
 BOOL tf_peer_unicode_keyboard_event(rdpInput* input, UINT16 flags, UINT16 code)
 {
-	WLog_DBG(TAG, "Client sent a unicode keyboard event (flags:0x%X code:0x%X)",
+	WLog_DBG(TAG, "Client sent a unicode keyboard event (flags:0x%04"PRIX16" code:0x%04"PRIX16")",
 	         flags, code);
 	return TRUE;
 }
 
 BOOL tf_peer_mouse_event(rdpInput* input, UINT16 flags, UINT16 x, UINT16 y)
 {
-	//WLog_DBG(TAG, "Client sent a mouse event (flags:0x%X pos:%d,%d)", flags, x, y);
+	//WLog_DBG(TAG, "Client sent a mouse event (flags:0x%04"PRIX16" pos:%"PRIu16",%"PRIu16")", flags, x, y);
 	test_peer_draw_icon(input->context->peer, x + 10, y);
 	return TRUE;
 }
@@ -712,7 +711,7 @@ BOOL tf_peer_mouse_event(rdpInput* input, UINT16 flags, UINT16 x, UINT16 y)
 BOOL tf_peer_extended_mouse_event(rdpInput* input, UINT16 flags, UINT16 x,
                                   UINT16 y)
 {
-	//WLog_DBG(TAG, "Client sent an extended mouse event (flags:0x%X pos:%d,%d)", flags, x, y);
+	//WLog_DBG(TAG, "Client sent an extended mouse event (flags:0x%04"PRIX16" pos:%"PRIu16",%"PRIu16")", flags, x, y);
 	return TRUE;
 }
 
@@ -724,7 +723,7 @@ static BOOL tf_peer_refresh_rect(rdpContext* context, BYTE count,
 
 	for (i = 0; i < count; i++)
 	{
-		WLog_DBG(TAG, "  (%d, %d) (%d, %d)", areas[i].left, areas[i].top,
+		WLog_DBG(TAG, "  (%"PRIu16", %"PRIu16") (%"PRIu16", %"PRIu16")", areas[i].left, areas[i].top,
 		         areas[i].right, areas[i].bottom);
 	}
 
@@ -736,7 +735,7 @@ static BOOL tf_peer_suppress_output(rdpContext* context, BYTE allow,
 {
 	if (allow > 0)
 	{
-		WLog_DBG(TAG, "Client restore output (%d, %d) (%d, %d).", area->left, area->top,
+		WLog_DBG(TAG, "Client restore output (%"PRIu16", %"PRIu16") (%"PRIu16", %"PRIu16").", area->left, area->top,
 		         area->right, area->bottom);
 	}
 	else

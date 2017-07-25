@@ -37,6 +37,7 @@
 #include <winpr/string.h>
 #include <winpr/stream.h>
 #include <winpr/wtsapi.h>
+#include <winpr/ssl.h>
 #include <winpr/debug.h>
 
 #include <freerdp/freerdp.h>
@@ -51,7 +52,8 @@
 
 /* connectErrorCode is 'extern' in error.h. See comment there.*/
 
-UINT freerdp_channel_add_init_handle_data(rdpChannelHandles* handles, void* pInitHandle, void* pUserData)
+UINT freerdp_channel_add_init_handle_data(rdpChannelHandles* handles, void* pInitHandle,
+        void* pUserData)
 {
 	if (!handles->init)
 		handles->init = ListDictionary_New(TRUE);
@@ -89,9 +91,10 @@ void freerdp_channel_remove_init_handle_data(rdpChannelHandles* handles, void* p
 	}
 }
 
-UINT freerdp_channel_add_open_handle_data(rdpChannelHandles* handles, DWORD openHandle, void* pUserData)
+UINT freerdp_channel_add_open_handle_data(rdpChannelHandles* handles, DWORD openHandle,
+        void* pUserData)
 {
-	void* pOpenHandle = (void*) (size_t) openHandle;
+	void* pOpenHandle = (void*)(size_t) openHandle;
 
 	if (!handles->open)
 		handles->open = ListDictionary_New(TRUE);
@@ -114,14 +117,14 @@ UINT freerdp_channel_add_open_handle_data(rdpChannelHandles* handles, DWORD open
 void* freerdp_channel_get_open_handle_data(rdpChannelHandles* handles, DWORD openHandle)
 {
 	void* pUserData = NULL;
-	void* pOpenHandle = (void*) (size_t) openHandle;
+	void* pOpenHandle = (void*)(size_t) openHandle;
 	pUserData = ListDictionary_GetItemValue(handles->open, pOpenHandle);
 	return pUserData;
 }
 
 void freerdp_channel_remove_open_handle_data(rdpChannelHandles* handles, DWORD openHandle)
 {
-	void* pOpenHandle = (void*) (size_t) openHandle;
+	void* pOpenHandle = (void*)(size_t) openHandle;
 	ListDictionary_Remove(handles->open, pOpenHandle);
 
 	if (ListDictionary_Count(handles->open) < 1)
@@ -188,7 +191,7 @@ BOOL freerdp_connect(freerdp* instance)
 	/* --authonly tests the connection without a UI */
 	if (instance->settings->AuthenticationOnly)
 	{
-		WLog_ERR(TAG, "Authentication only, exit status %d", !status);
+		WLog_ERR(TAG, "Authentication only, exit status %"PRId32"", !status);
 		goto freerdp_connect_finally;
 	}
 
@@ -363,7 +366,7 @@ BOOL freerdp_check_event_handles(rdpContext* context)
 
 	if (!status)
 	{
-		WLog_ERR(TAG, "freerdp_check_fds() failed - %i", status);
+		WLog_ERR(TAG, "freerdp_check_fds() failed - %"PRIi32"", status);
 		return FALSE;
 	}
 
@@ -371,7 +374,7 @@ BOOL freerdp_check_event_handles(rdpContext* context)
 
 	if (!status)
 	{
-		WLog_ERR(TAG, "freerdp_channels_check_fds() failed - %i", status);
+		WLog_ERR(TAG, "freerdp_channels_check_fds() failed - %"PRIi32"", status);
 		return FALSE;
 	}
 
@@ -796,8 +799,15 @@ const char* freerdp_get_last_error_string(UINT32 code)
 void freerdp_set_last_error(rdpContext* context, UINT32 lastError)
 {
 	if (lastError)
-		WLog_ERR(TAG, "freerdp_set_last_error %s [0x%04X]",
+		WLog_ERR(TAG, "freerdp_set_last_error %s [0x%08"PRIX32"]",
 		         freerdp_get_last_error_name(lastError), lastError);
+
+	if (context->LastError != 0)
+	{
+		WLog_ERR(TAG, "TODO: Trying to set error code %s, but %s already set!",
+		         freerdp_get_last_error_name(lastError),
+		         freerdp_get_last_error_name(context->LastError));
+	}
 
 	context->LastError = lastError;
 
@@ -857,6 +867,54 @@ void freerdp_set_last_error(rdpContext* context, UINT32 lastError)
 	}
 }
 
+const char* freerdp_get_logon_error_info_type(UINT32 type)
+{
+	switch (type)
+	{
+		case LOGON_MSG_DISCONNECT_REFUSED:
+			return "LOGON_MSG_DISCONNECT_REFUSED";
+
+		case LOGON_MSG_NO_PERMISSION:
+			return "LOGON_MSG_NO_PERMISSION";
+
+		case LOGON_MSG_BUMP_OPTIONS:
+			return "LOGON_MSG_BUMP_OPTIONS";
+
+		case LOGON_MSG_RECONNECT_OPTIONS:
+			return "LOGON_MSG_RECONNECT_OPTIONS";
+
+		case LOGON_MSG_SESSION_TERMINATE:
+			return "LOGON_MSG_SESSION_TERMINATE";
+
+		case LOGON_MSG_SESSION_CONTINUE:
+			return "LOGON_MSG_SESSION_CONTINUE";
+
+		default:
+			return "UNKNOWN";
+	}
+}
+
+const char* freerdp_get_logon_error_info_data(UINT32 data)
+{
+	switch (data)
+	{
+		case LOGON_FAILED_BAD_PASSWORD:
+			return "LOGON_FAILED_BAD_PASSWORD";
+
+		case LOGON_FAILED_UPDATE_PASSWORD:
+			return "LOGON_FAILED_UPDATE_PASSWORD";
+
+		case LOGON_FAILED_OTHER:
+			return "LOGON_FAILED_OTHER";
+
+		case LOGON_WARNING:
+			return "LOGON_WARNING";
+
+		default:
+			return "SESSION_ID";
+	}
+}
+
 /** Allocator function for the rdp_freerdp structure.
  *  @return an allocated structure filled with 0s. Need to be deallocated using freerdp_free()
  */
@@ -868,6 +926,7 @@ freerdp* freerdp_new()
 	if (!instance)
 		return NULL;
 
+	winpr_InitializeSSL(WINPR_SSL_INIT_DEFAULT);
 	instance->ContextSize = sizeof(rdpContext);
 	instance->SendChannelData = freerdp_send_channel_data;
 	instance->ReceiveChannelData = freerdp_channels_data;
@@ -902,7 +961,7 @@ BOOL checkChannelErrorEvent(rdpContext* context)
 {
 	if (WaitForSingleObject(context->channelErrorEvent, 0) == WAIT_OBJECT_0)
 	{
-		WLog_ERR(TAG, "%s. Error was %u", context->errorDescription,
+		WLog_ERR(TAG, "%s. Error was %"PRIu32"", context->errorDescription,
 		         context->channelErrorNum);
 		return FALSE;
 	}

@@ -34,12 +34,15 @@ int shadow_encoder_preferred_fps(rdpShadowEncoder* encoder)
 
 UINT32 shadow_encoder_inflight_frames(rdpShadowEncoder* encoder)
 {
-	/* Return inflight frame count =
+	/* Return inflight frame count.
+	 * If queueDepth is SUSPEND_FRAME_ACKNOWLEDGEMENT, count = 0
+	 * Otherwise, calculate count =
 	 * <last sent frame id> - <last client-acknowledged frame id>
 	 * Note: This function is exported so that subsystem could
 	 * implement its own strategy to tune fps.
 	 */
-	return encoder->frameId - encoder->lastAckframeId;
+	return (encoder->queueDepth == SUSPEND_FRAME_ACKNOWLEDGEMENT) ? 0 : encoder->frameId -
+	       encoder->lastAckframeId;
 }
 
 UINT32 shadow_encoder_create_frame_id(rdpShadowEncoder* encoder)
@@ -83,12 +86,12 @@ static int shadow_encoder_init_grid(rdpShadowEncoder* encoder)
 	                       encoder->maxTileHeight);
 	tileSize = encoder->maxTileWidth * encoder->maxTileHeight * 4;
 	tileCount = encoder->gridWidth * encoder->gridHeight;
-	encoder->gridBuffer = (BYTE*) malloc(tileSize * tileCount);
+	encoder->gridBuffer = (BYTE*) calloc(tileSize, tileCount);
 
 	if (!encoder->gridBuffer)
 		return -1;
 
-	encoder->grid = (BYTE**) malloc(tileCount * sizeof(BYTE*));
+	encoder->grid = (BYTE**) calloc(tileCount, sizeof(BYTE*));
 
 	if (!encoder->grid)
 		return -1;

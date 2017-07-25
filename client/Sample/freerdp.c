@@ -33,6 +33,7 @@
 #include <freerdp/client/file.h>
 #include <freerdp/client/cmdline.h>
 #include <freerdp/client/cliprdr.h>
+#include <freerdp/client/channels.h>
 #include <freerdp/channels/channels.h>
 
 #include <winpr/crt.h>
@@ -138,8 +139,8 @@ static void* tf_client_thread_proc(freerdp* instance)
 
 		if (status == WAIT_FAILED)
 		{
-			WLog_ERR(TAG, "%s: WaitForMultipleObjects failed with %lu", __FUNCTION__,
-			         (unsigned long) status);
+			WLog_ERR(TAG, "%s: WaitForMultipleObjects failed with %"PRIu32"", __FUNCTION__,
+			         status);
 			break;
 		}
 
@@ -174,6 +175,8 @@ int main(int argc, char* argv[])
 	instance->ContextNew = tf_context_new;
 	instance->ContextFree = tf_context_free;
 
+	freerdp_register_addin_provider(freerdp_channels_load_static_addin_entry, 0);
+
 	if (!freerdp_context_new(instance))
 	{
 		WLog_ERR(TAG, "Couldn't create context");
@@ -187,6 +190,7 @@ int main(int argc, char* argv[])
 	{
 		exit(0);
 	}
+
 
 	if (!freerdp_client_load_addins(instance->context->channels,
 	                                instance->settings))

@@ -129,8 +129,7 @@ void xf_SendClientEvent(xfContext* xfc, Window window, Atom atom,
 		xevent.xclient.data.l[i] = va_arg(argp, int);
 	}
 
-	DEBUG_X11("Send ClientMessage Event: wnd=0x%04X",
-	          (unsigned int) xevent.xclient.window);
+	DEBUG_X11("Send ClientMessage Event: wnd=0x%04lX", (unsigned long) xevent.xclient.window);
 	XSendEvent(xfc->display, RootWindowOfScreen(xfc->screen), False,
 	           SubstructureRedirectMask | SubstructureNotifyMask, &xevent);
 	XSync(xfc->display, False);
@@ -337,6 +336,18 @@ static const char* get_shm_id()
 	return shm_id;
 }
 
+Window xf_CreateDummyWindow(xfContext *xfc)
+{
+	return XCreateSimpleWindow(xfc->display, DefaultRootWindow(xfc->display),
+			0, 0, 1, 1, 0, 0, 0);
+}
+
+void xf_DestroyDummyWindow(xfContext *xfc, Window window)
+{
+	if (window)
+		XDestroyWindow(xfc->display, window);
+}
+
 xfWindow* xf_CreateDesktopWindow(xfContext* xfc, char* name, int width,
                                  int height)
 {
@@ -522,7 +533,7 @@ void xf_SetWindowStyle(xfContext* xfc, xfAppWindow* appWindow, UINT32 style,
 {
 	Atom window_type;
 
-	if (/*(ex_style & WS_EX_TOPMOST) ||*/ (ex_style & WS_EX_TOOLWINDOW))
+	if ((ex_style & WS_EX_NOACTIVATE) || (ex_style & WS_EX_TOOLWINDOW))
 	{
 		/*
 		 * Tooltips and menu items should be unmanaged windows
@@ -654,7 +665,7 @@ int xf_AppWindowInit(xfContext* xfc, xfAppWindow* appWindow)
 		else
 		{
 			class = malloc(sizeof("RAIL:00000000"));
-			sprintf_s(class, sizeof("RAIL:00000000"), "RAIL:%08X", appWindow->windowId);
+			sprintf_s(class, sizeof("RAIL:00000000"), "RAIL:%08"PRIX32"", appWindow->windowId);
 			class_hints->res_class = class;
 		}
 
@@ -946,6 +957,10 @@ void xf_UpdateWindowArea(xfContext* xfc, xfAppWindow* appWindow, int x, int y,
                          int width, int height)
 {
 	int ax, ay;
+
+        if (appWindow == NULL)
+		return;
+
 	ax = x + appWindow->windowOffsetX;
 	ay = y + appWindow->windowOffsetY;
 

@@ -39,8 +39,10 @@ static INLINE BOOL is_path_required(LPCSTR path, size_t len)
 {
 	if (!path || (len <= 1))
 		return FALSE;
+
 	if (strcmp(path, ".") == 0)
 		return FALSE;
+
 	return TRUE;
 }
 
@@ -56,7 +58,6 @@ LPSTR freerdp_get_library_install_path(void)
 	cchLibraryPath = strlen(pszLibraryPath) + 1;
 	cchInstallPrefix = strlen(pszInstallPrefix) + 1;
 	cchPath = cchInstallPrefix + cchLibraryPath;
-
 	needInstallPath = is_path_required(pszInstallPrefix, cchInstallPrefix);
 	needLibPath = is_path_required(pszLibraryPath, cchLibraryPath);
 
@@ -98,7 +99,6 @@ LPSTR freerdp_get_dynamic_addin_install_path(void)
 	cchAddinPath = strlen(pszAddinPath) + 1;
 	cchInstallPrefix = strlen(pszInstallPrefix) + 1;
 	cchPath = cchInstallPrefix + cchAddinPath;
-
 	needInstallPath = is_path_required(pszInstallPrefix, cchInstallPrefix);
 	needLibPath = is_path_required(pszAddinPath, cchAddinPath);
 
@@ -139,7 +139,7 @@ PVIRTUALCHANNELENTRY freerdp_load_dynamic_addin(LPCSTR pszFileName,
 	HINSTANCE library = NULL;
 	size_t cchFileName;
 	size_t cchFilePath;
-	LPSTR pszAddinFile;
+	LPSTR pszAddinFile = NULL;
 	LPSTR pszFilePath = NULL;
 	LPSTR pszRelativeFilePath = NULL;
 	size_t cchAddinFile;
@@ -176,6 +176,7 @@ PVIRTUALCHANNELENTRY freerdp_load_dynamic_addin(LPCSTR pszFileName,
 		sprintf_s(pszAddinFile, cchAddinFile, FREERDP_SHARED_LIBRARY_PREFIX"%s%s",
 		          pszFileName, pszExt);
 	}
+
 	cchAddinFile = strlen(pszAddinFile);
 
 	/* If a path is provided prefix the library name with it. */
@@ -183,8 +184,10 @@ PVIRTUALCHANNELENTRY freerdp_load_dynamic_addin(LPCSTR pszFileName,
 	{
 		size_t relPathLen = strlen(pszPath) + cchAddinFile + 1;
 		pszRelativeFilePath = calloc(relPathLen, sizeof(CHAR));
+
 		if (!pszRelativeFilePath)
 			goto fail;
+
 		sprintf_s(pszRelativeFilePath, relPathLen, "%s", pszRelativeFilePath);
 		NativePathCchAppendA(pszRelativeFilePath, relPathLen, pszAddinFile);
 	}
@@ -217,14 +220,15 @@ PVIRTUALCHANNELENTRY freerdp_load_dynamic_addin(LPCSTR pszFileName,
 		goto fail;
 
 	entry = (PVIRTUALCHANNELENTRY)GetProcAddress(library, pszEntryName);
-
 fail:
 	free(pszRelativeFilePath);
 	free(pszAddinFile);
 	free(pszFilePath);
 	free(pszAddinInstallPath);
+
 	if (!entry && library)
 		FreeLibrary(library);
+
 	return entry;
 }
 
@@ -305,7 +309,12 @@ PVIRTUALCHANNELENTRY freerdp_load_dynamic_channel_addin_entry(LPCSTR pszName,
 	/* channel add-in */
 
 	if (dwFlags & FREERDP_ADDIN_CHANNEL_STATIC)
-		entry = freerdp_load_dynamic_addin(pszFileName, NULL, "VirtualChannelEntry");
+	{
+		if (dwFlags & FREERDP_ADDIN_CHANNEL_ENTRYEX)
+			entry = freerdp_load_dynamic_addin(pszFileName, NULL, "VirtualChannelEntryEx");
+		else
+			entry = freerdp_load_dynamic_addin(pszFileName, NULL, "VirtualChannelEntry");
+	}
 	else if (dwFlags & FREERDP_ADDIN_CHANNEL_DYNAMIC)
 		entry = freerdp_load_dynamic_addin(pszFileName, NULL, "DVCPluginEntry");
 	else if (dwFlags & FREERDP_ADDIN_CHANNEL_DEVICE)
@@ -334,9 +343,6 @@ PVIRTUALCHANNELENTRY freerdp_load_channel_addin_entry(LPCSTR pszName,
 
 	if (freerdp_load_static_channel_addin_entry)
 		entry = freerdp_load_static_channel_addin_entry(pszName, pszSubsystem, pszType, dwFlags);
-
-	if (dwFlags & FREERDP_ADDIN_CHANNEL_ENTRYEX)
-		return entry; /* don't warn, don't try dynamic entries for VirtualChannelEntryEx */
 
 	if (!entry)
 		entry = freerdp_load_dynamic_channel_addin_entry(pszName, pszSubsystem, pszType, dwFlags);

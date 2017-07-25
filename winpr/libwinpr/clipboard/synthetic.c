@@ -382,7 +382,7 @@ static void* clipboard_synthesize_html_format(wClipboard* clipboard, UINT32 form
 			body = strstr(pSrcData, "<BODY");
 
 		/* StartHTML */
-		sprintf_s(num, sizeof(num), "%010lu", (unsigned long int)strlen(pDstData));
+		sprintf_s(num, sizeof(num), "%010"PRIuz"", strlen(pDstData));
 		CopyMemory(&pDstData[23], num, 10);
 
 		if (!body)
@@ -391,12 +391,12 @@ static void* clipboard_synthesize_html_format(wClipboard* clipboard, UINT32 form
 		strcat(pDstData, "<!--StartFragment-->");
 
 		/* StartFragment */
-		sprintf_s(num, sizeof(num), "%010lu", (unsigned long int)strlen(pDstData));
+		sprintf_s(num, sizeof(num), "%010"PRIuz"", strlen(pDstData));
 		CopyMemory(&pDstData[69], num, 10);
 		strcat(pDstData, pSrcData);
 
 		/* EndFragment */
-		sprintf_s(num, sizeof(num), "%010lu", (unsigned long int)strlen(pDstData));
+		sprintf_s(num, sizeof(num), "%010"PRIuz"", strlen(pDstData));
 		CopyMemory(&pDstData[93], num, 10);
 		strcat(pDstData, "<!--EndFragment-->");
 
@@ -404,7 +404,7 @@ static void* clipboard_synthesize_html_format(wClipboard* clipboard, UINT32 form
 			strcat(pDstData, "</BODY></HTML>");
 
 		/* EndHTML */
-		sprintf_s(num, sizeof(num), "%010lu", (unsigned long int)strlen(pDstData));
+		sprintf_s(num, sizeof(num), "%010"PRIuz"", strlen(pDstData));
 		CopyMemory(&pDstData[43], num, 10);
 
 		*pSize = (UINT32) strlen(pDstData) + 1;
@@ -445,7 +445,7 @@ static void* clipboard_synthesize_text_html(wClipboard* clipboard, UINT32 format
 		beg = atoi(&begStr[10]);
 		end = atoi(&endStr[8]);
 
-		if ((beg > SrcSize) || (end > SrcSize) || (beg >= end))
+		if (beg < 0 || end < 0 || (beg > SrcSize) || (end > SrcSize) || (beg >= end))
 			return NULL;
 
 		DstSize = end - beg;

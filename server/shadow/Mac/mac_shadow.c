@@ -457,11 +457,6 @@ static int mac_shadow_capture_init(macShadowSubsystem* subsystem)
 	CFDictionaryRef opts;
 	CGDirectDisplayID displayId;
 	displayId = CGMainDisplayID();
-	subsystem->updateBuffer = (BYTE*) malloc(subsystem->pixelWidth *
-	                          subsystem->pixelHeight * 4);
-
-	if (!subsystem->updateBuffer)
-		return -1;
 
 	subsystem->captureQueue = dispatch_queue_create("mac.shadow.capture", NULL);
 	keys[0] = (void*) kCGDisplayStreamShowCursor;
@@ -495,7 +490,7 @@ static int mac_shadow_subsystem_process_message(macShadowSubsystem* subsystem,
 			break;
 
 		default:
-			WLog_ERR(TAG, "Unknown message id: %u", message->id);
+			WLog_ERR(TAG, "Unknown message id: %"PRIu32"", message->id);
 			break;
 	}
 

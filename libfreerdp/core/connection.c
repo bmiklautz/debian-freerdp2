@@ -178,17 +178,6 @@ BOOL rdp_client_connect(rdpRdp* rdp)
 	BOOL status;
 	rdpSettings* settings = rdp->settings;
 
-	if (rdp->settingsCopy)
-	{
-		freerdp_settings_free(rdp->settingsCopy);
-		rdp->settingsCopy = NULL;
-	}
-
-	rdp->settingsCopy = freerdp_settings_clone(settings);
-
-	if (!rdp->settingsCopy)
-		return FALSE;
-
 	nego_init(rdp->nego);
 	nego_set_target(rdp->nego, settings->ServerHostname, settings->ServerPort);
 
@@ -312,12 +301,6 @@ BOOL rdp_client_connect(rdpRdp* rdp)
 BOOL rdp_client_disconnect(rdpRdp* rdp)
 {
 	BOOL status;
-
-	if (rdp->settingsCopy)
-	{
-		freerdp_settings_free(rdp->settingsCopy);
-		rdp->settingsCopy = NULL;
-	}
 
 	status = nego_disconnect(rdp->nego);
 
@@ -446,7 +429,7 @@ static BOOL rdp_client_establish_keys(rdpRdp* rdp)
 	 * client random must be (bitlen / 8) + 8 - see [MS-RDPBCGR] 5.3.4.1
 	 * for details
 	 */
-	crypt_client_random = calloc(1, key_len + 8);
+	crypt_client_random = calloc(key_len + 8, 1);
 
 	if (!crypt_client_random)
 		return FALSE;
@@ -559,7 +542,7 @@ BOOL rdp_server_establish_keys(rdpRdp* rdp, wStream* s)
 		return FALSE;
 	}
 
-	if (!rdp_read_security_header(s, &sec_flags))
+	if (!rdp_read_security_header(s, &sec_flags, NULL))
 	{
 		WLog_ERR(TAG, "invalid security header");
 		return FALSE;
@@ -590,17 +573,29 @@ BOOL rdp_server_establish_keys(rdpRdp* rdp, wStream* s)
 	if (rand_len != key_len + 8)
 	{
 		WLog_ERR(TAG, "invalid encrypted client random length");
+		free(client_random);
 		goto end;
 	}
 
 	crypt_client_random = calloc(1, rand_len);
 	if (!crypt_client_random)
+	{
+		free(client_random);
 		goto end;
+	}
+
 	Stream_Read(s, crypt_client_random, rand_len);
 
 	mod = rdp->settings->RdpServerRsaKey->Modulus;
 	priv_exp = rdp->settings->RdpServerRsaKey->PrivateExponent;
-	crypto_rsa_private_decrypt(crypt_client_random, rand_len - 8, key_len, mod, priv_exp, client_random);
+	if (crypto_rsa_private_decrypt(crypt_client_random, rand_len - 8, key_len, mod, priv_exp, client_random) <= 0)
+	{
+		free(client_random);
+		goto end;
+	}
+
+	rdp->settings->ClientRandom = client_random;
+	rdp->settings->ClientRandomLength = 32;
 
 	/* now calculate encrypt / decrypt and update keys */
 	if (!security_establish_keys(client_random, rdp))
@@ -642,7 +637,6 @@ BOOL rdp_server_establish_keys(rdpRdp* rdp, wStream* s)
 	ret = TRUE;
 end:
 	free(crypt_client_random);
-	free(client_random);
 
 	if (!ret)
 	{
@@ -773,10 +767,19 @@ BOOL rdp_client_connect_auto_detect(rdpRdp* rdp, wStream* s)
 		{
 			if (channelId == rdp->mcs->messageChannelId)
 			{
-				UINT16 securityFlags;
+				UINT16 securityFlags = 0;
 
-				if (!rdp_read_security_header(s, &securityFlags))
+				if (!rdp_read_security_header(s, &securityFlags, &length))
 					return FALSE;
+
+				if (securityFlags & SEC_ENCRYPT)
+				{
+					if (!rdp_decrypt(rdp, s, length, securityFlags))
+					{
+						WLog_ERR(TAG, "rdp_decrypt failed");
+						return FALSE;
+					}
+				}
 
 				if (rdp_recv_message_channel_pdu(rdp, s, securityFlags) == 0)
 					return TRUE;
@@ -1000,7 +1003,7 @@ BOOL rdp_server_accept_nego(rdpRdp* rdp, wStream* s)
 			 (nego->RequestedProtocols & PROTOCOL_TLS) ? 1 : 0,
 			 (nego->RequestedProtocols == PROTOCOL_RDP) ? 1 : 0
 			);
-	WLog_INFO(TAG, "Server Security: NLA:%d TLS:%d RDP:%d",
+	WLog_INFO(TAG, "Server Security: NLA:%"PRId32" TLS:%"PRId32" RDP:%"PRId32"",
 			 settings->NlaSecurity, settings->TlsSecurity, settings->RdpSecurity);
 
 	if ((settings->NlaSecurity) && (nego->RequestedProtocols & PROTOCOL_NLA))
@@ -1162,10 +1165,15 @@ BOOL rdp_server_accept_mcs_channel_join_request(rdpRdp* rdp, wStream* s)
 
 BOOL rdp_server_accept_confirm_active(rdpRdp* rdp, wStream* s)
 {
+	freerdp_peer *peer = rdp->context->peer;
+
 	if (rdp->state != CONNECTION_STATE_CAPABILITIES_EXCHANGE)
 		return FALSE;
 
 	if (!rdp_recv_confirm_active(rdp, s))
+		return FALSE;
+
+	if (peer->ClientCapabilities && !peer->ClientCapabilities(peer))
 		return FALSE;
 
 	if (rdp->settings->SaltedChecksum)

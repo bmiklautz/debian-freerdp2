@@ -322,13 +322,41 @@ static const BYTE GDI_BS_HATCHED_PATTERNS[] =
 INLINE BOOL gdi_decode_color(rdpGdi* gdi, const UINT32 srcColor,
                              UINT32* color, UINT32* format)
 {
-	UINT32 SrcFormat = gdi_get_pixel_format(gdi->context->settings->ColorDepth);
+	UINT32 SrcFormat;
+	UINT32 ColorDepth;
+
+	if (!gdi || !color || !gdi->context || !gdi->context->settings)
+		return FALSE;
+
+	ColorDepth = gdi->context->settings->ColorDepth;
+
+	switch (ColorDepth)
+	{
+		case 32:
+		case 24:
+			SrcFormat = PIXEL_FORMAT_BGR24;
+			break;
+
+		case 16:
+			SrcFormat = PIXEL_FORMAT_RGB16;
+			break;
+
+		case 15:
+			SrcFormat = PIXEL_FORMAT_RGB15;
+			break;
+
+		case 8:
+			SrcFormat = PIXEL_FORMAT_RGB8;
+			break;
+
+		default:
+			return FALSE;
+	}
 
 	if (format)
-		*format = SrcFormat;
+		*format = gdi->dstFormat;
 
-	*color = ConvertColor(srcColor, SrcFormat,
-	                      gdi->dstFormat, &gdi->palette);
+	*color = ConvertColor(srcColor, SrcFormat, gdi->dstFormat, &gdi->palette);
 	return TRUE;
 }
 
@@ -340,12 +368,12 @@ INLINE DWORD gdi_rop3_code(BYTE code)
 
 UINT32 gdi_get_pixel_format(UINT32 bitsPerPixel)
 {
-	UINT32 format = PIXEL_FORMAT_XBGR32;
+	UINT32 format;
 
 	switch (bitsPerPixel)
 	{
 		case 32:
-			format = PIXEL_FORMAT_ABGR32;
+			format = PIXEL_FORMAT_BGRA32;
 			break;
 
 		case 24:
@@ -362,6 +390,11 @@ UINT32 gdi_get_pixel_format(UINT32 bitsPerPixel)
 
 		case 8:
 			format = PIXEL_FORMAT_RGB8;
+			break;
+
+		default:
+			WLog_ERR(TAG, "Unsupported color depth %"PRIu32, bitsPerPixel);
+			format = 0;
 			break;
 	}
 
@@ -417,14 +450,9 @@ BOOL gdi_bitmap_update(rdpContext* context,
                        const BITMAP_UPDATE* bitmapUpdate)
 {
 	UINT32 index;
-	rdpGdi* gdi;
-	rdpCodecs* codecs;
 
 	if (!context || !bitmapUpdate || !context->gdi || !context->codecs)
 		return FALSE;
-
-	gdi = context->gdi;
-	codecs = context->codecs;
 
 	for (index = 0; index < bitmapUpdate->number; index++)
 	{
@@ -600,7 +628,7 @@ static BOOL gdi_patblt(rdpContext* context, PATBLT_ORDER* patblt)
 			break;
 
 		default:
-			WLog_ERR(TAG,  "unimplemented brush style:%d", brush->style);
+			WLog_ERR(TAG,  "unimplemented brush style:%"PRIu32"", brush->style);
 			break;
 	}
 
@@ -698,7 +726,7 @@ static BOOL gdi_line_to(rdpContext* context, const LINE_TO_ORDER* lineTo)
 	HGDI_PEN hPen;
 	rdpGdi* gdi = context->gdi;
 
-	if (!gdi_decode_color(gdi, lineTo->backColor, &color, NULL))
+	if (!gdi_decode_color(gdi, lineTo->penColor, &color, NULL))
 		return FALSE;
 
 	if (!(hPen = gdi_CreatePen(lineTo->penStyle, lineTo->penWidth, color,
@@ -874,7 +902,7 @@ static BOOL gdi_mem3blt(rdpContext* context, MEM3BLT_ORDER* mem3blt)
 			break;
 
 		default:
-			WLog_ERR(TAG,  "Mem3Blt unimplemented brush style:%d", brush->style);
+			WLog_ERR(TAG,  "Mem3Blt unimplemented brush style:%"PRIu32"", brush->style);
 			break;
 	}
 
@@ -919,7 +947,7 @@ static BOOL gdi_frame_marker(rdpContext* context,
 BOOL gdi_surface_frame_marker(rdpContext* context,
                               const SURFACE_FRAME_MARKER* surfaceFrameMarker)
 {
-	WLog_Print(context->gdi->log, WLOG_DEBUG, "frameId %d frameAction %d",
+	WLog_Print(context->gdi->log, WLOG_DEBUG, "frameId %"PRIu32" frameAction %"PRIu32"",
 	           surfaceFrameMarker->frameId,
 	           surfaceFrameMarker->frameAction);
 
@@ -944,35 +972,43 @@ BOOL gdi_surface_frame_marker(rdpContext* context,
 static BOOL gdi_surface_bits(rdpContext* context,
                              const SURFACE_BITS_COMMAND* cmd)
 {
+	BOOL result = FALSE;
 	DWORD format;
 	rdpGdi* gdi;
+	REGION16 region;
+	RECTANGLE_16 cmdRect;
+	UINT32 i, nbRects;
+	const RECTANGLE_16* rects;
 
 	if (!context || !cmd)
 		return FALSE;
 
 	gdi = context->gdi;
 	WLog_Print(gdi->log, WLOG_DEBUG,
-	           "destLeft %d destTop %d destRight %d destBottom %d "
-	           "bpp %d codecID %d width %d height %d length %d",
+	           "destLeft %"PRIu32" destTop %"PRIu32" destRight %"PRIu32" destBottom %"PRIu32" "
+	           "bpp %"PRIu32" codecID %"PRIu32" width %"PRIu32" height %"PRIu32" length %"PRIu32"",
 	           cmd->destLeft, cmd->destTop, cmd->destRight, cmd->destBottom,
 	           cmd->bpp, cmd->codecID, cmd->width, cmd->height, cmd->bitmapDataLength);
+
+	region16_init(&region);
+	cmdRect.left = cmd->destLeft;
+	cmdRect.top = cmd->destTop;
+	cmdRect.right = cmdRect.left + cmd->width;
+	cmdRect.bottom = cmdRect.top + cmd->height;
+
 
 	switch (cmd->codecID)
 	{
 		case RDP_CODEC_ID_REMOTEFX:
-			format = PIXEL_FORMAT_BGRX32;
-
 			if (!rfx_process_message(context->codecs->rfx, cmd->bitmapData,
-			                         format,
 			                         cmd->bitmapDataLength,
 			                         cmd->destLeft, cmd->destTop,
 			                         gdi->primary_buffer, gdi->dstFormat,
-			                         gdi->stride, gdi->height, NULL))
+			                         gdi->stride, gdi->height, &region))
 			{
 				WLog_ERR(TAG, "Failed to process RemoteFX message");
-				return FALSE;
+				goto out;
 			}
-
 			break;
 
 		case RDP_CODEC_ID_NSCODEC:
@@ -983,34 +1019,53 @@ static BOOL gdi_surface_bits(rdpContext* context,
 			                         cmd->bitmapDataLength, gdi->primary_buffer,
 			                         format, gdi->stride, cmd->destLeft, cmd->destTop,
 			                         cmd->width, cmd->height, FREERDP_FLIP_VERTICAL))
-				return FALSE;
-
+			{
+				WLog_ERR(TAG, "Failed to process NSCodec message");
+				goto out;
+			}
+			region16_union_rect(&region, &region, &cmdRect);
 			break;
 
 		case RDP_CODEC_ID_NONE:
-			format = PIXEL_FORMAT_BGRX32;
+			format = gdi_get_pixel_format(cmd->bpp);
 
 			if (!freerdp_image_copy(gdi->primary_buffer, gdi->dstFormat, gdi->stride,
 			                        cmd->destLeft, cmd->destTop, cmd->width, cmd->height,
 			                        cmd->bitmapData, format, 0, 0, 0,
 			                        &gdi->palette, FREERDP_FLIP_VERTICAL))
-				return FALSE;
-
+			{
+				WLog_ERR(TAG, "Failed to process nocodec message");
+				goto out;
+			}
+			region16_union_rect(&region, &region, &cmdRect);
 			break;
 
 		default:
-			WLog_ERR(TAG, "Unsupported codecID %d", cmd->codecID);
+			WLog_ERR(TAG, "Unsupported codecID %"PRIu32"", cmd->codecID);
 			break;
 	}
 
-	if (!gdi_InvalidateRegion(gdi->primary->hdc, cmd->destLeft, cmd->destTop,
-	                          cmd->width, cmd->height))
+	if (!(rects = region16_rects(&region, &nbRects)))
+		goto out;
+
+	for (i = 0; i < nbRects; i++)
 	{
-		WLog_ERR(TAG, "Failed to update invalid region");
-		return FALSE;
+		UINT32 left = rects[i].left;
+		UINT32 top = rects[i].top;
+		UINT32 width = rects[i].right - rects[i].left;
+		UINT32 height = rects[i].bottom - rects[i].top;
+
+		if (!gdi_InvalidateRegion(gdi->primary->hdc, left, top, width, height))
+		{
+			WLog_ERR(TAG, "Failed to update invalid region");
+			goto out;
+		}
 	}
 
-	return TRUE;
+	result = TRUE;
+out:
+	region16_uninit(&region);
+	return result;
 }
 
 /**
@@ -1061,6 +1116,8 @@ static BOOL gdi_init_primary(rdpGdi* gdi, UINT32 stride, UINT32 format,
 
 	if (stride > 0)
 		gdi->stride = stride;
+	else
+		gdi->stride = gdi->width * GetBytesPerPixel(gdi->dstFormat);
 
 	if (!gdi->primary)
 		goto fail_primary;
@@ -1132,7 +1189,8 @@ BOOL gdi_resize_ex(rdpGdi* gdi, UINT32 width, UINT32 height,
 	if (!gdi || !gdi->primary)
 		return FALSE;
 
-	if (gdi->width == width && gdi->height == height)
+	if (gdi->width == width && gdi->height == height &&
+	    (!buffer || gdi->primary_buffer == buffer))
 		return TRUE;
 
 	if (gdi->drawing == gdi->primary)

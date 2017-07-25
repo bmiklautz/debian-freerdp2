@@ -323,7 +323,7 @@ static long bio_rdp_tls_ctrl(BIO* bio, int cmd, long num, void* ptr)
 		case BIO_CTRL_PUSH:
 			if (next_bio && (next_bio != ssl_rbio))
 			{
-#if OPENSSL_VERSION_NUMBER < 0x10100000L
+#if OPENSSL_VERSION_NUMBER < 0x10100000L || defined(LIBRESSL_VERSION_NUMBER)
 				SSL_set_bio(tls->ssl, next_bio, next_bio);
 				CRYPTO_add(&(bio->next_bio->references), 1, CRYPTO_LOCK_BIO);
 #else
@@ -346,7 +346,7 @@ static long bio_rdp_tls_ctrl(BIO* bio, int cmd, long num, void* ptr)
 				if (ssl_rbio != ssl_wbio)
 					BIO_free_all(ssl_wbio);
 
-#if OPENSSL_VERSION_NUMBER < 0x10100000L
+#if OPENSSL_VERSION_NUMBER < 0x10100000L || defined(LIBRESSL_VERSION_NUMBER)
 				if (next_bio)
 					CRYPTO_add(&(bio->next_bio->references), -1, CRYPTO_LOCK_BIO);
 				tls->ssl->wbio = tls->ssl->rbio = NULL;
@@ -384,7 +384,7 @@ static long bio_rdp_tls_ctrl(BIO* bio, int cmd, long num, void* ptr)
 					BIO_push(ssl_rbio, next_bio);
 
 				BIO_set_next(bio, ssl_rbio);
-#if OPENSSL_VERSION_NUMBER < 0x10100000L
+#if OPENSSL_VERSION_NUMBER < 0x10100000L || defined(LIBRESSL_VERSION_NUMBER)
 				CRYPTO_add(&(ssl_rbio->references), 1, CRYPTO_LOCK_BIO);
 #else
 				BIO_up_ref(ssl_rbio);
@@ -762,7 +762,7 @@ int tls_do_handshake(rdpTls* tls, BOOL clientMode)
 
 		if ((status != WAIT_OBJECT_0) && (status != WAIT_TIMEOUT))
 		{
-			WLog_ERR(TAG, "error during WaitForSingleObject(): 0x%04X", status);
+			WLog_ERR(TAG, "error during WaitForSingleObject(): 0x%08"PRIX32"", status);
 			return -1;
 		}
 
@@ -1021,7 +1021,7 @@ BOOL tls_send_alert(rdpTls* tls)
  *        SSL struct is opaqe now
  */
 
-#if OPENSSL_VERSION_NUMBER < 0x10100000L
+#if OPENSSL_VERSION_NUMBER < 0x10100000L || defined(LIBRESSL_VERSION_NUMBER)
 	if (tls->alertDescription != TLS_ALERT_DESCRIPTION_CLOSE_NOTIFY)
 	{
 		/**
@@ -1409,7 +1409,7 @@ int tls_verify_certificate(rdpTls* tls, CryptoCert cert, char* hostname,
 void tls_print_certificate_error(char* hostname, UINT16 port, char* fingerprint,
                                  char* hosts_file)
 {
-	WLog_ERR(TAG, "The host key for %s:%hu has changed", hostname, port);
+	WLog_ERR(TAG, "The host key for %s:%"PRIu16" has changed", hostname, port);
 	WLog_ERR(TAG, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 	WLog_ERR(TAG, "@    WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!     @");
 	WLog_ERR(TAG, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
@@ -1437,7 +1437,7 @@ void tls_print_certificate_name_mismatch_error(char* hostname, UINT16 port,
 	WLog_ERR(TAG, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 	WLog_ERR(TAG, "@           WARNING: CERTIFICATE NAME MISMATCH!           @");
 	WLog_ERR(TAG, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-	WLog_ERR(TAG, "The hostname used for this connection (%s:%hu) ",
+	WLog_ERR(TAG, "The hostname used for this connection (%s:%"PRIu16") ",
 	         hostname, port);
 	WLog_ERR(TAG, "does not match %s given in the certificate:",
 	         alt_names_count < 1 ? "the name" : "any of the names");

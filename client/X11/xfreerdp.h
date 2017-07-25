@@ -19,8 +19,8 @@
  * limitations under the License.
  */
 
-#ifndef __XFREERDP_H
-#define __XFREERDP_H
+#ifndef FREERDP_CLIENT_X11_FREERDP_H
+#define FREERDP_CLIENT_X11_FREERDP_H
 
 typedef struct xf_context xfContext;
 
@@ -69,6 +69,7 @@ struct xf_bitmap
 {
 	rdpBitmap bitmap;
 	Pixmap pixmap;
+	XImage* image;
 };
 typedef struct xf_bitmap xfBitmap;
 
@@ -171,7 +172,7 @@ struct xf_context
 	XModifierKeymap* modifierMap;
 	wArrayList* keyCombinations;
 	wArrayList* xevents;
-	char* actionScript;
+	BOOL actionScriptExists;
 
 	XSetWindowAttributes attribs;
 	BOOL complex_regions;
@@ -286,5 +287,5 @@ void xf_draw_screen(xfContext* xfc, int x, int y, int w, int h);
 
 FREERDP_API DWORD xf_exit_code_from_disconnect_reason(DWORD reason);
 
-#endif /* __XFREERDP_H */
+#endif /* FREERDP_CLIENT_X11_FREERDP_H */
 

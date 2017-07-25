@@ -238,10 +238,10 @@ struct _TARGET_NET_ADDRESS
 typedef struct _TARGET_NET_ADDRESS TARGET_NET_ADDRESS;
 
 /* Logon Error Info */
-
+#define LOGON_MSG_DISCONNECT_REFUSED		0xFFFFFFF9
 #define LOGON_MSG_NO_PERMISSION			0xFFFFFFFA
 #define LOGON_MSG_BUMP_OPTIONS			0xFFFFFFFB
-#define LOGON_MSG_SESSION_RECONNECT		0xFFFFFFFC
+#define LOGON_MSG_RECONNECT_OPTIONS		0xFFFFFFFC
 #define LOGON_MSG_SESSION_TERMINATE		0xFFFFFFFD
 #define LOGON_MSG_SESSION_CONTINUE		0xFFFFFFFE
 
@@ -470,6 +470,9 @@ struct _RDPDR_PARALLEL
 };
 typedef struct _RDPDR_PARALLEL RDPDR_PARALLEL;
 
+#define PROXY_TYPE_NONE		0
+#define PROXY_TYPE_HTTP		1
+
 /* Settings */
 
 #ifdef __GNUC__
@@ -686,6 +689,9 @@ typedef struct _RDPDR_PARALLEL RDPDR_PARALLEL;
 #define FreeRDP_GatewayRpcTransport				1994
 #define FreeRDP_GatewayHttpTransport				1995
 #define FreeRDP_GatewayUdpTransport				1996
+#define FreeRDP_ProxyType					2015
+#define FreeRDP_ProxyHostname					2016
+#define FreeRDP_ProxyPort   					2017
 #define FreeRDP_RemoteApplicationMode				2112
 #define FreeRDP_RemoteApplicationName				2113
 #define FreeRDP_RemoteApplicationIcon				2114
@@ -772,6 +778,7 @@ typedef struct _RDPDR_PARALLEL RDPDR_PARALLEL;
 #define FreeRDP_GfxProgressiveV2				3843
 #define FreeRDP_GfxH264						3844
 #define FreeRDP_GfxAVC444					3845
+#define FreeRDP_GfxSendQoeAck					3846
 #define FreeRDP_BitmapCacheV3CodecId				3904
 #define FreeRDP_DrawNineGridEnabled				3968
 #define FreeRDP_DrawNineGridCacheSize				3969
@@ -1004,7 +1011,7 @@ struct rdp_settings
 	ALIGN64 BOOL RestrictedAdminModeRequired; /* 1097 */
 	ALIGN64 char* AuthenticationServiceClass; /* 1098 */
 	ALIGN64 BOOL DisableCredentialsDelegation; /* 1099 */
-	ALIGN64 BOOL AuthenticationLevel; /* 1100 */
+	ALIGN64 UINT32 AuthenticationLevel; /* 1100 */
 	ALIGN64 char* AllowedTlsCiphers; /* 1101 */
 	ALIGN64 BOOL VmConnectMode; /* 1102 */
 	ALIGN64 char* NtlmSamFile; /* 1103 */
@@ -1142,8 +1149,13 @@ struct rdp_settings
 	ALIGN64 BOOL GatewayRpcTransport; /* 1994 */
 	ALIGN64 BOOL GatewayHttpTransport; /* 1995 */
 	ALIGN64 BOOL GatewayUdpTransport; /* 1996 */
-	UINT64 padding2048[2048 - 1997]; /* 1997 */
-	UINT64 padding2112[2112 - 2048]; /* 2048 */
+	UINT64 padding2048[2015 - 1997]; /* 1997 */
+
+	/* Proxy */
+	ALIGN64 UINT32 ProxyType; 	/* 2015 */
+	ALIGN64 char* ProxyHostname;	/* 2016 */
+	ALIGN64 UINT16 ProxyPort;	/* 2017 */
+	UINT64 padding2112[2112 - 2018]; /* 2018 */
 
 	/**
 	 * RemoteApp
@@ -1323,7 +1335,8 @@ struct rdp_settings
 	ALIGN64 BOOL GfxProgressiveV2; /* 3843 */
 	ALIGN64 BOOL GfxH264; /* 3844 */
 	ALIGN64 BOOL GfxAVC444; /* 3845 */
-	UINT64 padding3904[3904 - 3846]; /* 3846 */
+	ALIGN64 BOOL GfxSendQoeAck; /* 3846 */
+	UINT64 padding3904[3904 - 3847]; /* 3847 */
 
 	/**
 	 * Caches
@@ -1423,6 +1436,7 @@ struct rdp_settings
 
 	ALIGN64 BYTE*
 	SettingsModified; /* byte array marking fields that have been modified from their default value */
+	ALIGN64 char* ActionScript;
 };
 typedef struct rdp_settings rdpSettings;
 
