@@ -132,7 +132,7 @@ static BOOL tsmf_ffmpeg_init_audio_stream(ITSMFDecoder* decoder, const TS_AM_MED
 #endif
 #else  /* LIBAVCODEC_VERSION_MAJOR < 55 */
 #ifdef AV_CPU_FLAG_SSE2
-	av_set_cpu_flags_mask(AV_CPU_FLAG_SSE2 | AV_CPU_FLAG_MMX2);
+	av_set_cpu_flags_mask(AV_CPU_FLAG_SSE2 | AV_CPU_FLAG_MMXEXT);
 #else
 	av_set_cpu_flags_mask(FF_MM_SSE2 | FF_MM_MMX2);
 #endif
@@ -313,12 +313,12 @@ static BOOL tsmf_ffmpeg_decode_video(ITSMFDecoder* decoder, const BYTE *data, UI
 #endif
 	if (len < 0)
 	{
-		WLog_ERR(TAG, "data_size %d, avcodec_decode_video failed (%d)", data_size, len);
+		WLog_ERR(TAG, "data_size %"PRIu32", avcodec_decode_video failed (%d)", data_size, len);
 		ret = FALSE;
 	}
 	else if (!decoded)
 	{
-		WLog_ERR(TAG, "data_size %d, no frame is decoded.", data_size);
+		WLog_ERR(TAG, "data_size %"PRIu32", no frame is decoded.", data_size);
 		ret = FALSE;
 	}
 	else
@@ -362,11 +362,11 @@ static BOOL tsmf_ffmpeg_decode_audio(ITSMFDecoder* decoder, const BYTE *data, UI
 	BYTE *dst;
 	int dst_offset;
 #if 0
-	WLog_DBG(TAG, ("tsmf_ffmpeg_decode_audio: data_size %d", data_size));
+	WLog_DBG(TAG, ("tsmf_ffmpeg_decode_audio: data_size %"PRIu32"", data_size));
 	int i;
 	for(i = 0; i < data_size; i++)
 	{
-		WLog_DBG(TAG, ("%02X ", data[i]));
+		WLog_DBG(TAG, ("%02"PRIX8"", data[i]));
 		if (i % 16 == 15)
 			WLog_DBG(TAG, ("\n"));
 	}
@@ -428,18 +428,23 @@ static BOOL tsmf_ffmpeg_decode_audio(ITSMFDecoder* decoder, const BYTE *data, UI
 														decoded_frame->nb_samples, mdecoder->codec_context->sample_fmt, 1);
 				memcpy(dst, decoded_frame->data[0], frame_size);
 			}
+			else
+			{
+				frame_size = 0;
+			}
 			av_free(decoded_frame);
 		}
 #endif
-		if (len <= 0 || frame_size <= 0)
+		if (len > 0)
 		{
-			WLog_ERR(TAG, "error decoding");
-			break;
+			src += len;
+			src_size -= len;
 		}
-		src += len;
-		src_size -= len;
-		mdecoder->decoded_size += frame_size;
-		dst += frame_size;
+		if(frame_size > 0)
+		{
+			mdecoder->decoded_size += frame_size;
+			dst += frame_size;
+		}
 	}
 	if (mdecoder->decoded_size == 0)
 	{
@@ -452,7 +457,7 @@ static BOOL tsmf_ffmpeg_decode_audio(ITSMFDecoder* decoder, const BYTE *data, UI
 			/* move the aligned decoded data to original place */
 			memmove(mdecoder->decoded_data, mdecoder->decoded_data + dst_offset, mdecoder->decoded_size);
 		}
-	DEBUG_TSMF("data_size %d decoded_size %d",
+	DEBUG_TSMF("data_size %"PRIu32" decoded_size %"PRIu32"",
 			   data_size, mdecoder->decoded_size);
 	return TRUE;
 }

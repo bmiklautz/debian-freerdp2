@@ -36,6 +36,40 @@
 /* #define LICENSE_NULL_CLIENT_RANDOM		1 */
 /* #define LICENSE_NULL_PREMASTER_SECRET		1 */
 
+static wStream* license_send_stream_init(rdpLicense* license);
+
+static void license_generate_randoms(rdpLicense* license);
+static BOOL license_generate_keys(rdpLicense* license);
+static BOOL license_generate_hwid(rdpLicense* license);
+static BOOL license_encrypt_premaster_secret(rdpLicense* license);
+static BOOL license_decrypt_platform_challenge(rdpLicense* license);
+
+static LICENSE_PRODUCT_INFO* license_new_product_info(void);
+static void license_free_product_info(LICENSE_PRODUCT_INFO* productInfo);
+static BOOL license_read_product_info(wStream* s, LICENSE_PRODUCT_INFO* productInfo);
+
+static LICENSE_BLOB* license_new_binary_blob(UINT16 type);
+static void license_free_binary_blob(LICENSE_BLOB* blob);
+static BOOL license_read_binary_blob(wStream* s, LICENSE_BLOB* blob);
+static BOOL license_write_binary_blob(wStream* s, LICENSE_BLOB* blob);
+
+static SCOPE_LIST* license_new_scope_list(void);
+static void license_free_scope_list(SCOPE_LIST* scopeList);
+static BOOL license_read_scope_list(wStream* s, SCOPE_LIST* scopeList);
+
+static BOOL license_read_license_request_packet(rdpLicense* license, wStream* s);
+static BOOL license_read_platform_challenge_packet(rdpLicense* license, wStream* s);
+static void license_read_new_license_packet(rdpLicense* license, wStream* s);
+static void license_read_upgrade_license_packet(rdpLicense* license, wStream* s);
+static BOOL license_read_error_alert_packet(rdpLicense* license, wStream* s);
+
+static BOOL license_write_new_license_request_packet(rdpLicense* license, wStream* s);
+static BOOL license_send_new_license_request_packet(rdpLicense* license);
+
+static BOOL license_write_platform_challenge_response_packet(
+    rdpLicense* license, wStream* s, BYTE* mac_data);
+static BOOL license_send_platform_challenge_response_packet(rdpLicense* license);
+
 #ifdef WITH_DEBUG_LICENSE
 
 static const char* const LICENSE_MESSAGE_STRINGS[] =
@@ -82,7 +116,7 @@ static const char* const  state_transitions[] =
 	"ST_RESEND_LAST_MESSAGE"
 };
 
-void license_print_product_info(LICENSE_PRODUCT_INFO* productInfo)
+static void license_print_product_info(LICENSE_PRODUCT_INFO* productInfo)
 {
 	char* CompanyName = NULL;
 	char* ProductId = NULL;
@@ -91,18 +125,18 @@ void license_print_product_info(LICENSE_PRODUCT_INFO* productInfo)
 	ConvertFromUnicode(CP_UTF8, 0, (WCHAR*) productInfo->pbProductId,
 					   productInfo->cbProductId / 2, &ProductId, 0, NULL, NULL);
 	WLog_INFO(TAG, "ProductInfo:");
-	WLog_INFO(TAG, "\tdwVersion: 0x%08X", productInfo->dwVersion);
+	WLog_INFO(TAG, "\tdwVersion: 0x%08"PRIX32"", productInfo->dwVersion);
 	WLog_INFO(TAG, "\tCompanyName: %s", CompanyName);
 	WLog_INFO(TAG, "\tProductId: %s", ProductId);
 	free(CompanyName);
 	free(ProductId);
 }
 
-void license_print_scope_list(SCOPE_LIST* scopeList)
+static void license_print_scope_list(SCOPE_LIST* scopeList)
 {
 	int index;
 	LICENSE_BLOB* scope;
-	WLog_INFO(TAG, "ScopeList (%d):", scopeList->count);
+	WLog_INFO(TAG, "ScopeList (%"PRIu32"):", scopeList->count);
 
 	for (index = 0; index < scopeList->count; index++)
 	{
@@ -219,7 +253,7 @@ BOOL license_send(rdpLicense* license, wStream* s, BYTE type)
 
 	license_write_preamble(s, type, flags, wMsgSize);
 #ifdef WITH_DEBUG_LICENSE
-	WLog_DBG(TAG, "Sending %s Packet, length %d", LICENSE_MESSAGE_STRINGS[type & 0x1F], wMsgSize);
+	WLog_DBG(TAG, "Sending %s Packet, length %"PRIu16"", LICENSE_MESSAGE_STRINGS[type & 0x1F], wMsgSize);
 	winpr_HexDump(TAG, WLOG_DEBUG, Stream_Pointer(s) - LICENSE_PREAMBLE_LENGTH, wMsgSize);
 #endif
 	Stream_SetPosition(s, length);
@@ -243,7 +277,7 @@ int license_recv(rdpLicense* license, wStream* s)
 	UINT16 wMsgSize;
 	UINT16 length;
 	UINT16 channelId;
-	UINT16 securityFlags;
+	UINT16 securityFlags = 0;
 
 	if (!rdp_read_header(license->rdp, s, &length, &channelId))
 	{
@@ -251,12 +285,12 @@ int license_recv(rdpLicense* license, wStream* s)
 		return -1;
 	}
 
-	if (!rdp_read_security_header(s, &securityFlags))
+	if (!rdp_read_security_header(s, &securityFlags, &length))
 		return -1;
 
 	if (securityFlags & SEC_ENCRYPT)
 	{
-		if (!rdp_decrypt(license->rdp, s, length - 4, securityFlags))
+		if (!rdp_decrypt(license->rdp, s, length, securityFlags))
 		{
 			WLog_ERR(TAG, "rdp_decrypt failed");
 			return -1;
@@ -317,7 +351,7 @@ int license_recv(rdpLicense* license, wStream* s)
 			break;
 
 		default:
-			WLog_ERR(TAG, "invalid bMsgType:%d", bMsgType);
+			WLog_ERR(TAG, "invalid bMsgType:%"PRIu8"", bMsgType);
 			return FALSE;
 	}
 
@@ -430,7 +464,7 @@ BOOL license_encrypt_premaster_secret(rdpLicense* license)
 		return FALSE;
 
 #ifdef WITH_DEBUG_LICENSE
-	WLog_DBG(TAG, "Modulus (%d bits):", license->ModulusLength * 8);
+	WLog_DBG(TAG, "Modulus (%"PRIu32" bits):", license->ModulusLength * 8);
 	winpr_HexDump(TAG, WLOG_DEBUG, license->Modulus, license->ModulusLength);
 	WLog_DBG(TAG, "Exponent:");
 	winpr_HexDump(TAG, WLOG_DEBUG, license->Exponent, 4);
@@ -463,7 +497,12 @@ BOOL license_decrypt_platform_challenge(rdpLicense* license)
 
 	if ((rc4 = winpr_RC4_New(license->LicensingEncryptionKey,
 				 LICENSING_ENCRYPTION_KEY_LENGTH)) == NULL)
+	{
+		free(license->PlatformChallenge->data);
+		license->PlatformChallenge->data = NULL;
+		license->PlatformChallenge->length = 0;
 		return FALSE;
+	}
 	rc = winpr_RC4_Update(rc4, license->EncryptedPlatformChallenge->length,
 			   license->EncryptedPlatformChallenge->data,
 			   license->PlatformChallenge->data);
@@ -487,14 +526,26 @@ BOOL license_read_product_info(wStream* s, LICENSE_PRODUCT_INFO* productInfo)
 	Stream_Read_UINT32(s, productInfo->dwVersion); /* dwVersion (4 bytes) */
 	Stream_Read_UINT32(s, productInfo->cbCompanyName); /* cbCompanyName (4 bytes) */
 
-	if (Stream_GetRemainingLength(s) < productInfo->cbCompanyName + 4)
+	/* Name must be >0, but there is no upper limit defined, use UINT32_MAX */
+	if ((productInfo->cbCompanyName < 2) || (productInfo->cbCompanyName % 2 != 0))
 		return FALSE;
 
+	if (Stream_GetRemainingLength(s) < productInfo->cbCompanyName)
+		return FALSE;
+
+	productInfo->pbProductId = NULL;
 	productInfo->pbCompanyName = (BYTE*) malloc(productInfo->cbCompanyName);
 	if (!productInfo->pbCompanyName)
 		return FALSE;
 	Stream_Read(s, productInfo->pbCompanyName, productInfo->cbCompanyName);
+
+	if (Stream_GetRemainingLength(s) < 4)
+		goto out_fail;
+
 	Stream_Read_UINT32(s, productInfo->cbProductId); /* cbProductId (4 bytes) */
+
+	if ((productInfo->cbProductId < 2) || (productInfo->cbProductId % 2 != 0))
+		goto out_fail;
 
 	if (Stream_GetRemainingLength(s) < productInfo->cbProductId)
 		goto out_fail;
@@ -507,7 +558,9 @@ BOOL license_read_product_info(wStream* s, LICENSE_PRODUCT_INFO* productInfo)
 
 out_fail:
 	free(productInfo->pbCompanyName);
+	free(productInfo->pbProductId);
 	productInfo->pbCompanyName = NULL;
+	productInfo->pbProductId = NULL;
 	return FALSE;
 }
 
@@ -576,7 +629,7 @@ BOOL license_read_binary_blob(wStream* s, LICENSE_BLOB* blob)
 
 	if ((blob->type != wBlobType) && (blob->type != BB_ANY_BLOB))
 	{
-		WLog_ERR(TAG, "license binary blob type (%x) does not match expected type (%x).", wBlobType, blob->type);
+		WLog_ERR(TAG, "license binary blob type (0x%"PRIx16") does not match expected type (0x%"PRIx16").", wBlobType, blob->type);
 	}
 
 	blob->type = wBlobType;
@@ -681,7 +734,7 @@ BOOL license_read_scope_list(wStream* s, SCOPE_LIST* scopeList)
 		return FALSE;
 
 	scopeList->count = scopeCount;
-	scopeList->array = (LICENSE_BLOB*) malloc(sizeof(LICENSE_BLOB) * scopeCount);
+	scopeList->array = (LICENSE_BLOB*) calloc(scopeCount, sizeof(LICENSE_BLOB));
 	if (!scopeList->array)
 		return FALSE;
 
@@ -806,7 +859,9 @@ BOOL license_read_platform_challenge_packet(rdpLicense* license, wStream* s)
 	Stream_Read_UINT32(s, ConnectFlags); /* ConnectFlags, Reserved (4 bytes) */
 	/* EncryptedPlatformChallenge */
 	license->EncryptedPlatformChallenge->type = BB_ANY_BLOB;
-	license_read_binary_blob(s, license->EncryptedPlatformChallenge);
+	if (!license_read_binary_blob(s, license->EncryptedPlatformChallenge))
+		return FALSE;
+
 	license->EncryptedPlatformChallenge->type = BB_ENCRYPTED_DATA_BLOB;
 
 	if (Stream_GetRemainingLength(s) < 16)
@@ -816,7 +871,7 @@ BOOL license_read_platform_challenge_packet(rdpLicense* license, wStream* s)
 	if (!license_decrypt_platform_challenge(license))
 		return FALSE;
 #ifdef WITH_DEBUG_LICENSE
-	WLog_DBG(TAG, "ConnectFlags: 0x%08X", ConnectFlags);
+	WLog_DBG(TAG, "ConnectFlags: 0x%08"PRIX32"", ConnectFlags);
 	WLog_DBG(TAG, "EncryptedPlatformChallenge:");
 	winpr_HexDump(TAG, WLOG_DEBUG, license->EncryptedPlatformChallenge->data, license->EncryptedPlatformChallenge->length);
 	WLog_DBG(TAG, "PlatformChallenge:");
@@ -933,13 +988,13 @@ BOOL license_write_new_license_request_packet(rdpLicense* license, wStream* s)
 	}
 
 #ifdef WITH_DEBUG_LICENSE
-	WLog_DBG(TAG, "PreferredKeyExchangeAlg: 0x%08X", PreferredKeyExchangeAlg);
+	WLog_DBG(TAG, "PreferredKeyExchangeAlg: 0x%08"PRIX32"", PreferredKeyExchangeAlg);
 	WLog_DBG(TAG, "ClientRandom:");
 	winpr_HexDump(TAG, WLOG_DEBUG, license->ClientRandom, 32);
 	WLog_DBG(TAG, "EncryptedPremasterSecret");
 	winpr_HexDump(TAG, WLOG_DEBUG, license->EncryptedPremasterSecret->data, license->EncryptedPremasterSecret->length);
-	WLog_DBG(TAG, "ClientUserName (%d): %s", license->ClientUserName->length, (char*) license->ClientUserName->data);
-	WLog_DBG(TAG, "ClientMachineName (%d): %s", license->ClientMachineName->length, (char*) license->ClientMachineName->data);
+	WLog_DBG(TAG, "ClientUserName (%"PRIu16"): %s", license->ClientUserName->length, (char*) license->ClientUserName->data);
+	WLog_DBG(TAG, "ClientMachineName (%"PRIu16"): %s", license->ClientMachineName->length, (char*) license->ClientMachineName->data);
 #endif
 	return TRUE;
 }

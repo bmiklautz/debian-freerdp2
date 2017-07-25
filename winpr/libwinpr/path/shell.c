@@ -3,6 +3,7 @@
  * Path Functions
  *
  * Copyright 2012 Marc-Andre Moreau <marcandre.moreau@gmail.com>
+ * Copyright 2016 David PHAM-VAN <d.phamvan@inuvika.com>
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -43,6 +44,7 @@
 #include <Shlobj.h>
 #else
 #include <errno.h>
+#include <dirent.h>
 #endif
 
 static char* GetPath_XDG_CONFIG_HOME(void);
@@ -66,13 +68,16 @@ static char* GetEnvAlloc(LPCSTR lpName)
 
 	if (length > 0)
 	{
-		env = malloc(length + 1);
+		env = malloc(length);
 
 		if (!env)
 			return NULL;
 
-		GetEnvironmentVariableA(lpName, env, length + 1);
-		env[length] = '\0';
+		if (GetEnvironmentVariableA(lpName, env, length) != length - 1)
+		{
+			free(env);
+			return NULL;
+		}
 	}
 
 	return env;
@@ -97,7 +102,7 @@ static char* GetPath_TEMP(void)
 #ifdef _WIN32
 	path = GetEnvAlloc("TEMP");
 #elif defined(__IOS__)
-    path = ios_get_temp();
+	path = ios_get_temp();
 #else
 	path = GetEnvAlloc("TMPDIR");
 
@@ -366,7 +371,11 @@ char* GetEnvironmentPath(char* name)
 		if (!env)
 			return NULL;
 
-		nSize = GetEnvironmentVariableA(name, env, nSize);
+		if (GetEnvironmentVariableA(name, env, nSize) != nSize - 1)
+		{
+			free(env);
+			return NULL;
+		}
 	}
 
 	return env;
@@ -450,12 +459,15 @@ char* GetCombinedPath(const char* basePath, const char* subPath)
 
 BOOL PathMakePathA(LPCSTR path, LPSECURITY_ATTRIBUTES lpAttributes)
 {
-#ifdef _WIN32
+#if defined(_UWP)
+	return FALSE;
+#elif defined(_WIN32)
 	return (SHCreateDirectoryExA(NULL, path, lpAttributes) == ERROR_SUCCESS);
 #else
 	const char delim = PathGetSeparatorA(PATH_STYLE_NATIVE);
 	char* dup;
 	char* p;
+	BOOL result = TRUE;
 
 	/* we only operate on a non-null, absolute path */
 	if (!path || *path != delim)
@@ -471,14 +483,17 @@ BOOL PathMakePathA(LPCSTR path, LPSECURITY_ATTRIBUTES lpAttributes)
 
 		if (mkdir(dup, 0777) != 0)
 			if (errno != EEXIST)
+			{
+				result = FALSE;
 				break;
+			}
 
 		if (p)
 			*p = delim;
 	}
 
 	free(dup);
-	return (p == NULL);
+	return (result);
 #endif
 }
 
@@ -496,8 +511,53 @@ BOOL PathFileExistsA(LPCSTR pszPath)
 
 BOOL PathFileExistsW(LPCWSTR pszPath)
 {
-	return FALSE;
+	LPSTR lpFileNameA = NULL;
+	BOOL ret;
+
+	if (ConvertFromUnicode(CP_UTF8, 0, pszPath, -1, &lpFileNameA, 0, NULL, NULL) < 1)
+		return FALSE;
+
+	ret = PathFileExistsA(lpFileNameA);
+	free (lpFileNameA);
+
+	return ret;
 }
+
+BOOL PathIsDirectoryEmptyA(LPCSTR pszPath)
+{
+	struct dirent *dp;
+	int empty = 1;
+
+	DIR *dir = opendir(pszPath);
+	if (dir == NULL) /* Not a directory or doesn't exist */
+		return 1;
+
+	while ((dp = readdir(dir)) != NULL) {
+		if (strcmp(dp->d_name, ".") == 0 || strcmp(dp->d_name, "..") == 0)
+			continue;    /* Skip . and .. */
+
+		empty = 0;
+		break;
+	}
+	closedir(dir);
+	return empty;
+}
+
+
+BOOL PathIsDirectoryEmptyW(LPCWSTR pszPath)
+{
+	LPSTR lpFileNameA = NULL;
+	BOOL ret;
+
+	if (ConvertFromUnicode(CP_UTF8, 0, pszPath, -1, &lpFileNameA, 0, NULL, NULL) < 1)
+		return FALSE;
+
+	ret = PathIsDirectoryEmptyA(lpFileNameA);
+	free (lpFileNameA);
+
+	return ret;
+}
+
 
 #else
 

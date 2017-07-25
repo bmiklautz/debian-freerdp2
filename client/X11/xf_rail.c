@@ -32,7 +32,7 @@
 
 #define TAG CLIENT_TAG("x11")
 
-const char* error_code_names[] =
+static const char* error_code_names[] =
 {
 	"RAIL_EXEC_S_OK",
 	"RAIL_EXEC_E_HOOK_NOT_LOADED",
@@ -43,7 +43,8 @@ const char* error_code_names[] =
 	"RAIL_EXEC_E_SESSION_LOCKED"
 };
 
-const char* movetype_names[] =
+#ifdef WITH_DEBUG_RAIL
+static const char* movetype_names[] =
 {
 	"(invalid)",
 	"RAIL_WMSZ_LEFT",
@@ -58,13 +59,14 @@ const char* movetype_names[] =
 	"RAIL_WMSZ_KEYMOVE",
 	"RAIL_WMSZ_KEYSIZE"
 };
+#endif
 
 void xf_rail_enable_remoteapp_mode(xfContext* xfc)
 {
 	if (!xfc->remote_app)
 	{
 		xfc->remote_app = TRUE;
-		xfc->drawable = DefaultRootWindow(xfc->display);
+		xfc->drawable = xf_CreateDummyWindow(xfc);
 		xf_DestroyDesktopWindow(xfc, xfc->window);
 		xfc->window = NULL;
 	}
@@ -75,6 +77,7 @@ void xf_rail_disable_remoteapp_mode(xfContext* xfc)
 	if (xfc->remote_app)
 	{
 		xfc->remote_app = FALSE;
+		xf_DestroyDummyWindow(xfc, xfc->drawable);
 		xf_create_window(xfc);
 	}
 }
@@ -216,17 +219,14 @@ void xf_rail_invalidate_region(xfContext* xfc, REGION16* invalidRegion)
 				updateRect.top = extents->top - appWindow->y;
 				updateRect.right = extents->right - appWindow->x;
 				updateRect.bottom = extents->bottom - appWindow->y;
-
-				if (appWindow)
-				{
-					xf_UpdateWindowArea(xfc, appWindow, updateRect.left, updateRect.top,
-					                    updateRect.right - updateRect.left,
-					                    updateRect.bottom - updateRect.top);
-				}
+				xf_UpdateWindowArea(xfc, appWindow, updateRect.left, updateRect.top,
+				                    updateRect.right - updateRect.left,
+				                    updateRect.bottom - updateRect.top);
 			}
 		}
 	}
 
+	free(pKeys);
 	region16_uninit(&windowInvalidRegion);
 }
 
@@ -533,16 +533,13 @@ static BOOL xf_rail_window_delete(rdpContext* context,
 static BOOL xf_rail_window_icon(rdpContext* context,
                                 WINDOW_ORDER_INFO* orderInfo, WINDOW_ICON_ORDER* windowIcon)
 {
-	BOOL bigIcon;
-	xfAppWindow* railWindow;
 	xfContext* xfc = (xfContext*) context;
-	railWindow = (xfAppWindow*) HashTable_GetItemValue(xfc->railWindows,
-	             (void*)(UINT_PTR) orderInfo->windowId);
+	xfAppWindow* railWindow = (xfAppWindow*) HashTable_GetItemValue(xfc->railWindows,
+	                          (void*)(UINT_PTR) orderInfo->windowId);
 
 	if (!railWindow)
 		return FALSE;
 
-	bigIcon = (orderInfo->fieldFlags & WINDOW_ORDER_FIELD_ICON_BIG) ? TRUE : FALSE;
 	return TRUE;
 }
 
@@ -815,7 +812,6 @@ static UINT xf_rail_server_local_move_size(RailClientContext* context,
 			y = localMoveSize->posY;
 			/* FIXME: local keyboard moves not working */
 			return CHANNEL_RC_OK;
-			break;
 
 		case RAIL_WMSZ_KEYSIZE:
 			direction = _NET_WM_MOVERESIZE_SIZE_KEYBOARD;
@@ -823,17 +819,12 @@ static UINT xf_rail_server_local_move_size(RailClientContext* context,
 			y = localMoveSize->posY;
 			/* FIXME: local keyboard moves not working */
 			return CHANNEL_RC_OK;
-			break;
 	}
 
 	if (localMoveSize->isMoveSizeStart)
-	{
 		xf_StartLocalMoveSize(xfc, appWindow, direction, x, y);
-	}
 	else
-	{
 		xf_EndLocalMoveSize(xfc, appWindow);
-	}
 
 	return CHANNEL_RC_OK;
 }

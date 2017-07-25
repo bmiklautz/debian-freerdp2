@@ -33,6 +33,7 @@
 
 #define TAG FREERDP_TAG("core.gcc")
 
+
 /**
  * T.124 GCC is defined in:
  *
@@ -396,7 +397,7 @@ BOOL gcc_read_client_data_blocks(wStream* s, rdpMcs* mcs, int length)
 				break;
 
 			default:
-				WLog_ERR(TAG,  "Unknown GCC client data block: 0x%04X", type);
+				WLog_ERR(TAG,  "Unknown GCC client data block: 0x%04"PRIX16"", type);
 				Stream_Seek(s, blockLength - 4);
 				break;
 		}
@@ -406,7 +407,7 @@ BOOL gcc_read_client_data_blocks(wStream* s, rdpMcs* mcs, int length)
 		if (endPos != (begPos + blockLength))
 		{
 			WLog_ERR(TAG,
-			         "Error parsing GCC client data block 0x%04X: Actual Offset: %d Expected Offset: %d",
+			         "Error parsing GCC client data block 0x%04"PRIX16": Actual Offset: %d Expected Offset: %d",
 			         type, endPos, begPos + blockLength);
 		}
 
@@ -530,7 +531,7 @@ BOOL gcc_read_server_data_blocks(wStream* s, rdpMcs* mcs, int length)
 				break;
 
 			default:
-				WLog_ERR(TAG,  "gcc_read_server_data_blocks: ignoring type=%hu", type);
+				WLog_ERR(TAG,  "gcc_read_server_data_blocks: ignoring type=%"PRIu16"", type);
 				break;
 		}
 
@@ -750,7 +751,6 @@ BOOL gcc_read_client_core_data(wStream* s, rdpMcs* mcs, UINT16 blockLength)
 
 		Stream_Read_UINT32(s,
 		                   settings->DeviceScaleFactor); /* deviceScaleFactor (4 bytes) */
-		blockLength -= 4;
 
 		if (settings->SelectedProtocol != serverSelectedProtocol)
 			return FALSE;
@@ -835,6 +835,9 @@ BOOL gcc_read_client_core_data(wStream* s, rdpMcs* mcs, UINT16 blockLength)
 	if (settings->SupportMonitorLayoutPdu)
 		settings->SupportMonitorLayoutPdu = (earlyCapabilityFlags &
 		                                     RNS_UD_CS_SUPPORT_MONITOR_LAYOUT_PDU) ? TRUE : FALSE;
+
+	if (settings->SupportStatusInfoPdu)
+		settings->SupportStatusInfoPdu = (earlyCapabilityFlags & RNS_UD_CS_SUPPORT_STATUSINFO_PDU) ? TRUE : FALSE;
 
 	if (!(earlyCapabilityFlags & RNS_UD_CS_VALID_CONNECTION_TYPE))
 		connectionType = 0;
@@ -936,6 +939,9 @@ void gcc_write_client_core_data(wStream* s, rdpMcs* mcs)
 
 	if (settings->SupportMonitorLayoutPdu)
 		earlyCapabilityFlags |= RNS_UD_CS_SUPPORT_MONITOR_LAYOUT_PDU;
+
+	if (settings->SupportStatusInfoPdu)
+		earlyCapabilityFlags |= RNS_UD_CS_SUPPORT_STATUSINFO_PDU;
 
 	Stream_Write_UINT16(s, highColorDepth); /* highColorDepth */
 	Stream_Write_UINT16(s, supportedColorDepths); /* supportedColorDepths */
@@ -1110,7 +1116,7 @@ BOOL gcc_read_server_security_data(wStream* s, rdpMcs* mcs)
 			break;
 
 		default:
-			WLog_ERR(TAG, "Received unknown encryption method %08X",
+			WLog_ERR(TAG, "Received unknown encryption method %08"PRIX32"",
 			         serverEncryptionMethod);
 			return FALSE;
 	}
@@ -1118,7 +1124,7 @@ BOOL gcc_read_server_security_data(wStream* s, rdpMcs* mcs)
 	if (settings->UseRdpSecurityLayer
 	    && !(settings->EncryptionMethods & serverEncryptionMethod))
 	{
-		WLog_WARN(TAG, "Server uses non-advertised encryption method 0x%08X",
+		WLog_WARN(TAG, "Server uses non-advertised encryption method 0x%08"PRIX32"",
 		          serverEncryptionMethod);
 		/* FIXME: Should we return FALSE; in this case ?? */
 	}
@@ -1158,14 +1164,14 @@ BOOL gcc_read_server_security_data(wStream* s, rdpMcs* mcs)
 			break;
 
 		default:
-			WLog_ERR(TAG, "Received unknown encryption level %08X",
+			WLog_ERR(TAG, "Received unknown encryption level 0x%08"PRIX32"",
 			         settings->EncryptionLevel);
 	}
 
 	if (!validCryptoConfig)
 	{
 		WLog_ERR(TAG,
-		         "Received invalid cryptographic configuration (level=0x%08X method=0x%08X)",
+		         "Received invalid cryptographic configuration (level=0x%08"PRIX32" method=0x%08"PRIX32")",
 		         settings->EncryptionLevel, settings->EncryptionMethods);
 		return FALSE;
 	}
@@ -1183,38 +1189,50 @@ BOOL gcc_read_server_security_data(wStream* s, rdpMcs* mcs)
 	Stream_Read_UINT32(s, settings->ServerRandomLength); /* serverRandomLen */
 	Stream_Read_UINT32(s, settings->ServerCertificateLength); /* serverCertLen */
 
-	if (Stream_GetRemainingLength(s) < settings->ServerRandomLength +
-	    settings->ServerCertificateLength)
+	if ((settings->ServerRandomLength == 0) || (settings->ServerCertificateLength == 0))
 		return FALSE;
 
-	if ((settings->ServerRandomLength <= 0)
-	    || (settings->ServerCertificateLength <= 0))
+	if (Stream_GetRemainingLength(s) < settings->ServerRandomLength)
 		return FALSE;
 
 	/* serverRandom */
 	settings->ServerRandom = (BYTE*) malloc(settings->ServerRandomLength);
 
 	if (!settings->ServerRandom)
-		return FALSE;
+		goto fail;
 
 	Stream_Read(s, settings->ServerRandom, settings->ServerRandomLength);
+
+	if (Stream_GetRemainingLength(s) < settings->ServerCertificateLength)
+		goto fail;
+
 	/* serverCertificate */
 	settings->ServerCertificate = (BYTE*) malloc(settings->ServerCertificateLength);
 
 	if (!settings->ServerCertificate)
-		return FALSE;
+		goto fail;
 
 	Stream_Read(s, settings->ServerCertificate, settings->ServerCertificateLength);
 	certificate_free(settings->RdpServerCertificate);
 	settings->RdpServerCertificate = certificate_new();
 
 	if (!settings->RdpServerCertificate)
-		return FALSE;
+		goto fail;
 
 	data = settings->ServerCertificate;
 	length = settings->ServerCertificateLength;
-	return certificate_read_server_certificate(settings->RdpServerCertificate, data,
-	        length);
+	if (!certificate_read_server_certificate(settings->RdpServerCertificate, data,
+	        length))
+		goto fail;
+
+	return TRUE;
+
+fail:
+	free (settings->ServerRandom);
+	free (settings->ServerCertificate);
+	settings->ServerRandom = NULL;
+	settings->ServerCertificate = NULL;
+	return FALSE;
 }
 
 static const BYTE initial_signature[] =
@@ -1312,7 +1330,7 @@ BOOL gcc_write_server_security_data(wStream* s, rdpMcs* mcs)
 			break;
 
 		default:
-			WLog_ERR(TAG, "Invalid server encryption level 0x%08X",
+			WLog_ERR(TAG, "Invalid server encryption level 0x%08"PRIX32"",
 			         settings->EncryptionLevel);
 			WLog_ERR(TAG, "Switching to encryption level CLIENT-COMPATIBLE");
 			settings->EncryptionLevel = ENCRYPTION_LEVEL_CLIENT_COMPATIBLE;
@@ -1575,7 +1593,7 @@ BOOL gcc_read_server_network_data(wStream* s, rdpMcs* mcs)
 
 	if (channelCount != mcs->channelCount)
 	{
-		WLog_ERR(TAG,  "requested %d channels, got %d instead",
+		WLog_ERR(TAG,  "requested %"PRIu32" channels, got %"PRIu16" instead",
 		         mcs->channelCount, channelCount);
 
 		/* we ensure that the response is not bigger than the request */
@@ -1699,9 +1717,19 @@ BOOL gcc_read_client_monitor_data(wStream* s, rdpMcs* mcs, UINT16 blockLength)
 	Stream_Read_UINT32(s, flags); /* flags */
 	Stream_Read_UINT32(s, monitorCount); /* monitorCount */
 
+	/* 2.2.1.3.6 Client Monitor Data -
+	 * monitorCount (4 bytes): A 32-bit, unsigned integer. The number of display
+	 * monitor definitions in the monitorDefArray field (the maximum allowed is 16).
+	 */
+	if (monitorCount > 16)
+	{
+		WLog_ERR(TAG, "announced monitors(%"PRIu32") exceed the 16 limit", monitorCount);
+		return FALSE;
+	}
+
 	if (monitorCount > settings->MonitorDefArraySize)
 	{
-		WLog_ERR(TAG, "too many announced monitors(%d), clamping to %d", monitorCount,
+		WLog_ERR(TAG, "too many announced monitors(%"PRIu32"), clamping to %"PRIu32"", monitorCount,
 		         settings->MonitorDefArraySize);
 		monitorCount = settings->MonitorDefArraySize;
 	}

@@ -35,6 +35,8 @@
 
 #include "wf_update.h"
 
+#define TAG SERVER_TAG("windows")
+
 DWORD WINAPI wf_update_thread(LPVOID lpParam)
 {
 	int index;
@@ -118,7 +120,7 @@ void wf_update_encode(wfInfo* wfi)
 	rect.y = 0;
 	rect.width = (UINT16) width;
 	rect.height = (UINT16) height;
-	//WLog_DBG(TAG, "x:%d y:%d w:%d h:%d", wfi->invalid.left, wfi->invalid.top, width, height);
+	//WLog_DBG(TAG, "x:%"PRId32" y:%"PRId32" w:%ld h:%ld", wfi->invalid.left, wfi->invalid.top, width, height);
 	Stream_Clear(wfi->s);
 
 	if (!(rfx_compose_message(wfi->rfx_context, wfi->s, &rect, 1,
@@ -179,7 +181,7 @@ void wf_update_encoder_reset(wfInfo* wfi)
 
 		if (wfi->rfx_context)
 		{
-			rfx_context_reset(wfi->rfx_context);
+			rfx_context_reset(wfi->rfx_context, wfi->servscreen_width, wfi->servscreen_height);
 		}
 		else
 		{
@@ -187,7 +189,7 @@ void wf_update_encoder_reset(wfInfo* wfi)
 			wfi->rfx_context->mode = RLGR3;
 			wfi->rfx_context->width = wfi->servscreen_width;
 			wfi->rfx_context->height = wfi->servscreen_height;
-			rfx_context_set_pixel_format(wfi->rfx_context, RDP_PIXEL_FORMAT_BGRA32);
+			rfx_context_set_pixel_format(wfi->rfx_context, PIXEL_FORMAT_BGRA32);
 			wfi->s = Stream_New(NULL, 0xFFFF);
 		}
 

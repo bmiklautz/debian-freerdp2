@@ -17,8 +17,8 @@
  * limitations under the License.
  */
 
-#ifndef __RFX_TYPES_H
-#define __RFX_TYPES_H
+#ifndef FREERDP_LIB_CODEC_RFX_TYPES_H
+#define FREERDP_LIB_CODEC_RFX_TYPES_H
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -66,7 +66,6 @@ struct _RFX_CONTEXT_PRIV
 	PROFILER_DEFINE(prof_rfx_quantization_decode);
 	PROFILER_DEFINE(prof_rfx_dwt_2d_decode);
 	PROFILER_DEFINE(prof_rfx_ycbcr_to_rgb);
-	PROFILER_DEFINE(prof_rfx_decode_format_rgb);
 
 	PROFILER_DEFINE(prof_rfx_encode_rgb);
 	PROFILER_DEFINE(prof_rfx_encode_component);
@@ -78,4 +77,4 @@ struct _RFX_CONTEXT_PRIV
 	PROFILER_DEFINE(prof_rfx_encode_format_rgb);
 };
 
-#endif /* __RFX_TYPES_H */
+#endif /* FREERDP_LIB_CODEC_RFX_TYPES_H */

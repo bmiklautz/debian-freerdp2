@@ -30,13 +30,10 @@
 
 #include <freerdp/log.h>
 
+#include "rdp.h"
 #include "peer.h"
 
 #define TAG FREERDP_TAG("core.peer")
-
-#ifdef WITH_DEBUG_RDP
-extern const char* DATA_PDU_TYPE_STRINGS[80];
-#endif
 
 static HANDLE freerdp_peer_virtual_channel_open(freerdp_peer* client, const char* name,
         UINT32 flags)
@@ -286,7 +283,7 @@ static BOOL peer_recv_data_pdu(freerdp_peer* client, wStream* s)
 		return FALSE;
 
 #ifdef WITH_DEBUG_RDP
-	WLog_DBG(TAG, "recv %s Data PDU (0x%02X), length: %d",
+	WLog_DBG(TAG, "recv %s Data PDU (0x%02"PRIX8"), length: %"PRIu16"",
 	         type < ARRAYSIZE(DATA_PDU_TYPE_STRINGS) ? DATA_PDU_TYPE_STRINGS[type] : "???", type, length);
 #endif
 
@@ -345,7 +342,7 @@ static BOOL peer_recv_data_pdu(freerdp_peer* client, wStream* s)
 			break;
 
 		default:
-			WLog_ERR(TAG, "Data PDU type %d", type);
+			WLog_ERR(TAG, "Data PDU type %"PRIu8"", type);
 			break;
 	}
 
@@ -360,7 +357,7 @@ static int peer_recv_tpkt_pdu(freerdp_peer* client, wStream* s)
 	UINT16 pduLength;
 	UINT16 pduSource;
 	UINT16 channelId;
-	UINT16 securityFlags;
+	UINT16 securityFlags = 0;
 	rdp = client->context->rdp;
 
 	if (!rdp_read_header(rdp, s, &length, &channelId))
@@ -374,12 +371,12 @@ static int peer_recv_tpkt_pdu(freerdp_peer* client, wStream* s)
 
 	if (rdp->settings->UseRdpSecurityLayer)
 	{
-		if (!rdp_read_security_header(s, &securityFlags))
+		if (!rdp_read_security_header(s, &securityFlags, &length))
 			return -1;
 
 		if (securityFlags & SEC_ENCRYPT)
 		{
-			if (!rdp_decrypt(rdp, s, length - 4, securityFlags))
+			if (!rdp_decrypt(rdp, s, length, securityFlags))
 			{
 				WLog_ERR(TAG, "rdp_decrypt failed");
 				return -1;
@@ -414,14 +411,14 @@ static int peer_recv_tpkt_pdu(freerdp_peer* client, wStream* s)
 				break;
 
 			default:
-				WLog_ERR(TAG, "Client sent pduType %d", pduType);
+				WLog_ERR(TAG, "Client sent pduType %"PRIu16"", pduType);
 				return -1;
 		}
 	}
 	else if (rdp->mcs->messageChannelId && channelId == rdp->mcs->messageChannelId)
 	{
 		if (!rdp->settings->UseRdpSecurityLayer)
-			if (!rdp_read_security_header(s, &securityFlags))
+			if (!rdp_read_security_header(s, &securityFlags, NULL))
 				return -1;
 
 		return rdp_recv_message_channel_pdu(rdp, s, securityFlags);
@@ -446,7 +443,7 @@ static int peer_recv_fastpath_pdu(freerdp_peer* client, wStream* s)
 
 	if ((length == 0) || (length > Stream_GetRemainingLength(s)))
 	{
-		WLog_ERR(TAG, "incorrect FastPath PDU header length %d", length);
+		WLog_ERR(TAG, "incorrect FastPath PDU header length %"PRIu16"", length);
 		return -1;
 	}
 
@@ -575,7 +572,7 @@ static int peer_recv_callback(rdpTransport* transport, wStream* s, void* extra)
 			{
 				WLog_ERR(TAG,
 				         "peer_recv_callback: CONNECTION_STATE_LICENSING - license_send_valid_client_error_packet() fail");
-				return FALSE;
+				return -1;
 			}
 
 			rdp_server_transition_to_state(rdp, CONNECTION_STATE_CAPABILITIES_EXCHANGE);
@@ -585,7 +582,9 @@ static int peer_recv_callback(rdpTransport* transport, wStream* s, void* extra)
 		case CONNECTION_STATE_CAPABILITIES_EXCHANGE:
 			if (!rdp->AwaitCapabilities)
 			{
-				IFCALL(client->Capabilities, client);
+
+				if (client->Capabilities && !client->Capabilities(client))
+					return -1;
 
 				if (!rdp_send_demand_active(rdp))
 				{

@@ -67,6 +67,7 @@ include(CheckCCompilerFlag)
 include(CheckCXXCompilerFlag)
 include(GNUInstallDirsWrapper)
 include(CMakePackageConfigHelpers)
+include(InstallFreeRDPMan)
 
 # Soname versioning
 set(BUILD_NUMBER 0)
@@ -106,6 +107,12 @@ if(CMAKE_CROSSCOMPILING)
 	SET(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM BOTH)
 endif(CMAKE_CROSSCOMPILING)
 
+find_program(CCACHE ccache)
+if(CCACHE AND WITH_CCACHE)
+	set_property(GLOBAL PROPERTY RULE_LAUNCH_COMPILE ${CCACHE})
+	set_property(GLOBAL PROPERTY RULE_LAUNCH_LINK ${CCACHE})
+endif(CCACHE AND WITH_CCACHE)
+
 include(GetGitRevisionDescription)
 git_get_exact_tag(GIT_REVISION --tags --always)
 
@@ -127,7 +134,7 @@ if(NOT CMAKE_BUILD_TYPE)
 endif()
 
 if(NOT DEFINED BUILD_SHARED_LIBS)
-	if(IOS OR APPLE)
+	if(IOS)
 		set(BUILD_SHARED_LIBS OFF)
 	else()
 		set(BUILD_SHARED_LIBS ON)
@@ -175,6 +182,11 @@ if(MSVC)
 	if(NOT DEFINED CMAKE_SUPPRESS_REGENERATION)
 		set(CMAKE_SUPPRESS_REGENERATION ON)
 	endif()
+endif()
+
+# Enable 64bit file support on linux.
+if("${CMAKE_SYSTEM_NAME}" MATCHES "Linux")
+	add_definitions("-D_FILE_OFFSET_BITS=64")
 endif()
 
 # Compiler-specific flags
@@ -649,6 +661,10 @@ set(OPENH264_FEATURE_TYPE "OPTIONAL")
 set(OPENH264_FEATURE_PURPOSE "codec")
 set(OPENH264_FEATURE_DESCRIPTION "use OpenH264 library")
 
+set(KRB5_FEATURE_TYPE "OPTIONAL")
+set(KRB5_FEATURE_PURPOSE "auth")
+set(KRB5_FEATURE_DESCRIPTION "add kerberos support")
+
 set(GSM_FEATURE_TYPE "OPTIONAL")
 set(GSM_FEATURE_PURPOSE "codec")
 set(GSM_FEATURE_DESCRIPTION "GSM audio codec library")
@@ -746,6 +762,7 @@ find_feature(JPEG ${JPEG_FEATURE_TYPE} ${JPEG_FEATURE_PURPOSE} ${JPEG_FEATURE_DE
 find_feature(x264 ${X264_FEATURE_TYPE} ${X264_FEATURE_PURPOSE} ${X264_FEATURE_DESCRIPTION})
 find_feature(OpenH264 ${OPENH264_FEATURE_TYPE} ${OPENH264_FEATURE_PURPOSE} ${OPENH264_FEATURE_DESCRIPTION})
 find_feature(GSM ${GSM_FEATURE_TYPE} ${GSM_FEATURE_PURPOSE} ${GSM_FEATURE_DESCRIPTION})
+find_feature(KRB5 ${KRB5_FEATURE_TYPE} ${KRB5_FEATURE_PURPOSE} ${KRB5_FEATURE_DESCRIPTION})
 
 if(TARGET_ARCH MATCHES "x86|x64")
 	if (NOT APPLE)
@@ -765,6 +782,12 @@ endif()
 
 if (TARGET_ARCH MATCHES "sparc")
 	set(HAVE_ALIGNED_REQUIRED 1)
+endif()
+
+if (WITH_X264 OR WITH_OPENH264 OR WITH_MEDIA_FOUNDATION OR WITH_FFMPEG)
+	set(WITH_GFX_H264 ON)
+else()
+	set(WITH_GFX_H264 OFF)
 endif()
 
 # Android expects all libraries to be loadable
@@ -804,6 +827,10 @@ set(CMAKE_SKIP_BUILD_RPATH FALSE)
 set(CMAKE_BUILD_WITH_INSTALL_RPATH FALSE)
 set(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
 set(CMAKE_INSTALL_RPATH "\$ORIGIN/../${CMAKE_INSTALL_LIBDIR}:\$ORIGIN/..")
+
+if (BUILD_SHARED_LIBS)
+	set(CMAKE_MACOSX_RPATH ON)
+endif()
 
 # Android profiling
 if(ANDROID)

@@ -19,8 +19,8 @@
  * limitations under the License.
  */
 
-#ifndef FREERDP_CORE_TSG_H
-#define FREERDP_CORE_TSG_H
+#ifndef FREERDP_LIB_CORE_GATEWAY_TSG_H
+#define FREERDP_LIB_CORE_GATEWAY_TSG_H
 
 typedef struct rdp_tsg rdpTsg;
 
@@ -123,7 +123,7 @@ typedef struct _tsendpointinfo
 #define E_PROXY_NOTSUPPORTED				0x000059E8
 #define E_PROXY_MAXCONNECTIONSREACHED			0x000059E6
 #define E_PROXY_SESSIONTIMEOUT				0x000059F6
-#define E_PROXY_REAUTH_AUTHN_FAILED			0X000059FA
+#define E_PROXY_REAUTH_AUTHN_FAILED			0x000059FA
 #define E_PROXY_REAUTH_CAP_FAILED			0x000059FB
 #define E_PROXY_REAUTH_RAP_FAILED			0x000059FC
 #define E_PROXY_SDR_NOT_SUPPORTED_BY_TS			0x000059FD
@@ -321,9 +321,6 @@ FREERDP_LOCAL BOOL tsg_connect(rdpTsg* tsg, const char* hostname, UINT16 port,
                                int timeout);
 FREERDP_LOCAL BOOL tsg_disconnect(rdpTsg* tsg);
 
-FREERDP_LOCAL int tsg_write(rdpTsg* tsg, BYTE* data, UINT32 length);
-FREERDP_LOCAL int tsg_read(rdpTsg* tsg, BYTE* data, UINT32 length);
-
 FREERDP_LOCAL int tsg_recv_pdu(rdpTsg* tsg, RPC_PDU* pdu);
 
 FREERDP_LOCAL int tsg_check_event_handles(rdpTsg* tsg);
@@ -335,4 +332,4 @@ FREERDP_LOCAL void tsg_free(rdpTsg* tsg);
 
 FREERDP_LOCAL BIO_METHOD* BIO_s_tsg(void);
 
-#endif /* FREERDP_CORE_TSG_H */
+#endif /* FREERDP_LIB_CORE_GATEWAY_TSG_H */
