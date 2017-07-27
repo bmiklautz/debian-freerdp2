@@ -1,11 +1,18 @@
 freerdp2 (2.0.0~git20170725.1.1648deb+dfsg1-1) UNRELEASED; urgency=medium
 
   [ Bernhard Miklautz ]
-  * import git snapshot for 2.0.0-rc0 from upstream:
+  * import git snapshot for 2.0.0-rc0 from upstream (Closes: #854689, #851600)
     - Obtained from master branch of http://github.com/FreeRDP/FreeRDP.
       Commit hash: 1648deb435ad52206f7aa2afe4b4dff71d9329bc
+    + fixes CVE-2017-2834, CVE-2017-2835, CVE-2017-2836,
+      CVE-2017-2837, CVE-2017-2838, CVE-2017-2839
+    + update copyright
+    + update symbols
+  * debian/control:
+    - Remove B:/R: rules (freerdp2-dev): libfreerdp-dev and freerdp2-dev don't
+      have conflicting file names anymore
 
- -- Bernhard Miklautz <bernhard.miklautz@shacknet.at>  Tue, 25 Jul 2017 16:26:41 +0200
+ -- Bernhard Miklautz <bernhard.miklautz@shacknet.at>  Wed, 26 Jul 2017 12:50:41 +0200
 
 freerdp2 (2.0.0~git20161130.1.e60d0d5+dfsg1-1) unstable; urgency=medium
 

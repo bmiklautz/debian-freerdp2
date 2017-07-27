@@ -1,2 +1,2 @@
-usr/lib/*/libwinpr.so.*
-usr/share/man/man1/wlog.1
+usr/lib/*/libwinpr2.so.*
+usr/share/man/man7/wlog.7

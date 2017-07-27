@@ -1,4 +1,4 @@
-libwinpr.so.2 libwinpr2 #MINVER#
+libwinpr2.so.2 libwinpr2 #MINVER#
  ASN1DecSetError@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  ASN1EncSetError@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  ASN1_CloseEncoder@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
@@ -110,6 +110,7 @@ libwinpr.so.2 libwinpr2 #MINVER#
  ClipboardDestroy@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  ClipboardEmpty@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  ClipboardGetData@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
+ ClipboardGetDelegate@Base 2.0.0~git20170725.1.1648deb+dfsg1
  ClipboardGetFormatId@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  ClipboardGetFormatIds@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  ClipboardGetFormatName@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
@@ -306,6 +307,8 @@ libwinpr.so.2 libwinpr2 #MINVER#
  GetCurrentThreadId@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  GetDefaultCommConfigA@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  GetDefaultCommConfigW@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
+ GetDiskFreeSpaceA@Base 2.0.0~git20170725.1.1648deb+dfsg1
+ GetDiskFreeSpaceW@Base 2.0.0~git20170725.1.1648deb+dfsg1
  GetDynamicTimeZoneInformation@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  GetDynamicTimeZoneInformationEffectiveYears@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  GetEnvironmentPath@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
@@ -320,6 +323,10 @@ libwinpr.so.2 libwinpr2 #MINVER#
  GetEventWaitObject@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  GetExitCodeProcess@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  GetExitCodeThread@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
+ GetFileAttributesA@Base 2.0.0~git20170725.1.1648deb+dfsg1
+ GetFileAttributesExA@Base 2.0.0~git20170725.1.1648deb+dfsg1
+ GetFileAttributesExW@Base 2.0.0~git20170725.1.1648deb+dfsg1
+ GetFileAttributesW@Base 2.0.0~git20170725.1.1648deb+dfsg1
  GetFileHandleForFileDescriptor@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  GetFileSize@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  GetHandleInformation@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
@@ -591,6 +598,10 @@ libwinpr.so.2 libwinpr2 #MINVER#
  MessageQueue_PostQuit@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  MessageQueue_Size@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  MessageQueue_Wait@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
+ MoveFileA@Base 2.0.0~git20170725.1.1648deb+dfsg1
+ MoveFileExA@Base 2.0.0~git20170725.1.1648deb+dfsg1
+ MoveFileExW@Base 2.0.0~git20170725.1.1648deb+dfsg1
+ MoveFileW@Base 2.0.0~git20170725.1.1648deb+dfsg1
  MultiByteToWideChar@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  NTOWFv1A@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  NTOWFv1W@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
@@ -626,6 +637,7 @@ libwinpr.so.2 libwinpr2 #MINVER#
  PCSC_GetOpenCardNameA@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  PCSC_GetOpenCardNameW@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  PCSC_SCardAccessStartedEvent@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
+ PCSC_SCardAddReaderName@Base 2.0.0~git20170725.1.1648deb+dfsg1
  PCSC_SCardAddReaderToGroupA@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  PCSC_SCardAddReaderToGroupW@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  PCSC_SCardAudit@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
@@ -679,6 +691,7 @@ libwinpr.so.2 libwinpr2 #MINVER#
  PCSC_SCardListInterfacesW@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  PCSC_SCardListReaderGroupsA@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  PCSC_SCardListReaderGroupsW@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
+ PCSC_SCardListReaderGroups_Internal@Base 2.0.0~git20170725.1.1648deb+dfsg1
  PCSC_SCardListReadersA@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  PCSC_SCardListReadersW@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  PCSC_SCardListReadersWithDeviceInstanceIdA@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
@@ -766,6 +779,8 @@ libwinpr.so.2 libwinpr2 #MINVER#
  PathGetSeparatorW@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  PathGetSharedLibraryExtensionA@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  PathGetSharedLibraryExtensionW@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
+ PathIsDirectoryEmptyA@Base 2.0.0~git20170725.1.1648deb+dfsg1
+ PathIsDirectoryEmptyW@Base 2.0.0~git20170725.1.1648deb+dfsg1
  PathIsUNCExA@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  PathIsUNCExW@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  PathMakePathA@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
@@ -984,6 +999,7 @@ libwinpr.so.2 libwinpr2 #MINVER#
  RpcStringFreeW@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  RpcTestCancel@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  SCardAccessStartedEvent@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
+ SCardAddReaderName@Base 2.0.0~git20170725.1.1648deb+dfsg1
  SCardAddReaderToGroupA@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  SCardAddReaderToGroupW@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  SCardAudit@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
@@ -1103,6 +1119,8 @@ libwinpr.so.2 libwinpr2 #MINVER#
  SetErrorMode@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  SetEvent@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  SetEventFileDescriptor@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
+ SetFileAttributesA@Base 2.0.0~git20170725.1.1648deb+dfsg1
+ SetFileAttributesW@Base 2.0.0~git20170725.1.1648deb+dfsg1
  SetFilePointer@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  SetFilePointerEx@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  SetFileTime@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
@@ -1202,6 +1220,7 @@ libwinpr.so.2 libwinpr2 #MINVER#
  UuidIsNil@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  UuidToStringA@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  UuidToStringW@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
+ ValidFileNameComponent@Base 2.0.0~git20170725.1.1648deb+dfsg1
  WLog_AddStringLogFilters@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  WLog_CloseAppender@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  WLog_ConfigureAppender@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
@@ -1411,6 +1430,7 @@ libwinpr.so.2 libwinpr2 #MINVER#
  _wcscmp@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  _wcsdup@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  _wcslen@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
+ _wcsrchr@Base 2.0.0~git20170725.1.1648deb+dfsg1
  closesocket@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  lstrcmpA@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  lstrcmpW@Base 2.0.0~git20160317.1.75ae3f5+dfsg1

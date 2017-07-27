@@ -1,4 +1,4 @@
-libfreerdp.so.2 libfreerdp2 #MINVER#
+libfreerdp2.so.2 libfreerdp2 #MINVER#
  Bitmap_Alloc@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  Bitmap_SetDimensions@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  Bitmap_SetRectangle@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
@@ -163,10 +163,12 @@ libfreerdp.so.2 libfreerdp2 #MINVER#
  freerdp_channel_get_open_handle_data@Base 2.0.0~git20161130.1.e60d0d5+dfsg1
  freerdp_channel_remove_init_handle_data@Base 2.0.0~git20161130.1.e60d0d5+dfsg1
  freerdp_channel_remove_open_handle_data@Base 2.0.0~git20161130.1.e60d0d5+dfsg1
+ freerdp_channels_attach@Base 2.0.0~git20170725.1.1648deb+dfsg1
  freerdp_channels_check_fds@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  freerdp_channels_client_load@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  freerdp_channels_client_load_ex@Base 2.0.0~git20161130.1.e60d0d5+dfsg1
  freerdp_channels_data@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
+ freerdp_channels_detach@Base 2.0.0~git20170725.1.1648deb+dfsg1
  freerdp_channels_get_event_handle@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  freerdp_channels_get_fds@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  freerdp_channels_get_static_channel_interface@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
@@ -212,6 +214,8 @@ libfreerdp.so.2 libfreerdp2 #MINVER#
  freerdp_get_last_error_name@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  freerdp_get_last_error_string@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  freerdp_get_library_install_path@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
+ freerdp_get_logon_error_info_data@Base 2.0.0~git20170725.1.1648deb+dfsg1
+ freerdp_get_logon_error_info_type@Base 2.0.0~git20170725.1.1648deb+dfsg1
  freerdp_get_message_queue@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  freerdp_get_message_queue_event_handle@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  freerdp_get_param_bool@Base 2.0.0~git20160317.1.75ae3f5+dfsg1

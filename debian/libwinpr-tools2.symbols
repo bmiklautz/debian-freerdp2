@@ -1,4 +1,4 @@
-libwinpr-tools.so.2 libwinpr-tools2 #MINVER#
+libwinpr-tools2.so.2 libwinpr-tools2 #MINVER#
  makecert_context_free@Base 2.0.0~git20160503.1.f828595+dfsg1
  makecert_context_new@Base 2.0.0~git20160503.1.f828595+dfsg1
  makecert_context_output_certificate_file@Base 2.0.0~git20160503.1.f828595+dfsg1

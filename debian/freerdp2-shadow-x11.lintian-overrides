@@ -1,3 +1,0 @@
-# https://github.com/FreeRDP/FreeRDP/issues/3347
-freerdp2-shadow-x11: binary-without-manpage usr/bin/freerdp-shadow-cli
-

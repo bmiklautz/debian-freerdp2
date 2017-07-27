@@ -1,4 +1,4 @@
-libfreerdp-server.so.2 libfreerdp-server2 #MINVER#
+libfreerdp-server2.so.2 libfreerdp-server2 #MINVER#
  audin_server_context_free@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  audin_server_context_new@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  cliprdr_server_context_free@Base 2.0.0~git20160317.1.75ae3f5+dfsg1

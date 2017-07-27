@@ -1,4 +1,4 @@
-libuwac.so.0 libuwac0 #MINVER#
+libuwac0.so.0 libuwac0 #MINVER#
  UwacCloseDisplay@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  UwacCreateWindowShm@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  UwacDestroyWindow@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
