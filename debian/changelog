@@ -11,6 +11,9 @@ freerdp2 (2.0.0~git20170725.1.1648deb+dfsg1-1) UNRELEASED; urgency=medium
   * debian/control:
     - Remove B:/R: rules (freerdp2-dev): libfreerdp-dev and freerdp2-dev don't
       have conflicting file names anymore
+  * debian/patches
+    + add 0001-Fix-gstreamer-1.0-detection.patch - fix gstreamer detection with
+      recent cmake versions
 
  -- Bernhard Miklautz <bernhard.miklautz@shacknet.at>  Wed, 26 Jul 2017 12:50:41 +0200
 
