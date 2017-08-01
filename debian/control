@@ -43,7 +43,7 @@ Build-Depends:
  libgstreamer-plugins-base1.0-dev,
  libwayland-dev,
  libxkbcommon-dev
-Standards-Version: 3.9.8
+Standards-Version: 4.0.0
 Homepage: http://www.freerdp.com/
 Vcs-Browser: https://anonscm.debian.org/git/pkg-remote/freerdp2.git
 Vcs-Git: https://anonscm.debian.org/git/pkg-remote/freerdp2.git
