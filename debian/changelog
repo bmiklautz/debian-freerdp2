@@ -1,4 +1,4 @@
-freerdp2 (2.0.0~git20170725.1.1648deb+dfsg1-1) UNRELEASED; urgency=medium
+freerdp2 (2.0.0~git20170725.1.1648deb+dfsg1-1) unstable; urgency=medium
 
   [ Bernhard Miklautz ]
   * import git snapshot for 2.0.0-rc0 from upstream (Closes: #854689, #851600)
@@ -15,7 +15,19 @@ freerdp2 (2.0.0~git20170725.1.1648deb+dfsg1-1) UNRELEASED; urgency=medium
     + add 0001-Fix-gstreamer-1.0-detection.patch - fix gstreamer detection with
       recent cmake versions
 
- -- Bernhard Miklautz <bernhard.miklautz@shacknet.at>  Wed, 26 Jul 2017 12:50:41 +0200
+  [ Mike Gabriel ]
+  * debian/{control,*.install,*.symbols}:
+    + Let package names match sonames.
+  * debian/control:
+    + Bump Standards-Version: to 4.0.0. No changes needed.
+  * lintian issue unused-override spelling-error-in-binary
+    usr/lib/x86_64-linux-gnu/libfreerdp-server.so.2.0.0 UNK(N)OWN
+    not triggered anymore.
+  * debian/patches:
+    + Add 1001_Typo-Fixes.patch and 1002_macro-fix-in-man-pages.patch.
+      Some cosmetic improvements (typos, man page flaws).
+
+ -- Mike Gabriel <sunweaver@debian.org>  Tue, 01 Aug 2017 10:37:14 +0000
 
 freerdp2 (2.0.0~git20161130.1.e60d0d5+dfsg1-1) unstable; urgency=medium
 
