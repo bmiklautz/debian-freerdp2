@@ -1,7 +1,4 @@
-libfreerdp-shadow-subsystem2.so.2 libfreerdp-shadow2 #MINVER#
- X11_ShadowSubsystemEntry@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- shadow_subsystem_set_entry_builtin@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
-libfreerdp-shadow2.so.2 libfreerdp-shadow2 #MINVER#
+libfreerdp-shadow2.so.2 libfreerdp-shadow2-2 #MINVER#
  shadow_capture_align_clip_rect@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  shadow_capture_compare@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  shadow_client_boardcast_msg@Base 2.0.0~git20160317.1.75ae3f5+dfsg1

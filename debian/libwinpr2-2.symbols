@@ -1,4 +1,4 @@
-libwinpr2.so.2 libwinpr2 #MINVER#
+libwinpr2.so.2 libwinpr2-2 #MINVER#
  ASN1DecSetError@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  ASN1EncSetError@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  ASN1_CloseEncoder@Base 2.0.0~git20160317.1.75ae3f5+dfsg1

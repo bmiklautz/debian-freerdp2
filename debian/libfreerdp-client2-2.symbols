@@ -1,4 +1,4 @@
-libfreerdp-client2.so.2 libfreerdp-client2 #MINVER#
+libfreerdp-client2.so.2 libfreerdp-client2-2 #MINVER#
  client_cli_authenticate@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  client_cli_gw_authenticate@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  client_cli_verify_certificate@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
