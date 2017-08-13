@@ -13,7 +13,7 @@ freerdp2 (2.0.0~git20170725.1.1648deb+dfsg1-1) unstable; urgency=medium
       have conflicting file names anymore
   * debian/patches
     + add 0001-Fix-gstreamer-1.0-detection.patch - fix gstreamer detection with
-      recent cmake versions
+      recent cmake versions. (Closes: #871150).
 
   [ Mike Gabriel ]
   * debian/{control,*.install,*.symbols}:
