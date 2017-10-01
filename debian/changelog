@@ -1,3 +1,13 @@
+freerdp2 (2.0.0~git20170725.1.1648deb+dfsg1-2) unstable; urgency=medium
+
+  * debian/changelog:
+    + post-upload add closure of #871150
+  * debian/rules:
+    + For armel builds set -DARM_FP_ABI=hard and -DWITH_NEON=off. Fixes FTBFS
+      on Debian armel.
+
+ -- Mike Gabriel <sunweaver@debian.org>  Sun, 01 Oct 2017 12:51:27 +0200
+
 freerdp2 (2.0.0~git20170725.1.1648deb+dfsg1-1) unstable; urgency=medium
 
   [ Bernhard Miklautz ]
