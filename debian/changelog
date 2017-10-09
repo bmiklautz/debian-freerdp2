@@ -1,3 +1,13 @@
+freerdp2 (2.0.0~git20170725.1.1648deb+dfsg1-4) unstable; urgency=medium
+
+  * debian/control:
+    + Fix typo in newly added dependency for freerdp2-dev.
+  * debian/rules:
+    + Improve fix for build support on armel. Thanks to Adrian Bunk. (Closes:
+      #874164).
+
+ -- Mike Gabriel <mike.gabriel@das-netzwerkteam.de>  Mon, 09 Oct 2017 15:55:42 +0200
+
 freerdp2 (2.0.0~git20170725.1.1648deb+dfsg1-3) unstable; urgency=medium
 
   * debian/control:
