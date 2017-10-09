@@ -1,3 +1,11 @@
+freerdp2 (2.0.0~git20170725.1.1648deb+dfsg1-3) unstable; urgency=medium
+
+  * debian/control:
+    + Add D (freerdp-dev): libfreerdp-shadow-subsystem2-2 (same binary version}.
+      (Closes: #877456).
+
+ -- Mike Gabriel <sunweaver@debian.org>  Mon, 09 Oct 2017 11:15:16 +0200
+
 freerdp2 (2.0.0~git20170725.1.1648deb+dfsg1-2) unstable; urgency=medium
 
   * debian/changelog:
