@@ -7,15 +7,10 @@ CFLAGS+=$(CPPFLAGS)
 CXXFLAGS+=$(CPPFLAGS)
 
 DEB_HOST_ARCH=$(shell dpkg-architecture -qDEB_HOST_ARCH)
-ifneq (,$(filter armhf,$(DEB_HOST_ARCH)))
-ARM_FLOAT_ABI = -DARM_FP_ABI=hard
-else
-ARM_FLOAT_ABI =
-endif
 ifneq (,$(filter armel,$(DEB_HOST_ARCH)))
-ARM_FLOAT_ABI = -DARM_FP_ABI=hard -DWITH_NEON=off
+WITH_NEON = -DWITH_NEON=OFF
 else
-ARM_FLOAT_ABI =
+WITH_NEON =
 endif
 
 NULL =
@@ -49,7 +44,7 @@ DEB_CMAKE_EXTRA_FLAGS :=  -DCMAKE_INSTALL_INCLUDEDIR=include/$(shell dpkg-archit
                           -DCMAKE_BUILD_TYPE=RELWITHDEBINFO \
                           -DWITH_WAYLAND=ON \
                           -DWITH_CLIENT_INTERFACE=OFF \
-                          $(ARM_FLOAT_ABI) \
+                          $(WITH_NEON) \
                           $(NULL)
 %:
 	dh $@ --parallel
