@@ -86,8 +86,8 @@ override_dh_strip:
 	dh_strip -plibuwac0-0 --dbgsym-migration='libuwac0-dbg (<< 2.0.0~git20161130.1.e60d0d5+dfsg1-1~exp1~)'
 
 PKD   = $(word 1,$(abspath $(dir $(MAKEFILE_LIST))))
-PKG   = $(word 2,$(shell dpkg-parsechangelog -l$(PKD)/changelog | grep ^Source))
-UVER  = $(shell dpkg-parsechangelog -l$(PKD)/changelog | perl -ne 'print $$1 if m{^Version:\s+(?:\d+:)?(\d.*)(?:\-\d+.*)};')
+PKG   = $(DEB_SOURCE)
+UVER  = $(shell echo $(DEB_VERSION) | cut -d "-" -f1)
 DTYPE = +dfsg1
 VER  ?= $(subst $(DTYPE),,$(UVER))
 
