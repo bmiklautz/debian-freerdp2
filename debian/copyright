@@ -1838,7 +1838,7 @@ License: Apache-2.0
 
 Files: cmake/AndroidToolchain.cmake
 Copyright: 2010-2011, Ethan Rublee
-  2011-2014, Andrey Kamaev 
+  2011-2014, Andrey Kamaev
 License: BSD-3-clause
 
 Files: cmake/AutoVersioning.cmake
