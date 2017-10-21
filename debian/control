@@ -209,7 +209,6 @@ Description: Windows Portable Runtime library (development files)
 Package: freerdp2-dev
 Section: devel
 Architecture: any
-Multi-Arch: same
 Depends:
  libfreerdp-client2-2 (= ${binary:Version}),
  libfreerdp-server2-2 (= ${binary:Version}),
