@@ -6,43 +6,43 @@ Uploaders:
  Mike Gabriel <sunweaver@debian.org>,
  Bernhard Miklautz <bernhard.miklautz@shacknet.at>,
 Build-Depends:
- debhelper (>= 9),
  autotools-dev,
- dpkg-dev (>= 1.16.1.1),
  cmake,
- pkg-config,
- xmlto,
- libssl-dev,
+ debhelper (>= 9),
  docbook-xsl,
- xsltproc,
- libx11-dev,
- libxkbfile-dev,
- libxrandr-dev,
- libxi-dev,
- libxrender-dev,
- libxext-dev,
- libxinerama-dev,
- libxfixes-dev,
- libxcursor-dev,
- libxv-dev,
- libxdamage-dev,
- libxtst-dev,
- libcups2-dev,
- libpcsclite-dev,
+ dpkg-dev (>= 1.16.1.1),
  libasound2-dev,
- libpulse-dev,
  libavcodec-dev,
  libavutil-dev,
- libjpeg-dev,
- libgsm1-dev,
- libusb-1.0-0-dev [linux-any],
- libudev-dev [linux-any],
+ libcups2-dev,
  libdbus-glib-1-dev,
- uuid-dev,
- libgstreamer1.0-dev,
+ libgsm1-dev,
  libgstreamer-plugins-base1.0-dev,
+ libgstreamer1.0-dev,
+ libjpeg-dev,
+ libpcsclite-dev,
+ libpulse-dev,
+ libssl-dev,
+ libudev-dev [linux-any],
+ libusb-1.0-0-dev [linux-any],
  libwayland-dev [linux-any],
- libxkbcommon-dev
+ libx11-dev,
+ libxcursor-dev,
+ libxdamage-dev,
+ libxext-dev,
+ libxfixes-dev,
+ libxi-dev,
+ libxinerama-dev,
+ libxkbcommon-dev,
+ libxkbfile-dev,
+ libxrandr-dev,
+ libxrender-dev,
+ libxtst-dev,
+ libxv-dev,
+ pkg-config,
+ uuid-dev,
+ xmlto,
+ xsltproc,
 Standards-Version: 4.0.0
 Homepage: http://www.freerdp.com/
 Vcs-Browser: https://anonscm.debian.org/git/pkg-remote/freerdp2.git
@@ -50,10 +50,15 @@ Vcs-Git: https://anonscm.debian.org/git/pkg-remote/freerdp2.git
 
 Package: freerdp2-x11
 Architecture: any
-Depends: ${misc:Depends}, ${shlibs:Depends}
-Provides: freerdp
-Replaces: freerdp-x11
-Conflicts: freerdp-x11
+Depends:
+ ${misc:Depends},
+ ${shlibs:Depends},
+Provides:
+ freerdp,
+Replaces:
+ freerdp-x11,
+Conflicts:
+ freerdp-x11,
 Description: RDP client for Windows Terminal Services (X11 client)
  FreeRDP is a libre client/server implementation of the Remote
  Desktop Protocol (RDP).
@@ -76,12 +81,18 @@ Description: RDP client for Windows Terminal Services (X11 client)
 Package: libfreerdp2-2
 Architecture: any
 Section: libs
-Pre-Depends: ${misc:Pre-Depends}
-Depends: ${misc:Depends}, ${shlibs:Depends}
-Breaks: libfreerdp2 (<< 2.0.0~git20170725.1.1648deb+dfsg1-1~),
-Replaces: libfreerdp2 (<< 2.0.0~git20170725.1.1648deb+dfsg1-1~),
+Pre-Depends:
+ ${misc:Pre-Depends},
+Depends:
+ ${misc:Depends},
+ ${shlibs:Depends},
+Breaks:
+ libfreerdp2 (<< 2.0.0~git20170725.1.1648deb+dfsg1-1~),
+Replaces:
+ libfreerdp2 (<< 2.0.0~git20170725.1.1648deb+dfsg1-1~),
 Multi-Arch: same
-Suggests: freerdp2-x11
+Suggests:
+ freerdp2-x11,
 Description: Free Remote Desktop Protocol library (core library)
  FreeRDP is a libre client/server implementation of the Remote
  Desktop Protocol (RDP).
@@ -91,10 +102,15 @@ Description: Free Remote Desktop Protocol library (core library)
 Package: libfreerdp-client2-2
 Architecture: any
 Section: libs
-Pre-Depends: ${misc:Pre-Depends}
-Depends: ${misc:Depends}, ${shlibs:Depends}
-Breaks: libfreerdp-client2 (<< 2.0.0~git20170725.1.1648deb+dfsg1-1~),
-Replaces: libfreerdp-client2 (<< 2.0.0~git20170725.1.1648deb+dfsg1-1~),
+Pre-Depends:
+ ${misc:Pre-Depends},
+Depends:
+ ${misc:Depends},
+ ${shlibs:Depends},
+Breaks:
+ libfreerdp-client2 (<< 2.0.0~git20170725.1.1648deb+dfsg1-1~),
+Replaces:
+ libfreerdp-client2 (<< 2.0.0~git20170725.1.1648deb+dfsg1-1~),
 Multi-Arch: same
 Description: Free Remote Desktop Protocol library (client library)
  FreeRDP is a libre client/server implementation of the Remote
@@ -105,10 +121,15 @@ Description: Free Remote Desktop Protocol library (client library)
 Package: libfreerdp-server2-2
 Architecture: any
 Section: libs
-Pre-Depends: ${misc:Pre-Depends}
-Depends: ${misc:Depends}, ${shlibs:Depends}
-Breaks: libfreerdp-server2 (<< 2.0.0~git20170725.1.1648deb+dfsg1-1~),
-Replaces: libfreerdp-server2 (<< 2.0.0~git20170725.1.1648deb+dfsg1-1~),
+Pre-Depends:
+ ${misc:Pre-Depends},
+Depends:
+ ${misc:Depends},
+ ${shlibs:Depends},
+Breaks:
+ libfreerdp-server2 (<< 2.0.0~git20170725.1.1648deb+dfsg1-1~),
+Replaces:
+ libfreerdp-server2 (<< 2.0.0~git20170725.1.1648deb+dfsg1-1~),
 Multi-Arch: same
 Description: Free Remote Desktop Protocol library (server library)
  FreeRDP is a libre client/server implementation of the Remote
@@ -119,12 +140,18 @@ Description: Free Remote Desktop Protocol library (server library)
 Package: libwinpr2-2
 Architecture: any
 Section: libs
-Pre-Depends: ${misc:Pre-Depends}
-Depends: ${misc:Depends}, ${shlibs:Depends}
-Breaks: libwinpr2 (<< 2.0.0~git20170725.1.1648deb+dfsg1-1~),
-Replaces: libwinpr2 (<< 2.0.0~git20170725.1.1648deb+dfsg1-1~),
+Pre-Depends:
+ ${misc:Pre-Depends},
+Depends:
+ ${misc:Depends},
+ ${shlibs:Depends},
+Breaks:
+ libwinpr2 (<< 2.0.0~git20170725.1.1648deb+dfsg1-1~),
+Replaces:
+ libwinpr2 (<< 2.0.0~git20170725.1.1648deb+dfsg1-1~),
 Multi-Arch: same
-Suggests: freerdp2-x11
+Suggests:
+ freerdp2-x11,
 Description: Windows Portable Runtime library
  WinPR is a spin-off project of FreeRDP which aims at providing a portable
  implementation of important portions of the Windows API. Just like FreeRDP,
@@ -140,10 +167,15 @@ Description: Windows Portable Runtime library
 Package: libwinpr-tools2-2
 Architecture: any
 Section: libs
-Pre-Depends: ${misc:Pre-Depends}
-Depends: ${misc:Depends}, ${shlibs:Depends}
-Breaks: libwinpr-tools2 (<< 2.0.0~git20170725.1.1648deb+dfsg1-1~),
-Replaces: libwinpr-tools2 (<< 2.0.0~git20170725.1.1648deb+dfsg1-1~),
+Pre-Depends:
+ ${misc:Pre-Depends},
+Depends:
+ ${misc:Depends},
+ ${shlibs:Depends},
+Breaks:
+ libwinpr-tools2 (<< 2.0.0~git20170725.1.1648deb+dfsg1-1~),
+Replaces:
+ libwinpr-tools2 (<< 2.0.0~git20170725.1.1648deb+dfsg1-1~),
 Multi-Arch: same
 Description: Windows Portable Runtime Tools library
  FreeRDP is a libre client/server implementation of the Remote
@@ -157,10 +189,10 @@ Section: libdevel
 Architecture: any
 Multi-Arch: same
 Depends:
- ${misc:Depends},
  libssl-dev,
- libwinpr2-2 (= ${binary:Version}),
  libwinpr-tools2-2 (= ${binary:Version}),
+ libwinpr2-2 (= ${binary:Version}),
+ ${misc:Depends},
 Description: Windows Portable Runtime library (development files)
  WinPR is a spin-off project of FreeRDP which aims at providing a portable
  implementation of important portions of the Windows API. Just like FreeRDP,
@@ -178,14 +210,14 @@ Section: devel
 Architecture: any
 Multi-Arch: same
 Depends:
- ${misc:Depends},
- libwinpr2-dev (= ${binary:Version}),
- libfreerdp2-2 (= ${binary:Version}),
- libfreerdp-server2-2 (= ${binary:Version}),
  libfreerdp-client2-2 (= ${binary:Version}),
- libfreerdp-shadow2-2 (= ${binary:Version}),
+ libfreerdp-server2-2 (= ${binary:Version}),
  libfreerdp-shadow-subsystem2-2 (= ${binary:Version}),
+ libfreerdp-shadow2-2 (= ${binary:Version}),
+ libfreerdp2-2 (= ${binary:Version}),
+ libwinpr2-dev (= ${binary:Version}),
  winpr-utils (= ${binary:Version}),
+ ${misc:Depends},
 Description: Free Remote Desktop Protocol library (development files)
  FreeRDP is a libre client/server implementation of the Remote
  Desktop Protocol (RDP).
@@ -196,7 +228,9 @@ Package: winpr-utils
 Multi-Arch: foreign
 Section: utils
 Architecture: any
-Depends: ${misc:Depends}, ${shlibs:Depends}
+Depends:
+ ${misc:Depends},
+ ${shlibs:Depends},
 Description: Windows Portable Runtime library command line utilities
  WinPR is a spin-off project of FreeRDP which aims at providing a portable
  implementation of important portions of the Windows API. Just like FreeRDP,
@@ -212,10 +246,15 @@ Description: Windows Portable Runtime library command line utilities
 Package: libfreerdp-shadow2-2
 Architecture: any
 Section: libs
-Pre-Depends: ${misc:Pre-Depends}
-Depends: ${misc:Depends}, ${shlibs:Depends},
-Breaks: libfreerdp-shadow2 (<< 2.0.0~git20170725.1.1648deb+dfsg1-1~),
-Replaces: libfreerdp-shadow2 (<< 2.0.0~git20170725.1.1648deb+dfsg1-1~),
+Pre-Depends:
+ ${misc:Pre-Depends},
+Depends:
+ ${misc:Depends},
+ ${shlibs:Depends},
+Breaks:
+ libfreerdp-shadow2 (<< 2.0.0~git20170725.1.1648deb+dfsg1-1~),
+Replaces:
+ libfreerdp-shadow2 (<< 2.0.0~git20170725.1.1648deb+dfsg1-1~),
 Multi-Arch: same
 Description: FreeRDP Remote Desktop Protocol shadow libraries
  FreeRDP is a libre client/server implementation of the Remote
@@ -226,10 +265,15 @@ Description: FreeRDP Remote Desktop Protocol shadow libraries
 Package: libfreerdp-shadow-subsystem2-2
 Architecture: any
 Section: libs
-Pre-Depends: ${misc:Pre-Depends}
-Depends: ${misc:Depends}, ${shlibs:Depends}
-Breaks: libfreerdp-shadow2 (<< 2.0.0~git20170725.1.1648deb+dfsg1-1~),
-Replaces: libfreerdp-shadow2 (<< 2.0.0~git20170725.1.1648deb+dfsg1-1~),
+Pre-Depends:
+ ${misc:Pre-Depends},
+Depends:
+ ${misc:Depends},
+ ${shlibs:Depends},
+Breaks:
+ libfreerdp-shadow2 (<< 2.0.0~git20170725.1.1648deb+dfsg1-1~),
+Replaces:
+ libfreerdp-shadow2 (<< 2.0.0~git20170725.1.1648deb+dfsg1-1~),
 Multi-Arch: same
 Description: FreeRDP Remote Desktop Protocol shadow subsystem libraries
  FreeRDP is a libre client/server implementation of the Remote
@@ -239,8 +283,11 @@ Description: FreeRDP Remote Desktop Protocol shadow subsystem libraries
 
 Package: freerdp2-shadow-x11
 Architecture: any
-Depends: ${misc:Depends}, ${shlibs:Depends}
-Provides: freerdp
+Depends:
+ ${misc:Depends},
+ ${shlibs:Depends},
+Provides:
+ freerdp,
 Description: FreeRDP x11 shadowing server
  FreeRDP is a libre client/server implementation of the Remote
  Desktop Protocol (RDP).
@@ -251,10 +298,15 @@ Description: FreeRDP x11 shadowing server
 Package: libuwac0-0
 Architecture: linux-any
 Section: libs
-Pre-Depends: ${misc:Pre-Depends}
-Depends: ${misc:Depends}, ${shlibs:Depends}
-Breaks: libuwac0 (<< 2.0.0~git20170725.1.1648deb+dfsg1-1~),
-Replaces: libuwac0 (<< 2.0.0~git20170725.1.1648deb+dfsg1-1~),
+Pre-Depends:
+ ${misc:Pre-Depends},
+Depends:
+ ${misc:Depends},
+ ${shlibs:Depends},
+Breaks:
+ libuwac0 (<< 2.0.0~git20170725.1.1648deb+dfsg1-1~),
+Replaces:
+ libuwac0 (<< 2.0.0~git20170725.1.1648deb+dfsg1-1~),
 Multi-Arch: same
 Description: Using wayland as a client library
  Using wayland as a client (uwac) is a library to provide common
@@ -267,8 +319,8 @@ Section: libdevel
 Architecture: linux-any
 Multi-Arch: same
 Depends:
- ${misc:Depends},
  libuwac0-0 (= ${binary:Version}),
+ ${misc:Depends},
 Description: Using wayland as a client (development files)
  Using wayland as a client (uwac) is a library to provide common
  functionality for wayland clients.
@@ -277,7 +329,9 @@ Description: Using wayland as a client (development files)
 
 Package: freerdp2-wayland
 Architecture: linux-any
-Depends: ${misc:Depends}, ${shlibs:Depends}
+Depends:
+ ${misc:Depends},
+ ${shlibs:Depends},
 Description: RDP client for Windows Terminal Services (wayland client)
  FreeRDP is a libre client/server implementation of the Remote
  Desktop Protocol (RDP).

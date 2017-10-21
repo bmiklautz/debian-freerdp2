@@ -1,4 +1,4 @@
-usr/lib/*/libuwac*.so
 usr/include/uwac*
-usr/lib/*/pkgconfig/uwac*.pc
 usr/lib/*/cmake/uwac*
+usr/lib/*/libuwac*.so
+usr/lib/*/pkgconfig/uwac*.pc
