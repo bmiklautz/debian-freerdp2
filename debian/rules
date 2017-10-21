@@ -16,8 +16,10 @@ endif
 DEB_HOST_ARCH_OS=$(shell dpkg-architecture -qDEB_HOST_ARCH_OS)
 ifeq (,$(filter linux, $(DEB_HOST_ARCH_OS)))
 WITH_WAYLAND = -DWITH_WAYLAND=OFF
+WITH_ALSA = -DWITH_ALSA=OFF
 else
 WITH_WAYLAND =
+WITH_ALSA =
 endif
 
 NULL =
@@ -37,6 +39,7 @@ DEB_CMAKE_EXTRA_FLAGS :=  -DCMAKE_INSTALL_INCLUDEDIR=include/$(shell dpkg-archit
                           -DCMAKE_SKIP_RPATH=FALSE \
                           -DCMAKE_SKIP_INSTALL_RPATH=TRUE \
                           -DWITH_PULSE=ON \
+                          ${WITH_ALSA} \
                           -DWITH_CHANNELS=ON \
                           -DBUILTIN_CHANNELS=ON \
                           -DWITH_CUPS=ON \
