@@ -41,7 +41,7 @@ Build-Depends:
  uuid-dev,
  libgstreamer1.0-dev,
  libgstreamer-plugins-base1.0-dev,
- libwayland-dev,
+ libwayland-dev [linux-any],
  libxkbcommon-dev
 Standards-Version: 4.0.0
 Homepage: http://www.freerdp.com/
@@ -249,7 +249,7 @@ Description: FreeRDP x11 shadowing server
  share an already started X11 DISPLAY.
 
 Package: libuwac0-0
-Architecture: any
+Architecture: linux-any
 Section: libs
 Pre-Depends: ${misc:Pre-Depends}
 Depends: ${misc:Depends}, ${shlibs:Depends}
@@ -264,7 +264,7 @@ Description: Using wayland as a client library
 
 Package: libuwac0-dev
 Section: libdevel
-Architecture: any
+Architecture: linux-any
 Multi-Arch: same
 Depends:
  ${misc:Depends},
@@ -276,7 +276,7 @@ Description: Using wayland as a client (development files)
  This package contains the libuwac development files
 
 Package: freerdp2-wayland
-Architecture: any
+Architecture: linux-any
 Depends: ${misc:Depends}, ${shlibs:Depends}
 Description: RDP client for Windows Terminal Services (wayland client)
  FreeRDP is a libre client/server implementation of the Remote

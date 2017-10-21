@@ -13,6 +13,13 @@ else
 WITH_NEON =
 endif
 
+DEB_HOST_ARCH_OS=$(shell dpkg-architecture -qDEB_HOST_ARCH_OS)
+ifeq (,$(filter linux, $(DEB_HOST_ARCH_OS)))
+WITH_WAYLAND = -DWITH_WAYLAND=OFF
+else
+WITH_WAYLAND =
+endif
+
 NULL =
 
 DEB_HOST_ARCH_OS=$(shell dpkg-architecture -qDEB_HOST_ARCH_OS)
@@ -42,7 +49,7 @@ DEB_CMAKE_EXTRA_FLAGS :=  -DCMAKE_INSTALL_INCLUDEDIR=include/$(shell dpkg-archit
                           -DWITH_SERVER=ON \
                           -DBUILD_TESTING=OFF \
                           -DCMAKE_BUILD_TYPE=RELWITHDEBINFO \
-                          -DWITH_WAYLAND=ON \
+                          $(WITH_WAYLAND) \
                           -DWITH_CLIENT_INTERFACE=OFF \
                           $(WITH_NEON) \
                           $(NULL)
