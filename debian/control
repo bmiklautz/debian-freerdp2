@@ -23,6 +23,7 @@ Build-Depends:
  libpcsclite-dev,
  libpulse-dev,
  libssl-dev,
+ libsystemd-dev [linux-any],
  libudev-dev [linux-any],
  libusb-1.0-0-dev [linux-any],
  libwayland-dev [linux-any],
