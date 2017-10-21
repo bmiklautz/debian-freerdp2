@@ -1,3 +1,30 @@
+freerdp2 (2.0.0~git20170725.1.1648deb+dfsg1-5) unstable; urgency=medium
+
+  * debian/{control,rules}:
+    + Don't build the wayland part of FreeRDP on non-Linux systems.
+    + Explicitly have libsystemd-dev as B-D. Disable building against
+      libsystemd-dev for non-Linux host.
+  * debian/control:
+    + Bump Standards-Version: to 4.1.1. No changes needed.
+    + Remove Multi-Arch: same field (for bin:pkg freerdp2-dev). (Closes:
+      #874222).
+  * debian/rules:
+    + FreeRDP2 does not build against oss4's alsa layer. Thus, deactivating
+      alsa support on non-linux hosts.
+    + Avoid using dpkg-parsechangelog.
+  * debian/{control,*.install}:
+    + Process with wrap-and-sort -t -s -a.
+  * debian/copyright{,.in}:
+    + White-space fix.
+  * debian/libwinpr2-2.symbols{.kfreebsd-*,hurd-*}:
+    + The libwinpr/comm/comm_serial_sys.c API is Linux-only.
+  * debian/patches:
+    + Add 1003_fix-FTBFS-on-kFreeBSD.patch,
+          1004_FreeBSD-is-not-kFreeBSD.patch.
+      Fix upstream passages for building against GNU/kFreeBSD.
+
+ -- Mike Gabriel <sunweaver@debian.org>  Sun, 22 Oct 2017 00:30:08 +0200
+
 freerdp2 (2.0.0~git20170725.1.1648deb+dfsg1-4) unstable; urgency=medium
 
   * debian/control:
