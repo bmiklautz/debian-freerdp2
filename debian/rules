@@ -49,7 +49,6 @@ DEB_CMAKE_EXTRA_FLAGS :=  -DCMAKE_INSTALL_INCLUDEDIR=include/$(shell dpkg-archit
                           -DWITH_JPEG=ON \
                           -DWITH_GSTREAMER_0_10=OFF \
                           -DWITH_GSTREAMER_1_0=ON \
-                          -DWITH_GSM=ON \
                           $(LINUX_URBDRC_CLIENT) \
                           -DWITH_SERVER=ON \
                           -DBUILD_TESTING=OFF \
@@ -59,6 +58,14 @@ DEB_CMAKE_EXTRA_FLAGS :=  -DCMAKE_INSTALL_INCLUDEDIR=include/$(shell dpkg-archit
                           -DWITH_CLIENT_INTERFACE=OFF \
                           $(WITH_NEON) \
                           $(NULL)
+
+# Ubuntu can't have ffmpeg in main
+ifeq ($(shell dpkg-vendor --is Ubuntu && echo yes),yes)
+DEB_CMAKE_EXTRA_FLAGS += -DWITH_FFMPEG=OFF -DWITH_GSM=OFF
+else
+DEB_CMAKE_EXTRA_FLAGS += -DWITH_GSM=ON
+endif
+
 %:
 	dh $@ --parallel
 
