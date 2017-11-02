@@ -1,3 +1,18 @@
+freerdp2 (2.0.0~git20170725.1.1648deb+dfsg1-6) unstable; urgency=medium
+
+  [ Mike Gabriel ]
+  * debian/changelog:
+    + Post-upload fix of 2.0.0~git20170725.1.1648deb+dfsg1-5 stanza. We forgot
+      to mention inclusion of pkg-info.pkg into debian/rules.
+
+  [ Jeremy Bicha ]
+  * debian/rules:
+    + Disable FFmpeg and GSM on Ubuntu (Closes: #880157)
+  * debian/gbp.conf:
+    + Add this file.
+
+ -- Mike Gabriel <sunweaver@debian.org>  Thu, 02 Nov 2017 12:10:06 +0100
+
 freerdp2 (2.0.0~git20170725.1.1648deb+dfsg1-5) unstable; urgency=medium
 
   * debian/{control,rules}:
