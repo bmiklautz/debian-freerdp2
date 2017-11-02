@@ -12,6 +12,8 @@ freerdp2 (2.0.0~git20170725.1.1648deb+dfsg1-5) unstable; urgency=medium
     + FreeRDP2 does not build against oss4's alsa layer. Thus, deactivating
       alsa support on non-linux hosts.
     + Avoid using dpkg-parsechangelog.
+    + Include pkg-info.pkg from dpkg to have DEB_SOURCE and DEB_VERSION
+      available.
   * debian/{control,*.install}:
     + Process with wrap-and-sort -t -s -a.
   * debian/copyright{,.in}:
