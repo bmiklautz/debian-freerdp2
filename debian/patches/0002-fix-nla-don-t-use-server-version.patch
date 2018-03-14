@@ -1,33 +1,22 @@
-From e7ae3f6babc881d893411a5ada9156abe8525b2f Mon Sep 17 00:00:00 2001
+From dd415320b78e6f703680aee64f9297909bd34f5e Mon Sep 17 00:00:00 2001
 From: Bernhard Miklautz <bernhard.miklautz@thincast.com>
-Date: Wed, 14 Mar 2018 13:39:23 +0100
+Date: Wed, 14 Mar 2018 16:58:50 +0100
 Subject: [PATCH] fix nla: don't use server version
 
-FreeRDP currently only supports CredSSP protocol version 3. However the
-current implementation always sent back the version received by the
-server indicating that this version was supported.
-With recent windows updates applied the protocol changed and this approach
-doesn't work anymore (see
-https://msdn.microsoft.com/en-us/library/mt752485.aspx for protocol changes).
-
-With this fix FreeRDP always sends version 3 as supported version.
-
-Credit goes to @mfleisz.
-
-Fixes #4449
+based on upstream commit e7ae3f6babc881d893411a5ada9156abe8525b2f
 ---
  libfreerdp/core/nla.c | 6 +++++-
  1 file changed, 5 insertions(+), 1 deletion(-)
 
 diff --git a/libfreerdp/core/nla.c b/libfreerdp/core/nla.c
-index c9c91dc85..cec177768 100644
+index 63966f5..ab9bfb3 100644
 --- a/libfreerdp/core/nla.c
 +++ b/libfreerdp/core/nla.c
-@@ -1691,15 +1691,19 @@ BOOL nla_send(rdpNla* nla)
- static int nla_decode_ts_request(rdpNla* nla, wStream* s)
+@@ -1541,15 +1541,19 @@ BOOL nla_send(rdpNla* nla)
+ int nla_decode_ts_request(rdpNla* nla, wStream* s)
  {
- 	size_t length;
-+	UINT32 version = 0;
+ 	int length;
++	UINT32 version;
  
  	/* TSRequest */
  	if (!ber_read_sequence_tag(s, &length) ||
