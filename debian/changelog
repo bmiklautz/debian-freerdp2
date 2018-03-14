@@ -1,3 +1,12 @@
+freerdp2 (2.0.0~git20170725.1.1648deb+dfsg1-7) unstable; urgency=medium
+
+  [ Bernhard Miklautz ]
+  * debian/patches
+    + add 0002-fix-nla-don-t-use-server-version.patch to fix NLA connection problems
+      with latest Windows update.
+
+ -- Bernhard Miklautz <bernhard.miklautz@shacknet.at>  Wed, 14 Mar 2018 15:53:42 +0100
+
 freerdp2 (2.0.0~git20170725.1.1648deb+dfsg1-6) unstable; urgency=medium
 
   [ Mike Gabriel ]
