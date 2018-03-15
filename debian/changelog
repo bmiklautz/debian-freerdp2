@@ -1,5 +1,7 @@
 freerdp2 (2.0.0~git20170725.1.1648deb+dfsg1-7) unstable; urgency=medium
 
+  * Team upload.
+
   [ Bernhard Miklautz ]
   * debian/patches
     + add 0002-fix-nla-don-t-use-server-version.patch to fix NLA connection problems
