@@ -6,7 +6,6 @@ Uploaders:
  Mike Gabriel <sunweaver@debian.org>,
  Bernhard Miklautz <bernhard.miklautz@shacknet.at>,
 Build-Depends:
- autotools-dev,
  cmake,
  debhelper (>= 11~),
  docbook-xsl,
