@@ -5,7 +5,14 @@ freerdp2 (2.0.0~git20170725.1.1648deb+dfsg1-7) unstable; urgency=medium
     + add 0002-fix-nla-don-t-use-server-version.patch to fix NLA connection problems
       with latest Windows update.
 
- -- Bernhard Miklautz <bernhard.miklautz@shacknet.at>  Wed, 14 Mar 2018 15:53:42 +0100
+  [ Matteo F. Vescovi ]
+  * debian/control: S-V bump 4.1.1 -> 4.1.3 (no changes needed)
+  * debian/control: Vcs-* fields updated to point to salsa
+  * debian/: debhelper bump 9 -> 11
+  * debian/rules: "--parallel" parameter dropped
+  * debian/control: autotools-dev b-dep dropped
+
+ -- Matteo F. Vescovi <mfv@debian.org>  Thu, 15 Mar 2018 14:31:05 +0100
 
 freerdp2 (2.0.0~git20170725.1.1648deb+dfsg1-6) unstable; urgency=medium
 
