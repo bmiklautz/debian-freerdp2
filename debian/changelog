@@ -13,8 +13,9 @@ freerdp2 (2.0.0~git20170725.1.1648deb+dfsg1-7) unstable; urgency=medium
   * debian/: debhelper bump 9 -> 11
   * debian/rules: "--parallel" parameter dropped
   * debian/control: autotools-dev b-dep dropped
+  * debian/rules: fix dpkg-architecture variables
 
- -- Matteo F. Vescovi <mfv@debian.org>  Thu, 15 Mar 2018 14:31:05 +0100
+ -- Matteo F. Vescovi <mfv@debian.org>  Thu, 15 Mar 2018 14:35:27 +0100
 
 freerdp2 (2.0.0~git20170725.1.1648deb+dfsg1-6) unstable; urgency=medium
 
