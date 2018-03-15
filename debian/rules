@@ -67,7 +67,7 @@ DEB_CMAKE_EXTRA_FLAGS += -DWITH_GSM=ON
 endif
 
 %:
-	dh $@ --parallel
+	dh $@
 
 .PHONY: override_dh_auto_configure override_dh_install override_dh_strip
 override_dh_auto_configure:
