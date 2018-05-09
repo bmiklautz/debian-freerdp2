@@ -2,6 +2,9 @@ Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: FreeRDP
 Upstream-Contact: FreeRDP project <freerdp-devel@lists.sourceforge.net>
 Source: http://github.com/FreeRDP/FreeRDP
+Comment:
+ Upstream Git snapshot gets repacked for Debian and we drop all non-Linux code
+ while doing so.
 
 Files: *
 Copyright: *No Copyright*
