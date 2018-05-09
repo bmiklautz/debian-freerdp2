@@ -199,8 +199,6 @@ Files: channels/client/addin.h
  rdtk/librdtk/rdtk_text_field.c
  rdtk/librdtk/rdtk_text_field.h
  rdtk/sample/rdtk_x11.c
- scripts/TimeZones.cs
- scripts/WindowsZones.cs
  scripts/xkb.pl
  server/Mac/mf_rdpsnd.h
  server/Sample/sf_audin.h
@@ -1475,13 +1473,6 @@ Copyright: 2011, Vic Lee
   2017, Thincast Technologies GmbH
 License: Apache-2.0
 
-Files: libfreerdp/primitives/prim_YUV_opt.c
-Copyright: 2014, Thomas Erbesdobler
-  2016-2017, Armin Novak <armin.novak@thincast.com>
-  2016-2017, Norbert Federa <norbert.federa@thincast.com>
-  2016-2017, Thincast Technologies GmbH
-License: Apache-2.0
-
 Files: libfreerdp/core/fastpath.c
 Copyright: 2011, Vic Lee
   2014, Norbert Federa <norbert.federa@thincast.com>
@@ -1840,11 +1831,6 @@ Files: cmake/AndroidToolchain.cmake
 Copyright: 2010-2011, Ethan Rublee
   2011-2014, Andrey Kamaev
 License: BSD-3-clause
-
-Files: cmake/AutoVersioning.cmake
-Copyright: 2011, O.S. Systems Software Ltda.
-  2011, Otavio Salvador <otavio@ossystems.com.br>
-License: Apache-2.0
 
 Files: cmake/ConfigOptionsAndroid.cmake
  cmake/CheckCmakeCompat.cmake
