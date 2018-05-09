@@ -113,8 +113,9 @@ static BOOL tf_post_connect(freerdp* instance)
 	return TRUE;
 }
 
-static void* tf_client_thread_proc(freerdp* instance)
+static DWORD WINAPI tf_client_thread_proc(LPVOID arg)
 {
+	freerdp* instance = (freerdp*)arg;
 	DWORD nCount;
 	DWORD status;
 	HANDLE handles[64];
@@ -122,7 +123,7 @@ static void* tf_client_thread_proc(freerdp* instance)
 	if (!freerdp_connect(instance))
 	{
 		WLog_ERR(TAG, "connection failure");
-		return NULL;
+		return 0;
 	}
 
 	while (!freerdp_shall_disconnect(instance))
@@ -146,14 +147,16 @@ static void* tf_client_thread_proc(freerdp* instance)
 
 		if (!freerdp_check_event_handles(instance->context))
 		{
-			WLog_ERR(TAG, "Failed to check FreeRDP event handles");
+			if (freerdp_get_last_error(instance->context) == FREERDP_ERROR_SUCCESS)
+				WLog_ERR(TAG, "Failed to check FreeRDP event handles");
+
 			break;
 		}
 	}
 
 	freerdp_disconnect(instance);
 	ExitThread(0);
-	return NULL;
+	return 0;
 }
 
 int main(int argc, char* argv[])
@@ -166,7 +169,7 @@ int main(int argc, char* argv[])
 	if (!instance)
 	{
 		WLog_ERR(TAG, "Couldn't create instance");
-		exit(1);
+		return 1;
 	}
 
 	instance->PreConnect = tf_pre_connect;
@@ -174,13 +177,12 @@ int main(int argc, char* argv[])
 	instance->ContextSize = sizeof(tfContext);
 	instance->ContextNew = tf_context_new;
 	instance->ContextFree = tf_context_free;
-
 	freerdp_register_addin_provider(freerdp_channels_load_static_addin_entry, 0);
 
 	if (!freerdp_context_new(instance))
 	{
 		WLog_ERR(TAG, "Couldn't create context");
-		exit(1);
+		return 1;
 	}
 
 	status = freerdp_client_settings_parse_command_line(instance->settings, argc,
@@ -188,16 +190,14 @@ int main(int argc, char* argv[])
 
 	if (status < 0)
 	{
-		exit(0);
+		return 0;
 	}
-
 
 	if (!freerdp_client_load_addins(instance->context->channels,
 	                                instance->settings))
-		exit(-1);
+		return -1;
 
-	if (!(thread = CreateThread(NULL, 0, (LPTHREAD_START_ROUTINE)
-	                            tf_client_thread_proc, instance, 0, NULL)))
+	if (!(thread = CreateThread(NULL, 0, tf_client_thread_proc, instance, 0, NULL)))
 	{
 		WLog_ERR(TAG, "Failed to create client thread");
 	}

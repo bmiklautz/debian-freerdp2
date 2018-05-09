@@ -307,17 +307,8 @@ out_print_name_error:
 				goto out_smartc_name_error;
 		}
 
-		if (smartcard->Path)
-		{
-			_smartcard->Path = _strdup(smartcard->Path);
-			if (!_smartcard->Path)
-				goto out_smartc_path_error;
-		}
-
 		return (RDPDR_DEVICE*) _smartcard;
 
-out_smartc_path_error:
-		free(_smartcard->Name);
 out_smartc_name_error:
 		free(_smartcard);
 		return NULL;
@@ -428,7 +419,7 @@ void freerdp_device_collection_free(rdpSettings* settings)
 		}
 		else if (settings->DeviceArray[index]->Type == RDPDR_DTYP_SMARTCARD)
 		{
-			free(((RDPDR_SMARTCARD*) device)->Path);
+
 		}
 		else if (settings->DeviceArray[index]->Type == RDPDR_DTYP_SERIAL)
 		{
@@ -921,6 +912,9 @@ BOOL freerdp_get_param_bool(rdpSettings* settings, int id)
 		case FreeRDP_ExternalCertificateManagement:
 			return settings->ExternalCertificateManagement;
 
+		case FreeRDP_FIPSMode:
+			return settings->FIPSMode;
+
 		case FreeRDP_Workarea:
 			return settings->Workarea;
 
@@ -1379,6 +1373,10 @@ int freerdp_set_param_bool(rdpSettings* settings, int id, BOOL param)
 
 		case FreeRDP_ExternalCertificateManagement:
 			settings->ExternalCertificateManagement = param;
+			break;
+
+		case FreeRDP_FIPSMode:
+			settings->FIPSMode = param;
 			break;
 
 		case FreeRDP_Workarea:
@@ -1845,6 +1843,12 @@ UINT32 freerdp_get_param_uint32(rdpSettings* settings, int id)
 		case FreeRDP_PercentScreen:
 			return settings->PercentScreen;
 
+		case FreeRDP_PercentScreenUseWidth:
+			return settings->PercentScreenUseWidth;
+
+		case FreeRDP_PercentScreenUseHeight:
+			return settings->PercentScreenUseHeight;
+
 		case FreeRDP_GatewayUsageMethod:
 			return settings->GatewayUsageMethod;
 
@@ -2140,6 +2144,14 @@ int freerdp_set_param_uint32(rdpSettings* settings, int id, UINT32 param)
 
 		case FreeRDP_PercentScreen:
 			settings->PercentScreen = param;
+			break;
+
+		case FreeRDP_PercentScreenUseWidth:
+			settings->PercentScreenUseWidth = param;
+			break;
+
+		case FreeRDP_PercentScreenUseHeight:
+			settings->PercentScreenUseHeight = param;
 			break;
 
 		case FreeRDP_GatewayUsageMethod:
@@ -2491,6 +2503,9 @@ char* freerdp_get_param_string(rdpSettings* settings, int id)
 		case FreeRDP_GatewayDomain:
 			return settings->GatewayDomain;
 
+		case FreeRDP_GatewayAccessToken:
+			return settings->GatewayAccessToken;
+
 		case FreeRDP_ProxyHostname:
 			return settings->ProxyHostname;
 
@@ -2699,6 +2714,10 @@ int freerdp_set_param_string(rdpSettings* settings, int id, const char* param)
 
 		case FreeRDP_GatewayDomain:
 			tmp = &settings->GatewayDomain;
+			break;
+
+		case FreeRDP_GatewayAccessToken:
+			tmp = &settings->GatewayAccessToken;
 			break;
 
 		case FreeRDP_ProxyHostname:

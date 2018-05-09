@@ -195,7 +195,7 @@ BOOL gdi_FillRect(HGDI_DC hdc, const HGDI_RECT rect, HGDI_BRUSH hbr)
 					else
 					{
 						dstColor = ReadColor(patp, hbr->pattern->format);
-						dstColor = ConvertColor(dstColor, hbr->pattern->format, hdc->format, NULL);
+						dstColor = FreeRDPConvertColor(dstColor, hbr->pattern->format, hdc->format, NULL);
 					}
 
 					if (dstp)
@@ -256,7 +256,6 @@ BOOL gdi_Rectangle(HGDI_DC hdc, UINT32 nXDst, UINT32 nYDst, UINT32 nWidth,
 		return TRUE;
 
 	color = hdc->textColor;
-	color = GetColor(hdc->format, 0, 0xFF, 0, 0xFF);
 
 	for (y = 0; y < nHeight; y++)
 	{

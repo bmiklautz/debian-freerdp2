@@ -1,6 +1,6 @@
 /**
  * FreeRDP: A Remote Desktop Protocol Implementation
- * Credential Security Support Provider (CredSSP)
+ * Network Level Authentication (NLA)
  *
  * Copyright 2010-2012 Marc-Andre Moreau <marcandre.moreau@gmail.com>
  *
@@ -60,7 +60,13 @@ struct rdp_nla
 	rdpSettings* settings;
 	rdpTransport* transport;
 	UINT32 cbMaxToken;
+#if defined(UNICODE)
+	SEC_WCHAR* packageName;
+#else
+	SEC_CHAR* packageName;
+#endif
 	UINT32 version;
+	UINT32 peerVersion;
 	UINT32 errorCode;
 	ULONG fContextReq;
 	ULONG pfContextAttr;
@@ -78,6 +84,7 @@ struct rdp_nla
 	SecBuffer negoToken;
 	SecBuffer pubKeyAuth;
 	SecBuffer authInfo;
+	SecBuffer ClientNonce;
 	SecBuffer PublicKey;
 	SecBuffer tsCredentials;
 	LPTSTR ServicePrincipalName;

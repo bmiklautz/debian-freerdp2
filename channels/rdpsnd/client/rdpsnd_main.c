@@ -34,6 +34,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <errno.h>
 
 #include <winpr/crt.h>
 #include <winpr/wlog.h>
@@ -102,7 +103,7 @@ struct rdpsnd_plugin
  */
 static UINT rdpsnd_confirm_wave(rdpsndPlugin* rdpsnd, RDPSND_WAVE* wave);
 
-static void* rdpsnd_schedule_thread(void* arg)
+static DWORD WINAPI rdpsnd_schedule_thread(LPVOID arg)
 {
 	wMessage message;
 	UINT16 wTimeDiff;
@@ -182,8 +183,8 @@ static void* rdpsnd_schedule_thread(void* arg)
 		setChannelError(rdpsnd->rdpcontext, error,
 		                "rdpsnd_schedule_thread reported an error");
 
-	ExitThread((DWORD)error);
-	return NULL;
+	ExitThread(error);
+	return error;
 }
 
 /**
@@ -224,8 +225,8 @@ static void rdpsnd_select_supported_audio_formats(rdpsndPlugin* rdpsnd)
 		return;
 
 	rdpsnd->ClientFormats = (AUDIO_FORMAT*) calloc(
-	                        rdpsnd->NumberOfServerFormats,
-				sizeof(AUDIO_FORMAT));
+	                            rdpsnd->NumberOfServerFormats,
+	                            sizeof(AUDIO_FORMAT));
 
 	if (!rdpsnd->ClientFormats)
 		return;
@@ -871,6 +872,7 @@ static UINT rdpsnd_process_addin_args(rdpsndPlugin* rdpsnd, ADDIN_ARGV* args)
 			return CHANNEL_RC_INITIALIZATION_ERROR;
 
 		arg = rdpsnd_args;
+		errno = 0;
 
 		do
 		{
@@ -890,23 +892,43 @@ static UINT rdpsnd_process_addin_args(rdpsndPlugin* rdpsnd, ADDIN_ARGV* args)
 			}
 			CommandLineSwitchCase(arg, "format")
 			{
-				rdpsnd->fixedFormat = atoi(arg->Value);
+				unsigned long val = strtoul(arg->Value, NULL, 0);
+
+				if ((errno != 0) || (val > UINT16_MAX))
+					return CHANNEL_RC_INITIALIZATION_ERROR;
+
+				rdpsnd->fixedFormat = val;
 			}
 			CommandLineSwitchCase(arg, "rate")
 			{
-				rdpsnd->fixedRate = atoi(arg->Value);
+				unsigned long val = strtoul(arg->Value, NULL, 0);
+
+				if ((errno != 0) || (val > UINT32_MAX))
+					return CHANNEL_RC_INITIALIZATION_ERROR;
+
+				rdpsnd->fixedRate = val;
 			}
 			CommandLineSwitchCase(arg, "channel")
 			{
-				rdpsnd->fixedChannel = atoi(arg->Value);
+				unsigned long val = strtoul(arg->Value, NULL, 0);
+
+				if ((errno != 0) || (val > UINT16_MAX))
+					return CHANNEL_RC_INITIALIZATION_ERROR;
+
+				rdpsnd->fixedChannel = val;
 			}
 			CommandLineSwitchCase(arg, "latency")
 			{
-				rdpsnd->latency = atoi(arg->Value);
+				unsigned long val = strtoul(arg->Value, NULL, 0);
+
+				if ((errno != 0) || (val > INT32_MAX))
+					return CHANNEL_RC_INITIALIZATION_ERROR;
+
+				rdpsnd->latency = val;
 			}
 			CommandLineSwitchCase(arg, "quality")
 			{
-				int wQualityMode = DYNAMIC_QUALITY;
+				long wQualityMode = DYNAMIC_QUALITY;
 
 				if (_stricmp(arg->Value, "dynamic") == 0)
 					wQualityMode = DYNAMIC_QUALITY;
@@ -915,7 +937,12 @@ static UINT rdpsnd_process_addin_args(rdpsndPlugin* rdpsnd, ADDIN_ARGV* args)
 				else if (_stricmp(arg->Value, "high") == 0)
 					wQualityMode = HIGH_QUALITY;
 				else
-					wQualityMode = atoi(arg->Value);
+				{
+					wQualityMode = strtol(arg->Value, NULL, 0);
+
+					if (errno != 0)
+						return CHANNEL_RC_INITIALIZATION_ERROR;
+				}
 
 				if ((wQualityMode < 0) || (wQualityMode > 2))
 					wQualityMode = DYNAMIC_QUALITY;
@@ -1088,7 +1115,7 @@ static UINT rdpsnd_process_connect(rdpsndPlugin* rdpsnd)
 		}
 
 		rdpsnd->ScheduleThread = CreateThread(NULL, 0,
-		                                      (LPTHREAD_START_ROUTINE) rdpsnd_schedule_thread,
+											  rdpsnd_schedule_thread,
 		                                      (void*) rdpsnd, 0, NULL);
 
 		if (!rdpsnd->ScheduleThread)
@@ -1244,7 +1271,7 @@ static VOID VCAPITYPE rdpsnd_virtual_channel_open_event_ex(LPVOID lpUserParam, D
 		                "rdpsnd_virtual_channel_open_event_ex reported an error");
 }
 
-static void* rdpsnd_virtual_channel_client_thread(void* arg)
+static DWORD WINAPI rdpsnd_virtual_channel_client_thread(LPVOID arg)
 {
 	wStream* data;
 	wMessage message;
@@ -1295,8 +1322,8 @@ out:
 		                "rdpsnd_virtual_channel_client_thread reported an error");
 
 	rdpsnd_process_disconnect(rdpsnd);
-	ExitThread((DWORD)error);
-	return NULL;
+	ExitThread(error);
+	return error;
 }
 
 /**
@@ -1328,7 +1355,7 @@ static UINT rdpsnd_virtual_channel_event_connected(rdpsndPlugin* rdpsnd,
 	}
 
 	rdpsnd->thread = CreateThread(NULL, 0,
-	                              (LPTHREAD_START_ROUTINE) rdpsnd_virtual_channel_client_thread, (void*) rdpsnd,
+								  rdpsnd_virtual_channel_client_thread, (void*) rdpsnd,
 	                              0, NULL);
 
 	if (!rdpsnd->thread)

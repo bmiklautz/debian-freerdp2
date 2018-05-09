@@ -240,6 +240,7 @@ static void xf_input_detect_pan(xfContext* xfc)
 	double py;
 	double dist_x;
 	double dist_y;
+	rdpContext* ctx = &xfc->context;
 
 	if (active_contacts != 2)
 	{
@@ -266,9 +267,8 @@ static void xf_input_detect_pan(xfContext* xfc)
 				EventArgsInit(&e, "xfreerdp");
 				e.dx = 5;
 				e.dy = 0;
-				PubSub_OnPanningChange(((rdpContext*) xfc)->pubSub, xfc, &e);
+				PubSub_OnPanningChange(ctx->pubSub, xfc, &e);
 			}
-			px_vector = 0;
 			px_vector = 0;
 			py_vector = 0;
 			z_vector = 0;
@@ -280,9 +280,8 @@ static void xf_input_detect_pan(xfContext* xfc)
 				EventArgsInit(&e, "xfreerdp");
 				e.dx = -5;
 				e.dy = 0;
-				PubSub_OnPanningChange(((rdpContext*) xfc)->pubSub, xfc, &e);
+				PubSub_OnPanningChange(ctx->pubSub, xfc, &e);
 			}
-			px_vector = 0;
 			px_vector = 0;
 			py_vector = 0;
 			z_vector = 0;
@@ -298,11 +297,10 @@ static void xf_input_detect_pan(xfContext* xfc)
 				EventArgsInit(&e, "xfreerdp");
 				e.dx = 0;
 				e.dy = 5;
-				PubSub_OnPanningChange(((rdpContext*) xfc)->pubSub, xfc, &e);
+				PubSub_OnPanningChange(ctx->pubSub, xfc, &e);
 			}
 			py_vector = 0;
 			px_vector = 0;
-			py_vector = 0;
 			z_vector = 0;
 		}
 		else if (py_vector < -PAN_THRESHOLD)
@@ -312,11 +310,10 @@ static void xf_input_detect_pan(xfContext* xfc)
 				EventArgsInit(&e, "xfreerdp");
 				e.dx = 0;
 				e.dy = -5;
-				PubSub_OnPanningChange(((rdpContext*) xfc)->pubSub, xfc, &e);
+				PubSub_OnPanningChange(ctx->pubSub, xfc, &e);
 			}
 			py_vector = 0;
 			px_vector = 0;
-			py_vector = 0;
 			z_vector = 0;
 		}
 	}
@@ -327,6 +324,7 @@ static void xf_input_detect_pinch(xfContext* xfc)
 	double dist;
 	double delta;
 	ZoomingChangeEventArgs e;
+	rdpContext* ctx = &xfc->context;
 
 	if (active_contacts != 2)
 	{
@@ -346,7 +344,6 @@ static void xf_input_detect_pinch(xfContext* xfc)
 		z_vector = 0;
 		px_vector = 0;
 		py_vector = 0;
-		z_vector = 0;
 	}
 	else
 	{
@@ -366,22 +363,20 @@ static void xf_input_detect_pinch(xfContext* xfc)
 		{
 			EventArgsInit(&e, "xfreerdp");
 			e.dx = e.dy = -10;
-			PubSub_OnZoomingChange(((rdpContext*) xfc)->pubSub, xfc, &e);
+			PubSub_OnZoomingChange(ctx->pubSub, xfc, &e);
 			z_vector = 0;
 			px_vector = 0;
 			py_vector = 0;
-			z_vector = 0;
 		}
 
 		if (z_vector < -ZOOM_THRESHOLD)
 		{
 			EventArgsInit(&e, "xfreerdp");
 			e.dx = e.dy = 10;
-			PubSub_OnZoomingChange(((rdpContext*) xfc)->pubSub, xfc, &e);
+			PubSub_OnZoomingChange(ctx->pubSub, xfc, &e);
 			z_vector = 0;
 			px_vector = 0;
 			py_vector = 0;
-			z_vector = 0;
 		}
 	}
 }
