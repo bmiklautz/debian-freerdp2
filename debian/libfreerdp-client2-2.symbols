@@ -24,6 +24,7 @@ libfreerdp-client2.so.2 libfreerdp-client2-2 #MINVER#
  freerdp_client_populate_settings_from_rdp_file@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  freerdp_client_print_buildconfig@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  freerdp_client_print_command_line_help@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
+ freerdp_client_print_command_line_help_ex@Base 2.0.0~git20180411.1.7a7b1802+dfsg1
  freerdp_client_print_version@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  freerdp_client_rdp_file_free@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  freerdp_client_rdp_file_get_integer_option@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
@@ -32,6 +33,7 @@ libfreerdp-client2.so.2 libfreerdp-client2-2 #MINVER#
  freerdp_client_rdp_file_set_integer_option@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  freerdp_client_rdp_file_set_string_option@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  freerdp_client_settings_command_line_status_print@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
+ freerdp_client_settings_command_line_status_print_ex@Base 2.0.0~git20180411.1.7a7b1802+dfsg1
  freerdp_client_settings_parse_assistance_file@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  freerdp_client_settings_parse_command_line@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  freerdp_client_settings_parse_command_line_arguments@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
@@ -46,3 +48,5 @@ libfreerdp-client2.so.2 libfreerdp-client2-2 #MINVER#
  freerdp_parse_hostname@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  freerdp_parse_username@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  freerdp_set_connection_type@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
+ mappedGeometryRef@Base 2.0.0~git20180411.1.7a7b1802+dfsg1
+ mappedGeometryUnref@Base 2.0.0~git20180411.1.7a7b1802+dfsg1

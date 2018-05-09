@@ -333,6 +333,15 @@ libfreerdp2.so.2 libfreerdp2-2 #MINVER#
  gdi_resize@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  gdi_resize_ex@Base 2.0.0~git20161130.1.e60d0d5+dfsg1
  gdi_rop3_code@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
+ gdi_rop3_code_string@Base 2.0.0~git20180411.1.7a7b1802+dfsg1
+ gdi_rop3_string@Base 2.0.0~git20180411.1.7a7b1802+dfsg1
+ gdi_send_suppress_output@Base 2.0.0~git20180411.1.7a7b1802+dfsg1
+ gdi_video_control_init@Base 2.0.0~git20180411.1.7a7b1802+dfsg1
+ gdi_video_control_uninit@Base 2.0.0~git20180411.1.7a7b1802+dfsg1
+ gdi_video_data_init@Base 2.0.0~git20180411.1.7a7b1802+dfsg1
+ gdi_video_data_uninit@Base 2.0.0~git20180411.1.7a7b1802+dfsg1
+ gdi_video_geometry_init@Base 2.0.0~git20180411.1.7a7b1802+dfsg1
+ gdi_video_geometry_uninit@Base 2.0.0~git20180411.1.7a7b1802+dfsg1
  getChannelError@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  getChannelErrorDescription@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  getChannelErrorEventHandle@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
@@ -514,6 +523,10 @@ libfreerdp2.so.2 libfreerdp2-2 #MINVER#
  xcrush_context_new@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  xcrush_context_reset@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  xcrush_decompress@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
+ yuv_context_decode@Base 2.0.0~git20180411.1.7a7b1802+dfsg1
+ yuv_context_free@Base 2.0.0~git20180411.1.7a7b1802+dfsg1
+ yuv_context_new@Base 2.0.0~git20180411.1.7a7b1802+dfsg1
+ yuv_context_reset@Base 2.0.0~git20180411.1.7a7b1802+dfsg1
  zgfx_compress@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  zgfx_compress_to_stream@Base 2.0.0~git20161130.1.e60d0d5+dfsg1
  zgfx_context_free@Base 2.0.0~git20160317.1.75ae3f5+dfsg1

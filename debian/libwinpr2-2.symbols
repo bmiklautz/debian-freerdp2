@@ -637,7 +637,7 @@ libwinpr2.so.2 libwinpr2-2 #MINVER#
  PCSC_GetOpenCardNameA@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  PCSC_GetOpenCardNameW@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  PCSC_SCardAccessStartedEvent@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- PCSC_SCardAddReaderName@Base 2.0.0~git20170725.1.1648deb+dfsg1
+#MISSING: 2.0.0~git20180411.1.7a7b1802+dfsg1# PCSC_SCardAddReaderName@Base 2.0.0~git20170725.1.1648deb+dfsg1
  PCSC_SCardAddReaderToGroupA@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  PCSC_SCardAddReaderToGroupW@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  PCSC_SCardAudit@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
@@ -999,7 +999,7 @@ libwinpr2.so.2 libwinpr2-2 #MINVER#
  RpcStringFreeW@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  RpcTestCancel@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  SCardAccessStartedEvent@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- SCardAddReaderName@Base 2.0.0~git20170725.1.1648deb+dfsg1
+#MISSING: 2.0.0~git20180411.1.7a7b1802+dfsg1# SCardAddReaderName@Base 2.0.0~git20170725.1.1648deb+dfsg1
  SCardAddReaderToGroupA@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  SCardAddReaderToGroupW@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  SCardAudit@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
@@ -1443,6 +1443,7 @@ libwinpr2.so.2 libwinpr2-2 #MINVER#
  sspi_SecBufferAlloc@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  sspi_SecBufferFree@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  sspi_SetAuthIdentity@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
+ sspi_SetAuthIdentityWithUnicodePassword@Base 2.0.0~git20180411.1.7a7b1802+dfsg1
  strtok_s@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  wcstok_s@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  winpr_BinToHexString@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
@@ -1469,13 +1470,16 @@ libwinpr2.so.2 libwinpr2-2 #MINVER#
  winpr_CreateThreadpoolWork@Base 2.0.0~git20161130.1.e60d0d5+dfsg1
  winpr_DeleteSynchronizationBarrier@Base 2.0.0~git20161130.1.e60d0d5+dfsg1
  winpr_Digest@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
+ winpr_Digest_Allow_FIPS@Base 2.0.0~git20180411.1.7a7b1802+dfsg1
  winpr_Digest_Final@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  winpr_Digest_Free@Base 2.0.0~git20161130.1.e60d0d5+dfsg1
  winpr_Digest_Init@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
+ winpr_Digest_Init_Allow_FIPS@Base 2.0.0~git20180411.1.7a7b1802+dfsg1
  winpr_Digest_New@Base 2.0.0~git20161130.1.e60d0d5+dfsg1
  winpr_Digest_Update@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  winpr_DisassociateCurrentThreadFromCallback@Base 2.0.0~git20161130.1.e60d0d5+dfsg1
  winpr_EnterSynchronizationBarrier@Base 2.0.0~git20161130.1.e60d0d5+dfsg1
+ winpr_FIPSMode@Base 2.0.0~git20180411.1.7a7b1802+dfsg1
  winpr_FreeLibraryWhenCallbackReturns@Base 2.0.0~git20161130.1.e60d0d5+dfsg1
  winpr_GetTickCount64@Base 2.0.0~git20161130.1.e60d0d5+dfsg1
  winpr_HMAC@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
@@ -1497,10 +1501,12 @@ libwinpr2.so.2 libwinpr2-2 #MINVER#
  winpr_RAND_pseudo@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  winpr_RC4_Free@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  winpr_RC4_New@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
+ winpr_RC4_New_Allow_FIPS@Base 2.0.0~git20180411.1.7a7b1802+dfsg1
  winpr_RC4_Update@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  winpr_ReleaseMutexWhenCallbackReturns@Base 2.0.0~git20161130.1.e60d0d5+dfsg1
  winpr_ReleaseSemaphoreWhenCallbackReturns@Base 2.0.0~git20161130.1.e60d0d5+dfsg1
  winpr_SetEventWhenCallbackReturns@Base 2.0.0~git20161130.1.e60d0d5+dfsg1
+ winpr_SetThreadpoolCallbackCleanupGroup@Base 2.0.0~git20180411.1.7a7b1802+dfsg1
  winpr_SetThreadpoolThreadMaximum@Base 2.0.0~git20161130.1.e60d0d5+dfsg1
  winpr_SetThreadpoolThreadMinimum@Base 2.0.0~git20161130.1.e60d0d5+dfsg1
  winpr_SetThreadpoolTimer@Base 2.0.0~git20161130.1.e60d0d5+dfsg1
