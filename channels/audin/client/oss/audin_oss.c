@@ -173,7 +173,7 @@ static UINT audin_oss_set_format(IAudinDevice* device, audinFormat* format,
 	return CHANNEL_RC_OK;
 }
 
-static void* audin_oss_thread_func(void* arg)
+static DWORD WINAPI audin_oss_thread_func(LPVOID arg)
 {
 	char dev_name[PATH_MAX] = "/dev/dsp";
 	char mixer_name[PATH_MAX] = "/dev/mixer";
@@ -352,8 +352,8 @@ err_out:
 	}
 
 	free(buffer);
-	ExitThread(0);
-	return NULL;
+	ExitThread(error);
+	return error;
 }
 
 /**
@@ -374,8 +374,7 @@ static UINT audin_oss_open(IAudinDevice* device, AudinReceive receive,
 		return ERROR_INTERNAL_ERROR;
 	}
 
-	if (!(oss->thread = CreateThread(NULL, 0,
-	                                 (LPTHREAD_START_ROUTINE)audin_oss_thread_func, oss, 0, NULL)))
+	if (!(oss->thread = CreateThread(NULL, 0, audin_oss_thread_func, oss, 0, NULL)))
 	{
 		WLog_ERR(TAG, "CreateThread failed!");
 		CloseHandle(oss->stopEvent);
@@ -471,6 +470,7 @@ static UINT audin_oss_parse_addin_args(AudinOSSDevice* device, ADDIN_ARGV* args)
 		return ERROR_INVALID_PARAMETER;
 
 	arg = audin_oss_args;
+	errno = 0;
 
 	do
 	{
@@ -488,7 +488,17 @@ static UINT audin_oss_parse_addin_args(AudinOSSDevice* device, ADDIN_ARGV* args)
 				return CHANNEL_RC_NO_MEMORY;
 			}
 
-			oss->dev_unit = strtol(str_num, &eptr, 10);
+			{
+				long val = strtol(str_num, &eptr, 10);
+
+				if ((errno != 0) || (val < INT32_MIN) || (val > INT32_MAX))
+				{
+					free(str_num);
+					return CHANNEL_RC_NULL_DATA;
+				}
+
+				oss->dev_unit = val;
+			}
 
 			if (oss->dev_unit < 0 || *eptr != '\0')
 				oss->dev_unit = -1;

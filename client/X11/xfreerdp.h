@@ -81,6 +81,8 @@ struct xf_glyph
 typedef struct xf_glyph xfGlyph;
 
 typedef struct xf_clipboard xfClipboard;
+typedef struct _xfDispContext xfDispContext;
+typedef struct _xfVideoContext xfVideoContext;
 
 /* Value of the first logical button number in X11 which must be */
 /* subtracted to go from a button number in X11 to an index into */
@@ -140,13 +142,6 @@ struct xf_context
 	UINT16 frame_x2;
 	UINT16 frame_y2;
 
-	UINT8 red_shift_l;
-	UINT8 red_shift_r;
-	UINT8 green_shift_l;
-	UINT8 green_shift_r;
-	UINT8 blue_shift_l;
-	UINT8 blue_shift_r;
-
 	int XInputOpcode;
 
 	int savedWidth;
@@ -164,7 +159,6 @@ struct xf_context
 	BOOL focused;
 	BOOL use_xinput;
 	BOOL mouse_active;
-	BOOL suppress_output;
 	BOOL fullscreen_toggle;
 	BOOL controlToggle;
 	UINT32 KeyboardLayout;
@@ -178,9 +172,9 @@ struct xf_context
 	BOOL complex_regions;
 	VIRTUAL_SCREEN vscreen;
 	void* xv_context;
-	TsmfClientContext* tsmf;
-	xfClipboard* clipboard;
-	CliprdrClientContext* cliprdr;
+
+	Atom* supportedAtoms;
+	unsigned long supportedAtomCount;
 
 	Atom UTF8_STRING;
 
@@ -188,6 +182,9 @@ struct xf_context
 	Atom _MOTIF_WM_HINTS;
 	Atom _NET_CURRENT_DESKTOP;
 	Atom _NET_WORKAREA;
+
+	Atom _NET_SUPPORTED;
+	ATOM _NET_SUPPORTING_WM_CHECK;
 
 	Atom _NET_WM_STATE;
 	Atom _NET_WM_STATE_FULLSCREEN;
@@ -216,9 +213,14 @@ struct xf_context
 	Atom WM_DELETE_WINDOW;
 
 	/* Channels */
+	TsmfClientContext* tsmf;
+	xfClipboard* clipboard;
+	CliprdrClientContext* cliprdr;
+	xfVideoContext* xfVideo;
 	RdpeiClientContext* rdpei;
-	RdpgfxClientContext* gfx;
 	EncomspClientContext* encomsp;
+	xfDispContext* xfDisp;
+	DispClientContext* disp;
 
 	RailClientContext* rail;
 	wHashTable* railWindows;
@@ -228,6 +230,7 @@ struct xf_context
 
 	/* value to be sent over wire for each logical client mouse button */
 	int button_map[NUM_BUTTONS_MAPPED];
+	BYTE savedMaximizedState;
 };
 
 BOOL xf_create_window(xfContext* xfc);

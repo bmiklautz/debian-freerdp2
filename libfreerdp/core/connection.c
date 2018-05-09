@@ -32,6 +32,7 @@
 
 #include <winpr/crt.h>
 #include <winpr/crypto.h>
+#include <winpr/ssl.h>
 
 #include <freerdp/log.h>
 #include <freerdp/error.h>
@@ -177,6 +178,24 @@ BOOL rdp_client_connect(rdpRdp* rdp)
 {
 	BOOL status;
 	rdpSettings* settings = rdp->settings;
+
+	/* make sure SSL is initialize for earlier enough for crypto, by taking advantage of winpr SSL FIPS flag for openssl initialization */
+	DWORD flags = WINPR_SSL_INIT_DEFAULT;
+
+	if (settings->FIPSMode)
+		flags |= WINPR_SSL_INIT_ENABLE_FIPS;
+	winpr_InitializeSSL(flags);
+
+	/* FIPS Mode forces the following and overrides the following(by happening later */
+	/* in the command line processing): */
+	/* 1. Disables NLA Security since NLA in freerdp uses NTLM(no Kerberos support yet) which uses algorithms */
+	/*      not allowed in FIPS for sensitive data. So, we disallow NLA when FIPS is required. */
+	/* 2. Forces the only supported RDP encryption method to be FIPS. */
+	if (settings->FIPSMode || winpr_FIPSMode())
+	{
+		settings->NlaSecurity = FALSE;
+		settings->EncryptionMethods = ENCRYPTION_METHOD_FIPS;
+	}
 
 	nego_init(rdp->nego);
 	nego_set_target(rdp->nego, settings->ServerHostname, settings->ServerPort);

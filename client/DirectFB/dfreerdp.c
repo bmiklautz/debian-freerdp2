@@ -220,7 +220,7 @@ BOOL df_verify_certificate(freerdp* instance, char* subject, char* issuer,
 	WLog_INFO(TAG,
 	          "The above X.509 certificate could not be verified, possibly because you do not have "
 	          "the CA certificate in your certificate store, or the certificate has expired. "
-	          "Please look at the documentation on how to create local certificate store for a private CA.");
+	          "Please look at the OpenSSL documentation on how to add a private CA to the store.");
 
 	while (1)
 	{
@@ -422,7 +422,7 @@ int main(int argc, char* argv[])
 	if (!(g_sem = CreateSemaphore(NULL, 0, 1, NULL)))
 	{
 		WLog_ERR(TAG, "Failed to create semaphore");
-		exit(1);
+		return 1;
 	}
 
 	instance = freerdp_new();
@@ -437,7 +437,7 @@ int main(int argc, char* argv[])
 	if (!freerdp_context_new(instance))
 	{
 		WLog_ERR(TAG, "Failed to create FreeRDP context");
-		exit(1);
+		return 1;
 	}
 
 	context = (dfContext*) instance->context;
@@ -449,11 +449,11 @@ int main(int argc, char* argv[])
 	         argv, FALSE);
 
 	if (status < 0)
-		exit(0);
+		return 0;
 
 	if (!freerdp_client_load_addins(instance->context->channels,
 	                                instance->settings))
-		exit(-1);
+		return -1;
 
 	data = (struct thread_data*) malloc(sizeof(struct thread_data));
 	ZeroMemory(data, sizeof(sizeof(struct thread_data)));

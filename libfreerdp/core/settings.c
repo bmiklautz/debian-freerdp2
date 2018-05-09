@@ -333,6 +333,7 @@ rdpSettings* freerdp_settings_new(DWORD flags)
 	settings->ConnectionType = CONNECTION_TYPE_LAN;
 	settings->EncryptionMethods = ENCRYPTION_METHOD_NONE;
 	settings->EncryptionLevel = ENCRYPTION_LEVEL_NONE;
+	settings->FIPSMode = FALSE;
 	settings->CompressionEnabled = TRUE;
 	settings->LogonNotify = TRUE;
 
@@ -562,6 +563,7 @@ rdpSettings* freerdp_settings_new(DWORD flags)
 
 	if (!settings->ServerMode)
 	{
+		settings->RedirectClipboard = TRUE;
 		/* these values are used only by the client part */
 		settings->HomePath = GetKnownPath(KNOWN_PATH_HOME);
 
@@ -690,6 +692,7 @@ rdpSettings* freerdp_settings_clone(rdpSettings* settings)
 		CHECKED_STRDUP(GatewayUsername); /* 1987 */
 		CHECKED_STRDUP(GatewayPassword); /* 1988 */
 		CHECKED_STRDUP(GatewayDomain); /* 1989 */
+		CHECKED_STRDUP(GatewayAccessToken); /* 1997 */
 		CHECKED_STRDUP(ProxyHostname); /* 2016 */
 		CHECKED_STRDUP(RemoteApplicationName); /* 2113 */
 		CHECKED_STRDUP(RemoteApplicationIcon); /* 2114 */
@@ -1083,6 +1086,7 @@ void freerdp_settings_free(rdpSettings* settings)
 	free(settings->GatewayUsername);
 	free(settings->GatewayPassword);
 	free(settings->GatewayDomain);
+	free(settings->GatewayAccessToken);
 	free(settings->CertificateName);
 	free(settings->DynamicDSTTimeZoneKeyName);
 	free(settings->PreconnectionBlob);

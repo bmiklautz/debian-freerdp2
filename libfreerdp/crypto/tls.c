@@ -23,6 +23,7 @@
 
 #include <assert.h>
 #include <string.h>
+#include <errno.h>
 
 #include <winpr/crt.h>
 #include <winpr/sspi.h>
@@ -77,8 +78,8 @@ struct _BIO_RDP_TLS
 };
 typedef struct _BIO_RDP_TLS BIO_RDP_TLS;
 
-long bio_rdp_tls_callback(BIO* bio, int mode, const char* argp, int argi,
-                          long argl, long ret)
+static long bio_rdp_tls_callback(BIO* bio, int mode, const char* argp, int argi,
+                                 long argl, long ret)
 {
 	return 1;
 }
@@ -234,7 +235,6 @@ static long bio_rdp_tls_ctrl(BIO* bio, int cmd, long num, void* ptr)
 	int status = -1;
 	BIO_RDP_TLS* tls = (BIO_RDP_TLS*) BIO_get_data(bio);
 
-
 	if (!tls)
 		return 0;
 
@@ -340,6 +340,7 @@ static long bio_rdp_tls_ctrl(BIO* bio, int cmd, long num, void* ptr)
 			break;
 
 		case BIO_CTRL_POP:
+
 			/* Only detach if we are the BIO explicitly being popped */
 			if (bio == ptr)
 			{
@@ -347,8 +348,10 @@ static long bio_rdp_tls_ctrl(BIO* bio, int cmd, long num, void* ptr)
 					BIO_free_all(ssl_wbio);
 
 #if OPENSSL_VERSION_NUMBER < 0x10100000L || defined(LIBRESSL_VERSION_NUMBER)
+
 				if (next_bio)
 					CRYPTO_add(&(bio->next_bio->references), -1, CRYPTO_LOCK_BIO);
+
 				tls->ssl->wbio = tls->ssl->rbio = NULL;
 #else
 				/* OpenSSL 1.1: This will also clear the reference we obtained during push */
@@ -392,7 +395,6 @@ static long bio_rdp_tls_ctrl(BIO* bio, int cmd, long num, void* ptr)
 			}
 
 			BIO_set_init(bio, 1);
-
 			status = 1;
 			break;
 
@@ -437,16 +439,13 @@ static long bio_rdp_tls_ctrl(BIO* bio, int cmd, long num, void* ptr)
 static int bio_rdp_tls_new(BIO* bio)
 {
 	BIO_RDP_TLS* tls;
-
 	BIO_set_flags(bio, BIO_FLAGS_SHOULD_RETRY);
 
 	if (!(tls = calloc(1, sizeof(BIO_RDP_TLS))))
 		return 0;
 
 	InitializeCriticalSectionAndSpinCount(&tls->lock, 4000);
-
 	BIO_set_data(bio, (void*) tls);
-
 	return 1;
 }
 
@@ -469,6 +468,7 @@ static int bio_rdp_tls_free(BIO* bio)
 			SSL_shutdown(tls->ssl);
 			SSL_free(tls->ssl);
 		}
+
 		BIO_set_init(bio, 0);
 		BIO_set_flags(bio, 0);
 	}
@@ -508,7 +508,7 @@ static long bio_rdp_tls_callback_ctrl(BIO* bio, int cmd, bio_info_cb* fp)
 
 #define BIO_TYPE_RDP_TLS	68
 
-BIO_METHOD* BIO_s_rdp_tls(void)
+static BIO_METHOD* BIO_s_rdp_tls(void)
 {
 	static BIO_METHOD* bio_methods = NULL;
 
@@ -530,7 +530,7 @@ BIO_METHOD* BIO_s_rdp_tls(void)
 	return bio_methods;
 }
 
-BIO* BIO_new_rdp_tls(SSL_CTX* ctx, int client)
+static BIO* BIO_new_rdp_tls(SSL_CTX* ctx, int client)
 {
 	BIO* bio;
 	SSL* ssl;
@@ -596,7 +596,7 @@ static void tls_free_certificate(CryptoCert cert)
 
 #define TLS_SERVER_END_POINT	"tls-server-end-point:"
 
-SecPkgContext_Bindings* tls_get_channel_bindings(X509* cert)
+static SecPkgContext_Bindings* tls_get_channel_bindings(X509* cert)
 {
 	int PrefixLength;
 	BYTE CertificateHash[32];
@@ -681,7 +681,7 @@ static BOOL tls_prepare(rdpTls* tls, BIO* underlying, SSL_METHOD* method,
 	return TRUE;
 }
 
-int tls_do_handshake(rdpTls* tls, BOOL clientMode)
+static int tls_do_handshake(rdpTls* tls, BOOL clientMode)
 {
 	CryptoCert cert;
 	int verify_status;
@@ -1016,12 +1016,12 @@ BOOL tls_send_alert(rdpTls* tls)
 	if (!tls->ssl)
 		return TRUE;
 
-/**
- * FIXME: The following code does not work on OpenSSL > 1.1.0 because the
- *        SSL struct is opaqe now
- */
-
+	/**
+	 * FIXME: The following code does not work on OpenSSL > 1.1.0 because the
+	 *        SSL struct is opaqe now
+	 */
 #if OPENSSL_VERSION_NUMBER < 0x10100000L || defined(LIBRESSL_VERSION_NUMBER)
+
 	if (tls->alertDescription != TLS_ALERT_DESCRIPTION_CLOSE_NOTIFY)
 	{
 		/**
@@ -1035,7 +1035,6 @@ BOOL tls_send_alert(rdpTls* tls)
 		 */
 		SSL_SESSION* ssl_session = SSL_get_session(tls->ssl);
 		SSL_CTX* ssl_ctx = SSL_get_SSL_CTX(tls->ssl);
-
 		SSL_set_quiet_shutdown(tls->ssl, 1);
 
 		if ((tls->alertLevel == TLS_ALERT_LEVEL_FATAL) && (ssl_session))
@@ -1048,12 +1047,12 @@ BOOL tls_send_alert(rdpTls* tls)
 		if (tls->ssl->s3->wbuf.left == 0)
 			tls->ssl->method->ssl_dispatch_alert(tls->ssl);
 	}
-#endif
 
+#endif
 	return TRUE;
 }
 
-BIO* findBufferedBio(BIO* front)
+static BIO* findBufferedBio(BIO* front)
 {
 	BIO* ret = front;
 
@@ -1467,7 +1466,6 @@ rdpTls* tls_new(rdpSettings* settings)
 	if (!tls)
 		return NULL;
 
-	winpr_InitializeSSL(WINPR_SSL_INIT_DEFAULT);
 	tls->settings = settings;
 
 	if (!settings->ServerMode)
