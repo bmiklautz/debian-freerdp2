@@ -1,3 +1,11 @@
+freerdp2 (2.0.0~git20180411.1.7a7b1802+dfsg1-2) unstable; urgency=medium
+
+  * debian/patches:
+    + Add 0001_nsc-context-free-must-not-access-uninit-fields.patch. Fixes
+      segfault in Vinagre when user mistypes the password. (Closes: #898448).
+
+ -- Mike Gabriel <mike.gabriel@das-netzwerkteam.de>  Tue, 15 May 2018 15:55:52 +0200
+
 freerdp2 (2.0.0~git20180411.1.7a7b1802+dfsg1-1) unstable; urgency=medium
 
   [ Bernhard Miklautz ]
