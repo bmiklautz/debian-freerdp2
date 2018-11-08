@@ -35,3 +35,4 @@ libuwac0.so.0 libuwac0-0 #MINVER#
  xdg_popup_interface@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  xdg_shell_interface@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  xdg_surface_interface@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
+*Build-Depends-Package: libuwac0-dev

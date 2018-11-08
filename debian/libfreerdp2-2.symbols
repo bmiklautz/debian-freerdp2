@@ -533,3 +533,4 @@ libfreerdp2.so.2 libfreerdp2-2 #MINVER#
  zgfx_context_new@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  zgfx_context_reset@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  zgfx_decompress@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
+*Build-Depends-Package: freerdp2-dev

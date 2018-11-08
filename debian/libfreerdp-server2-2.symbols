@@ -32,3 +32,4 @@ libfreerdp-server2.so.2 libfreerdp-server2-2 #MINVER#
  rdpsnd_server_send_formats@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  remdesk_server_context_free@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  remdesk_server_context_new@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
+*Build-Depends-Package: freerdp2-dev
