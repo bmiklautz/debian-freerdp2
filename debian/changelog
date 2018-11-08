@@ -1,10 +1,19 @@
 freerdp2 (2.0.0~git20180411.1.7a7b1802+dfsg1-3) unstable; urgency=medium
 
+  [ Bernhard Miklautz ]
   * debian/patches:
     + Add 0002_set-tls-seclevel.patch. Sets the default TLS security level to
-      1. Back ported from ustream (PR 4996). (Closes #912206).
+      1. Back-ported from ustream (PR 4996). (Closes: #912206).
 
- -- Bernhard Miklautz <bernhard.miklautz@shacknet.at>  Thu, 08 Nov 2018 11:44:36 +0100
+  [ Mike Gabriel ]
+  * debian/patches:
+    + Add patch header to 0002_set-tls-seclevel.patch.
+  * debian/*.symbols:
+    + Add Build-Depends-Package: field.
+  * debian/control:
+    + Bump Standards-Version: to 4.2.1. No changes needed.
+
+ -- Mike Gabriel <sunweaver@debian.org>  Thu, 08 Nov 2018 12:08:43 +0100
 
 freerdp2 (2.0.0~git20180411.1.7a7b1802+dfsg1-2) unstable; urgency=medium
 
