@@ -1,0 +1,73 @@
+diff --git a/client/common/cmdline.c b/client/common/cmdline.c
+index 801ef95..3296da8 100644
+--- a/client/common/cmdline.c
++++ b/client/common/cmdline.c
+@@ -2367,6 +2367,15 @@ int freerdp_client_settings_parse_command_line_arguments(rdpSettings* settings,
+ 					return COMMAND_LINE_ERROR_MEMORY;
+ 			}
+ 		}
++		CommandLineSwitchCase(arg, "tls-seclevel")
++		{
++			unsigned long val = strtoul(arg->Value, NULL, 0);
++
++			if ((errno != 0) || (val > 5))
++				return COMMAND_LINE_ERROR_UNEXPECTED_VALUE;
++
++			settings->TlsSecLevel = val;
++		}
+ 		CommandLineSwitchCase(arg, "cert-name")
+ 		{
+ 			free(settings->CertificateName);
+diff --git a/client/common/cmdline.h b/client/common/cmdline.h
+index 8785ed6..364a161 100644
+--- a/client/common/cmdline.h
++++ b/client/common/cmdline.h
+@@ -165,6 +165,7 @@ static COMMAND_LINE_ARGUMENT_A args[] =
+ 	{ "t", COMMAND_LINE_VALUE_REQUIRED, "<title>", NULL, NULL, -1, "title", "Window title" },
+ 	{ "themes", COMMAND_LINE_VALUE_BOOL, NULL, BoolValueTrue, NULL, -1, NULL, "Enable themes" },
+ 	{ "tls-ciphers", COMMAND_LINE_VALUE_REQUIRED, "netmon|ma|ciphers", NULL, NULL, -1, NULL, "Allowed TLS ciphers" },
++	{ "tls-seclevel", COMMAND_LINE_VALUE_REQUIRED, "<level>", "1", NULL, -1, NULL, "TLS security level - defaults to 1" },
+ 	{ "toggle-fullscreen", COMMAND_LINE_VALUE_BOOL, NULL, BoolValueTrue, NULL, -1, NULL, "Alt+Ctrl+Enter toggles fullscreen" },
+ 	{ "u", COMMAND_LINE_VALUE_REQUIRED, "[<domain>\\]<user> or <user>[@<domain>]", NULL, NULL, -1, NULL, "Username" },
+ 	{ "unmap-buttons", COMMAND_LINE_VALUE_BOOL, NULL, BoolValueFalse, NULL, -1, NULL, "Let server see real physical pointer button"},
+diff --git a/include/freerdp/settings.h b/include/freerdp/settings.h
+index e35364b..3f2fdd8 100644
+--- a/include/freerdp/settings.h
++++ b/include/freerdp/settings.h
+@@ -1020,7 +1020,8 @@ struct rdp_settings
+ 	ALIGN64 BOOL VmConnectMode; /* 1102 */
+ 	ALIGN64 char* NtlmSamFile; /* 1103 */
+ 	ALIGN64 BOOL FIPSMode; /* 1104 */
+-	UINT64 padding1152[1152 - 1105]; /* 1105 */
++	ALIGN64 UINT32 TlsSecLevel;                  /* 1105 */
++	UINT64 padding1152[1152 - 1106]; /* 1106 */
+ 
+ 	/* Connection Cookie */
+ 	ALIGN64 BOOL MstscCookieMode; /* 1152 */
+diff --git a/libfreerdp/core/settings.c b/libfreerdp/core/settings.c
+index 4d249eb..4b5ab46 100644
+--- a/libfreerdp/core/settings.c
++++ b/libfreerdp/core/settings.c
+@@ -612,6 +612,7 @@ rdpSettings* freerdp_settings_new(DWORD flags)
+ 		goto out_fail;
+ 
+ 	settings->ActionScript = _strdup("~/.config/freerdp/action.sh");
++	settings->TlsSecLevel = 1;
+ 	return settings;
+ out_fail:
+ 	free(settings->HomePath);
+diff --git a/libfreerdp/crypto/tls.c b/libfreerdp/crypto/tls.c
+index c9ae8c8..cd06b94 100644
+--- a/libfreerdp/crypto/tls.c
++++ b/libfreerdp/crypto/tls.c
+@@ -659,6 +659,10 @@ static BOOL tls_prepare(rdpTls* tls, BIO* underlying, SSL_METHOD* method,
+ 	SSL_CTX_set_options(tls->ctx, options);
+ 	SSL_CTX_set_read_ahead(tls->ctx, 1);
+ 
++#if OPENSSL_VERSION_NUMBER >= 0x10100000L || defined(LIBRESSL_VERSION_NUMBER)
++	SSL_CTX_set_security_level(tls->ctx, settings->TlsSecLevel);
++#endif
++
+ 	if (settings->AllowedTlsCiphers)
+ 	{
+ 		if (!SSL_CTX_set_cipher_list(tls->ctx, settings->AllowedTlsCiphers))
