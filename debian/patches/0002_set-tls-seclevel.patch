@@ -1,3 +1,15 @@
+From 1222e7060b400da5bd6f4588cc914a56db8e16fc Mon Sep 17 00:00:00 2001
+From: Bernhard Miklautz <bernhard.miklautz@thincast.com>
+Date: Thu, 8 Nov 2018 11:01:56 +0100
+Subject: [PATCH] new [crypto/tls]: add support to set tls security level
+
+The newly introduced option /tls-seclevel can be used to set the tls
+security level on systems with openssl >= 1.1.0 or libressl.
+As default level 1 is used as higher levels might prohibit connections
+to older systems.
+
+[bmiklautz] Merged-in upstream PR commit 8be6ec9720877ee52433df1be32bf218775e248f.
+
 diff --git a/client/common/cmdline.c b/client/common/cmdline.c
 index 801ef95..3296da8 100644
 --- a/client/common/cmdline.c
