@@ -1,4 +1,5 @@
 libuwac0.so.0 libuwac0-0 #MINVER#
+* Build-Depends-Package: libuwac0-dev
  UwacCloseDisplay@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  UwacCreateWindowShm@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  UwacDestroyWindow@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
@@ -16,6 +17,7 @@ libuwac0.so.0 libuwac0-0 #MINVER#
  UwacNextEvent@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  UwacOpenDisplay@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  UwacOutputGetResolution@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
+ UwacSeatGetId@Base 2.0.0~git20181120.1.e21b72c95+dfsg1
  UwacSeatGetName@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  UwacTouchAutomataInit@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  UwacTouchAutomataInjectEvent@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
@@ -35,4 +37,3 @@ libuwac0.so.0 libuwac0-0 #MINVER#
  xdg_popup_interface@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  xdg_shell_interface@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  xdg_surface_interface@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
-*Build-Depends-Package: libuwac0-dev

@@ -1,4 +1,5 @@
 libfreerdp2.so.2 libfreerdp2-2 #MINVER#
+* Build-Depends-Package: freerdp2-dev
  Bitmap_Alloc@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  Bitmap_SetDimensions@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  Bitmap_SetRectangle@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
@@ -20,6 +21,18 @@ libfreerdp2.so.2 libfreerdp2-2 #MINVER#
  _ber_sizeof_length@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  _der_skip_length@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  _er_skip_length@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
+ audio_format_compatible@Base 2.0.0~git20181120.1.e21b72c95+dfsg1
+ audio_format_compute_time_length@Base 2.0.0~git20181120.1.e21b72c95+dfsg1
+ audio_format_copy@Base 2.0.0~git20181120.1.e21b72c95+dfsg1
+ audio_format_free@Base 2.0.0~git20181120.1.e21b72c95+dfsg1
+ audio_format_get_tag_string@Base 2.0.0~git20181120.1.e21b72c95+dfsg1
+ audio_format_new@Base 2.0.0~git20181120.1.e21b72c95+dfsg1
+ audio_format_print@Base 2.0.0~git20181120.1.e21b72c95+dfsg1
+ audio_format_read@Base 2.0.0~git20181120.1.e21b72c95+dfsg1
+ audio_format_write@Base 2.0.0~git20181120.1.e21b72c95+dfsg1
+ audio_formats_free@Base 2.0.0~git20181120.1.e21b72c95+dfsg1
+ audio_formats_new@Base 2.0.0~git20181120.1.e21b72c95+dfsg1
+ audio_formats_print@Base 2.0.0~git20181120.1.e21b72c95+dfsg1
  avc420_compress@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  avc420_decompress@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  avc444_compress@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
@@ -83,9 +96,13 @@ libfreerdp2.so.2 libfreerdp2-2 #MINVER#
  connectErrorCode@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  crypto_base64_decode@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  crypto_base64_encode@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
+ crypto_cert_dns_names_free@Base 2.0.0~git20181120.1.e21b72c95+dfsg1
  crypto_cert_fingerprint@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  crypto_cert_free@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
+ crypto_cert_get_dns_names@Base 2.0.0~git20181120.1.e21b72c95+dfsg1
+ crypto_cert_get_email@Base 2.0.0~git20181120.1.e21b72c95+dfsg1
  crypto_cert_get_public_key@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
+ crypto_cert_get_upn@Base 2.0.0~git20181120.1.e21b72c95+dfsg1
  crypto_cert_issuer@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  crypto_cert_print_info@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  crypto_cert_read@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
@@ -189,8 +206,13 @@ libfreerdp2.so.2 libfreerdp2-2 #MINVER#
  freerdp_device_collection_find_type@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  freerdp_device_collection_free@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  freerdp_disconnect@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
+ freerdp_disconnect_before_reconnect@Base 2.0.0~git20181120.1.e21b72c95+dfsg1
  freerdp_dsp_context_free@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  freerdp_dsp_context_new@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
+ freerdp_dsp_context_reset@Base 2.0.0~git20181120.1.e21b72c95+dfsg1
+ freerdp_dsp_decode@Base 2.0.0~git20181120.1.e21b72c95+dfsg1
+ freerdp_dsp_encode@Base 2.0.0~git20181120.1.e21b72c95+dfsg1
+ freerdp_dsp_supports_format@Base 2.0.0~git20181120.1.e21b72c95+dfsg1
  freerdp_dynamic_channel_clone@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  freerdp_dynamic_channel_collection_add@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  freerdp_dynamic_channel_collection_find@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
@@ -201,6 +223,7 @@ libfreerdp2.so.2 libfreerdp2-2 #MINVER#
  freerdp_get_build_config@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  freerdp_get_build_date@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  freerdp_get_build_revision@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
+ freerdp_get_disconnect_ultimatum@Base 2.0.0~git20181120.1.e21b72c95+dfsg1
  freerdp_get_dynamic_addin_install_path@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  freerdp_get_error_base_name@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  freerdp_get_error_base_string@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
@@ -454,11 +477,6 @@ libfreerdp2.so.2 libfreerdp2-2 #MINVER#
  progressive_decompress@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  progressive_delete_surface_context@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  rail_read_unicode_string@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- rdpsnd_compute_audio_time_length@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- rdpsnd_free_audio_formats@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- rdpsnd_get_audio_tag_string@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- rdpsnd_print_audio_format@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- rdpsnd_print_audio_formats@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  rectangle_is_empty@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  rectangles_equal@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  rectangles_intersection@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
@@ -533,4 +551,3 @@ libfreerdp2.so.2 libfreerdp2-2 #MINVER#
  zgfx_context_new@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  zgfx_context_reset@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  zgfx_decompress@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
-*Build-Depends-Package: freerdp2-dev

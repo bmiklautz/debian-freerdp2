@@ -37,7 +37,6 @@ Files: channels/client/addin.h
  client/X11/xf_graphics.h
  client/X11/xf_keyboard.c
  client/X11/xf_keyboard.h
- client/X11/xf_monitor.c
  client/X11/xf_monitor.h
  client/X11/xf_rail.c
  client/X11/xf_rail.h
@@ -111,9 +110,7 @@ Files: channels/client/addin.h
  libfreerdp/cache/palette.c
  libfreerdp/cache/pointer.c
  libfreerdp/codec/audio.c
- libfreerdp/codec/h264_x264.c
  libfreerdp/codec/mppc.c
- libfreerdp/codec/ncrush.c
  libfreerdp/codec/progressive.c
  libfreerdp/common/addin.c
  libfreerdp/common/assistance.c
@@ -262,6 +259,7 @@ Files: channels/client/addin.h
  winpr/include/winpr/crypto.h
  winpr/include/winpr/dsparse.h
  winpr/include/winpr/endian.h
+ winpr/include/winpr/error.h
  winpr/include/winpr/handle.h
  winpr/include/winpr/heap.h
  winpr/include/winpr/image.h
@@ -391,7 +389,6 @@ Files: channels/client/addin.h
  winpr/libwinpr/sspi/NTLM/ntlm_compute.h
  winpr/libwinpr/sspi/NTLM/ntlm_message.c
  winpr/libwinpr/sspi/NTLM/ntlm_message.h
- winpr/libwinpr/sspi/Negotiate/negotiate.c
  winpr/libwinpr/sspi/Schannel/schannel.c
  winpr/libwinpr/sspi/Schannel/schannel.h
  winpr/libwinpr/sspi/Schannel/schannel_openssl.c
@@ -399,7 +396,6 @@ Files: channels/client/addin.h
  winpr/libwinpr/sspi/sspi.c
  winpr/libwinpr/sspi/sspi.h
  winpr/libwinpr/sspi/sspi_export.c
- winpr/libwinpr/sspi/sspi_winpr.c
  winpr/libwinpr/sspi/sspi_winpr.h
  winpr/libwinpr/sspicli/sspicli.c
  winpr/libwinpr/synch/address.c
@@ -413,7 +409,6 @@ Files: channels/client/addin.h
  winpr/libwinpr/thread/argv.c
  winpr/libwinpr/thread/processor.c
  winpr/libwinpr/thread/tls.c
- winpr/libwinpr/timezone/timezone.c
  winpr/libwinpr/utils/cmdline.c
  winpr/libwinpr/utils/collections/ArrayList.c
  winpr/libwinpr/utils/collections/BipBuffer.c
@@ -498,6 +493,7 @@ Files: client/Sample/freerdp.c
  include/freerdp/graphics.h
  libfreerdp/codec/clear.c
  libfreerdp/codec/color.c
+ libfreerdp/codec/ncrush.c
  libfreerdp/codec/planar.c
  libfreerdp/codec/xcrush.c
  libfreerdp/codec/zgfx.c
@@ -687,6 +683,42 @@ Copyright: 2012, Hewlett-Packard Development Company, L.P.
   2014, Hewlett-Packard Development Company, L.P.
 License: Apache-2.0
 
+Files: channels/audin/client/mac/audin_mac.c
+ channels/rdpsnd/client/fake/rdpsnd_fake.c
+ channels/rdpsnd/common/rdpsnd_common.h
+ channels/tsmf/client/gstreamer/tsmf_X11.c
+ channels/tsmf/client/gstreamer/tsmf_platform.h
+ include/freerdp/channels/tsmf.h
+ include/freerdp/server/server-common.h
+ libfreerdp/cache/bitmap.h
+ libfreerdp/cache/brush.h
+ libfreerdp/cache/cache.h
+ libfreerdp/cache/glyph.h
+ libfreerdp/cache/palette.h
+ libfreerdp/cache/pointer.h
+ libfreerdp/codec/dsp.h
+ libfreerdp/codec/dsp_ffmpeg.c
+ libfreerdp/codec/dsp_ffmpeg.h
+ libfreerdp/core/errbase.c
+ libfreerdp/core/errconnect.c
+ libfreerdp/crypto/test/TestKnownHosts.c
+ libfreerdp/gdi/test/helpers.c
+ libfreerdp/gdi/test/helpers.h
+ winpr/include/winpr/debug.h
+ winpr/libwinpr/utils/debug.c
+ winpr/libwinpr/utils/winpr.c
+Copyright: 2014, Armin Novak <armin.novak@thincast.com>
+  2014, Thincast Technologies GmbH
+  2015, Armin Novak <armin.novak@thincast.com>
+  2015, Thincast Technologies GmbH
+  2016, Armin Novak <armin.novak@thincast.com>
+  2016, Thincast Technologies GmbH
+  2018, Armin Novak <armin.novak@thincast.com>
+  2018, Thincast Technologies GmbH
+  2019, Armin Novak <armin.novak@thincast.com>
+  2019, Thincast Technologies GmbH
+License: Apache-2.0
+
 Files: channels/audin/client/alsa/audin_alsa.c
  channels/audin/client/pulse/audin_pulse.c
  channels/audin/server/audin.c
@@ -753,24 +785,25 @@ Copyright: 2012, Corey Clayton <can.of.tuna@gmail.com>
   2013, Corey Clayton <can.of.tuna@gmail.com>
 License: Apache-2.0
 
-Files: channels/audin/client/mac/audin_mac.c
- channels/tsmf/client/gstreamer/tsmf_X11.c
- channels/tsmf/client/gstreamer/tsmf_platform.h
- include/freerdp/channels/tsmf.h
- libfreerdp/core/errbase.c
- libfreerdp/core/errconnect.c
- libfreerdp/crypto/test/TestKnownHosts.c
- libfreerdp/gdi/test/helpers.c
- libfreerdp/gdi/test/helpers.h
- winpr/include/winpr/debug.h
- winpr/libwinpr/utils/debug.c
- winpr/libwinpr/utils/winpr.c
-Copyright: 2014, Armin Novak <armin.novak@thincast.com>
-  2014, Thincast Technologies GmbH
-  2015, Armin Novak <armin.novak@thincast.com>
-  2015, Thincast Technologies GmbH
-  2016, Armin Novak <armin.novak@thincast.com>
-  2016, Thincast Technologies GmbH
+Files: channels/geometry/client/geometry_main.c
+ channels/geometry/client/geometry_main.h
+ channels/printer/printer.h
+ channels/video/client/video_main.c
+ channels/video/client/video_main.h
+ client/X11/xf_disp.c
+ client/X11/xf_disp.h
+ client/X11/xf_video.c
+ client/X11/xf_video.h
+ include/freerdp/channels/geometry.h
+ include/freerdp/channels/video.h
+ include/freerdp/client/geometry.h
+ include/freerdp/client/video.h
+ include/freerdp/codec/yuv.h
+ include/freerdp/gdi/video.h
+ libfreerdp/gdi/video.c
+Copyright: 2016, David Fort <contact@hardening-consulting.com>
+  2017, David Fort <contact@hardening-consulting.com>
+  2018, David Fort <contact@hardening-consulting.com>
 License: Apache-2.0
 
 Files: channels/rdpgfx/server/rdpgfx_main.c
@@ -978,17 +1011,6 @@ Copyright: 2004-2012, Jay Sorg <jay.sorg@gmail.com>
   2012, Jay Sorg <jay.sorg@gmail.com>
 License: Apache-2.0
 
-Files: libfreerdp/core/license.c
- libfreerdp/core/security.c
- winpr/libwinpr/synch/barrier.c
- winpr/libwinpr/synch/critical.c
-Copyright: 2011, Marc-Andre Moreau <marcandre.moreau@gmail.com>
-  2011-2013, Marc-Andre Moreau <marcandre.moreau@gmail.com>
-  2012, Marc-Andre Moreau <marcandre.moreau@gmail.com>
-  2013, Norbert Federa <norbert.federa@thincast.com>
-  2014, Norbert Federa <norbert.federa@thincast.com>
-  2016, Norbert Federa <norbert.federa@thincast.com>
-License: Apache-2.0
 
 Files: include/freerdp/utils/passphrase.h
  include/freerdp/utils/signal.h
@@ -1031,6 +1053,15 @@ Copyright: 2011, Vic Lee
   2012, Vic Lee
   2016, Armin Novak <armin.novak@thincast.com>
   2016, Thincast Technologies GmbH
+License: Apache-2.0
+
+Files: client/common/cmdline.h
+ winpr/include/winpr/intrin.h
+ winpr/libwinpr/file/test/TestFileGetStdHandle.c
+Copyright: 2015, Bernhard Miklautz <bernhard.miklautz@thincast.com>
+  2015, Thincast Technologies GmbH
+  2018, Bernhard Miklautz <bernhard.miklautz@thincast.com>
+  2018, Thincast Technologies GmbH
 License: Apache-2.0
 
 Files: channels/rdpdr/server/rdpdr_main.c
@@ -1082,6 +1113,16 @@ Copyright: 2010-2011, Vic Lee
   2012, Hewlett-Packard Development Company, L.P.
 License: Apache-2.0
 
+Files: libfreerdp/core/security.c
+ winpr/libwinpr/synch/barrier.c
+ winpr/libwinpr/synch/critical.c
+Copyright: 2011, Marc-Andre Moreau <marcandre.moreau@gmail.com>
+  2012, Marc-Andre Moreau <marcandre.moreau@gmail.com>
+  2013, Norbert Federa <norbert.federa@thincast.com>
+  2014, Norbert Federa <norbert.federa@thincast.com>
+  2016, Norbert Federa <norbert.federa@thincast.com>
+License: Apache-2.0
+
 Files: include/freerdp/rail.h
  libfreerdp/core/window.c
  libfreerdp/core/window.h
@@ -1098,6 +1139,14 @@ Copyright: 2014, Norbert Federa <norbert.federa@thincast.com>
   2015, Thincast Technologies GmbH
 License: Apache-2.0
 
+
+Files: include/freerdp/error.h
+ libfreerdp/locale/xkb_layout_ids.c
+ winpr/libwinpr/timezone/timezone.c
+Copyright: 2009-2012, Marc-Andre Moreau <marcandre.moreau@gmail.com>
+  2012, Marc-Andre Moreau <marcandre.moreau@gmail.com>
+License: Apache-2.0
+
 Files: winpr/libwinpr/utils/wlog/JournaldAppender.h
  winpr/libwinpr/utils/wlog/SyslogAppender.h
  winpr/libwinpr/utils/wlog/UdpAppender.h
@@ -1110,6 +1159,19 @@ Files: winpr/libwinpr/utils/trio/triodef.h
  winpr/libwinpr/utils/trio/trionan.h
 Copyright: 2001, Bjorn Reese <breese@users.sourceforge.net>
 License: ISC
+
+Files: winpr/libwinpr/sspi/Kerberos/kerberos.c
+ winpr/libwinpr/sspi/Kerberos/kerberos.h
+Copyright: 2015, ANSSI, Author Thomas Calderon
+  2017, Dorian Ducournau <dorian.ducournau@gmail.com>
+License: Apache-2.0
+
+Files: winpr/libwinpr/sspi/sspi_gss.c
+ winpr/libwinpr/sspi/sspi_gss.h
+Copyright: 2015, ANSSI, Author Thomas Calderon
+  2015, Marc-Andre Moreau <marcandre.moreau@gmail.com>
+  2017, Dorian Ducournau <dorian.ducournau@gmail.com>
+License: Apache-2.0
 
 Files: winpr/libwinpr/clipboard/posix.c
  winpr/libwinpr/clipboard/posix.h
@@ -1136,18 +1198,20 @@ Files: winpr/libwinpr/utils/wlog/CallbackAppender.c
 Copyright: 2014, Armin Novak <armin.novak@thincast.com>
 License: Apache-2.0
 
+Files: libfreerdp/primitives/prim_YUV_neon.c
+ libfreerdp/primitives/prim_YUV_ssse3.c
+Copyright: 2014, Thomas Erbesdobler
+  2016-2017, Armin Novak <armin.novak@thincast.com>
+  2016-2017, Norbert Federa <norbert.federa@thincast.com>
+  2016-2017, Thincast Technologies GmbH
+License: Apache-2.0
+
 Files: include/freerdp/codec/nsc.h
  libfreerdp/codec/nsc.c
 Copyright: 2011, Samsung, Author Jiten Pathy
   2012, Vic Lee
   2016, Armin Novak <armin.novak@thincast.com>
   2016, Thincast Technologies GmbH
-License: Apache-2.0
-
-Files: winpr/include/winpr/intrin.h
- winpr/libwinpr/file/test/TestFileGetStdHandle.c
-Copyright: 2015, Bernhard Miklautz <bernhard.miklautz@thincast.com>
-  2015, Thincast Technologies GmbH
 License: Apache-2.0
 
 Files: libfreerdp/core/proxy.c
@@ -1217,6 +1281,13 @@ Files: libfreerdp/core/gateway/rdg.c
 Copyright: 2015, Denis Vincent <dvincent@devolutions.net>
 License: Apache-2.0
 
+Files: winpr/libwinpr/sspi/Negotiate/negotiate.c
+ winpr/libwinpr/sspi/sspi_winpr.c
+Copyright: 2011-2014, Marc-Andre Moreau <marcandre.moreau@gmail.com>
+  2012-2014, Marc-Andre Moreau <marcandre.moreau@gmail.com>
+  2017, Dorian Ducournau <dorian.ducournau@gmail.com>
+License: Apache-2.0
+
 Files: channels/serial/client/serial_main.c
  winpr/libwinpr/comm/comm_ioctl.h
 Copyright: 2011, Eduardo Fiss Beloni <beloni@ossystems.com.br>
@@ -1258,26 +1329,25 @@ Copyright: 2011, Norbert Federa <norbert.federa@thincast.com>
   2011, Vic Lee
 License: Apache-2.0
 
+Files: winpr/include/winpr/strlst.h
+ winpr/libwinpr/utils/strlst.c
+Copyright: 2018, Pascal Bourguignon <pjb@informatimago.com>
+License: Apache-2.0
+
 Files: include/freerdp/crypto/der.h
  libfreerdp/crypto/der.c
 Copyright: 2011, Samsung, Author Jiten Pathy
 License: Apache-2.0
 
-Files: include/freerdp/error.h
- libfreerdp/locale/xkb_layout_ids.c
-Copyright: 2009-2012, Marc-Andre Moreau <marcandre.moreau@gmail.com>
-  2012, Marc-Andre Moreau <marcandre.moreau@gmail.com>
+Files: client/X11/xf_floatbar.c
+ client/X11/xf_floatbar.h
+Copyright: NONE
 License: Apache-2.0
 
 Files: winpr/libwinpr/sysinfo/cpufeatures/cpu-features.c
  winpr/libwinpr/sysinfo/cpufeatures/cpu-features.h
 Copyright: 2010, The Android Open Source Project
 License: BSD-2-clause
-
-Files: winpr/libwinpr/crt/utf.c
- winpr/libwinpr/crt/utf.h
-Copyright: 2001-2004, Unicode, Inc.
-License: UNICODE
 
 Files: channels/rdpsnd/client/ios/TPCircularBuffer.c
  channels/rdpsnd/client/ios/TPCircularBuffer.h
@@ -1311,6 +1381,11 @@ Copyright: 2011, Anthony Tong <atong@trustedcs.com>
   2015, DI (FH) Martin Haimberger <martin.haimberger@thincast.com>
   2015, Thincast Technologies GmbH
   2016, David PHAM-VAN <d.phamvan@inuvika.com>
+License: Apache-2.0
+
+Files: libfreerdp/codec/h264.h
+Copyright: 2018, Armin Novak <anovak@thincast.com>
+  2018, Thincast Technologies GmbH
 License: Apache-2.0
 
 Files: channels/printer/client/printer_main.c
@@ -1493,6 +1568,22 @@ Copyright: 2016, Armin Novak <armin.novak@thincast.om>
   2016, Thincast Technologies GmbH
 License: Apache-2.0
 
+Files: include/freerdp/client/sshagent.h
+Copyright: 2017, Ben Cohen
+License: Apache-2.0
+
+Files: channels/sshagent/client/sshagent_main.h
+Copyright: 2013, Christian Hofstaedtler
+  2017, Ben Cohen
+License: Apache-2.0
+
+Files: channels/sshagent/client/sshagent_main.c
+Copyright: 2013, Christian Hofstaedtler
+  2015, DI (FH) Martin Haimberger <martin.haimberger@thincast.com>
+  2015, Thincast Technologies GmbH
+  2017, Ben Cohen
+License: Apache-2.0
+
 Files: winpr/libwinpr/file/file.c
 Copyright: 2015, Bernhard Miklautz <bernhard.miklautz@thincast.com>
   2015, Thincast Technologies GmbH
@@ -1608,6 +1699,14 @@ Copyright: 2012, Dmitrij Jasnov <dmitrij.jasnov@ts.fujitsu.com>
   2015, Thincast Technologies GmbH
 License: Apache-2.0
 
+Files: libfreerdp/core/nla.c
+Copyright: 2010-2012, Marc-Andre Moreau <marcandre.moreau@gmail.com>
+  2015, DI (FH) Martin Haimberger <martin.haimberger@thincast.com>
+  2015, Thincast Technologies GmbH
+  2016, Martin Fleisz <martin.fleisz@thincast.com>
+  2017, Dorian Ducournau <dorian.ducournau@gmail.com>
+License: Apache-2.0
+
 Files: channels/cliprdr/client/cliprdr_main.h
 Copyright: 2009-2011, Jay Sorg
   2010-2011, Vic Lee
@@ -1619,13 +1718,6 @@ Copyright: 2011, Jiten Pathy
   2011, Marc-Andre Moreau <marcandre.moreau@gmail.com>
   2015, DI (FH) Martin Haimberger <martin.haimberger@thincast.com>
   2015, Thincast Technologies GmbH
-License: Apache-2.0
-
-Files: libfreerdp/core/nla.c
-Copyright: 2010-2012, Marc-Andre Moreau <marcandre.moreau@gmail.com>
-  2015, DI (FH) Martin Haimberger <martin.haimberger@thincast.com>
-  2015, Thincast Technologies GmbH
-  2016, Martin Fleisz <martin.fleisz@thincast.com>
 License: Apache-2.0
 
 Files: libfreerdp/core/gcc.c
@@ -1669,8 +1761,16 @@ Copyright: 2013, Marc-Andre Moreau <marcandre.moreau@gmail.com>
   2014, Thincast Technologies Gmbh.
 License: Apache-2.0
 
-Files: channels/printer/printer.h
-Copyright: 2016, David Fort <contact@hardening-consulting.com>
+Files: client/X11/xf_monitor.c
+Copyright: 2011, Marc-Andre Moreau <marcandre.moreau@gmail.com>
+  2017, David Fort <contact@hardening-consulting.com>
+  2018, Kai Harms <kharms@rangee.com>
+License: Apache-2.0
+
+Files: libfreerdp/core/license.c
+Copyright: 2011-2013, Marc-Andre Moreau <marcandre.moreau@gmail.com>
+  2014, Norbert Federa <norbert.federa@thincast.com>
+  2018, David Fort <contact@hardening-consulting.com>
 License: Apache-2.0
 
 Files: libfreerdp/codec/h264.c
@@ -1755,6 +1855,9 @@ Copyright: 2011, Marc-Andre Moreau <marcandre.moreau@gmail.com>
   2014, Norbert Federa <norbert.federa@thincast.com>
 License: Apache-2.0
 
+Files: libfreerdp/codec/h264_x264.c
+Copyright: 2015, Marc-Andre Moreau <marcandre.moreau@gmail.com>
+License: Apache-2.0
 
 Files: libfreerdp/codec/h264_ffmpeg.c
 Copyright: 2014, Mike McDonald <Mike.McDonald@software.dell.com>
@@ -1781,6 +1884,12 @@ Files: libfreerdp/codec/nsc_types.h
 Copyright: 2011, Samsung, Author Jiten Pathy
   2012, Vic Lee
 License: Apache-2.0
+
+Files: channels/sshagent/server/sshagent_main.c
+Copyright: 2012-2013, Jay Sorg
+  2012-2013, Laxmikant Rashinkar
+  2017, Ben Cohen
+License: Apache-2.0 and BSD-2-clause
 
 Files: libfreerdp/codec/progressive.h
 Copyright: 2017, Armin Novak <anovak@thincast.com>
@@ -2013,12 +2122,12 @@ License: BSD-3-clause
 
 Files: packaging/*
 Copyright: 2015-2016, Bernhard Miklautz <bernhard.miklautz@thincast.com>
-License: Apache-2.0 or BSD-2-clause or BSD-3-clause or ISC or UNICODE or X11 or zlib/libpng or public-domain
+License: Apache-2.0 or BSD-2-clause or BSD-3-clause or ISC or X11 or zlib/libpng or public-domain
 
 Files: debian/*
-Copyright: 2015-2016, Bernhard Miklautz <bernhard.miklautz@thincast.com>
+Copyright: 2015-2018, Bernhard Miklautz <bernhard.miklautz@thincast.com>
   2016, Mike Gabriel <mike.gabriel@das-netzwerkteam.de>
-License: Apache-2.0 or BSD-2-clause or BSD-3-clause or ISC or UNICODE or X11 or zlib/libpng or public-domain
+License: Apache-2.0 or BSD-2-clause or BSD-3-clause or ISC or X11 or zlib/libpng or public-domain
 
 License: Apache-2.0
  Licensed under the Apache License, Version 2.0 (the "License");
@@ -2094,23 +2203,6 @@ License: ISC
  WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED WARRANTIES OF
  MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE. THE AUTHORS AND
  CONTRIBUTORS ACCEPT NO RESPONSIBILITY IN ANY CONCEIVABLE MANNER.
-
-License: UNICODE
- This source code is provided as is by Unicode, Inc. No claims are
- made as to fitness for any particular purpose. No warranties of any
- kind are expressed or implied. The recipient agrees to determine
- applicability of information provided. If this file has been
- purchased on magnetic or optical media from Unicode, Inc., the
- sole remedy for any claim will be exchange of defective media
- within 90 days of receipt.
- .
- Limitations on Rights to Redistribute This Code
- .
- Unicode, Inc. hereby grants the right to freely use the information
- supplied in this file in the creation of products supporting the
- Unicode Standard, and to make copies of this file in any form
- for internal or external distribution as long as this notice
- remains attached.
 
 License: X11
  Permission to use, copy, modify, distribute, and sell this software and its

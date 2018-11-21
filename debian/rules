@@ -56,6 +56,7 @@ DEB_CMAKE_EXTRA_FLAGS :=  -DCMAKE_INSTALL_INCLUDEDIR=include/$(shell dpkg-archit
                           $(WITH_WAYLAND) \
                           $(WITH_LIBSYSTEMD) \
                           -DWITH_CLIENT_INTERFACE=OFF \
+                          -DWITH_ICU=ON \
                           $(WITH_NEON) \
                           $(NULL)
 
@@ -127,7 +128,9 @@ $(PKG)_$(VER)$(DTYPE).orig.tar.xz: $(info I: GIT Revision=$(UREV))
 	        client/Mac/ \
 	        client/Windows/ \
 	        scripts/OpenSSL-DownloadAndBuild.command \
-	    && $(RM) -r .git .git*
+	        winpr/libwinpr/crt/utf.* \
+	    && $(RM) -r .git .git* \
+	    && echo "$(UREV)+debian" > .source_version
 	@echo "# Packing..."
 	find -L "$(PKG)-$(VER)" -xdev -type f -print | sort \
 	    | XZ_OPT="-6v" tar -caf "../$(PKG)_$(VER)$(DTYPE).orig.tar.xz" -T- --owner=root --group=root --mode=a+rX \

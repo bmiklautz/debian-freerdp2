@@ -43,6 +43,7 @@ Build-Depends:
  uuid-dev,
  xmlto,
  xsltproc,
+ libicu-dev
 Standards-Version: 4.2.1
 Homepage: http://www.freerdp.com/
 Vcs-Browser: https://salsa.debian.org/debian-remote-team/freerdp2

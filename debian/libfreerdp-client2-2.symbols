@@ -1,4 +1,7 @@
 libfreerdp-client2.so.2 libfreerdp-client2-2 #MINVER#
+* Build-Depends-Package: freerdp2-dev
+ client_auto_reconnect@Base 2.0.0~git20181120.1.e21b72c95+dfsg1
+ client_auto_reconnect_ex@Base 2.0.0~git20181120.1.e21b72c95+dfsg1
  client_cli_authenticate@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  client_cli_gw_authenticate@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  client_cli_verify_certificate@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
@@ -50,4 +53,3 @@ libfreerdp-client2.so.2 libfreerdp-client2-2 #MINVER#
  freerdp_set_connection_type@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  mappedGeometryRef@Base 2.0.0~git20180411.1.7a7b1802+dfsg1
  mappedGeometryUnref@Base 2.0.0~git20180411.1.7a7b1802+dfsg1
-*Build-Depends-Package: freerdp2-dev
