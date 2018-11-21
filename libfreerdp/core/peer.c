@@ -171,10 +171,7 @@ static int freerdp_peer_virtual_channel_write(freerdp_peer* client, HANDLE hChan
 		Stream_Write(s, buffer, chunkSize);
 
 		if (!rdp_send(rdp, s, peerChannel->channelId))
-		{
-			Stream_Release(s);
 			return -1;
-		}
 
 		buffer += chunkSize;
 		length -= chunkSize;
@@ -500,8 +497,7 @@ static int peer_recv_callback(rdpTransport* transport, wStream* s, void* extra)
 		case CONNECTION_STATE_NEGO:
 			if (!rdp_server_accept_mcs_connect_initial(rdp, s))
 			{
-				WLog_ERR(TAG,
-				         "peer_recv_callback: CONNECTION_STATE_NEGO - rdp_server_accept_mcs_connect_initial() fail");
+				WLog_ERR(TAG, "peer_recv_callback: CONNECTION_STATE_NEGO - rdp_server_accept_mcs_connect_initial() fail");
 				return -1;
 			}
 
@@ -582,7 +578,6 @@ static int peer_recv_callback(rdpTransport* transport, wStream* s, void* extra)
 		case CONNECTION_STATE_CAPABILITIES_EXCHANGE:
 			if (!rdp->AwaitCapabilities)
 			{
-
 				if (client->Capabilities && !client->Capabilities(client))
 					return -1;
 
@@ -675,7 +670,7 @@ static void freerdp_peer_disconnect(freerdp_peer* client)
 	transport_disconnect(transport);
 }
 
-static int freerdp_peer_send_channel_data(freerdp_peer* client, UINT16 channelId, BYTE* data,
+static int freerdp_peer_send_channel_data(freerdp_peer* client, UINT16 channelId, const BYTE* data,
         int size)
 {
 	return rdp_send_channel_data(client->context->rdp, channelId, data, size);

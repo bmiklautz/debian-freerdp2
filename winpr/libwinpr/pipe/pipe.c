@@ -457,7 +457,19 @@ static HANDLE_OPS namedOps =
 	NamedPipeRead,
 	NULL,
 	NULL,
-	NamedPipeWrite
+	NamedPipeWrite,
+	NULL,
+	NULL,
+	NULL,
+	NULL,
+	NULL,
+	NULL,
+	NULL,
+	NULL,
+	NULL,
+	NULL,
+	NULL,
+	NULL
 };
 
 static BOOL InitWinPRPipeModule()
@@ -653,7 +665,7 @@ HANDLE CreateNamedPipeA(LPCSTR lpName, DWORD dwOpenMode, DWORD dwPipeMode, DWORD
 
 		ZeroMemory(&s, sizeof(struct sockaddr_un));
 		s.sun_family = AF_UNIX;
-		strcpy(s.sun_path, pNamedPipe->lpFilePath);
+		sprintf_s(s.sun_path, ARRAYSIZE(s.sun_path), "%s", pNamedPipe->lpFilePath);
 
 		if (bind(serverfd, (struct sockaddr*) &s, sizeof(struct sockaddr_un)) == -1)
 		{

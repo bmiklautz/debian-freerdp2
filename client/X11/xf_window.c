@@ -146,15 +146,26 @@ void xf_SendClientEvent(xfContext* xfc, Window window, Atom atom,
 	va_end(argp);
 }
 
+void xf_SetWindowMinimized(xfContext* xfc, xfWindow* window)
+{
+	XIconifyWindow(xfc->display, window->handle, xfc->screen_number);
+}
+
 void xf_SetWindowFullscreen(xfContext* xfc, xfWindow* window, BOOL fullscreen)
 {
-	int i;
+	UINT32 i;
 	rdpSettings* settings = xfc->context.settings;
 	int startX, startY;
 	UINT32 width = window->width;
 	UINT32 height = window->height;
+	/* xfc->decorations is set by caller depending on settings and whether it is fullscreen or not */
 	window->decorations = xfc->decorations;
+	/* show/hide decorations (e.g. title bar) as guided by xfc->decorations */
 	xf_SetWindowDecorations(xfc, window->handle, window->decorations);
+	DEBUG_X11(TAG, "X window decoration set to %d", (int)window->decorations);
+
+	if (xfc->floatbar)
+		xf_floatbar_toggle_visibility(xfc, fullscreen);
 
 	if (fullscreen)
 	{
@@ -162,8 +173,8 @@ void xf_SetWindowFullscreen(xfContext* xfc, xfWindow* window, BOOL fullscreen)
 		xfc->savedHeight = xfc->window->height;
 		xfc->savedPosX = xfc->window->left;
 		xfc->savedPosY = xfc->window->top;
-		startX = settings->DesktopPosX;
-		startY = settings->DesktopPosY;
+		startX = (settings->DesktopPosX != UINT32_MAX) ? settings->DesktopPosX : 0;
+		startY = (settings->DesktopPosY != UINT32_MAX) ? settings->DesktopPosY : 0;
 	}
 	else
 	{
@@ -194,7 +205,12 @@ void xf_SetWindowFullscreen(xfContext* xfc, xfWindow* window, BOOL fullscreen)
 		startY += xfc->context.settings->MonitorLocalShiftY;
 	}
 
-	if (xfc->_NET_WM_FULLSCREEN_MONITORS != None)
+	/*
+	  It is safe to proceed with simply toogling _NET_WM_STATE_FULLSCREEN window state on the following conditions:
+	       - The window manager supports multiple monitor full screen
+	       - The user requested to use a single monitor to render the remote desktop
+	 */
+	if (xfc->_NET_WM_FULLSCREEN_MONITORS != None || settings->MonitorCount == 1)
 	{
 		xf_ResizeDesktopWindow(xfc, window, width, height);
 
@@ -286,6 +302,7 @@ void xf_SetWindowFullscreen(xfContext* xfc, xfWindow* window, BOOL fullscreen)
 
 			width = xfc->vscreen.area.right - xfc->vscreen.area.left + 1;
 			height = xfc->vscreen.area.bottom - xfc->vscreen.area.top + 1;
+			DEBUG_X11("X window move and resize %dx%d@%dx%d", startX, startY, width, height);
 			xf_ResizeDesktopWindow(xfc, window, width, height);
 			XMoveWindow(xfc->display, window->handle, startX, startY);
 		}
@@ -541,6 +558,7 @@ xfWindow* xf_CreateDesktopWindow(xfContext* xfc, char* name, int width,
 
 	XSelectInput(xfc->display, window->handle, input_mask);
 	XClearWindow(xfc->display, window->handle);
+	xf_SetWindowTitleText(xfc, window->handle, name);
 	XMapWindow(xfc->display, window->handle);
 	xf_input_init(xfc, window->handle);
 
@@ -563,13 +581,13 @@ xfWindow* xf_CreateDesktopWindow(xfContext* xfc, char* name, int width,
 	{
 		XMoveWindow(xfc->display, window->handle, 0, 0);
 	}
-	else if (settings->DesktopPosX || settings->DesktopPosY)
+	else if (settings->DesktopPosX != UINT32_MAX && settings->DesktopPosY != UINT32_MAX)
 	{
 		XMoveWindow(xfc->display, window->handle, settings->DesktopPosX,
 		            settings->DesktopPosY);
 	}
 
-	xf_SetWindowTitleText(xfc, window->handle, name);
+	window->floatbar = xf_floatbar_new(xfc, window->handle);
 	return window;
 }
 
@@ -591,11 +609,10 @@ void xf_ResizeDesktopWindow(xfContext* xfc, xfWindow* window, int width,
 	size_hints->win_gravity = NorthWestGravity;
 	size_hints->min_width = size_hints->min_height = 1;
 	size_hints->max_width = size_hints->max_height = 16384;
-	XSetWMNormalHints(xfc->display, window->handle, size_hints);
 	XResizeWindow(xfc->display, window->handle, width, height);
 #ifdef WITH_XRENDER
 
-	if (!settings->SmartSizing)
+	if (!settings->SmartSizing && !settings->DynamicResolutionUpdate)
 #endif
 	{
 		if (!xfc->fullscreen)
@@ -604,10 +621,10 @@ void xf_ResizeDesktopWindow(xfContext* xfc, xfWindow* window, int width,
 			 * not be resizable */
 			size_hints->min_width = size_hints->max_width = width;
 			size_hints->min_height = size_hints->max_height = height;
-			XSetWMNormalHints(xfc->display, window->handle, size_hints);
 		}
 	}
 
+	XSetWMNormalHints(xfc->display, window->handle, size_hints);
 	XFree(size_hints);
 }
 
@@ -618,6 +635,9 @@ void xf_DestroyDesktopWindow(xfContext* xfc, xfWindow* window)
 
 	if (xfc->window == window)
 		xfc->window = NULL;
+
+	if (window->floatbar)
+		xf_floatbar_free(xfc, window, window->floatbar);
 
 	if (window->gc)
 		XFreeGC(xfc->display, window->gc);
@@ -644,25 +664,14 @@ void xf_SetWindowStyle(xfContext* xfc, xfAppWindow* appWindow, UINT32 style,
                        UINT32 ex_style)
 {
 	Atom window_type;
+	BOOL redirect = FALSE;
 
 	if ((ex_style & WS_EX_NOACTIVATE) || (ex_style & WS_EX_TOOLWINDOW))
 	{
-		/*
-		 * Tooltips and menu items should be unmanaged windows
-		 * (called "override redirect" in X windows parlance)
-		 * If they are managed, there are issues with window focus that
-		 * cause the windows to behave improperly.  For example, a mouse
-		 * press will dismiss a drop-down menu because the RDP server
-		 * sees that as a focus out event from the window owning the
-		 * dropdown.
-		 */
-		XSetWindowAttributes attrs;
-		attrs.override_redirect = True;
-		XChangeWindowAttributes(xfc->display, appWindow->handle, CWOverrideRedirect,
-		                        &attrs);
+		redirect = TRUE;
 		appWindow->is_transient = TRUE;
 		xf_SetWindowUnlisted(xfc, appWindow->handle);
-		window_type = xfc->_NET_WM_WINDOW_TYPE_POPUP;
+		window_type = xfc->_NET_WM_WINDOW_TYPE_DROPDOWN_MENU;
 	}
 	/*
 	 * TOPMOST window that is not a tool window is treated like a regular window (i.e. task manager).
@@ -682,6 +691,22 @@ void xf_SetWindowStyle(xfContext* xfc, xfAppWindow* appWindow, UINT32 style,
 	else
 	{
 		window_type = xfc->_NET_WM_WINDOW_TYPE_NORMAL;
+	}
+
+	{
+		/*
+		 * Tooltips and menu items should be unmanaged windows
+		 * (called "override redirect" in X windows parlance)
+		 * If they are managed, there are issues with window focus that
+		 * cause the windows to behave improperly.  For example, a mouse
+		 * press will dismiss a drop-down menu because the RDP server
+		 * sees that as a focus out event from the window owning the
+		 * dropdown.
+		 */
+		XSetWindowAttributes attrs;
+		attrs.override_redirect = redirect ? True : False;
+		XChangeWindowAttributes(xfc->display, appWindow->handle, CWOverrideRedirect,
+		                        &attrs);
 	}
 
 	XChangeProperty(xfc->display, appWindow->handle, xfc->_NET_WM_WINDOW_TYPE,
@@ -970,43 +995,6 @@ void xf_ShowWindow(xfContext* xfc, xfAppWindow* appWindow, BYTE state)
 	appWindow->rail_state = state;
 	XFlush(xfc->display);
 }
-
-#if 0
-void xf_SetWindowIcon(xfContext* xfc, xfAppWindow* appWindow, rdpIcon* icon)
-{
-	int x, y;
-	int pixels;
-	int propsize;
-	long* propdata;
-	long* dstp;
-	UINT32* srcp;
-
-	if (!icon->big)
-		return;
-
-	pixels = icon->entry->width * icon->entry->height;
-	propsize = 2 + pixels;
-	propdata = malloc(propsize * sizeof(long));
-	propdata[0] = icon->entry->width;
-	propdata[1] = icon->entry->height;
-	dstp = &(propdata[2]);
-	srcp = (UINT32*) icon->extra;
-
-	for (y = 0; y < icon->entry->height; y++)
-	{
-		for (x = 0; x < icon->entry->width; x++)
-		{
-			*dstp++ = *srcp++;
-		}
-	}
-
-	XChangeProperty(xfc->display, appWindow->handle, xfc->_NET_WM_ICON, XA_CARDINAL,
-	                32,
-	                PropModeReplace, (BYTE*) propdata, propsize);
-	XFlush(xfc->display);
-	free(propdata);
-}
-#endif
 
 void xf_SetWindowRects(xfContext* xfc, xfAppWindow* appWindow,
                        RECTANGLE_16* rects, int nrects)

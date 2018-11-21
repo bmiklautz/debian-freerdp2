@@ -51,37 +51,26 @@
 
 static BOOL freerdp_listener_open(freerdp_listener* instance, const char* bind_address, UINT16 port)
 {
+	int ai_flags = 0;
 	int status;
 	int sockfd;
 	char addr[64];
 	void* sin_addr;
 	int option_value;
-	char servname[16];
 	struct addrinfo* ai;
 	struct addrinfo* res;
-	struct addrinfo hints = { 0 };
 	rdpListener* listener = (rdpListener*) instance->listener;
 #ifdef _WIN32
 	u_long arg;
 #endif
-	hints.ai_family = AF_UNSPEC;
-	hints.ai_socktype = SOCK_STREAM;
 
 	if (!bind_address)
-		hints.ai_flags = AI_PASSIVE;
+		ai_flags = AI_PASSIVE;
 
-	sprintf_s(servname, sizeof(servname), "%"PRIu16"", port);
-	status = getaddrinfo(bind_address, servname, &hints, &res);
+	res = freerdp_tcp_resolve_host(bind_address, port, ai_flags);
 
-	if (status != 0)
-	{
-#ifdef _WIN32
-		WLog_ERR("getaddrinfo error: %s", gai_strerrorA(status));
-#else
-		WLog_ERR(TAG, "getaddrinfo");
-#endif
+	if (!res)
 		return FALSE;
-	}
 
 	for (ai = res; ai && (listener->num_sockfds < 5); ai = ai->ai_next)
 	{
@@ -148,7 +137,7 @@ static BOOL freerdp_listener_open(freerdp_listener* instance, const char* bind_a
 
 		WSAEventSelect(sockfd, listener->events[listener->num_sockfds], FD_READ | FD_ACCEPT | FD_CLOSE);
 		listener->num_sockfds++;
-		WLog_INFO(TAG, "Listening on %s:%s", addr, servname);
+		WLog_INFO(TAG, "Listening on %s:%d", addr, port);
 	}
 
 	freeaddrinfo(res);
@@ -160,7 +149,7 @@ static BOOL freerdp_listener_open_local(freerdp_listener* instance, const char* 
 #ifndef _WIN32
 	int status;
 	int sockfd;
-	struct sockaddr_un addr;
+	struct sockaddr_un addr = { 0 };
 	rdpListener* listener = (rdpListener*) instance->listener;
 	HANDLE hevent;
 
@@ -180,7 +169,7 @@ static BOOL freerdp_listener_open_local(freerdp_listener* instance, const char* 
 
 	fcntl(sockfd, F_SETFL, O_NONBLOCK);
 	addr.sun_family = AF_UNIX;
-	strncpy(addr.sun_path, path, sizeof(addr.sun_path));
+	strncpy(addr.sun_path, path, sizeof(addr.sun_path) - 1);
 	unlink(path);
 	status = _bind(sockfd, (struct sockaddr*) &addr, sizeof(addr));
 

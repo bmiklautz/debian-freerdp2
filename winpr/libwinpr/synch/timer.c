@@ -222,6 +222,7 @@ static void WaitableTimerHandler(void* arg)
 	{
 		if (timer->running)
 			dispatch_suspend(timer->source);
+
 		timer->running = FALSE;
 	}
 }
@@ -234,20 +235,11 @@ static int InitializeWaitableTimer(WINPR_TIMER* timer)
 	if (!timer->lpArgToCompletionRoutine)
 	{
 #ifdef HAVE_SYS_TIMERFD_H
-		int status;
-		timer->fd = timerfd_create(CLOCK_MONOTONIC, 0);
+		timer->fd = timerfd_create(CLOCK_MONOTONIC, TFD_NONBLOCK);
 
 		if (timer->fd <= 0)
 		{
 			free(timer);
-			return -1;
-		}
-
-		status = fcntl(timer->fd, F_SETFL, O_NONBLOCK);
-
-		if (status)
-		{
-			close(timer->fd);
 			return -1;
 		}
 
@@ -290,7 +282,23 @@ static HANDLE_OPS ops =
 	TimerIsHandled,
 	TimerCloseHandle,
 	TimerGetFd,
-	TimerCleanupHandle
+	TimerCleanupHandle,
+	NULL,
+	NULL,
+	NULL,
+	NULL,
+	NULL,
+	NULL,
+	NULL,
+	NULL,
+	NULL,
+	NULL,
+	NULL,
+	NULL,
+	NULL,
+	NULL,
+	NULL,
+	NULL
 };
 
 /**
@@ -333,15 +341,19 @@ HANDLE CreateWaitableTimerA(LPSECURITY_ATTRIBUTES lpTimerAttributes, BOOL bManua
 		dispatch_set_context(timer->source, timer);
 		dispatch_source_set_event_handler_f(timer->source, WaitableTimerHandler);
 		timer->fd = timer->pipe[0];
+
 		if (fcntl(timer->fd, F_SETFL, O_NONBLOCK) < 0)
 			goto fail;
+
 #endif
 	}
 
 	return handle;
+#if defined(__APPLE__)
 fail:
 	TimerCloseHandle(handle);
 	return NULL;
+#endif
 }
 
 HANDLE CreateWaitableTimerW(LPSECURITY_ATTRIBUTES lpTimerAttributes, BOOL bManualReset,
@@ -499,17 +511,20 @@ BOOL SetWaitableTimer(HANDLE hTimer, const LARGE_INTEGER* lpDueTime, LONG lPerio
 		return FALSE;
 	}
 
-	{ /* Clean out old data from FD */
+	{
+		/* Clean out old data from FD */
 		BYTE buffer[32];
 
 		while (read(timer->fd, buffer, sizeof(buffer)) > 0);
 	}
+
 	{
 		if (timer->running)
 			dispatch_suspend(timer->source);
 
 		dispatch_time_t start = dispatch_time(DISPATCH_TIME_NOW, nanoseconds);
 		uint64_t interval = DISPATCH_TIME_FOREVER;
+
 		if (lPeriod > 0)
 			interval = lPeriod * 1000000;
 
@@ -554,8 +569,10 @@ BOOL CancelWaitableTimer(HANDLE hTimer)
 
 	timer = (WINPR_TIMER*)Object;
 #if defined(__APPLE__)
+
 	if (timer->running)
 		dispatch_suspend(timer->source);
+
 	timer->running = FALSE;
 #endif
 	return TRUE;

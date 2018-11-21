@@ -43,6 +43,68 @@ static const char* const INFO_TYPE_LOGON_STRINGS[4] =
 	"Logon Extended Info"
 };
 
+/* This define limits the length of the strings in the label field. */
+#define MAX_LABEL_LENGTH 40
+static struct
+{
+	UINT32      flag;
+	const char* label;
+}  const info_flags[] =
+{
+	{INFO_MOUSE,                  "INFO_MOUSE"},
+	{INFO_DISABLECTRLALTDEL,      "INFO_DISABLECTRLALTDEL"},
+	{INFO_AUTOLOGON,              "INFO_AUTOLOGON"},
+	{INFO_UNICODE,                "INFO_UNICODE"},
+	{INFO_MAXIMIZESHELL,          "INFO_MAXIMIZESHELL"},
+	{INFO_LOGONNOTIFY,            "INFO_LOGONNOTIFY"},
+	{INFO_COMPRESSION,            "INFO_COMPRESSION"},
+	{INFO_ENABLEWINDOWSKEY,       "INFO_ENABLEWINDOWSKEY"},
+	{INFO_REMOTECONSOLEAUDIO,     "INFO_REMOTECONSOLEAUDIO"},
+	{INFO_FORCE_ENCRYPTED_CS_PDU, "INFO_FORCE_ENCRYPTED_CS_PDU"},
+	{INFO_RAIL,                   "INFO_RAIL"},
+	{INFO_LOGONERRORS,            "INFO_LOGONERRORS"},
+	{INFO_MOUSE_HAS_WHEEL,        "INFO_MOUSE_HAS_WHEEL"},
+	{INFO_PASSWORD_IS_SC_PIN,     "INFO_PASSWORD_IS_SC_PIN"},
+	{INFO_NOAUDIOPLAYBACK,        "INFO_NOAUDIOPLAYBACK"},
+	{INFO_USING_SAVED_CREDS,      "INFO_USING_SAVED_CREDS"},
+	{INFO_AUDIOCAPTURE,           "INFO_AUDIOCAPTURE"},
+	{INFO_VIDEO_DISABLE,          "INFO_VIDEO_DISABLE"},
+	{INFO_HIDEF_RAIL_SUPPORTED,   "INFO_HIDEF_RAIL_SUPPORTED"},
+};
+
+FREERDP_LOCAL char* rdp_info_package_flags_description(UINT32 flags)
+{
+	char* result;
+	size_t maximum_size = 1; /* Reserve space for the terminating '\0' by strcat if all flags set */
+	size_t i;
+	size_t size;
+
+	for (i = 0; i < ARRAYSIZE(info_flags); i ++)
+		maximum_size += strnlen(info_flags[i].label, MAX_LABEL_LENGTH) + 1;
+
+	result = calloc(maximum_size, sizeof(char));
+
+	if (!result)
+		return 0;
+
+	for (i = 0; i < ARRAYSIZE(info_flags); i ++)
+	{
+		if (info_flags[i].flag & flags)
+		{
+			strcat(result, info_flags[i].label);
+			strcat(result, "|");
+		}
+	}
+
+	size = strnlen(result, maximum_size);
+
+	if (size > 0)
+		result[size - 1] = '\0'; /* remove last "|" */
+
+	return result;
+}
+
+
 static BOOL rdp_compute_client_auto_reconnect_cookie(rdpRdp* rdp)
 {
 	BYTE ClientRandom[32];
@@ -421,6 +483,10 @@ static BOOL rdp_read_info_packet(rdpRdp* rdp, wStream* s)
 	settings->RemoteConsoleAudio = ((flags & INFO_REMOTECONSOLEAUDIO) ? TRUE : FALSE);
 	settings->CompressionEnabled = ((flags & INFO_COMPRESSION) ? TRUE : FALSE);
 	settings->LogonNotify = ((flags & INFO_LOGONNOTIFY) ? TRUE : FALSE);
+	settings->MouseHasWheel = ((flags & INFO_MOUSE_HAS_WHEEL) ? TRUE : FALSE);
+	settings->DisableCtrlAltDel = ((flags & INFO_DISABLECTRLALTDEL) ? TRUE : FALSE);
+	settings->ForceEncryptedCsPdu = ((flags & INFO_FORCE_ENCRYPTED_CS_PDU) ? TRUE : FALSE);
+	settings->PasswordIsSmartcardPin = ((flags & INFO_PASSWORD_IS_SC_PIN) ? TRUE : FALSE);
 
 	if (flags & INFO_COMPRESSION)
 	{
@@ -517,7 +583,7 @@ static BOOL rdp_read_info_packet(rdpRdp* rdp, wStream* s)
 		 * This size excludes (!) the length of the mandatory null terminator.
 		 * Maximum value including the mandatory null terminator: 512
 		 */
-		if ((cbPassword % 2) || cbPassword > 512)
+		if ((cbPassword % 2) || cbPassword > LB_PASSWORD_MAX_LENGTH)
 		{
 			WLog_ERR(TAG, "protocol error: invalid cbPassword value: %"PRIu16"", cbPassword);
 			return FALSE;
@@ -610,7 +676,7 @@ static BOOL rdp_read_info_packet(rdpRdp* rdp, wStream* s)
 
 	Stream_Seek(s, 2);
 
-	if (settings->RdpVersion >= 5)
+	if (settings->RdpVersion >= RDP_VERSION_5_PLUS)
 		return rdp_read_extended_info_packet(rdp, s); /* extraInfo */
 
 	return TRUE;
@@ -639,11 +705,19 @@ static void rdp_write_info_packet(rdpRdp* rdp, wStream* s)
 	BOOL usedPasswordCookie = FALSE;
 	rdpSettings* settings = rdp->settings;
 	flags = INFO_MOUSE |
-		INFO_UNICODE |
-		INFO_LOGONERRORS |
-		INFO_MAXIMIZESHELL |
-		INFO_ENABLEWINDOWSKEY |
-		INFO_DISABLECTRLALTDEL;
+	        INFO_UNICODE |
+	        INFO_LOGONERRORS |
+	        INFO_MAXIMIZESHELL |
+	        INFO_ENABLEWINDOWSKEY |
+	        INFO_DISABLECTRLALTDEL |
+	        INFO_MOUSE_HAS_WHEEL |
+	        INFO_FORCE_ENCRYPTED_CS_PDU;
+
+	if (settings->SmartcardLogon)
+	{
+		flags |= INFO_AUTOLOGON;
+		flags |= INFO_PASSWORD_IS_SC_PIN;
+	}
 
 	if (settings->AudioCapture)
 		flags |= INFO_AUDIOCAPTURE;
@@ -677,6 +751,16 @@ static void rdp_write_info_packet(rdpRdp* rdp, wStream* s)
 
 	if (settings->PasswordIsSmartcardPin)
 		flags |= INFO_PASSWORD_IS_SC_PIN;
+
+	{
+		char* flags_description = rdp_info_package_flags_description(flags);
+
+		if (flags_description)
+		{
+			WLog_DBG(TAG, "Client Info Packet Flags = %s", flags_description);
+			free(flags_description);
+		}
+	}
 
 	if (settings->Domain)
 	{
@@ -789,7 +873,7 @@ static void rdp_write_info_packet(rdpRdp* rdp, wStream* s)
 	if (!usedPasswordCookie)
 		free(passwordW);
 
-	if (settings->RdpVersion >= 5)
+	if (settings->RdpVersion >= RDP_VERSION_5_PLUS)
 		rdp_write_extended_info_packet(rdp, s); /* extraInfo */
 }
 
@@ -845,9 +929,8 @@ BOOL rdp_recv_client_info(rdpRdp* rdp, wStream* s)
 BOOL rdp_send_client_info(rdpRdp* rdp)
 {
 	wStream* s;
-	BOOL status;
 	rdp->sec_flags |= SEC_INFO_PKT;
-	s = Stream_New(NULL, 2048);
+	s = rdp_send_stream_init(rdp);
 
 	if (!s)
 	{
@@ -855,11 +938,8 @@ BOOL rdp_send_client_info(rdpRdp* rdp)
 		return FALSE;
 	}
 
-	rdp_init_stream(rdp, s);
 	rdp_write_info_packet(rdp, s);
-	status = rdp_send(rdp, s, MCS_GLOBAL_CHANNEL_ID);
-	Stream_Free(s, TRUE);
-	return status;
+	return rdp_send(rdp, s, MCS_GLOBAL_CHANNEL_ID);
 }
 
 static BOOL rdp_recv_logon_info_v1(rdpRdp* rdp, wStream* s, logon_info* info)
@@ -1218,13 +1298,17 @@ static BOOL rdp_write_logon_info_v1(wStream* s, logon_info* info)
 	len *= 2;
 
 	if (len > 52)
+	{
+		free(wString);
 		return FALSE;
+	}
 
 	Stream_Write_UINT32(s, len);
 	Stream_Write(s, wString, len);
 	Stream_Seek(s, 52 - len);
 	free(wString);
 	/* username */
+	wString = NULL;
 	len = ConvertToUnicode(CP_UTF8, 0, info->username, -1, &wString, 0);
 
 	if (len < 0)
@@ -1233,7 +1317,10 @@ static BOOL rdp_write_logon_info_v1(wStream* s, logon_info* info)
 	len *= 2;
 
 	if (len > 512)
+	{
+		free(wString);
 		return FALSE;
+	}
 
 	Stream_Write_UINT32(s, len);
 	Stream_Write(s, wString, len);
@@ -1248,7 +1335,7 @@ static BOOL rdp_write_logon_info_v2(wStream* s, logon_info* info)
 {
 	int Size = 2 + 4 + 4 + 4 + 4 + 558;
 	int domainLen, usernameLen, len;
-	WCHAR* wString;
+	WCHAR* wString = NULL;
 
 	if (!Stream_EnsureRemainingCapacity(s, Size))
 		return FALSE;
@@ -1268,6 +1355,7 @@ static BOOL rdp_write_logon_info_v2(wStream* s, logon_info* info)
 
 	Stream_Write(s, wString, len * 2);
 	free(wString);
+	wString = NULL;
 	len = ConvertToUnicode(CP_UTF8, 0, info->username, -1, &wString, 0);
 
 	if (len < 0)
@@ -1369,7 +1457,7 @@ BOOL rdp_send_save_session_info(rdpContext* context, UINT32 type, void* data)
 	if (status)
 		status = rdp_send_data_pdu(rdp, s, DATA_PDU_TYPE_SAVE_SESSION_INFO, rdp->mcs->userId);
 	else
-		Stream_Free(s, TRUE);
+		Stream_Release(s);
 
 	return status;
 }

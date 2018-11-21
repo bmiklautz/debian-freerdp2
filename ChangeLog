@@ -1,3 +1,2951 @@
+2018-11-20 11:43:51 +0100 akallabeth (e21b72c95) 
+
+	* Merge pull request #5032 from bmiklautz/rc4
+
+2018-11-12 14:46:01 +0100 Bernhard Miklautz (cc801eded) 
+
+	* new: version 2.0.0-rc4
+
+2018-11-20 10:20:43 +0000 Bernhard Miklautz (98490b079) 
+
+	* Merge pull request #5031 from akallabeth/cve_fixes_final
+
+2018-10-22 16:59:28 +0200 Armin Novak (eb57ed3a3) 
+
+	* Refactored ntlm_av_pairs API
+
+2018-10-22 17:51:26 +0200 Armin Novak (17c363a51) 
+
+	* Fixed CVE-2018-8784
+
+2018-10-22 16:52:21 +0200 Armin Novak (d1112c279) 
+
+	* Fixed CVE-2018-8788
+
+2018-10-22 16:30:20 +0200 Armin Novak (09b9d4f19) 
+
+	* Fixed CVE-2018-8787
+
+2018-10-22 16:25:13 +0200 Armin Novak (445a5a42c) 
+
+	* Fixed CVE-2018-8786
+
+2018-10-22 16:20:34 +0200 Armin Novak (602f4a2e1) 
+
+	* Fixed CVE-2018-8785
+
+2018-10-22 16:00:03 +0200 Armin Novak (2ee663f39) 
+
+	* Fixed CVE-2018-8789
+
+2018-11-20 10:07:30 +0000 Bernhard Miklautz (ef0c7e81a) 
+
+	* Merge pull request #4953 from akallabeth/region_signed
+
+2018-11-20 10:53:40 +0100 Martin Fleisz (38091fc34) 
+
+	* Merge pull request #5030 from akallabeth/pointer_cache_optional
+
+2018-11-20 09:09:52 +0100 Armin Novak (666ef4ab3) 
+
+	* Fix #4864: Register pointer cache after PostConnect is called
+
+2018-11-20 09:38:02 +0100 Armin Novak (3e2caa88a) 
+
+	* Fixed invalid NULL check
+
+2018-11-20 09:00:39 +0100 akallabeth (a4001a047) 
+
+	* Merge pull request #5029 from mcsong/master
+
+2018-11-19 14:38:48 -0800 mcsong (d7ab198a6) 
+
+	* added korean translation
+
+2018-11-19 17:24:24 +0100 Armin Novak (53fdea845) 
+
+	* Clip coordinates for lineTo and polyLine
+
+2018-11-19 17:24:06 +0100 Armin Novak (d75c464db) 
+
+	* Fixed signed/unsigned warnings.
+
+2018-11-19 13:58:53 +0100 Armin Novak (75d532f87) 
+
+	* Fixed glyph cache bounds setting.
+
+2018-11-13 17:06:09 +0100 Armin Novak (e94ed7d76) 
+
+	* Fixed gdi_BitBlt coordinate clipping.
+
+2018-10-22 14:12:22 +0200 Armin Novak (a078d8714) 
+
+	* Fixed opaque rect bounding rectangle.
+
+2018-10-19 17:02:33 +0200 akallabeth (b6eca4fc5) 
+
+	* signed gdi regions to adjust negative coordinates
+
+2018-11-19 10:20:52 +0100 Martin Fleisz (b216520d5) 
+
+	* Merge pull request #5021 from akallabeth/profiler_api_rework
+
+2018-11-19 09:15:14 +0000 Bernhard Miklautz (b7354ce43) 
+
+	* Merge pull request #4940 from akallabeth/check_window_order_support
+
+2018-11-19 08:57:53 +0000 Bernhard Miklautz (3eb46444e) 
+
+	* Merge pull request #5025 from DustPuppyNet/openssl_1_1_1
+
+2018-11-18 14:09:37 +0000 Christian Gall (fffe4f077) 
+
+	* * remove obsolete SSLv23_client_method in tls_connect() * set min
+          TLS Version
+
+2018-11-17 18:47:08 +0000 Bernhard Miklautz (621ade9b8) 
+
+	* Merge pull request #5023 from ileGITimo/master
+
+2018-11-17 06:32:52 -0800 ileGITimo (d5dd983bc) 
+
+	* call xf_SetWindowTitle before XMapWindow, so window manager can act
+          on window name
+
+2018-11-15 17:52:43 +0100 Armin Novak (d2e1248b0) 
+
+	* Fixed profiler API
+
+2018-11-15 16:46:57 +0000 Bernhard Miklautz (fe1a79759) 
+
+	* Merge pull request #5018 from hardening/windowpos
+
+2018-11-15 15:54:56 +0000 Bernhard Miklautz (010e3485c) 
+
+	* Merge pull request #4989 from akallabeth/dsp_encode_resample
+
+2018-11-15 15:25:25 +0000 Bernhard Miklautz (d6dea852b) 
+
+	* Merge pull request #4976 from hardening/rfx_flush
+
+2018-11-15 13:48:22 +0000 Bernhard Miklautz (b8cf70b13) 
+
+	* Merge pull request #4964 from akallabeth/rdg_fixes
+
+2018-11-15 14:40:03 +0100 David Fort (e118d14f6) 
+
+	* cmdline: add window-position argument to set initial window
+          position
+
+2018-10-19 11:14:09 +0200 Armin Novak (4d7bece6e) 
+
+	* Fixed order mask
+
+2018-10-18 17:23:06 +0200 Armin Novak (dd80a0978) 
+
+	* Allow window orders with AllowUnanouncedOrdersFromServer
+
+2018-10-18 10:55:48 +0200 Armin Novak (c0b13cf43) 
+
+	* Added checks for order type window support.
+
+2018-11-15 08:50:56 +0000 Bernhard Miklautz (d91549171) 
+
+	* Merge pull request #5012 from akallabeth/rail_app_icons
+
+2018-11-15 08:43:54 +0100 akallabeth (cf2c8ef6a) 
+
+	* Merge pull request #5015 from chipitsine/cleanup
+
+2018-11-15 01:54:39 +0500 Ilya Shipitsin (77323d6f1) 
+
+	* remove not needed check
+
+2018-11-15 01:51:44 +0500 Ilya Shipitsin (be8f70998) 
+
+	* remove not needed check
+
+2018-11-14 13:45:31 +0100 akallabeth (268a2c0cf) 
+
+	* Merge pull request #4979 from hardening/CAL
+
+2018-11-14 13:35:42 +0100 Martin Fleisz (1f5c4e223) 
+
+	* Merge pull request #5009 from akallabeth/rdp_version_update
+
+2018-11-14 13:29:03 +0100 akallabeth (50395ff57) 
+
+	* Merge pull request #5013 from bmiklautz/sspi_symbols
+
+2018-11-13 14:46:51 +0100 Armin Novak (5490ceb4e) 
+
+	* Fixed source format for freerdp_dsp_encode in
+          rdpsnd_server_send_wave_pdu
+
+2018-11-13 14:04:43 +0100 Armin Novak (e5197f529) 
+
+	* Add soxr library and include paths.
+
+2018-11-13 12:29:19 +0100 Armin Novak (9766161f1) 
+
+	* Added missing define guards.
+
+2018-11-13 11:06:38 +0100 Armin Novak (5b363e72a) 
+
+	* Allow building without libsoxr support.
+
+2018-11-13 11:03:09 +0100 Armin Novak (6af56458a) 
+
+	* Marked custom ADPCM codecs experimental.
+
+2018-11-13 11:00:39 +0100 Armin Novak (0f45a570f) 
+
+	* Added fallback for supported sample rates if original not
+          supported. Added format compatibility check between
+          recording input and destination.
+
+2018-11-13 10:59:41 +0100 Armin Novak (93eea2412) 
+
+	* Fixed possible NULL pointer dereference
+
+2018-11-13 10:59:30 +0100 Armin Novak (b362b61a1) 
+
+	* Added libsoxr based resampling.
+
+2018-11-13 09:13:52 +0100 Armin Novak (e93aab2f7) 
+
+	* Added CMake detection support for libsoxr
+
+2018-11-09 10:15:14 +0100 Armin Novak (ab15e3403) 
+
+	* Refactored freerdp_dsp_resample, checks now done internally.
+
+2018-11-09 10:05:11 +0100 Armin Novak (83f959ce6) 
+
+	* Fixed format issues with server sound channel (review by @llysz)
+
+2018-11-09 09:08:06 +0100 Armin Novak (60025dde8) 
+
+	* Fixed unused function warnings when FFMPEG backend is used.
+
+2018-11-07 14:14:15 +0100 Armin Novak (e8e4800c5) 
+
+	* Added resampling to freerdp_dsp_encode.
+
+2018-11-14 11:57:13 +0000 Bernhard Miklautz (e980d20e8) 
+
+	* Merge pull request #4973 from Devolutions/fix_drive_redirection
+
+2018-11-14 11:39:23 +0000 Bernhard Miklautz (44ead4cfe) 
+
+	* Merge pull request #5001 from akallabeth/mac_clipboard_fix
+
+2018-11-14 12:19:36 +0100 Bernhard Miklautz (a9bcc07d2) 
+
+	* fix [winpr/sspi]: export symbols on all systems
+
+2018-11-14 11:29:44 +0100 Armin Novak (98a537d05) 
+
+	* Better description and formatting for update_read_icon_info
+
+2018-11-14 11:06:23 +0100 Armin Novak (7e12955c5) 
+
+	* Made all internal functions static.
+
+2018-11-14 11:04:59 +0100 Armin Novak (43e17c975) 
+
+	* Fixed color conversion, log level and buffer types
+
+2018-11-14 11:03:59 +0100 Armin Novak (e500abc09) 
+
+	* Fixed rail_string_to_unicode_string size calculation.
+
+2018-11-10 14:43:36 +0200 ilammy (9292b2231) 
+
+	* xfreerdp: set _NET_WM_ICON to RAIL app icon
+
+2018-11-10 11:51:30 +0200 ilammy (8163b6d1c) 
+
+	* xfreerdp: add RAIL icon cache
+
+2018-11-10 22:09:20 +0200 ilammy (7a2b6e130) 
+
+	* libfreerdp-core: fix reading TS_ICON_INFO
+
+2018-11-14 10:14:48 +0100 Armin Novak (138eb13fe) 
+
+	* Updated RDP_VERSION definitions.
+
+2018-11-13 14:39:39 +0100 akallabeth (ca6d1d591) 
+
+	* Merge pull request #5005 from bmiklautz/nightly_build
+
+2018-11-13 13:59:41 +0100 Bernhard Miklautz (bbd6a3e6c) 
+
+	* fix [rpm/freerdp-nightly]: build dependencies
+
+2018-11-13 12:22:09 +0100 Armin Novak (ecac99834) 
+
+	* Fixed rdg bio cleanup.
+
+2018-11-13 11:24:04 +0100 Armin Novak (3c35a098f) 
+
+	* Fixed direct rdg front bio access.
+
+2018-11-13 09:30:47 +0100 Armin Novak (e070bbea8) 
+
+	* Fixed leaks in rdg_send_channel_create
+
+2018-11-12 16:48:31 +0100 Armin Novak (342ff8cf0) 
+
+	* Fixed broken server name packet size
+
+2018-11-12 15:40:10 +0100 Armin Novak (15a41586a) 
+
+	* Don't read content length in
+          VIRTUAL_CONNECTION_STATE_OUT_CHANNEL_WAIT
+
+2018-11-12 16:29:28 +0100 Armin Novak (90d2e4260) 
+
+	* Fixed ntlm_authenticate, split return from continue flag.
+
+2018-11-07 11:25:09 +0100 Armin Novak (4e0b4d709) 
+
+	* Fixed static INT_MAX checks, replaced with assert.
+
+2018-10-24 16:49:25 +0200 Armin Novak (398a33af6) 
+
+	* Fixed all warnings in rdg module
+
+2018-10-24 15:46:18 +0200 Armin Novak (9078b0deb) 
+
+	* Fixed extern declaration of rpc_bind p_uuid_t variables.
+
+2018-10-24 15:42:44 +0200 Armin Novak (b4fc0c75c) 
+
+	* Made rdpRdp opaque
+
+2018-10-31 10:27:31 +0100 David Fort (b6e6575bf) 
+
+	* license: support CAL license
+
+2018-11-12 13:55:36 +0100 Martin Fleisz (097ac0ee1) 
+
+	* Merge pull request #4997 from akallabeth/use_bio_free_all
+
+2018-11-12 08:35:04 +0100 Armin Novak (738aa5623) 
+
+	* Fixed #4995: Don't forget to send the NULL of the clipboard string.
+
+2018-11-09 12:25:55 +0000 Bernhard Miklautz (c5c1bac31) 
+
+	* Merge pull request #4960 from akallabeth/interleaved_fix
+
+2018-11-09 12:18:51 +0100 Armin Novak (fff2454ae) 
+
+	* Make VS2010 happy, reworked UNROLL defines.
+
+2018-11-09 11:51:20 +0100 Armin Novak (6e61dd9d9) 
+
+	* Unroll bBits loops as well.
+
+2018-11-09 12:07:43 +0100 Martin Fleisz (6d6a2959c) 
+
+	* Merge pull request #4968 from akallabeth/timezone_updates
+
+2018-11-09 11:58:04 +0100 Martin Fleisz (a7f0da244) 
+
+	* Merge pull request #4961 from akallabeth/align_malloc_fix
+
+2018-11-09 11:32:28 +0100 Armin Novak (7e932bbfa) 
+
+	* Readded loop unrolling.
+
+2018-10-24 10:59:54 +0200 Armin Novak (71036fe0b) 
+
+	* Fixed #2039: Check for overflow in calculations.
+
+2018-11-08 17:41:56 +0100 Armin Novak (cf8bc72dc) 
+
+	* Fixed profiler naming in tests.
+
+2018-11-08 17:21:28 +0100 Armin Novak (9e2c20377) 
+
+	* Fixed various issues with freerdp_bitmap_compress and
+          interleaved_compress
+
+2018-11-08 17:20:31 +0100 Armin Novak (c0c1d064b) 
+
+	* Added a unit test for interleaved codec compression.
+
+2018-11-08 15:33:40 +0100 Martin Fleisz (9400bdccd) 
+
+	* Merge pull request #4996 from bmiklautz/tls_security_level
+
+2018-11-08 12:09:49 +0100 Armin Novak (5f4843191) 
+
+	* Replaced BIO_free with BIO_free_all
+
+2018-11-08 11:13:57 +0100 Bernhard Miklautz (8be6ec972) 
+
+	* fix [cmdline]: parameter parsing
+
+2018-11-08 11:01:56 +0100 Bernhard Miklautz (1222e7060) 
+
+	* new [crypto/tls]: add support to set tls security level
+
+2018-11-08 10:08:03 +0000 Bernhard Miklautz (1f2a22d0d) 
+
+	* Merge pull request #4994 from akallabeth/bio_uninit_fix
+
+2018-11-07 17:01:28 +0100 Armin Novak (5eca5ebde) 
+
+	* Fixed #4993: Allow uninitialized bio socket in
+          transport_bio_simple_uninit
+
+2018-11-07 16:11:02 +0100 akallabeth (cf43406dc) 
+
+	* Merge pull request #4982 from bmiklautz/ctest_asan_fixes
+
+2018-10-24 17:40:05 +0200 Armin Novak (6a2d49e0e) 
+
+	* Simplified timezone update handling:
+
+2018-11-07 12:00:49 +0100 Armin Novak (a544776bd) 
+
+	* Simplified code, moved bounds check out of loops.
+
+2018-10-23 10:33:45 +0200 Armin Novak (10d3ee131) 
+
+	* Fixed #4954: Check destination buffer bounds.
+
+2018-11-06 13:51:53 +0100 Martin Fleisz (76c91ee51) 
+
+	* Merge pull request #4985 from informatimago/issue-4983
+
+2018-11-06 11:20:02 +0100 Pascal J. Bourguignon (6f2caef77) 
+
+	* Fix Issue #4983 : Increased size of buffer to encrypt hash with
+          kerberos.
+
+2018-11-05 15:43:12 +0100 Bernhard Miklautz (37f818173) 
+
+	* fix [libfreerdp/codec]: heap buffer overflow in
+          TestFreeRDPCodecClear
+
+2018-11-05 13:46:05 +0100 Bernhard Miklautz (649404dd2) 
+
+	* fix [libfreerdp/crypto]: memory leak in Test_x509_cert_info
+
+2018-11-05 12:29:06 +0100 Bernhard Miklautz (472f7ea93) 
+
+	* fix [winpr/util]: memory leak in TestCmdLine
+
+2018-11-05 10:44:01 +0000 Bernhard Miklautz (aecc77cd7) 
+
+	* Merge pull request #4969 from akallabeth/covscan_fix
+
+2018-11-05 09:57:04 +0000 Bernhard Miklautz (a95a55a0c) 
+
+	* Merge pull request #4980 from hardening/logon_infov2_fix
+
+2018-11-01 10:45:56 +0100 David Fort (1a50a4833) 
+
+	* fix uninitialised variable
+
+2018-10-31 11:26:19 +0000 Bernhard Miklautz (29d3fea3d) 
+
+	* Merge pull request #4974 from Devolutions/android_timezone_fix
+
+2018-10-31 11:12:05 +0000 Bernhard Miklautz (62a1967ad) 
+
+	* Merge pull request #4977 from hardening/nego_flags
+
+2018-10-26 10:37:10 +0200 David Fort (548025bcc) 
+
+	* nego: add new flags
+
+2018-10-31 09:59:56 +0100 David Fort (af195864e) 
+
+	* remotefx: fix rlgr last bits of encoder
+
+2018-10-30 16:47:06 -0400 Jonathan Lafontaine (610a882f1) 
+
+	* remove unsupported call to fseek when file is opened with popen
+
+2018-10-29 10:17:42 -0400 Jonathan Lafontaine (35d7a1e38) 
+
+	* Allow fixed drive redirection on Windows (a:, c:, ...) and fix
+          macos drive duplication.
+
+2018-10-29 14:54:55 +0100 Martin Fleisz (7b0f4f5dc) 
+
+	* Merge pull request #4907 from akallabeth/transport_write_leak_fix
+
+2018-10-29 10:26:04 +0000 Bernhard Miklautz (242f7f231) 
+
+	* Merge pull request #4962 from akallabeth/wextra_fixes
+
+2018-10-25 15:54:21 +0200 akallabeth (c3c9783e6) 
+
+	* Merge pull request #4970 from hardening/uwac_fixes
+
+2018-10-25 15:48:48 +0200 Armin Novak (fffd352f8) 
+
+	* Fixed warnings in Stream test.
+
+2018-10-25 15:48:06 +0200 Armin Novak (b7f272cd1) 
+
+	* Fixed casts in Data_Read macros.
+
+2018-10-25 15:20:18 +0200 David Fort (0b2ea08f7) 
+
+	* uwac: change seat API to not reference disposed UwacSeat
+
+2018-10-24 17:24:35 +0200 Armin Novak (423d54d75) 
+
+	* Fixed signedness casts.
+
+2018-10-24 17:22:43 +0200 Armin Novak (9633e4576) 
+
+	* Fixed signedness of MoniorCount
+
+2018-10-25 13:19:22 +0200 Armin Novak (6339c43c8) 
+
+	* Fixed sockfd/socketBio resource leak.
+
+2018-10-25 13:13:14 +0200 Armin Novak (42014e80d) 
+
+	* Fixed sockfd/socketBio resource leak.
+
+2018-10-25 13:08:16 +0200 Armin Novak (7aebf8ebd) 
+
+	* Silence code analyzers, check correct variable for NULL.
+
+2018-10-25 13:08:00 +0200 Armin Novak (f269a0ce5) 
+
+	* Fixed sockfd/socketBio resource leak.
+
+2018-10-25 12:49:42 +0200 Armin Novak (847ee233f) 
+
+	* Fixed resource leak in rpc_ntlm_http_request
+
+2018-10-24 16:50:05 +0200 Armin Novak (97e68deea) 
+
+	* Fixed initialisation in DEFINE_EVENT_ENTRY define
+
+2018-10-24 14:36:12 +0200 Armin Novak (987ca5ec6) 
+
+	* Fixed another bunch of warnings.
+
+2018-10-24 13:20:46 +0200 Armin Novak (02f68c35b) 
+
+	* Fixed -Wextra sign warnings
+
+2018-10-24 13:17:14 +0200 Armin Novak (86f08981e) 
+
+	* Fixed warnings of uninitialized struct values.
+
+2018-10-24 13:17:04 +0200 Armin Novak (46d6aa4e2) 
+
+	* Fixed cast warnings for thread wrapper
+
+2018-10-24 13:05:49 +0200 Armin Novak (2a4b47aaa) 
+
+	* Changed size iterator variables to size_t
+
+2018-10-23 12:33:13 +0200 Armin Novak (6ccaafe2d) 
+
+	* Fixed default return value for fastpath_send_multiple_input_pdu
+
+2018-10-23 12:03:03 +0200 akallabeth (d3c1db174) 
+
+	* Merge pull request #4947 from akallabeth/http_gw_fix
+
+2018-10-23 10:40:09 +0200 akallabeth (76e81c615) 
+
+	* Merge pull request #4958 from nfedera/nf-fix-alsapulse-wrn-err
+
+2018-10-23 09:45:20 +0200 Norbert Federa (af992f4ce) 
+
+	* channels/client: fix alsa/pulse warning and checks
+
+2018-10-23 09:28:00 +0200 Norbert Federa (a7022e9a5) 
+
+	* Merge pull request #4957 from akallabeth/wave_2_pdu_fix
+
+2018-10-22 21:16:36 +0200 akallabeth (16d37b1a1) 
+
+	* Merge pull request #4932 from hardening/stream_static
+
+2018-10-22 14:53:46 +0200 Armin Novak (fe7a37dcb) 
+
+	* Cleaned up resource cleanup for rdpsnd alsa backend.
+
+2018-10-22 12:50:21 +0000 Bernhard Miklautz (0e9b26c1d) 
+
+	* Merge pull request #4796 from akallabeth/groegera_fixes
+
+2018-10-22 14:41:59 +0200 Armin Novak (900abb61f) 
+
+	* Fixed memory leak in update_recv_surfcmd_surface_bits
+
+2018-10-22 13:02:00 +0200 Armin Novak (3ed50aaca) 
+
+	* Implemented rdpsnd_pulse_get_volume
+
+2018-10-22 12:27:19 +0200 Armin Novak (9ff17dc0f) 
+
+	* fixed return value check in rdpsnd_recv_volume_pdu
+
+2018-10-22 12:16:18 +0200 Armin Novak (e2e1071ff) 
+
+	* Seal length in wave pdu alignment.
+
+2018-10-22 12:00:07 +0200 Armin Novak (1a015612a) 
+
+	* Align wave pdu size
+
+2018-10-22 11:59:42 +0200 Armin Novak (fb76f88ca) 
+
+	* Added missing length check and log message information.
+
+2018-10-22 10:27:16 +0200 Armin Novak (3d49697d1) 
+
+	* Improved debug logging for sound device handling.
+
+2018-10-22 10:18:17 +0200 Armin Novak (ff7e91fed) 
+
+	* Removed unnecessary pulse context check.
+
+2018-10-22 10:04:02 +0200 Armin Novak (03dcfaf8d) 
+
+	* Unified sound device reopen in a single function.
+
+2018-10-19 17:13:21 +0200 akallabeth (c251bdc11) 
+
+	* Merge pull request #4952 from eledoux/master
+
+2018-10-19 14:00:14 +0200 akallabeth (b8ff18f37) 
+
+	* Merge pull request #4951 from nfedera/nf-fix-fnobjnew-fnstylecasts
+
+2018-10-19 13:47:42 +0200 akallabeth (1929e3d1e) 
+
+	* Merge pull request #4949 from bmiklautz/floatbar_warning
+
+2018-10-19 13:00:51 +0200 akallabeth (a263da002) 
+
+	* Merge pull request #4950 from bmiklautz/cleanup_pr_4581p2
+
+2018-10-19 12:52:14 +0200 Armin Novak (b9933e7af) 
+
+	* Read byte by byte, the alignment may otherwise be broken.
+
+2018-10-19 11:59:28 +0200 Armin Novak (5a747b118) 
+
+	* Read http request in 4byte chunks until '\r\n\r\n' is found
+
+2018-10-19 11:56:56 +0200 Emmanuel Ledoux (33c7f6590) 
+
+	* fixed partial reads
+
+2018-10-19 11:39:22 +0200 Armin Novak (d05684a50) 
+
+	* Properly parse ContentType to find length.
+
+2018-10-19 10:33:50 +0200 Bernhard Miklautz (9b353202a) 
+
+	* fix [x11]: compiler warnings in floatbar
+
+2018-10-19 11:30:01 +0200 Norbert Federa (0572572eb) 
+
+	* fix issue with fnObjectFree and related casts
+
+2018-10-19 11:11:44 +0200 Bernhard Miklautz (7290e3f2b) 
+
+	* fix [cache/pointer]: add missing callback checks
+
+2018-10-19 11:10:23 +0200 MartinHaimberger (1dc3c91a1) 
+
+	* Merge pull request #4948 from bmiklautz/cleanup_pr_4581
+
+2018-10-18 14:32:08 +0200 Bernhard Miklautz (e114ee44e) 
+
+	* new [cache/pointer]: don't require pointer functions to be set
+
+2018-10-18 16:58:53 +0200 Armin Novak (7e397d0f1) 
+
+	* Fixed http gateway body length read.
+
+2018-10-18 16:40:22 +0200 akallabeth (3d0ccb3f5) 
+
+	* Merge pull request #4946 from
+          mmattes/fix/floatbar_app_check_missing
+
+2018-10-18 15:37:24 +0200 akallabeth (6f14018a2) 
+
+	* Merge pull request #4945 from mmattes/fix/transferEncoding
+
+2018-10-18 15:33:01 +0200 Markus Mattes (a235b44f6) 
+
+	* added missing check for remote app where no floatbar exists
+
+2018-10-18 14:11:18 +0200 Norbert Federa (850d2dbda) 
+
+	* Merge pull request #4942 from akallabeth/rail_fixes_2.0
+
+2018-10-18 14:08:23 +0200 Norbert Federa (5ef243f91) 
+
+	* Merge pull request #4941 from
+          nfedera/nf-remove-stale-valgrind-macro
+
+2018-10-18 14:08:01 +0200 Norbert Federa (d9a4ae831) 
+
+	* Merge pull request #4938 from akallabeth/warning_fixes_master
+
+2018-10-18 13:59:49 +0200 Markus Mattes (6d5b88cda) 
+
+	* transferEncoding can be NULL, verification happens in line 348
+
+2018-10-18 12:34:10 +0200 Armin Novak (5b70142ec) 
+
+	* Fixed read_altsec_order ORDER_TYPE_WINDOW
+
+2018-10-18 12:33:06 +0200 Armin Novak (8bdb5d771) 
+
+	* Fixed order to string format string.
+
+2018-10-18 11:45:18 +0200 Norbert Federa (d201deede) 
+
+	* gateway/rpc: remove stale valgrind macro
+
+2018-10-18 11:12:59 +0200 Martin Fleisz (eea5e2085) 
+
+	* Merge pull request #4939 from
+          nfedera/nf-fix-rdpsnd_server_send_formats
+
+2018-10-18 10:41:03 +0200 Armin Novak (2e3832af9) 
+
+	* Fixed TSG stream alignment (4 or 8)
+
+2018-10-18 10:15:24 +0200 Norbert Federa (d35470f8a) 
+
+	* rdpsnd: always call rdpsnd_server_send_formats
+
+2018-10-18 10:15:51 +0200 Armin Novak (dc197d4dd) 
+
+	* Fixed tsg abort condition.
+
+2018-10-18 09:09:30 +0200 Armin Novak (88d310ff2) 
+
+	* Fixed compiler warnings (casts, ...)
+
+2018-10-18 09:06:55 +0200 Armin Novak (554e18780) 
+
+	* USe const compare function pointer arguments
+
+2018-10-16 11:33:03 +0200 David Fort (13e2a8834) 
+
+	* winpr: add some functions to use wStream in a static way
+
+2018-10-17 17:27:29 +0200 akallabeth (305f5d1bd) 
+
+	* Merge pull request #4600 from andreesteve/xfullscreen
+
+2018-10-17 17:16:28 +0200 MartinHaimberger (558a03f60) 
+
+	* Merge pull request #4937 from akallabeth/server_rdpsnd_get_formats
+
+2018-10-17 16:17:41 +0200 Armin Novak (e319ec5bd) 
+
+	* Fixed missing return in server_rdpsnd_get_formats
+
+2018-10-17 16:02:28 +0200 Martin Fleisz (e46d1d95f) 
+
+	* Merge pull request #4926 from akallabeth/primary_order_checks
+
+2018-10-17 15:01:22 +0200 akallabeth (fbceb7c75) 
+
+	* Merge pull request #4478 from smalleel/master
+
+2018-10-02 13:18:13 +0200 Armin Novak (991f051a6) 
+
+	* Fixed stream release for transport_write
+
+2018-10-02 14:22:27 +0200 Armin Novak (3416d1bde) 
+
+	* Reset stream length to capacity in StreamPool_Take
+
+2018-10-17 14:40:00 +0200 MartinHaimberger (6f6581cdd) 
+
+	* Merge pull request #4933 from akallabeth/planar_alpha_fix
+
+2018-10-17 14:35:17 +0200 MartinHaimberger (741a032b9) 
+
+	* Merge pull request #4936 from akallabeth/gw_leak_fix
+
+2018-10-17 14:16:16 +0200 Armin Novak (aefb7728f) 
+
+	* Removed debug log entries, simplified order support check.
+
+2018-10-17 13:19:33 +0200 Armin Novak (f91590ecb) 
+
+	* Fixed bugs detected during scanbuild run
+
+2018-10-17 12:23:10 +0200 akallabeth (8fe3ac5d2) 
+
+	* Merge pull request #4902 from akallabeth/gw_refactor_3
+
+2018-10-17 12:19:03 +0200 akallabeth (e54af8efa) 
+
+	* Merge pull request #4927 from akallabeth/cmdline_fixes
+
+2018-10-17 12:15:57 +0200 Armin Novak (7b860ce96) 
+
+	* Add command line option /relax-order-checks
+
+2018-10-17 11:36:32 +0200 Armin Novak (a432a297c) 
+
+	* Fixed division by 0 if invalid formats are used.
+
+2018-10-17 11:32:56 +0200 akallabeth (5778bf102) 
+
+	* Merge pull request #4891 from akallabeth/rail_fixes
+
+2018-10-17 10:47:23 +0200 Armin Novak (10cc31997) 
+
+	* Announce glyph orders if glyph cache is activated.
+
+2018-10-17 10:09:37 +0200 Armin Novak (c0d38778f) 
+
+	* Fixed length sanity check.
+
+2018-10-17 10:09:27 +0200 Armin Novak (4d124cf5d) 
+
+	* Fixed order requirements.
+
+2018-10-16 17:29:10 +0200 Armin Novak (777bfe5c4) 
+
+	* Fixed const correctness of arguments.
+
+2018-10-16 17:26:57 +0200 Armin Novak (75517c06f) 
+
+	* Added parameter checks.
+
+2018-10-16 17:23:24 +0200 Armin Novak (bbcba568f) 
+
+	* Added parameter checks.
+
+2018-10-16 17:14:56 +0200 Armin Novak (d2e08c0aa) 
+
+	* Fixed missing argument check.
+
+2018-10-16 17:10:03 +0200 Armin Novak (3629a84d3) 
+
+	* Fixed missing input validation.
+
+2018-10-16 17:09:29 +0200 Armin Novak (cab2e2857) 
+
+	* Fixed missing value check
+
+2018-10-16 16:10:17 +0200 Armin Novak (c51ca89d9) 
+
+	* Fixed glyph cache
+
+2018-10-16 15:56:17 +0200 Armin Novak (5ea4a7d3b) 
+
+	* Proper order checks.
+
+2018-10-16 09:09:05 -0400 Marc-André Moreau (ce234411c) 
+
+	* Merge pull request #4914 from Devolutions/winpr-dll-export
+
+2018-10-16 13:59:37 +0200 Armin Novak (16d553a75) 
+
+	* Check if incoming secondary alternate orders have been activated.
+
+2018-10-16 13:48:43 +0200 Armin Novak (711da861e) 
+
+	* Check if incoming secondary orders have been activated.
+
+2018-10-16 13:48:29 +0200 Armin Novak (88bd26213) 
+
+	* Send brush support level from settings.
+
+2018-10-16 13:02:15 +0200 Armin Novak (c99434691) 
+
+	* For every order check if it is activated in settings before
+          processing.
+
+2018-10-16 12:46:44 +0200 Armin Novak (fb87f6d0b) 
+
+	* Added a warning that the server sent an unsupported order
+
+2018-10-16 12:36:08 +0200 Armin Novak (e4b24aa31) 
+
+	* Fixed arguments to *adust
+
+2018-10-16 12:17:25 +0200 Armin Novak (91107beb6) 
+
+	* Separate alpha handling for planar codec
+
+2018-10-16 10:05:33 +0200 Armin Novak (a29bc16af) 
+
+	* Siplified planar alpha / non alpha paths
+
+2018-10-16 08:45:06 +0200 Armin Novak (7d8e6377d) 
+
+	* Fixed a memory leak in cleaning up brushes.
+
+2018-10-15 16:34:44 +0200 Armin Novak (14321a2d5) 
+
+	* Adjust rectangles where appropriate.
+
+2018-10-15 16:33:56 +0200 Armin Novak (3920c570d) 
+
+	* Fixed memory leak with audio formats.
+
+2018-10-15 15:27:17 +0200 Armin Novak (e5d60370b) 
+
+	* Fixed MultiOpaqueRect
+
+2018-10-15 15:23:04 +0200 Armin Novak (479233ced) 
+
+	* Fix bounding rectangle of OpaqueRect
+
+2018-10-15 15:22:50 +0200 Armin Novak (ca3fb2623) 
+
+	* Deactivated unimplemented orders.
+
+2018-10-15 14:36:03 +0200 Armin Novak (63823f54e) 
+
+	* Removed checks for LineTo, that is handled by the drawing routines
+
+2018-10-15 14:30:38 +0200 Armin Novak (f88ed950d) 
+
+	* Fixed various issues with primary orders.
+
+2018-10-15 13:56:19 +0200 Armin Novak (83fba667c) 
+
+	* Fixed logging.
+
+2018-10-15 13:20:47 +0200 Armin Novak (8cfffcc02) 
+
+	* Use dynamic logging and fix compiler warnings.
+
+2018-10-15 13:15:57 +0200 Armin Novak (ed02832a8) 
+
+	* Added altsec return value checks.
+
+2018-10-15 13:10:48 +0200 Armin Novak (09bef3bab) 
+
+	* Unified logging.
+
+2018-10-15 11:51:16 +0200 Armin Novak (972959087) 
+
+	* Fixed command line setting of flags, unified string replace
+
+2018-10-15 10:34:47 +0200 Armin Novak (aecda5280) 
+
+	* Added plausibility checks for order input coordinates.
+
+2018-10-09 14:24:58 +0200 Armin Novak (766a66a7c) 
+
+	* Fixed stream get position.
+
+2018-10-09 14:24:39 +0200 Armin Novak (166bdf018) 
+
+	* Fixed return value of rpc_channel_tls_connect
+
+2018-10-09 14:19:05 +0200 Armin Novak (65bfb67f7) 
+
+	* Fixed rpc_client_write_call resource cleanup.
+
+2018-10-09 14:16:27 +0200 Armin Novak (8c92f3436) 
+
+	* Fixed argument name for ntlm_client_encrypt
+
+2018-10-08 12:56:09 +0200 Martin Fleisz (00af869cd) 
+
+	* Merge pull request #4889 from
+          akallabeth/shadow_server_audin_refactor
+
+2018-10-08 10:13:51 +0200 Martin Fleisz (ea5a0adfc) 
+
+	* Merge pull request #4913 from akallabeth/audin_opensles
+
+2018-10-08 08:39:27 +0200 akallabeth (fbf1404cc) 
+
+	* Merge pull request #4918 from byteboon/master
+
+2018-10-05 09:43:00 -0700 byteboon (1d99d2d5f) 
+
+	* Regression: added back kerberos signature fix that was lost in a
+          recent refactor #4801
+
+2018-10-05 11:00:13 +0200 akallabeth (9cc4f844c) 
+
+	* Merge pull request #4912 from akallabeth/swresample
+
+2018-10-05 09:50:27 +0200 Martin Fleisz (168bab905) 
+
+	* Merge pull request #4916 from Devolutions/ios-path-fix
+
+2018-10-05 09:05:57 +0200 akallabeth (da133fdff) 
+
+	* Merge pull request #4917 from Devolutions/array-list-equals-fix
+
+2017-07-21 15:57:34 -0400 Sébastien Duquette (2497fcf94) 
+
+	* Use fnObjectEquals in ArrayList_Remove.
+
+2017-10-06 14:55:34 -0700 Richard Markiewicz (ee7b5460b) 
+
+	* freerdp - fix iOS directory paths
+
+2017-02-15 14:50:24 -0500 Marc-André Moreau (1b42e512e) 
+
+	* winpr: add WINPR_DLL definition
+
+2018-10-04 13:53:18 +0200 Armin Novak (ac1476356) 
+
+	* [audin] Abort version exchange if server version is not supported.
+
+2018-10-04 12:21:28 +0200 Armin Novak (47f880407) 
+
+	* Fixed audio recording with opensles.
+
+2018-10-04 09:42:31 +0200 Bernhard Miklautz (8871d5558) 
+
+	* Merge pull request #4910 from akallabeth/warning_fixes
+
+2018-10-04 08:57:54 +0200 Armin Novak (fbe95209e) 
+
+	* Readded AVRESAMPLE support as fallback.
+
+2018-10-04 09:56:20 +0800 Vladimir Lomov (41cc2b63c) 
+
+	* Move from libavresample to libswresample
+
+2018-10-03 15:16:59 +0200 Armin Novak (a8a6accc1) 
+
+	* Fixed compiler warnings.
+
+2018-10-03 09:42:16 +0200 David Fort (2e1bf90bd) 
+
+	* Merge pull request #4885 from
+          akallabeth/autoreconnect_handle_window_events
+
+2018-10-02 15:46:17 +0200 akallabeth (4e71af677) 
+
+	* Merge pull request #4906 from FeLvi-zzz/japanese-patch
+
+2018-10-02 21:53:55 +0900 FeLvi_zzz (751cfde86) 
+
+	* remove untranslatable strings in Japanese translation
+
+2018-10-02 21:47:08 +0900 FeLvi_zzz (6d36707ec) 
+
+	* fixed typo in Japanese translation
+
+2018-10-02 12:33:52 +0200 Armin Novak (00489ae75) 
+
+	* Reworked checks in xf_disp.c
+
+2018-10-02 18:36:58 +0900 FeLvi_zzz (2564a6a2d) 
+
+	* modified Japanese translation #4905
+
+2018-10-02 18:00:29 +0900 FeLvi_zzz (7a44e179c) 
+
+	* added Japanese translation
+
+2018-10-02 10:28:28 +0200 Armin Novak (3b7f522eb) 
+
+	* Release stream in transport_write in all error cases.
+
+2018-10-02 10:04:21 +0200 Bernhard Miklautz (57623d844) 
+
+	* Merge pull request #4901 from
+          akallabeth/cmd_line_flag_no_value_check
+
+2018-10-01 14:45:45 +0200 Martin Fleisz (6554bc3b8) 
+
+	* Merge pull request #4904 from akallabeth/floatbar_x11_leak
+
+2018-10-01 10:49:30 +0200 Armin Novak (f33277998) 
+
+	* Fixed floatbar X11 leak.
+
+2018-10-01 10:49:30 +0200 Armin Novak (046d2296a) 
+
+	* Fixed floatbar X11 leak.
+
+2018-09-28 12:59:20 +0200 Armin Novak (a0f42280c) 
+
+	* Check if a boolean or flag argument has additional data. Treat it
+          as an error.
+
+2018-09-28 12:29:29 +0200 Armin Novak (fc9ff6d2f) 
+
+	* Made gateway NTLM self contained.
+
+2018-09-28 12:08:27 +0200 Armin Novak (99eb9f7ec) 
+
+	* Refactored and simplified RPC signature functions.
+
+2018-09-28 08:43:43 +0200 Armin Novak (9516c251c) 
+
+	* Made TSG struct opaque
+
+2018-09-27 16:42:27 +0200 Armin Novak (7ab1251a6) 
+
+	* Refactored rpc_client and resolve gateway only once.
+
+2018-09-27 16:23:01 +0200 Armin Novak (f5f155b05) 
+
+	* Refactored RpcClient functions
+
+2018-09-27 16:08:28 +0200 Armin Novak (47ba37fbc) 
+
+	* Unified dns resolving of host
+
+2018-09-27 16:05:14 +0200 Armin Novak (8a677d6cf) 
+
+	* Refactored rdg channel structs.
+
+2018-09-27 15:19:41 +0200 Armin Novak (d748adbf1) 
+
+	* Refactored gateway ncacn HTTP to be self contained.
+
+2018-09-27 15:04:41 +0200 Armin Novak (a5fdf9e00) 
+
+	* Refactored gateway HTTP to be self contained.
+
+2018-09-25 17:13:25 +0200 Armin Novak (7e1589a3e) 
+
+	* Added default rdpsnd formats.
+
+2018-09-25 17:09:45 +0200 Armin Novak (c60ab7d06) 
+
+	* fixed stuff
+
+2018-09-25 17:05:12 +0200 Armin Novak (2cf066255) 
+
+	* Unified format support for rdpsnd.
+
+2018-09-25 16:52:27 +0200 Armin Novak (26ef8c9b3) 
+
+	* Added export define.
+
+2018-09-25 16:45:08 +0200 Armin Novak (40dae15cf) 
+
+	* Moved server-common to public header.
+
+2018-09-25 16:32:37 +0200 Armin Novak (d56efaae8) 
+
+	* Fixed server format selection.
+
+2018-09-25 16:25:35 +0200 Armin Novak (16531e143) 
+
+	* Fixed server audin callback, provide more information.
+
+2018-09-25 16:00:30 +0200 Armin Novak (5aa4b702c) 
+
+	* Fixed dst_format
+
+2018-09-25 15:56:05 +0200 Armin Novak (12f1cf9e3) 
+
+	* Fixed default format.
+
+2018-09-25 15:53:35 +0200 Armin Novak (a83c805ad) 
+
+	* Fixed format debug message.
+
+2018-09-25 15:53:10 +0200 Armin Novak (0560832b5) 
+
+	* Using common audio formats for input.
+
+2018-09-25 15:50:48 +0200 Armin Novak (db2a0dbdc) 
+
+	* Unified format selection.
+
+2018-09-25 15:46:36 +0200 Armin Novak (5e14bb1b1) 
+
+	* Mac fixes
+
+2018-09-25 15:18:37 +0200 Armin Novak (e61219eb5) 
+
+	* Fixed mac callbacks.
+
+2018-09-25 15:17:19 +0200 Armin Novak (d513f184e) 
+
+	* Fixed shadow server callbacks.
+
+2018-09-25 14:56:25 +0200 Armin Novak (18f97d03e) 
+
+	* Cleaned up defaults.
+
+2018-09-25 14:34:14 +0200 Armin Novak (106dde957) 
+
+	* Working mic redirection for shadow server.
+
+2018-09-25 12:04:10 +0200 Armin Novak (28efbbc01) 
+
+	* Refactored audio_format* functions.
+
+2018-09-26 11:27:57 +0200 Armin Novak (a5b689b35) 
+
+	* Readded override redirect but reset on focus loss.
+
+2018-09-26 11:13:06 +0200 Armin Novak (316eed1fb) 
+
+	* Menus are no longer popup windows but dropdown menus.
+
+2018-09-26 10:11:52 +0200 Armin Novak (fa7902c36) 
+
+	* Fixed argument check for floatbar events.
+
+2018-09-26 10:02:49 +0200 David Fort (d0612151f) 
+
+	* Merge pull request #4874 from r-barnett/fix-MonitorLocalShift
+
+2018-09-26 09:37:41 +0200 Martin Fleisz (a90b74b8d) 
+
+	* Merge pull request #4879 from akallabeth/clip_fix
+
+2018-09-26 09:37:23 +0200 Martin Fleisz (c3ec6d293) 
+
+	* Merge pull request #4862 from akallabeth/printer_warning_fix
+
+2018-09-26 09:20:54 +0200 Martin Fleisz (5339efd6e) 
+
+	* Merge pull request #4882 from akallabeth/no_proxy_cidr
+
+2018-09-25 16:34:20 +0200 akallabeth (0b8a66188) 
+
+	* Merge pull request #4865 from mmattes/feature/floatbar
+
+2018-09-25 14:38:09 +0200 Martin Fleisz (1d64a2464) 
+
+	* Merge pull request #4888 from akallabeth/shadow_server_audin
+
+2018-09-25 11:13:32 +0200 Armin Novak (dab5770fe) 
+
+	* Added microphone support to shadow server.
+
+2018-09-25 10:58:53 +0200 David Fort (443831bfe) 
+
+	* Merge pull request #4887 from akallabeth/rail_string_allow_empty
+
+2018-09-25 09:54:47 +0200 Armin Novak (93846c801) 
+
+	* Allow empty rail strings.
+
+2018-09-24 16:44:25 +0200 Armin Novak (8357f6181) 
+
+	* Fixed load/unload for display channel.
+
+2018-09-24 16:24:32 +0200 Armin Novak (51f97f2d3) 
+
+	* Fixed #3423: Process xevents when in reconnect mode.
+
+2018-09-24 16:00:27 +0200 David Fort (ba69925b8) 
+
+	* Merge pull request #4501 from akallabeth/drive_file_size_fix
+
+2018-09-24 14:09:10 +0200 David Fort (bfbcddf6a) 
+
+	* Merge pull request #4880 from akallabeth/auto_reconnect_unify
+
+2018-09-24 09:53:28 +0200 Armin Novak (13478c744) 
+
+	* Skip empty server format response.
+
+2018-09-24 09:38:01 +0200 Armin Novak (1d77875a6) 
+
+	* Fix NULL function pointer BeginPaint
+
+2018-09-24 09:08:50 +0200 Armin Novak (a5f0fa818) 
+
+	* Fixed freerdp_keyboard_layouts_free
+
+2018-09-24 09:07:59 +0200 Armin Novak (228e63d61) 
+
+	* Free RDP_KEYBOARD_LAYOUT with freerdp_keyboard_layouts_free
+
+2018-09-24 12:24:15 +0200 Armin Novak (941213f50) 
+
+	* Fixed domain and regex match.
+
+2018-09-24 11:42:23 +0200 Armin Novak (3a2bfa183) 
+
+	* Fixed #4878: Added cidr support for proxy exception check.
+
+2018-09-24 10:30:59 +0200 Armin Novak (897c0c72a) 
+
+	* Unified auto_reconnect functions for all clients.
+
+2018-09-24 09:46:33 +0200 David Fort (040d14b67) 
+
+	* Merge pull request #4869 from akallabeth/clear_fix
+
+2018-09-21 13:40:48 -0500 rbarnett (41664572a) 
+
+	* MonitorLocalShiftX,Y should be set when 1st monitor from MonitorIds
+          selected as primary
+
+2018-09-21 13:02:39 +0200 Martin Fleisz (2096c1108) 
+
+	* Merge pull request #4872 from akallabeth/sw_gdi_default
+
+2018-09-21 13:01:58 +0200 Martin Fleisz (205c61282) 
+
+	* Merge pull request #4871 from akallabeth/drdynvc_checks
+
+2018-09-20 13:14:24 +0200 Martin Fleisz (44b82a45b) 
+
+	* Merge pull request #4873 from akallabeth/leak_fix
+
+2018-09-20 12:07:36 +0200 akallabeth (30601608e) 
+
+	* Merge pull request #4855 from r-barnett/fix-logoff-exit-code
+
+2018-09-20 11:04:20 +0200 Armin Novak (bdff1c96f) 
+
+	* Fixed use after free and leak.
+
+2018-09-20 10:44:03 +0200 Armin Novak (dfb104965) 
+
+	* Fix #4851: Software GDI is now default
+
+2018-09-20 09:06:01 +0200 Armin Novak (baee520e3) 
+
+	* Fix for #4866: Added additional length checks
+
+2018-09-19 09:36:39 -0500 rbarnett (5d3e76bd8) 
+
+	* Replace cryptic names; move the disconnect ultimatum reasons enum
+          into public API and rename; remove setter
+
+2018-09-19 16:20:32 +0200 Martin Fleisz (92676fe15) 
+
+	* Merge pull request #4870 from corux/patch-1
+
+2018-09-19 15:36:24 +0200 Tobias (a4df4f7bb) 
+
+	* Do not prompt if blank password was provided
+
+2018-09-19 14:10:50 +0200 Armin Novak (7e8d128fc) 
+
+	* Fixed clear codec reset and test cases.
+
+2018-09-19 13:02:29 +0200 Armin Novak (712a39898) 
+
+	* Fixed buffer size for clear_decompress test.
+
+2018-09-19 12:03:07 +0200 Armin Novak (13e59b5d6) 
+
+	* Fix #4868: Allow empty bands data.
+
+2018-09-19 13:45:15 +0200 Martin Fleisz (59ae00baa) 
+
+	* Merge pull request #4867 from akallabeth/empty_smartcard_filter_fix
+
+2018-09-19 11:13:02 +0200 Armin Novak (f63286dbe) 
+
+	* Fixed smartcard filter for empty arguments.
+
+2018-09-18 15:31:10 -0500 rbarnett (845826618) 
+
+	* Store the disconnect provider ulimatum reason in a new field in
+          struct rdp_context and move the test for a logoff reason
+          to xf_client.c
+
+2018-09-18 21:46:02 +0200 Markus Mattes (36fc5dde2) 
+
+	* fix hidden floatbar consumes a lot of cpu
+
+2018-09-18 21:25:51 +0200 Markus Mattes (21e4804a7) 
+
+	* implemented floatbar for x11
+
+2018-09-18 14:45:25 +0200 Armin Novak (a74437811) 
+
+	* Fixed a warning in printer channel.
+
+2018-09-18 10:59:15 +0200 Martin Fleisz (24936c185) 
+
+	* Merge pull request #4859 from akallabeth/autoreconnect_gfx_fix
+
+2018-09-18 09:51:50 +0200 Armin Novak (4c491b5a1) 
+
+	* Fixed #4857: Properly reset clear codec.
+
+2018-09-17 09:08:47 +0200 Martin Fleisz (0b7b9c0dc) 
+
+	* Merge pull request #4842 from akallabeth/smartcard_rdp_logon
+
+2018-09-17 09:08:32 +0200 Martin Fleisz (5686a0f90) 
+
+	* Merge pull request #4840 from akallabeth/smartcard_filter
+
+2018-09-14 09:54:35 -0500 rbarnett (5db0b57fc) 
+
+	* Map a particular disconnect situation triggered by a user logging
+          off to a user logoff code.
+
+2018-09-14 10:59:31 +0200 Martin Fleisz (3c158299a) 
+
+	* Merge pull request #4853 from r-barnett/add-nego-fail-exit-code
+
+2018-09-14 10:58:36 +0200 Martin Fleisz (f7ee02372) 
+
+	* Merge pull request #4854 from akallabeth/rail_exec_arguments_fix
+
+2018-09-14 10:08:38 +0200 Armin Novak (bfeac80ed) 
+
+	* Fixed macro _stream_read_n16_le and _stream_read_n16_be
+
+2018-09-14 10:07:22 +0200 Armin Novak (97c909107) 
+
+	* Fixed const correctness for RAIL callbacks.
+
+2018-09-14 10:04:16 +0200 Armin Novak (5819946b8) 
+
+	* Fixed rail unicode string conversion and const correctness.
+
+2018-09-13 10:29:23 -0500 rbarnett (1e7be9908) 
+
+	* Add an exit code for a security protocol negotiation failure
+
+2018-09-13 09:57:16 +0200 akallabeth (56d001ef1) 
+
+	* Merge pull request #4852 from
+          r-barnett/fix-net-disconnect-exit-code
+
+2018-09-12 10:16:27 -0500 rbarnett (4e97edade) 
+
+	* Set an error exit code for an unsuccessful reconnect
+
+2018-09-12 11:35:08 +0200 Martin Fleisz (94143c323) 
+
+	* Merge pull request #4850 from r-barnett/fix-connection-type-parsing
+
+2018-09-11 10:17:52 -0500 rbarnett (e296a55fa) 
+
+	* Reject unknown connection type values for /network command line
+          option.
+
+2018-09-11 08:18:33 +0200 akallabeth (b0599afbb) 
+
+	* Merge pull request #4848 from mfleisz/longer_window_title
+
+2018-09-10 14:44:29 +0200 Martin Fleisz (e00dd1974) 
+
+	* wfreerdp: Increase buffer size for window title (#4731)
+
+2018-09-10 10:48:48 +0200 Martin Fleisz (bf22ce5f5) 
+
+	* Merge pull request #4844 from akallabeth/avcodec_version_check_fix
+
+2018-09-07 10:54:33 +0200 Armin Novak (cbb4be412) 
+
+	* Removed manipulation of authentication modes.
+
+2018-09-05 14:19:57 +0200 Armin Novak (5bddbd1cf) 
+
+	* Fixed avcodec version test.
+
+2018-09-05 15:28:06 +0200 Armin Novak (cf319001f) 
+
+	* Fixed out of bound access.
+
+2018-09-04 15:49:21 +0200 Armin Novak (0de43c8b8) 
+
+	* Added /smartcard-logon option to set flag. (Stripped version of
+          #4837 by @informatimago)
+
+2018-09-04 15:22:06 +0200 Armin Novak (4596588e0) 
+
+	* Set freed pointer to NULL avoiding double free.
+
+2018-09-04 15:17:01 +0200 David Fort (c2e2eb910) 
+
+	* Merge pull request #4839 from akallabeth/optional_begin_paint
+
+2018-09-04 12:58:05 +0200 Armin Novak (b2ce309b2) 
+
+	* Added multi filter for smartcard. (based on #4837 by
+          @informatimago)
+
+2018-09-04 10:40:17 +0200 Armin Novak (54f3a388d) 
+
+	* Fixed #4835: BeginPaint callback now optional.
+
+2018-09-03 10:55:03 +0200 David Fort (874021911) 
+
+	* Merge pull request #4836 from akallabeth/strcpy_fix
+
+2018-09-03 08:48:33 +0200 Armin Novak (817f8e0d4) 
+
+	* Fixed an issue introduced with #4822
+
+2018-08-30 10:25:02 +0200 David Fort (25e2ab1c0) 
+
+	* Merge pull request #4822 from akallabeth/remove_unchecked_strcpy
+
+2018-08-29 11:40:50 +0200 Martin Fleisz (057c6095f) 
+
+	* Merge pull request #4827 from akallabeth/fedora_build_fix
+
+2018-08-27 10:52:22 +0200 Armin Novak (5bc3993e3) 
+
+	* Fixed buffer size and function name
+
+2018-08-27 09:15:50 +0200 Armin Novak (456b95cbf) 
+
+	* Fixed size of command line value string.
+
+2018-08-24 13:49:19 +0200 Armin Novak (fad20be6e) 
+
+	* Fixed missing includes.
+
+2018-08-24 12:15:06 +0200 Armin Novak (00a5d06fc) 
+
+	* Fixed coverity memory leak.
+
+2018-08-24 10:39:48 +0200 Armin Novak (62c1696d4) 
+
+	* Removed use of unchecked sprintf
+
+2018-08-24 09:54:25 +0200 Armin Novak (114abad76) 
+
+	* Removed use of strcpy.
+
+2018-08-27 14:33:09 +0200 akallabeth (9e3b48e0f) 
+
+	* Merge pull request #4829 from
+          informatimago/smartcard-logon-rdp--x509-certificate-info-extraction
+
+2018-08-27 13:51:30 +0200 Pascal J. Bourguignon (63d00f6f8) 
+
+	* Corrected the compatibility function names:
+          crypto_cert_subject_alt_name and
+          crypto_cert_subject_alt_name_free.
+
+2018-08-27 12:10:08 +0200 David Fort (595cdf272) 
+
+	* Merge pull request #4828 from akallabeth/warning_fixes_2_0
+
+2018-08-24 16:04:29 +0200 Pascal J. Bourguignon (53692ffc5) 
+
+	* Compute certificate_path from __FILE__ to adapt to changing
+          compilation and test environments.
+
+2018-08-24 15:20:03 +0200 Pascal J. Bourguignon (79d2294a2) 
+
+	* Put back deprecated function names crypto_cert_get_alt_names and
+          crypto_cert_alt_names_free for FREERDP_API compatibility.
+
+2018-08-24 15:05:50 +0200 Pascal J. Bourguignon (98b860266) 
+
+	* Use C comment syntax instead of C++; added static declaration for
+          local functions.
+
+2018-08-24 14:03:04 +0200 Pascal J. Bourguignon (469f9bf48) 
+
+	* Smartcard Logon: restructured x509 certificate info extraction;
+          added extracting the UPN.
+
+2018-08-23 13:25:46 +0200 Armin Novak (5b0b18ae7) 
+
+	* Device name now const.
+
+2018-08-23 13:16:13 +0200 Armin Novak (33be80cb4) 
+
+	* Removed unused variables.
+
+2018-08-23 13:15:46 +0200 Armin Novak (6d3beabd5) 
+
+	* Removed unused variables in tests.
+
+2018-08-23 13:08:52 +0200 Armin Novak (d7d556789) 
+
+	* Fixed missing const.
+
+2018-08-23 13:08:31 +0200 Armin Novak (dab842cfb) 
+
+	* Fixed missing type casts.
+
+2018-08-23 13:06:34 +0200 Armin Novak (a3819f65e) 
+
+	* Fixed unused variable warnings.
+
+2018-08-23 13:06:15 +0200 Armin Novak (59819818f) 
+
+	* Fixed freerdp_load_dynamic_addin path
+
+2018-08-23 13:05:44 +0200 Armin Novak (8d473af4f) 
+
+	* Fixed missing type cast.
+
+2018-08-23 13:05:12 +0200 Armin Novak (d90e5da86) 
+
+	* Fixed unused label warning.
+
+2018-08-23 13:04:42 +0200 Armin Novak (bff49a9bd) 
+
+	* Fixed invalid argument warnings.
+
+2018-08-23 12:45:36 +0200 Armin Novak (48125164d) 
+
+	* Fixed dead initialization.
+
+2018-08-23 12:43:29 +0200 Armin Novak (c159b2e9c) 
+
+	* Fixed missing check before calling memcpy
+
+2018-08-24 13:21:27 +0200 Armin Novak (afbc96929) 
+
+	* Fixed wayland man page detection on fedora/redhat builds.
+
+2018-08-24 11:41:58 +0200 Martin Fleisz (0fb19d04b) 
+
+	* Merge pull request #4810 from akallabeth/no_proxy_support
+
+2018-08-24 09:48:51 +0200 Martin Fleisz (f9e52c185) 
+
+	* Merge pull request #4815 from akallabeth/async_transport_remove
+
+2018-08-24 09:45:26 +0200 Martin Fleisz (8248dcb3b) 
+
+	* Merge pull request #4816 from akallabeth/drive_cmd_fix
+
+2018-08-24 08:37:41 +0200 Martin Fleisz (0afba5840) 
+
+	* Merge pull request #4814 from akallabeth/linked_list_add_object
+
+2018-08-21 11:01:54 +0200 Armin Novak (b5df39756) 
+
+	* Added option to ignore proxy env.
+
+2018-08-21 10:57:44 +0200 Armin Novak (a0facc329) 
+
+	* Added option to deactivate proxy.
+
+2018-08-21 10:53:33 +0200 Armin Novak (4bea9934c) 
+
+	* Added patch from #4697
+
+2018-08-23 16:58:22 +0200 Martin Fleisz (ebef5a5e2) 
+
+	* Merge pull request #4811 from akallabeth/dyn_fullscreen_fix
+
+2018-08-23 16:07:48 +0200 Martin Fleisz (3381ca46e) 
+
+	* Merge pull request #4787 from akallabeth/redirect_fqdn_fix
+
+2018-08-23 10:04:26 +0200 Armin Novak (ab18f8f22) 
+
+	* Fix #4680: Return proper directory name.
+
+2018-08-23 09:40:49 +0200 David Fort (7b53ae618) 
+
+	* Merge pull request #4813 from ondrejholy/coverity
+
+2018-08-20 11:11:47 +0200 Ondrej Holy (95a043e0e) 
+
+	* winpr/winsock: Fix leak found by covscan
+
+2018-08-22 13:17:10 +0200 Ondrej Holy (0a11a06dc) 
+
+	* winpr/winsock: Format code by astyle
+
+2018-08-21 10:27:56 +0200 Ondrej Holy (10b9c516f) 
+
+	* winpr/utils/wlog: Fix leak found by covscan
+
+2018-08-22 13:16:58 +0200 Ondrej Holy (d3c2ceb0f) 
+
+	* winpr/utils/wlog: Format code by astyle
+
+2018-08-20 10:55:29 +0200 Ondrej Holy (4813a7089) 
+
+	* winpr/utils/ntlm: Prevent releasing function argument
+
+2018-08-22 17:53:16 +0200 David Fort (d093189ac) 
+
+	* Merge pull request #4797 from akallabeth/rpm_expand_fix
+
+2018-08-22 13:16:31 +0200 Ondrej Holy (1c1d00aac) 
+
+	* winpr/utils/ntlm: Format code by astyle
+
+2018-08-20 09:52:24 +0200 Ondrej Holy (35bccd526) 
+
+	* winpr/sspi/ntlm: Fix leak found by covscan
+
+2018-08-20 09:50:43 +0200 Ondrej Holy (724bc7acd) 
+
+	* winpr/io/device: Fix leak found by covscan
+
+2018-08-22 13:16:03 +0200 Ondrej Holy (df9d0fab8) 
+
+	* winpr/io/device: Format code by astyle
+
+2018-08-20 09:47:33 +0200 Ondrej Holy (acbd6e632) 
+
+	* winpr/file: Fix leak found by covscan
+
+2018-08-20 09:33:42 +0200 Ondrej Holy (24eb53e20) 
+
+	* uwac: Fix leak found by covscan
+
+2018-08-22 13:15:32 +0200 Ondrej Holy (91c398dc9) 
+
+	* uwac: Format code by astyle
+
+2018-08-20 09:10:49 +0200 Ondrej Holy (3a5fdd0a3) 
+
+	* rdtk: Fix leak found by covscan
+
+2018-08-21 10:12:05 +0200 Ondrej Holy (0b7d0c200) 
+
+	* crypto/tls: Prevent usage of freed pointer found by coverity
+
+2018-08-20 11:26:35 +0200 Ondrej Holy (47595a857) 
+
+	* core/transport: Fix leak found by covscan
+
+2018-08-17 16:25:20 +0200 Ondrej Holy (1a413b5b4) 
+
+	* core/tcp: Prevent buffer overflow found by covscan
+
+2018-08-22 13:15:10 +0200 Ondrej Holy (26bc52f79) 
+
+	* core/tcp: Format code by astyle
+
+2018-08-17 16:22:56 +0200 Ondrej Holy (7e4fa6702) 
+
+	* core/proxy: Fix leak found by covscan
+
+2018-08-17 16:20:43 +0200 Ondrej Holy (2417a6a16) 
+
+	* core/nla: Fix leak found by covscan
+
+2018-08-17 16:16:37 +0200 Ondrej Holy (6e0f05cbd) 
+
+	* core/nego: Fix leak found by covscan
+
+2018-08-17 16:14:53 +0200 Ondrej Holy (8f8d91e36) 
+
+	* core/listener: Prevent buffer overflow found by covscan
+
+2018-08-21 09:45:46 +0200 Ondrej Holy (23c3c188c) 
+
+	* core/info: Silence false positive warnings from covscan
+
+2018-08-17 16:10:26 +0200 Ondrej Holy (4a7bb1842) 
+
+	* core/info: Fix leak found by covscan
+
+2018-08-17 16:00:19 +0200 Ondrej Holy (83e966d9e) 
+
+	* core/gateway/rpc: Fix leak found by covscan
+
+2018-08-22 13:14:45 +0200 Ondrej Holy (6de583e13) 
+
+	* core/gateway/rpc: Format code by astyle
+
+2018-08-17 15:47:46 +0200 Ondrej Holy (409e19233) 
+
+	* core/gateway/rdg: Fix leak found by covscan
+
+2018-08-21 09:16:47 +0200 Ondrej Holy (79d0725a8) 
+
+	* codec/planar: Fix leak found by covscan
+
+2018-08-22 13:40:41 +0200 Armin Novak (c3a26b0d6) 
+
+	* Removed +async-transport options
+
+2018-08-17 15:01:25 +0200 Ondrej Holy (36960e97a) 
+
+	* codec/nsc: Fix leak found by covscan
+
+2018-08-17 14:56:49 +0200 Ondrej Holy (99c15e533) 
+
+	* cache: Fix wrong condition found by covscan
+
+2018-08-17 14:45:07 +0200 Ondrej Holy (f36054b37) 
+
+	* client/cmdline: Fix leak found by covscan
+
+2018-08-17 14:40:12 +0200 Ondrej Holy (e9549a3bd) 
+
+	* client/common: Fix leak found by covscan
+
+2018-08-21 09:07:15 +0200 Ondrej Holy (e7d5aae51) 
+
+	* client/x11: Silence false positive warnings from covscan
+
+2018-08-17 14:28:55 +0200 Ondrej Holy (baeb29a7e) 
+
+	* client/x11: Fix leak found by covscan
+
+2018-08-22 13:13:37 +0200 Ondrej Holy (dde4c3838) 
+
+	* client/x11: Format code by astyle
+
+2018-08-17 14:19:19 +0200 Ondrej Holy (97f25e8ab) 
+
+	* channels/smartcard: Fix leak found by covscan
+
+2018-08-22 13:13:07 +0200 Ondrej Holy (3baa71670) 
+
+	* channels/smartcard: Format code by astyle
+
+2018-08-21 09:11:19 +0200 Ondrej Holy (ab7ab7a7c) 
+
+	* channels/server: Silence false positive warnings from covscan
+
+2018-08-22 13:12:35 +0200 Ondrej Holy (4ba3c46cd) 
+
+	* channels/server: Format code by astyle
+
+2018-08-17 13:55:56 +0200 Ondrej Holy (170d5859d) 
+
+	* channels/serial: Fix leak found by covscan
+
+2018-08-17 13:52:38 +0200 Ondrej Holy (d3ab04d78) 
+
+	* channels/remdesk: Fix leak found by covscan
+
+2018-08-17 13:47:24 +0200 Ondrej Holy (405c13338) 
+
+	* channels/rdpgfx: Fix leak found by covscan
+
+2018-08-22 13:11:28 +0200 Ondrej Holy (36a68b4ea) 
+
+	* channels/rdpgfx: Format code by astyle
+
+2018-08-17 13:43:18 +0200 Ondrej Holy (1001807c5) 
+
+	* channels/rdpdr: Prevent buffer overflow found by covscan
+
+2018-08-22 13:07:46 +0200 Ondrej Holy (472576e6e) 
+
+	* channels/rdpdr: Format code by astyle
+
+2018-08-17 12:56:45 +0200 Ondrej Holy (10bddb9fd) 
+
+	* channels/rdpdr: Fix leak found by covscan
+
+2018-08-17 12:51:19 +0200 Ondrej Holy (865ee84ab) 
+
+	* channels/rail: Fix leak found by covscan
+
+2018-08-17 12:43:49 +0200 Ondrej Holy (4b8f2d513) 
+
+	* channels/drive: Fix leak found by covscan
+
+2018-08-17 12:41:34 +0200 Ondrej Holy (7b740f152) 
+
+	* channels/addin: Fix leak found by covscan
+
+2018-08-17 12:30:33 +0200 Ondrej Holy (926ac4f93) 
+
+	* channels/audin: Fix leak found by covscan
+
+2018-08-22 12:33:34 +0200 Armin Novak (b77dc13b5) 
+
+	* Implemented linked list compare and value copy functions.
+
+2018-08-21 12:58:55 +0200 Armin Novak (02dc6ab3f) 
+
+	* Fixed single monitor fullscreen resolution update.
+
+2018-08-21 10:01:47 +0200 Martin Fleisz (560552ce1) 
+
+	* Merge pull request #4808 from akallabeth/tls_extract_pem_fix
+
+2018-08-21 09:08:33 +0200 Armin Novak (026ff00e7) 
+
+	* Fixed #4806 broken bounds check.
+
+2018-08-13 15:44:53 +0200 Armin Novak (210939988) 
+
+	* Removed comments with variables and (previously added) buggy suse
+          conditionals
+
+2018-08-13 15:21:49 +0200 David Fort (735ab2e8b) 
+
+	* Merge pull request #4795 from akallabeth/rpm_build_fix
+
+2018-07-10 20:22:18 +0200 Andreas Gröger (525d089fa) 
+
+	* Update X11-modifier key state on focus_in
+
+2018-08-13 14:34:06 +0200 Armin Novak (aad5c45b6) 
+
+	* Deactivated FFMPEG support for redhat systems (deps not in repo)
+
+2018-08-13 14:33:49 +0200 Norbert Federa (2353287e0) 
+
+	* Merge pull request #4794 from akallabeth/drive_find_first_file_fix
+
+2018-08-13 13:23:52 +0200 Armin Novak (dbd630a38) 
+
+	* drive_file_query_information: Use GetFileAttributesExW
+
+2018-08-13 13:17:56 +0200 Armin Novak (8b8e85271) 
+
+	* Fixed #4793: Return correct file handle for existing directory
+
+2018-08-09 10:41:56 +0200 akallabeth (dd26659ab) 
+
+	* Merge pull request #4789 from akallabeth/nightly_ffmpeg_rpm
+
+2018-08-09 10:22:24 +0200 David Fort (fd1c94bfb) 
+
+	* Merge pull request #4788 from akallabeth/multimon_fullscreen
+
+2018-08-09 09:58:56 +0200 Armin Novak (2b5b7cb3c) 
+
+	* Added requirement check for WITH_DSP_FFMPEG
+
+2018-08-08 13:31:52 +0200 Armin Novak (f78794b72) 
+
+	* Enabled ffmpeg support on RPM based systems.
+
+2018-08-08 13:10:07 +0200 akallabeth (b18f9ee86) 
+
+	* Merge pull request #4783 from akallabeth/nightly_audio
+
+2018-08-08 13:04:26 +0200 Armin Novak (a334aa965) 
+
+	* Fixed #4786: Added fullscreen handling for dynamic resolution.
+
+2018-08-08 12:26:57 +0200 Armin Novak (13564dbb4) 
+
+	* Allow redirect address override with a list of values.
+
+2018-08-08 11:16:24 +0200 Armin Novak (cc5e402cd) 
+
+	* Added command line option /redirect-prefer:<fqdn|ip|netbios>
+
+2018-08-08 10:25:09 +0200 Armin Novak (f6b6eba0a) 
+
+	* Try redirection FQDN first, but check if it is resolvable.
+
+2018-08-06 07:55:30 +0200 Armin Novak (98ddde0cc) 
+
+	* Enabled FFMPEG dependency.
+
+2018-08-01 15:59:34 +0200 akallabeth (92c2d83a4) 
+
+	* Merge pull request #4778 from akallabeth/2_0_0_dev_4
+
+2018-08-01 12:33:34 +0200 Armin Novak (97e7eca30) 
+
+	* Started next development cycle
+
+2018-08-01 15:27:31 +0200 akallabeth (a4f147683) 
+
+	* Merge pull request #4777 from akallabeth/changelog_2_0_0-rc3
+
+2018-08-01 15:16:07 +0200 Martin Fleisz (1c75854a3) 
+
+	* Merge pull request #4776 from akallabeth/fixes_cleanups_etc
+
+2018-08-01 11:58:24 +0200 Armin Novak (ec0a0fef2) 
+
+	* Added const to function buffer pointers
+
+2018-08-01 11:57:18 +0200 Armin Novak (2a3a66b18) 
+
+	* Fixed expression ambiguity
+
+2018-08-01 11:56:47 +0200 Armin Novak (98c254ffa) 
+
+	* Fixed invalid return value type.
+
+2018-08-01 11:56:04 +0200 Armin Novak (eed5a41b6) 
+
+	* Fixed funtion to function pointer argument mismatch
+
+2018-08-01 11:54:45 +0200 Armin Novak (0352dc3d6) 
+
+	* Fixed invalid format string.
+
+2018-08-01 11:54:18 +0200 Armin Novak (cc44119dc) 
+
+	* Fixed missing array initializer values
+
+2018-08-01 11:44:45 +0200 Armin Novak (44d1438ea) 
+
+	* Fixed mac audin
+
+2018-08-01 10:04:00 +0200 Armin Novak (31f933bc1) 
+
+	* Fixed mac server compile issue.
+
+2018-07-31 11:29:59 +0200 Armin Novak (619ce84cd) 
+
+	* release: version 2.0.0-rc3
+
+2018-07-31 13:35:05 +0200 MartinHaimberger (30626a5dc) 
+
+	* Merge pull request #4773 from akallabeth/drive_multi_fix
+
+2018-07-31 11:13:29 +0200 Martin Fleisz (70b3e442e) 
+
+	* Merge pull request #4774 from akallabeth/audin_leak_fix
+
+2018-07-31 11:03:39 +0200 Martin Fleisz (e3eae5db8) 
+
+	* Merge pull request #4240 from akallabeth/wl_client_fixes
+
+2018-07-31 10:45:04 +0200 Armin Novak (3a30844db) 
+
+	* Added default return value.
+
+2018-07-31 10:33:19 +0200 Armin Novak (7355b4e5f) 
+
+	* Fixed leak in audio format processing.
+
+2018-07-31 10:22:22 +0200 MartinHaimberger (2d7499b7c) 
+
+	* Merge pull request #4758 from akallabeth/dsp_fix
+
+2018-07-30 13:31:32 +0200 akallabeth (88474af92) 
+
+	* Merge pull request #4762 from mmattes/issue/4757
+
+2018-07-30 13:16:45 +0200 Armin Novak (adc0882f8) 
+
+	* Removed obsolete winodws path hack.
+
+2018-07-30 12:58:15 +0200 Armin Novak (93fa8eb0d) 
+
+	* Fixed windows automount drive arguments.
+
+2018-07-30 12:37:19 +0200 Armin Novak (4035ed46c) 
+
+	* Added automount flag for windows and macos implementations.
+
+2018-07-30 12:31:11 +0200 Armin Novak (e8393a22e) 
+
+	* Remember if drive was added by automout.
+
+2018-07-30 12:29:18 +0200 Martin Fleisz (da8e58760) 
+
+	* Merge pull request #4741 from akallabeth/find_file_fix
+
+2018-07-30 12:28:38 +0200 Martin Fleisz (143a2b149) 
+
+	* Merge pull request #4755 from akallabeth/dyn_resize_fix
+
+2018-07-30 11:22:11 +0200 Armin Novak (033abe93d) 
+
+	* Fixed callback parameter checks.
+
+2018-07-30 10:47:34 +0200 akallabeth (ffd84916f) 
+
+	* Merge pull request #4765 from mmattes/fix/double-import-xinput2
+
+2018-07-30 10:46:20 +0200 Armin Novak (ed8932834) 
+
+	* Fixed missing argument checks.
+
+2018-07-30 10:37:50 +0200 akallabeth (6b07a3f2b) 
+
+	* Merge pull request #4772 from Mandar-Shinde/master
+
+2018-07-27 15:54:57 +0530 Mandar (093fe8338) 
+
+	* macos: Bring RDP window to front
+
+2018-07-24 14:03:45 +0200 Markus Mattes (e6209748f) 
+
+	* Removed double ifdef WITH_XI, XInput2.h already included
+
+2018-07-23 22:06:09 +0200 David Fort (6bd1a7d2a) 
+
+	* Merge pull request #4759 from mfleisz/audin_srv_fix
+
+2018-07-22 20:00:25 +0200 Markus Mattes (bad8bbadf) 
+
+	* Fix for #4757
+
+2018-07-19 16:21:03 +0200 Armin Novak (3b187ef32) 
+
+	* Code Cleanup
+
+2018-07-19 15:54:40 +0200 Martin Fleisz (b6a41b26e) 
+
+	* audin: Fix server-side dsp decoding
+
+2018-07-19 15:38:44 +0200 Armin Novak (a984dd7f5) 
+
+	* Updated experimental list.
+
+2018-07-19 15:17:54 +0200 Armin Novak (d40daedb9) 
+
+	* Fixed FFMPEG backend: Do not drop samples for package alignment.
+
+2018-07-19 12:20:14 +0200 Armin Novak (c192c17c8) 
+
+	* Fixed mixed declaration.
+
+2018-07-19 11:53:36 +0200 Armin Novak (d7e88b1b8) 
+
+	* Fixed winmm backend logging.
+
+2018-07-19 11:46:54 +0200 Armin Novak (a003890b3) 
+
+	* Fixed opensles compilation errors.
+
+2018-07-18 16:32:53 +0200 Martin Fleisz (5a154dccb) 
+
+	* Merge pull request #4754 from
+          akallabeth/expose_cert_redirection_flag
+
+2018-07-16 17:08:26 +0200 Armin Novak (3d6c41746) 
+
+	* Expose redirection flag for certificate.
+
+2018-07-18 15:16:50 +0200 Armin Novak (328eba7fe) 
+
+	* Fix #4752: Provide message free function for channel queue.
+
+2018-07-18 14:29:22 +0200 Armin Novak (4e4ec0b03) 
+
+	* Fix #4752: Unsubscirbe all PubSub in dynamic channel.
+
+2018-07-18 12:33:52 +0200 Armin Novak (ec83f3d4f) 
+
+	* Fixed number of samples returned.
+
+2018-07-18 12:33:39 +0200 Armin Novak (00b073add) 
+
+	* Fixed DVI_ADPCM mapping.
+
+2018-07-18 12:14:37 +0200 Armin Novak (7c8a55637) 
+
+	* Fixed alignment issues.
+
+2018-07-18 09:31:04 +0200 Armin Novak (ced4d06f7) 
+
+	* Fixed #4679, #4753 dynamic resizing
+
+2018-07-17 14:55:19 +0200 Armin Novak (8664a3c91) 
+
+	* Fixed alsa and pulse backend receive buffer sizes
+
+2018-07-17 12:57:57 +0200 Armin Novak (6029a411e) 
+
+	* Fixed ima_adpcm encoder bug.
+
+2018-07-17 10:57:08 +0200 Armin Novak (b9645c924) 
+
+	* Using dynamic logger again.
+
+2018-07-17 10:30:35 +0200 Armin Novak (7260a4fd8) 
+
+	* Fixed override of stream data in dsp_encode methods.
+
+2018-07-13 13:54:03 +0200 Martin Fleisz (7705535f9) 
+
+	* Merge pull request #4745 from akallabeth/redirect_fix_follow_up
+
+2018-07-13 13:11:38 +0200 Armin Novak (7a6b8a04b) 
+
+	* Fixed channel reconnect after redirect.
+
+2018-07-11 16:37:29 +0200 Armin Novak (3d8dec7fb) 
+
+	* Removed debug log messages.
+
+2018-07-11 16:27:14 +0200 Armin Novak (dbfa896d5) 
+
+	* Fixed errno reset.
+
+2018-07-11 15:41:05 +0200 Martin Fleisz (4d0876fcc) 
+
+	* Merge pull request #4742 from mfleisz/fix_wave2
+
+2018-07-11 15:06:31 +0200 Martin Fleisz (0ec957901) 
+
+	* rdpsnd: Fix sending of wave2 PDU
+
+2018-07-11 10:58:37 +0200 Armin Novak (2b91095eb) 
+
+	* Fixed pattern detection if path is already a directory.
+
+2018-07-11 10:53:26 +0200 Armin Novak (30843ef4d) 
+
+	* Code cleanups and more logging.
+
+2018-07-10 17:31:08 +0200 Martin Fleisz (fc925a7f2) 
+
+	* Merge pull request #4738 from akallabeth/connect_timeout_retry
+
+2018-07-10 14:57:13 +0200 Armin Novak (7ebc89951) 
+
+	* Fixed PEM certificate reading.
+
+2018-07-10 13:26:25 +0200 Armin Novak (f617d0d3c) 
+
+	* Moved automatic reconnect after timeout to freerdp_connect.
+
+2018-07-10 12:49:46 +0200 Armin Novak (8ba8a6244) 
+
+	* Added automatic reconnect if freerdp_connect fails due to timeout.
+
+2018-07-10 12:21:38 +0200 Armin Novak (77eb93b4b) 
+
+	* Made internal functions static to help compiler optimize.
+
+2018-07-10 12:04:27 +0200 Armin Novak (7a39dcd7e) 
+
+	* Updated reconnect to handle cases where PostConnect was not called
+
+2018-07-10 10:03:49 +0200 Armin Novak (c9cebf6ed) 
+
+	* Remember accepted PEM cert to avoid unnecessary user input.
+
+2018-07-09 17:45:50 +0200 Armin Novak (0d1895e4e) 
+
+	* Fixed async input return value check.
+
+2018-07-05 16:37:15 +0200 Martin Fleisz (e326f7144) 
+
+	* Merge pull request #4727 from akallabeth/new_error
+
+2018-07-05 15:20:52 +0200 Armin Novak (398da7340) 
+
+	* Added no or missing credentail error.
+
+2018-07-05 09:50:03 +0200 Martin Fleisz (fc84e6dd2) 
+
+	* Merge pull request #4726 from akallabeth/bitmap_cache_fix
+
+2018-07-05 08:44:42 +0200 Armin Novak (8f7dbe505) 
+
+	* Fix #4725: Need to copy data.
+
+2018-07-04 14:21:36 +0200 Martin Fleisz (a0fddd174) 
+
+	* Merge pull request #4530 from akallabeth/order_refactor
+
+2018-07-04 13:44:38 +0200 Armin Novak (de8be5d50) 
+
+	* Fixed indentation.
+
+2018-07-04 13:10:38 +0200 David Fort (a1d9399ca) 
+
+	* Merge pull request #4724 from akallabeth/wave2_server
+
+2018-07-04 11:03:32 +0200 Armin Novak (4465bcfa8) 
+
+	* Fixed remarks
+
+2018-07-04 10:50:41 +0200 David Fort (1107220ec) 
+
+	* Merge pull request #4645 from akallabeth/mac_ports_removed
+
+2018-07-03 16:07:05 +0200 Martin Fleisz (aaaee8015) 
+
+	* Merge pull request #4700 from informatimago/rdpsettings-script
+
+2018-07-03 14:35:57 +0200 Pascal J. Bourguignon (45841f8e6) 
+
+	* Applied autoformat.sh manually to settings.h
+
+2018-07-03 13:33:05 +0200 Pascal J. Bourguignon (35477c35d) 
+
+	* Use tabs to indent the comment in rdp_settings too.
+
+2018-07-03 12:45:15 +0200 Martin Fleisz (187cf000b) 
+
+	* Merge pull request #4706 from khvMX/master
+
+2018-07-03 09:54:29 +0200 Armin Novak (bf70ee626) 
+
+	* Keep extra data of audio format locally cached.
+
+2018-07-02 16:46:03 +0200 Armin Novak (a554207c1) 
+
+	* Added target dependencies.
+
+2018-07-02 16:38:21 +0200 Armin Novak (7cd25027a) 
+
+	* Fixed empty lib.
+
+2018-07-02 16:33:50 +0200 Armin Novak (73b8963d1) 
+
+	* Added automatic format support filter.
+
+2018-07-02 16:09:27 +0200 Armin Novak (30283e18e) 
+
+	* Fixed warning.
+
+2018-07-02 16:08:47 +0200 Armin Novak (373bfac9a) 
+
+	* Added support for WAVE2 PDU in server side audio channel.
+
+2018-06-26 10:19:41 +0200 Martin Fleisz (b34e3bcf7) 
+
+	* Merge pull request #4681 from akallabeth/wording_consistent
+
+2018-06-26 00:02:58 +0200 David Fort (eb1727bb8) 
+
+	* Merge pull request #4710 from akallabeth/reconnect_fixes
+
+2018-06-19 17:28:22 +0200 Armin Novak (35cd438ec) 
+
+	* Added enum for client connection state.
+
+2018-06-19 16:57:45 +0200 Armin Novak (9a47ce3f7) 
+
+	* Fixed missing variable type
+
+2018-06-19 16:48:05 +0200 David Fort (3ec0113df) 
+
+	* Merge pull request #4711 from
+          akallabeth/command_line_cleanup_rework
+
+2018-06-19 12:55:29 +0200 Armin Novak (348ecc4c8) 
+
+	* Fixed memory leak in command line value parsing.
+
+2018-06-19 12:55:29 +0200 Armin Novak (b9b30f92c) 
+
+	* Fixed memory leak in command line value parsing.
+
+2018-06-19 12:46:58 +0200 Armin Novak (e44d10a3e) 
+
+	* Merge remote-tracking branch 'origin/pr/4701' into reconnect_fixes
+
+2018-06-18 10:44:35 +0200 Armin Novak (273655a85) 
+
+	* Follow up fix for #4631
+
+2018-06-18 10:23:57 +0200 Armin Novak (a716dc244) 
+
+	* Removed duplicate resource free.
+
+2018-06-08 11:35:02 +0200 Viktor Mukha (16cde2ee2) 
+
+	* X11: fixed Right-Ctrl ungrab feature (PR #3622)
+
+2018-06-07 13:29:44 +0200 Pascal J. Bourguignon (17a3782d1) 
+
+	* FIX: moved declarations above the statements for strict C 90
+          compliance.
+
+2018-06-06 17:08:52 +0200 Pascal J. Bourguignon (a7c402255) 
+
+	* Corrected update-rdpSettings according to PR comments. Updated
+          settings.h with it.
+
+2018-06-06 16:43:09 +0200 Pascal J. Bourguignon (15f2bafea) 
+
+	* Cleaned up const char** -> char** for argv, since we definitely do
+          modify the argv! (we overwrite the password and pin
+          arguments). This implies changes in the argument parsing
+          tests that now must pass a mutable argv (copied from the
+          statically declared test argvs). Some other const
+          inconsistency have been dealt with too.
+
+2018-05-25 14:51:55 +0200 Pascal J. Bourguignon (25dafa381) 
+
+	* Created script to update the #define from rdp_settings fields.
+
+2018-05-23 10:27:39 +0200 Pascal J. Bourguignon (118ce7f12) 
+
+	* Aligned columns in rdpSettings structure declaration.
+
+2018-06-04 11:29:01 +0200 David Fort (dad6b7a53) 
+
+	* Merge pull request #4694 from akallabeth/mic_crash_fix
+
+2018-06-04 10:14:29 +0200 Armin Novak (2d69e369b) 
+
+	* Fixed #4693: Fix integer underflow in encoder loop.
+
+2018-05-30 12:39:17 +0200 Martin Fleisz (73588bc2b) 
+
+	* Merge pull request #4683 from akallabeth/ffmpeg_found_fix
+
+2018-05-30 12:13:24 +0200 Armin Novak (f8a1bb845) 
+
+	* Fixed case of variable names.
+
+2018-05-29 12:10:53 +0200 Martin Fleisz (fad23aab2) 
+
+	* Merge pull request #4677 from akallabeth/build_dep_fix
+
+2018-05-28 15:30:50 +0200 Armin Novak (4c0007b55) 
+
+	* Fix #4672: Check if FFMPEG and OpenH264 detected
+
+2018-05-22 16:22:10 +0200 Martin Fleisz (e90184cc5) 
+
+	* Merge pull request #4665 from FreeRDP/akallabeth-patch-1
+
+2018-05-18 09:03:30 +0200 akallabeth (43dd47141) 
+
+	* Update issue templates
+
+2018-05-17 10:08:05 +0200 Armin Novak (8dba31ea0) 
+
+	* Fixed #4636: Consistent wording for boolean options depending on
+          default.
+
+2018-05-16 16:15:50 -0400 Mike Gilbert (9460f4292) 
+
+	* primitives: ensure primitives_get() returns a populated struct
+
+2018-05-16 09:53:30 +0200 David Fort (0255a7db1) 
+
+	* Merge pull request #4654 from akallabeth/alsa_latency_patch
+
+2018-05-16 08:45:17 +0200 Armin Novak (c078aee23) 
+
+	* Return real alsa latency if buffer is filled.
+
+2018-05-16 08:01:09 +0200 akallabeth (81c41c2a8) 
+
+	* Merge pull request #4653 from rjcorrig/kb4093753
+
+2018-05-15 15:53:36 -0400 Robert Corrigan (992554a01) 
+
+	* Update time zone data to April 2018
+
+2018-05-15 16:29:27 +0200 Martin Fleisz (1cb14010a) 
+
+	* Merge pull request #4651 from akallabeth/loadepng_memleak_fix
+
+2018-05-15 15:09:49 +0200 Martin Fleisz (278fef24a) 
+
+	* Merge pull request #4648 from akallabeth/nsc_free_fix
+
+2018-05-15 14:57:00 +0200 Armin Novak (0cf4dcc01) 
+
+	* Fix missing sound arrival time for wave2 PDU
+
+2018-05-15 14:30:04 +0200 Armin Novak (5a5b5eb6d) 
+
+	* Fixed loadepng memory leak.
+
+2018-05-15 13:47:28 +0200 Martin Fleisz (f65368695) 
+
+	* Merge pull request #4637 from akallabeth/win_ninja_support
+
+2018-05-15 13:46:57 +0200 Martin Fleisz (dd408318b) 
+
+	* Merge pull request #4631 from akallabeth/santizer_fixes
+
+2018-05-15 09:13:00 +0200 Armin Novak (ae765430e) 
+
+	* Fixed #4647: nsc_context_free must not access possibly
+          uninitialized fields.
+
+2018-05-14 15:04:34 +0200 David Fort (c5b84db7e) 
+
+	* Merge pull request #4638 from
+          akallabeth/known_hosts_comment_support
+
+2018-05-11 11:09:54 +0200 Armin Novak (9de99f15d) 
+
+	* Added comment support for known_hosts format.
+
+2018-05-14 10:39:12 +0200 Armin Novak (3c7dfa0a0) 
+
+	* Fix #2617: Removed MacPorts from CMake (default) search path.
+
+2018-05-11 11:00:46 +0200 Armin Novak (e8b911650) 
+
+	* Fixed invalid function argument for
+          ntlm_compute_message_integrity_check
+
+2018-05-11 11:00:01 +0200 Armin Novak (e71a39f21) 
+
+	* Fixed compiler warnings (unused)
+
+2018-05-06 11:17:08 +0200 Armin Novak (e1ea44127) 
+
+	* Fixed #4629: Only call freerdp_channels_post_connect when it was
+          connected.
+
+2018-05-11 10:37:50 +0200 Armin Novak (a18ee2e7b) 
+
+	* VS2017 support: set pdb output directory for Ninja generator.
+
+2018-05-06 10:49:05 +0200 Armin Novak (6e958e7ed) 
+
+	* Fix #4628: CommandLineFindNextArgumentA must check the current
+          argument
+
+2018-04-28 14:13:17 -0700 Andre Esteve (ab0bc2a7f) 
+
+	* X11: Fix fullscreen toggle
+
+2018-05-04 13:28:18 +0200 Martin Fleisz (7eb12bb02) 
+
+	* Merge pull request #4610 from akallabeth/cmd_strtol_fix
+
+2018-05-04 13:08:45 +0200 Martin Fleisz (c4e8685a2) 
+
+	* Merge pull request #4623 from akallabeth/mac_sound_backend_fix
+
+2018-05-04 13:07:01 +0200 Martin Fleisz (9c02f1bd1) 
+
+	* Merge pull request #4627 from akallabeth/clang_warning_fixes
+
+2018-05-04 12:03:26 +0200 Armin Novak (28ac0ee14) 
+
+	* Fixed NULL dereferences.
+
+2018-05-04 12:36:29 +0200 Armin Novak (87c19b30d) 
+
+	* Fixed uninitialized return and early resource cleanup.
+
+2018-05-04 12:36:18 +0200 Armin Novak (fb032f91b) 
+
+	* Fixed uninitialized value.
+
+2018-05-04 12:35:51 +0200 Armin Novak (46a62aa1a) 
+
+	* Fixed missing NULL pointer checks.
+
+2018-05-04 11:59:21 +0200 Martin Fleisz (65e329782) 
+
+	* Merge pull request #4624 from akallabeth/pth_fix
+
+2018-05-04 11:46:46 +0200 Armin Novak (069c58a72) 
+
+	* Fixed memory leak.
+
+2018-05-04 09:54:49 +0200 Armin Novak (458e51eae) 
+
+	* Do not set password to identity if pth is used.
+
+2018-05-04 10:06:42 +0200 Martin Fleisz (99346d19c) 
+
+	* Merge pull request #4611 from akallabeth/argument_warnings
+
+2018-05-04 10:04:37 +0200 akallabeth (0cf184d35) 
+
+	* Merge pull request #4625 from dualmoon/fix-hisher-pronouns
+
+2018-05-04 09:44:06 +0200 Armin Novak (670c1190c) 
+
+	* Fixed formats supported by backend.
+
+2018-05-04 09:10:31 +0200 Armin Novak (b59b0a442) 
+
+	* Added error log messages.
+
+2018-05-03 12:11:13 -0400 Ashley Davis (ae54f5bde) 
+
+	* First person "they" pronouns in logoff message
+
+2018-05-03 17:49:14 +0200 Armin Novak (5b961e9c7) 
+
+	* Fixed /pth: Consistently treat the hash offset to password length.
+
+2018-05-03 16:12:12 +0200 Armin Novak (17d43edaf) 
+
+	* Fixed mac sound backend initialization.
+
+2018-05-03 13:35:20 +0200 Martin Fleisz (1a27f28ba) 
+
+	* Merge pull request #4620 from akallabeth/bio_ctrl_fix
+
+2018-05-03 12:25:52 +0200 Armin Novak (d4c98e4e7) 
+
+	* Fixed formatting.
+
+2018-05-03 12:24:16 +0200 Armin Novak (5765e9a42) 
+
+	* Fixed #4476: broken casts/variable sizes for custom BIO calls.
+
+2018-05-03 11:56:58 +0200 David Fort (456b0e893) 
+
+	* Merge pull request #4453 from akallabeth/sound_channel_refactor
+
+2018-05-03 11:55:03 +0200 akallabeth (dd577377d) 
+
+	* Merge pull request #4617 from kevans91/spurious
+
+2018-05-03 11:31:54 +0200 akallabeth (d130d9cb2) 
+
+	* Merge pull request #4613 from kevans91/file64
+
+2018-05-03 10:56:04 +0200 akallabeth (ba37f04e1) 
+
+	* Merge pull request #4616 from kevans91/timerfd-nonblock
+
+2018-05-03 10:23:12 +0200 Martin Fleisz (296b19e17) 
+
+	* Merge pull request #4596 from p-pautov/rdg_ssl_fixes
+
+2018-05-03 10:08:56 +0200 Armin Novak (066cb52ca) 
+
+	* Fixed treat_wave sample length and checks.
+
+2018-05-03 09:49:31 +0200 akallabeth (613e0be20) 
+
+	* Merge pull request #4614 from kevans91/cmakemod
+
+2018-05-03 08:55:23 +0200 akallabeth (94b316bf8) 
+
+	* Merge pull request #4618 from kevans91/buildtest
+
+2018-05-02 23:19:44 -0500 Kyle Evans (8073a7850) 
+
+	* Pull in the libepoll-shim includes for libwinpr's synch/test
+
+2018-05-02 10:57:16 -0500 Kyle Evans (2fb992a96) 
+
+	* Upstream the rest of our local FreeBSD patching
+
+2018-05-02 21:03:49 -0500 Kyle Evans (f1a7c3cc6) 
+
+	* Pass TFD_NONBLOCK to timerfd_create to avoid later fcntl
+
+2018-05-02 17:59:10 +0200 akallabeth (2215071b2) 
+
+	* Merge pull request #4576 from ccpp/bugfix-rdg-poll
+
+2018-05-02 17:54:57 +0200 akallabeth (3c51abc29) 
+
+	* Merge pull request #4612 from kevans91/mandest
+
+2018-05-02 09:59:33 -0500 Kyle Evans (5463b2359) 
+
+	* Enable 64-bit file support on FreeBSD as well
+
+2018-05-02 10:03:53 -0500 Kyle Evans (a7c0632bf) 
+
+	* Use SetFreeRDPCMakeInstallDir where CMake modules are installed
+
+2018-05-02 10:32:26 -0500 Kyle Evans (824ace49a) 
+
+	* Add SetFreeRDPCMakeInstallDir function to abstract away platform
+          differences
+
+2018-05-02 09:31:19 -0500 Kyle Evans (92a8e28f2) 
+
+	* Follow OpenBSD convention when installing manpages on FreeBSD
+
+2018-05-02 13:08:30 +0200 Armin Novak (3a5471310) 
+
+	* Fixed invalid argument parameter
+
+2018-05-02 13:08:17 +0200 Armin Novak (f631958a0) 
+
+	* Fixed argument warning.
+
+2018-05-02 12:57:34 +0200 Armin Novak (1fd5c53a7) 
+
+	* Fix #4597: Do string argument checks before a possible strtol
+
+2018-05-02 12:11:24 +0200 Martin Fleisz (fbb21e349) 
+
+	* Merge pull request #4608 from akallabeth/posix_timer_cmake_check
+
+2018-05-02 12:09:55 +0200 David Fort (9381e18cd) 
+
+	* Merge pull request #4570 from akallabeth/toolchain_fix
+
+2018-05-02 11:26:13 +0200 Martin Fleisz (31c804c34) 
+
+	* Merge pull request #4603 from hardening/socksplus
+
+2018-05-02 08:40:30 +0200 Armin Novak (60bf33f79) 
+
+	* Determine posix timer availability by function availability
+
+2018-04-29 21:25:28 +0200 David Fort (0f968b782) 
+
+	* proxy: cleanup SOCKS support and add user/password support
+
+2018-05-02 10:39:22 +0200 David Fort (a03c0d88d) 
+
+	* Merge pull request #4606 from kevans91/libressl-fixes
+
+2018-05-02 10:10:55 +0200 Martin Fleisz (c0804699f) 
+
+	* Merge pull request #4609 from akallabeth/clipboard_return_check
+
+2018-05-02 09:25:30 +0200 Armin Novak (e0af47d26) 
+
+	* Fixed rebase introduced error.
+
+2018-05-02 09:47:17 +0200 David Fort (2dee696af) 
+
+	* Merge pull request #4607 from kevans91/epoll
+
+2018-04-23 20:30:08 +0200 Jiri Sasek (1ba31551a) 
+
+	* socks proxy reply fix
+
+2018-05-02 09:21:42 +0200 Armin Novak (a1c3c1ad6) 
+
+	* Added proper return value checks for clipboard data.
+
+2018-04-04 13:40:13 +0200 Armin Novak (f19a17d3e) 
+
+	* Fixed surface bits command cleanup.
+
+2018-04-03 17:17:45 +0200 Armin Novak (4e6697261) 
+
+	* Fixed remaining global order buffers.
+
+2018-03-30 10:43:20 +0200 Armin Novak (e5767f07a) 
+
+	* Refactored order updates
+
+2018-05-01 23:50:15 -0500 Kyle Evans (aca530bc5) 
+
+	* Use shared memory instead of temp files on FreeBSD-compatible OS
+
+2018-05-01 23:42:25 -0500 Kyle Evans (45d8e2dfb) 
+
+	* Pull in libepoll-shim for the bits that require timerfd/epoll
+
+2018-05-01 23:38:48 -0500 Kyle Evans (5e9c8c4bc) 
+
+	* Set BSD/FREEBSD for DragonflyBSD
+
+2018-05-01 08:43:36 -0500 Kyle Evans (f8c391876) 
+
+	* Pull in the LibreSSL compatibility patches from FreeBSD
+
+2018-04-27 11:28:37 +0200 Armin Novak (bda925c52) 
+
+	* Added libavcodec version check for dsp-ffmpeg component.
+
+2018-04-27 09:39:30 +0200 David Fort (8cba20199) 
+
+	* Merge pull request #4548 from akallabeth/autoreconnect_fix
+
+2018-04-26 11:59:15 +0200 David Fort (782039c6a) 
+
+	* Merge pull request #4589 from oshogbo/token
+
+2018-04-26 02:11:04 -0700 p-pautov (fda76349b) 
+
+	* Fix Windows build.
+
+2018-04-17 17:05:20 -0700 Pavel Pautov (a0019ec79) 
+
+	* Fallback to RDG RPC transport only if server does not support RDG
+          HTTP and error out in other cases - invalid RDG SSL cert,
+          bad credentials, PAA failue, etc.
+
+2018-04-16 14:23:13 -0700 Pavel Pautov (c60388954) 
+
+	* Remove some unused functions.
+
+2018-04-12 13:05:04 -0700 Pavel Pautov (32505fda1) 
+
+	* Apply "authentication level" RDP property only to non-RDG
+          connections (as mstsc does).
+
+2018-04-11 20:02:44 -0700 Pavel Pautov (3a8d721bb) 
+
+	* Don't use CertificateName setting for RDG connections.
+
+2018-04-25 09:00:52 +0200 akallabeth (d5f9da2b3) 
+
+	* Merge pull request #4586 from Awingu/cbytes-fix
+
+2018-04-25 08:54:59 +0200 akallabeth (df1e3037e) 
+
+	* Merge pull request #4588 from oshogbo/tokencookie
+
+2018-04-24 20:45:52 +0200 Christian Plattner (4a19f4987) 
+
+	* Fail on unimplemented BIO_ctrl for /gt:rpc
+
+2018-04-24 16:35:04 +0200 Christian Plattner (4739189cf) 
+
+	* Implement BIO_ctrl more correctly for RDG
+
+2018-04-24 16:20:42 +0200 Christian Plattner (895689836) 
+
+	* Revert useless part of the bugfix
+
+2018-04-24 15:00:00 +0200 Mariusz Zaborski (651545388) 
+
+	* Recognize only the cookie format anything else treat as token.
+
+2018-04-24 14:34:45 +0200 Mariusz Zaborski (b9ddf2046) 
+
+	* Fix comments where is cookie and where is token.
+
+2018-04-24 10:33:44 +0200 Ruben De Visscher (1835a39aa) 
+
+	* Fix inconsistent cBytes value between WinScard and pcsc-lite.
+
+2017-08-18 19:17:17 +0200 Jiri Sasek (b1c1549ad) 
+
+	* SOCKS proxy support
+
+2018-04-19 11:04:08 +0200 Martin Fleisz (c5572b087) 
+
+	* Merge pull request #4539 from p-pautov/rdg_fixes
+
+2018-04-18 21:50:47 +0200 Christian Plattner (a15644365) 
+
+	* Fix BIO_get_fd for RDG, again.
+
+2018-04-18 14:50:31 +0200 Martin Fleisz (b228deb99) 
+
+	* Merge pull request #4543 from oshogbo/master
+
+2018-04-18 10:47:06 +0200 Christian Plattner (f9d036a87) 
+
+	* Fix #3602 by implementing BIO_get_fd correctly for RDG
+
+2018-04-18 10:38:42 +0200 Christian Plattner (589d2ec62) 
+
+	* Fix timeout for polling (partly fixes #3602)
+
+2018-04-17 15:03:27 +0200 Mariusz Zaborski (509afe252) 
+
+	* Remove MessageIntegrityCheck from context.
+
+2018-04-17 10:51:49 +0200 akallabeth (9de311fee) 
+
+	* Merge pull request #4572 from weberhofer/patch-1
+
+2018-04-17 08:20:54 +0200 Johannes Weberhofer (277fc1ca4) 
+
+	* Include geometry.h in video channel
+
+2018-04-05 13:12:20 -0700 Pavel Pautov (c86692389) 
+
+	* Avoid buffer to struct cast.
+
+2018-04-04 19:08:26 -0700 Pavel Pautov (8fc0ea719) 
+
+	* Send correct packet size in case of PAA. Some cleanup.
+
+2018-04-04 19:08:20 -0700 Pavel Pautov (bbee19ced) 
+
+	* Content-Length and Transfer-Encoding are mutually exclusive.
+
+2018-04-04 19:08:08 -0700 Pavel Pautov (ec42228b2) 
+
+	* Consolidate IN/OUT data connections establishment into common
+          function and clean up related code.
+
+2018-04-04 19:08:00 -0700 Pavel Pautov (00256bba1) 
+
+	* Move NTLM auth related code into dedicated functions.
+
+2018-04-04 19:07:52 -0700 Pavel Pautov (269dec637) 
+
+	* Consolidate rdg_tls_out_connect/rdg_tls_in_connect into single
+          function. This also fixes connections to RDG server via
+          proxy.
+
+2018-04-04 19:07:33 -0700 Pavel Pautov (e639e2caf) 
+
+	* Removed unused "readEvent" - no one checks if it was set. Removed
+          needless rdg_check_event_handles declaration.
+
+2018-04-04 19:07:25 -0700 Pavel Pautov (1530bcf91) 
+
+	* Consolidate
+          rdg_send_in_channel_request/rdg_send_out_channel_request
+          into single function.
+
+2018-04-04 19:07:11 -0700 Pavel Pautov (0fbf8f895) 
+
+	* Explicitly skip "seed" payload on RDG OUT connection, to avoid
+          issues when it's split over several SSL records.
+
+2018-04-04 19:06:59 -0700 Pavel Pautov (44cb71049) 
+
+	* Moved some repeated "read all" code into function.
+
+2018-04-16 16:45:00 +0200 Armin Novak (1feca7768) 
+
+	* Fixed redirection with session brokers.
+
+2018-04-16 11:39:36 +0200 Armin Novak (927409cf8) 
+
+	* Add default values for keystore variables.
+
+2018-04-16 10:22:24 +0200 Armin Novak (8758638c2) 
+
+	* Ensure audin channel uses supported protocol version 1.
+
+2018-04-16 08:56:09 +0200 David Fort (d07d06b28) 
+
+	* rdpsnd: add support for wave2 PDU in client (#2)
+
+2018-04-12 16:52:33 +0200 Armin Novak (d8bcb6910) 
+
+	* Updated OpenSSL version in build scripts.
+
+2018-04-12 16:49:18 +0200 Armin Novak (887e94c58) 
+
+	* Added patch from f-droid repo. (Christian Plattner)
+
+2018-04-12 15:52:38 +0200 Bernhard Miklautz (fc6780a86) 
+
+	* Merge pull request #4567 from akallabeth/sanitizer_checks_refined
+
+2018-04-12 15:25:35 +0200 David Fort (81ea42098) 
+
+	* Merge pull request #4568 from akallabeth/rails_bad_window_fix
+
+2018-04-12 14:39:37 +0200 Armin Novak (5628ed5e7) 
+
+	* Check for window existence in remote app mode before access
+
+2018-04-12 11:49:43 +0200 Armin Novak (c9373cee0) 
+
+	* Refined checks for sanitizers.
+
+2018-04-12 12:10:56 +0200 Martin Fleisz (855af9e94) 
+
+	* Merge pull request #4557 from akallabeth/connect_error_fix
+
+2018-04-12 11:11:57 +0200 David Fort (14cce798e) 
+
+	* Merge pull request #4544 from oshogbo/nSize
+
+2018-04-12 10:43:34 +0200 Martin Fleisz (d1b4b410f) 
+
+	* Merge pull request #4547 from andreesteve/gatewayip
+
+2018-04-11 17:10:48 +0200 Martin Fleisz (e297a4f0e) 
+
+	* Merge pull request #4563 from oshogbo/pointer
+
+2018-04-11 16:01:45 +0200 Mariusz Zaborski (0e25335c8) 
+
+	* Don't assume that the pointer function are set.
+
+2018-04-11 14:45:35 +0200 Norbert Federa (648f66670) 
+
+	* Merge pull request #4561 from bmiklautz/200dev3
+
+2018-04-11 13:36:33 +0200 Bernhard Miklautz (d309a1ba3) 
+
+	* build: set version to 2.0.0-dev3
+
 2018-04-11 13:25:31 +0200 Martin Fleisz (7a7b18027) 
 
 	* Merge pull request #4560 from bmiklautz/200rc2
@@ -22,6 +2970,22 @@
 
 	* cmake: Fix finding OpenSSL 1.1.0 libs on Windows platforms
 
+2018-04-11 09:30:40 +0200 Armin Novak (685f5a8d2) 
+
+	* Do not clear last error if not reconnecting.
+
+2018-04-11 09:00:32 +0200 Armin Novak (2fc31fcb3) 
+
+	* Set connection error if TCP connect fails.
+
+2018-04-11 08:33:05 +0200 Armin Novak (3606b66cc) 
+
+	* Fix rdpsnd channel detached handling.
+
+2018-03-14 22:37:30 -0700 Andre Esteve (d240069b5) 
+
+	* Gateway (RDG) use same IP for both channels
+
 2018-04-10 11:12:31 +0200 Martin Fleisz (04b29575f) 
 
 	* Merge pull request #4552 from perkerk/win-10-cursors-again
@@ -38,6 +3002,10 @@
 
 	* Merge pull request #4551 from oshogbo/nego_0
 
+2018-04-09 17:28:22 +0200 Armin Novak (82ad911ee) 
+
+	* Added fake rdpsnd backend.
+
 2018-04-09 17:13:22 +0200 Mariusz Zaborski (480abdde9) 
 
 	* Fix setting of negotiated security protocol.
@@ -50,9 +3018,60 @@
 
 	* Fix checking of krb in encrypt public key echo.
 
+2018-04-09 14:03:05 +0200 Armin Novak (7af9ba917) 
+
+	* Refactored reconnect and redirect API
+
+2018-04-09 11:10:14 +0200 Armin Novak (030e9fc12) 
+
+	* Fixed channel duplicate disconnect handling
+
+2018-04-09 11:10:17 +0200 Armin Novak (6c7bfe892) 
+
+	* Fixed channel duplicate disconnect handling
+
+2018-04-09 11:10:08 +0200 Armin Novak (357391bd9) 
+
+	* Fixed channel duplicate disconnect handling
+
+2018-04-09 11:10:03 +0200 Armin Novak (1761a66b5) 
+
+	* Fixed channel duplicate disconnect handling
+
+2018-04-09 11:09:59 +0200 Armin Novak (d784954bc) 
+
+	* Fixed channel duplicate disconnect handling
+
+2018-04-09 11:09:56 +0200 Armin Novak (973a4c30b) 
+
+	* Fixed channel duplicate disconnect handling
+
+2018-04-09 11:09:51 +0200 Armin Novak (75717411d) 
+
+	* Fixed channel duplicate disconnect handling
+
+2018-04-09 11:08:46 +0200 Armin Novak (0a7691de5) 
+
+	* Fixed channel (dis)connect on redirect or reconnect.
+
+2018-04-09 11:04:27 +0200 Armin Novak (1698a54b0) 
+
+	* Removed unnecessarty string duplications.
+
 2018-04-09 09:22:18 +0200 David Fort (62f540812) 
 
 	* Merge pull request #4540 from akallabeth/warning_fixes_v2
+
+2018-04-06 21:15:15 +0200 Mariusz Zaborski (fe37fede5) 
+
+	* Fix variable passsed to HashCallback with MIC. The value in the
+          context is not set yet and we need one from authentication
+          message.
+
+2018-04-06 21:07:51 +0200 Mariusz Zaborski (00374382d) 
+
+	* There is no reason to restrict nSize to 2 the hostname can be empty
+          on UNIX-like machines.
 
 2018-04-06 11:34:24 +0200 Armin Novak (3762e0671) 
 
@@ -61,6 +3080,38 @@
 2016-10-10 19:17:21 +0200 Armin Novak (ef6a03128) 
 
 	* Added memory and thread sanitizer.
+
+2018-04-03 12:08:01 +0200 Armin Novak (2c98d85a3) 
+
+	* Fixed function pointer typedef formatting.
+
+2018-04-03 11:18:22 +0200 Armin Novak (3f712cab7) 
+
+	* Fixed formatting of changed files.
+
+2018-03-23 13:57:22 +0100 Armin Novak (2e801a842) 
+
+	* Free dsp context on close.
+
+2018-03-23 13:26:17 +0100 Armin Novak (1c127fab7) 
+
+	* Added AudioFormatFlags fallback.
+
+2018-03-20 15:07:00 +0100 Armin Novak (ec5dab973) 
+
+	* Initialized ALSA backend format.
+
+2018-03-16 11:42:06 +0100 Armin Novak (65a82e9cd) 
+
+	* Fix #4462: Fallback typedef for AudioFormatID on MacOS < 10.10
+
+2018-03-14 16:10:12 +0100 Armin Novak (4d45bd666) 
+
+	* Added CMake option WITH_DSP_EXPERIMENTAL
+
+2018-02-20 12:15:30 +0100 Armin Novak (f89c1857b) 
+
+	* Rewrite of sound and microphone channels
 
 2018-04-05 10:49:24 +0200 Armin Novak (b5668e35b) 
 
@@ -268,6 +3319,10 @@
 
 	* pkg freerdp-nightly: fix build on bionic
 
+2018-03-20 11:31:53 +0100 Armin Novak (d8e8bf847) 
+
+	* Removed xrdp workarounds.
+
 2018-03-20 11:02:40 +0100 akallabeth (de83f4df2) 
 
 	* Merge pull request #4499 from mfleisz/cssp_v6
@@ -307,6 +3362,10 @@
 2018-03-08 13:46:46 +0100 Armin Novak (9bd13c25c) 
 
 	* Added WaitableTimer implementation for mac OS.
+
+2018-03-09 20:05:40 -0800 Lee Ball (d5cd7e8ff) 
+
+	* Updated project site link to HTTPS
 
 2018-03-09 14:25:45 +0100 Armin Novak (f430b55ab) 
 
@@ -411,6 +3470,14 @@
 2018-03-05 12:32:42 -0600 Eric Brown (d8151c03d) 
 
 	* Remove unnecessary WM_SETCURSOR handling from wf_event_proc
+
+2018-03-05 09:59:41 +0100 Armin Novak (733f58c4f) 
+
+	* Use wrapper functions for input event handling.
+
+2018-03-05 09:59:26 +0100 Armin Novak (87c44a047) 
+
+	* Removed NULL checks in functions without return
 
 2018-03-02 12:42:04 -0600 Eric Brown (0c24ade66) 
 
@@ -530,6 +3597,10 @@
 2018-02-15 10:06:05 +0100 Martin Fleisz (6283ce8a2) 
 
 	* Merge pull request #4415 from akallabeth/drdynvc_dyn_log
+
+2017-11-16 12:42:33 +0100 Armin Novak (84f2cff5e) 
+
+	* Fixed wayland issues.
 
 2018-02-14 15:54:13 +0100 Martin Fleisz (13be71381) 
 

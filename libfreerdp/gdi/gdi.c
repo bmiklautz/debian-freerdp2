@@ -584,8 +584,8 @@ static BOOL gdi_patblt(rdpContext* context, PATBLT_ORDER* patblt)
 	rdpGdi* gdi = context->gdi;
 	BOOL ret = FALSE;
 	const DWORD rop = gdi_rop3_code(patblt->bRop);
-	UINT32 nXSrc = 0;
-	UINT32 nYSrc = 0;
+	INT32 nXSrc = 0;
+	INT32 nYSrc = 0;
 	BYTE data[8 * 8 * 4];
 	HGDI_BITMAP hBmp = NULL;
 
@@ -663,9 +663,7 @@ static BOOL gdi_patblt(rdpContext* context, PATBLT_ORDER* patblt)
 			break;
 	}
 
-	if (!hbrush)
-		gdi_DeleteObject((HGDIOBJECT) hBmp);
-	else
+	if (hbrush)
 	{
 		hbrush->nXOrg = brush->x;
 		hbrush->nYOrg = brush->y;
@@ -676,6 +674,7 @@ static BOOL gdi_patblt(rdpContext* context, PATBLT_ORDER* patblt)
 	}
 
 out_error:
+	gdi_DeleteObject((HGDIOBJECT) hBmp);
 	gdi_DeleteObject((HGDIOBJECT) hbrush);
 	gdi->drawing->hdc->brush = originalBrush;
 	gdi_SetTextColor(gdi->drawing->hdc, originalColor);
@@ -704,8 +703,12 @@ static BOOL gdi_opaque_rect(rdpContext* context,
 	UINT32 brush_color;
 	rdpGdi* gdi = context->gdi;
 	BOOL ret;
-	gdi_CRgnToRect(opaque_rect->nLeftRect, opaque_rect->nTopRect,
-	               opaque_rect->nWidth, opaque_rect->nHeight, &rect);
+	INT32 x = opaque_rect->nLeftRect;
+	INT32 y = opaque_rect->nTopRect;
+	INT32 w = opaque_rect->nWidth;
+	INT32 h = opaque_rect->nHeight;
+	gdi_ClipCoords(gdi->drawing->hdc, &x, &y, &w, &h, NULL, NULL);
+	gdi_CRgnToRect(x, y, w, h, &rect);
 
 	if (!gdi_decode_color(gdi, opaque_rect->color, &brush_color, NULL))
 		return FALSE;
@@ -739,8 +742,12 @@ static BOOL gdi_multi_opaque_rect(rdpContext* context,
 	for (i = 0; i < multi_opaque_rect->numRectangles; i++)
 	{
 		const DELTA_RECT* rectangle = &multi_opaque_rect->rectangles[i];
-		gdi_CRgnToRect(rectangle->left, rectangle->top,
-		               rectangle->width, rectangle->height, &rect);
+		INT32 x = rectangle->left;
+		INT32 y = rectangle->top;
+		INT32 w = rectangle->width;
+		INT32 h = rectangle->height;
+		gdi_ClipCoords(gdi->drawing->hdc, &x, &y, &w, &h, NULL, NULL);
+		gdi_CRgnToRect(x, y, w, h, &rect);
 		ret = gdi_FillRect(gdi->drawing->hdc, &rect, hBrush);
 
 		if (!ret)
@@ -756,6 +763,14 @@ static BOOL gdi_line_to(rdpContext* context, const LINE_TO_ORDER* lineTo)
 	UINT32 color;
 	HGDI_PEN hPen;
 	rdpGdi* gdi = context->gdi;
+	INT32 xStart = lineTo->nXStart;
+	INT32 yStart = lineTo->nYStart;
+	INT32 xEnd = lineTo->nXEnd;
+	INT32 yEnd = lineTo->nYEnd;
+	INT32 w = 0;
+	INT32 h = 0;
+	gdi_ClipCoords(gdi->drawing->hdc, &xStart, &yStart, &w, &h, NULL, NULL);
+	gdi_ClipCoords(gdi->drawing->hdc, &xEnd, &yEnd, &w, &h, NULL, NULL);
 
 	if (!gdi_decode_color(gdi, lineTo->penColor, &color, NULL))
 		return FALSE;
@@ -781,6 +796,7 @@ static BOOL gdi_polyline(rdpContext* context, const POLYLINE_ORDER* polyline)
 	HGDI_PEN hPen;
 	DELTA_POINT* points;
 	rdpGdi* gdi = context->gdi;
+	INT32 w = 0, h = 0;
 
 	if (!gdi_decode_color(gdi, polyline->penColor, &color, NULL))
 		return FALSE;
@@ -793,6 +809,7 @@ static BOOL gdi_polyline(rdpContext* context, const POLYLINE_ORDER* polyline)
 	gdi_SetROP2(gdi->drawing->hdc, polyline->bRop2);
 	x = polyline->xStart;
 	y = polyline->yStart;
+	gdi_ClipCoords(gdi->drawing->hdc, &x, &y, &w, &h, NULL, NULL);
 	gdi_MoveToEx(gdi->drawing->hdc, x, y, NULL);
 	points = polyline->points;
 
@@ -800,6 +817,7 @@ static BOOL gdi_polyline(rdpContext* context, const POLYLINE_ORDER* polyline)
 	{
 		x += points[i].x;
 		y += points[i].y;
+		gdi_ClipCoords(gdi->drawing->hdc, &x, &y, &w, &h, NULL, NULL);
 		gdi_LineTo(gdi->drawing->hdc, x, y);
 		gdi_MoveToEx(gdi->drawing->hdc, x, y, NULL);
 	}
@@ -933,6 +951,7 @@ static BOOL gdi_mem3blt(rdpContext* context, MEM3BLT_ORDER* mem3blt)
 				                 mem3blt->nXSrc, mem3blt->nYSrc, gdi_rop3_code(mem3blt->bRop),
 				                 &gdi->palette);
 				gdi_DeleteObject((HGDIOBJECT) gdi->drawing->hdc->brush);
+				gdi_DeleteObject((HGDIOBJECT) hBmp);
 				gdi->drawing->hdc->brush = originalBrush;
 			}
 			break;
@@ -1024,7 +1043,8 @@ static BOOL gdi_surface_bits(rdpContext* context,
 	           "destLeft %"PRIu32" destTop %"PRIu32" destRight %"PRIu32" destBottom %"PRIu32" "
 	           "bpp %"PRIu8" flags %"PRIx8" codecID %"PRIu16" width %"PRIu16" height %"PRIu16" length %"PRIu32"",
 	           cmd->destLeft, cmd->destTop, cmd->destRight, cmd->destBottom,
-			   cmd->bmp.bpp, cmd->bmp.flags, cmd->bmp.codecID, cmd->bmp.width, cmd->bmp.height, cmd->bmp.bitmapDataLength);
+	           cmd->bmp.bpp, cmd->bmp.flags, cmd->bmp.codecID, cmd->bmp.width, cmd->bmp.height,
+	           cmd->bmp.bitmapDataLength);
 	region16_init(&region);
 	cmdRect.left = cmd->destLeft;
 	cmdRect.top = cmd->destTop;
@@ -1035,7 +1055,7 @@ static BOOL gdi_surface_bits(rdpContext* context,
 	{
 		case RDP_CODEC_ID_REMOTEFX:
 			if (!rfx_process_message(context->codecs->rfx, cmd->bmp.bitmapData,
-									 cmd->bmp.bitmapDataLength,
+			                         cmd->bmp.bitmapDataLength,
 			                         cmd->destLeft, cmd->destTop,
 			                         gdi->primary_buffer, gdi->dstFormat,
 			                         gdi->stride, gdi->height, &region))
@@ -1050,10 +1070,10 @@ static BOOL gdi_surface_bits(rdpContext* context,
 			format = gdi->dstFormat;
 
 			if (!nsc_process_message(context->codecs->nsc, cmd->bmp.bpp, cmd->bmp.width,
-									 cmd->bmp.height, cmd->bmp.bitmapData,
-									 cmd->bmp.bitmapDataLength, gdi->primary_buffer,
+			                         cmd->bmp.height, cmd->bmp.bitmapData,
+			                         cmd->bmp.bitmapDataLength, gdi->primary_buffer,
 			                         format, gdi->stride, cmd->destLeft, cmd->destTop,
-									 cmd->bmp.width, cmd->bmp.height, FREERDP_FLIP_VERTICAL))
+			                         cmd->bmp.width, cmd->bmp.height, FREERDP_FLIP_VERTICAL))
 			{
 				WLog_ERR(TAG, "Failed to process NSCodec message");
 				goto out;
@@ -1066,8 +1086,8 @@ static BOOL gdi_surface_bits(rdpContext* context,
 			format = gdi_get_pixel_format(cmd->bmp.bpp);
 
 			if (!freerdp_image_copy(gdi->primary_buffer, gdi->dstFormat, gdi->stride,
-									cmd->destLeft, cmd->destTop, cmd->bmp.width, cmd->bmp.height,
-									cmd->bmp.bitmapData, format, 0, 0, 0,
+			                        cmd->destLeft, cmd->destTop, cmd->bmp.width, cmd->bmp.height,
+			                        cmd->bmp.bitmapData, format, 0, 0, 0,
 			                        &gdi->palette, FREERDP_FLIP_VERTICAL))
 			{
 				WLog_ERR(TAG, "Failed to process nocodec message");
@@ -1285,10 +1305,6 @@ BOOL gdi_init_ex(freerdp* instance, UINT32 format, UINT32 stride, BYTE* buffer,
 		goto fail;
 
 	if (!(context->cache = cache_new(instance->settings)))
-		goto fail;
-
-	if (!freerdp_client_codecs_prepare(context->codecs, FREERDP_CODEC_ALL,
-	                                   gdi->width, gdi->height))
 		goto fail;
 
 	gdi_register_update_callbacks(instance->update);

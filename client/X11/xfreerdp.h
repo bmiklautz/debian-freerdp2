@@ -83,6 +83,7 @@ typedef struct xf_glyph xfGlyph;
 typedef struct xf_clipboard xfClipboard;
 typedef struct _xfDispContext xfDispContext;
 typedef struct _xfVideoContext xfVideoContext;
+typedef struct xf_rail_icon_cache xfRailIconCache;
 
 /* Value of the first logical button number in X11 which must be */
 /* subtracted to go from a button number in X11 to an index into */
@@ -160,6 +161,7 @@ struct xf_context
 	BOOL use_xinput;
 	BOOL mouse_active;
 	BOOL fullscreen_toggle;
+	BOOL floatbar;
 	BOOL controlToggle;
 	UINT32 KeyboardLayout;
 	BOOL KeyboardState[256];
@@ -203,6 +205,7 @@ struct xf_context
 	Atom _NET_WM_WINDOW_TYPE_DIALOG;
 	Atom _NET_WM_WINDOW_TYPE_UTILITY;
 	Atom _NET_WM_WINDOW_TYPE_POPUP;
+	Atom _NET_WM_WINDOW_TYPE_POPUP_MENU;
 	Atom _NET_WM_WINDOW_TYPE_DROPDOWN_MENU;
 
 	Atom _NET_WM_MOVERESIZE;
@@ -220,10 +223,10 @@ struct xf_context
 	RdpeiClientContext* rdpei;
 	EncomspClientContext* encomsp;
 	xfDispContext* xfDisp;
-	DispClientContext* disp;
 
 	RailClientContext* rail;
 	wHashTable* railWindows;
+	xfRailIconCache* railIconCache;
 
 	BOOL xkbAvailable;
 	BOOL xrenderAvailable;
@@ -278,6 +281,7 @@ enum XF_EXIT_CODE
 	XF_EXIT_PROTOCOL = 130,
 	XF_EXIT_CONN_FAILED = 131,
 	XF_EXIT_AUTH_FAILURE = 132,
+	XF_EXIT_NEGO_FAILURE = 133,
 
 	XF_EXIT_UNKNOWN = 255,
 };

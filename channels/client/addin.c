@@ -87,9 +87,8 @@ extern const STATIC_ADDIN_TABLE CLIENT_STATIC_ADDIN_TABLE[];
 FREERDP_ADDIN** freerdp_channels_list_client_static_addins(LPSTR pszName, LPSTR pszSubsystem,
         LPSTR pszType, DWORD dwFlags)
 {
-	int i, j;
+	size_t i, j;
 	DWORD nAddins;
-	FREERDP_ADDIN* pAddin = NULL;
 	FREERDP_ADDIN** ppAddins = NULL;
 	STATIC_SUBSYSTEM_ENTRY* subsystems;
 	nAddins = 0;
@@ -105,7 +104,7 @@ FREERDP_ADDIN** freerdp_channels_list_client_static_addins(LPSTR pszName, LPSTR 
 
 	for (i = 0; CLIENT_STATIC_ADDIN_TABLE[i].name != NULL; i++)
 	{
-		pAddin = (FREERDP_ADDIN*) calloc(1, sizeof(FREERDP_ADDIN));
+		FREERDP_ADDIN* pAddin = (FREERDP_ADDIN*) calloc(1, sizeof(FREERDP_ADDIN));
 
 		if (!pAddin)
 		{
@@ -113,7 +112,7 @@ FREERDP_ADDIN** freerdp_channels_list_client_static_addins(LPSTR pszName, LPSTR 
 			goto error_out;
 		}
 
-		strcpy(pAddin->cName, CLIENT_STATIC_ADDIN_TABLE[i].name);
+		sprintf_s(pAddin->cName, ARRAYSIZE(pAddin->cName), "%s", CLIENT_STATIC_ADDIN_TABLE[i].name);
 		pAddin->dwFlags = FREERDP_ADDIN_CLIENT;
 		pAddin->dwFlags |= FREERDP_ADDIN_STATIC;
 		pAddin->dwFlags |= FREERDP_ADDIN_NAME;
@@ -130,8 +129,8 @@ FREERDP_ADDIN** freerdp_channels_list_client_static_addins(LPSTR pszName, LPSTR 
 				goto error_out;
 			}
 
-			strcpy(pAddin->cName, CLIENT_STATIC_ADDIN_TABLE[i].name);
-			strcpy(pAddin->cSubsystem, subsystems[j].name);
+			sprintf_s(pAddin->cName, ARRAYSIZE(pAddin->cName), "%s", CLIENT_STATIC_ADDIN_TABLE[i].name);
+			sprintf_s(pAddin->cSubsystem, ARRAYSIZE(pAddin->cSubsystem), "%s", subsystems[j].name);
 			pAddin->dwFlags = FREERDP_ADDIN_CLIENT;
 			pAddin->dwFlags |= FREERDP_ADDIN_STATIC;
 			pAddin->dwFlags |= FREERDP_ADDIN_NAME;
@@ -220,6 +219,7 @@ FREERDP_ADDIN** freerdp_channels_list_dynamic_addins(LPSTR pszName, LPSTR pszSub
 
 	if (!ppAddins)
 	{
+		FindClose(hFind);
 		WLog_ERR(TAG, "calloc failed!");
 		return NULL;
 	}
@@ -298,6 +298,7 @@ FREERDP_ADDIN** freerdp_channels_list_dynamic_addins(LPSTR pszName, LPSTR pszSub
 	ppAddins[nAddins] = NULL;
 	return ppAddins;
 error_out:
+	FindClose(hFind);
 	freerdp_channels_addin_list_free(ppAddins);
 	return NULL;
 }

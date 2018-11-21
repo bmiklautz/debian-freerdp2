@@ -306,6 +306,7 @@ int freerdp_client_settings_parse_assistance_file(rdpSettings* settings,
         const char* filename)
 {
 	int status;
+	int ret = -1;
 	rdpAssistanceFile* file;
 	file = freerdp_assistance_file_new();
 
@@ -315,15 +316,17 @@ int freerdp_client_settings_parse_assistance_file(rdpSettings* settings,
 	status = freerdp_assistance_parse_file(file, filename);
 
 	if (status < 0)
-		return -1;
+		goto out;
 
 	status = freerdp_client_populate_settings_from_assistance_file(file, settings);
 
 	if (status < 0)
-		return -1;
+		goto out;
 
+	ret = 0;
+out:
 	freerdp_assistance_file_free(file);
-	return 0;
+	return ret;
 }
 
 /** Callback set in the rdp_freerdp structure, and used to get the user's password,
@@ -422,6 +425,12 @@ fail:
 BOOL client_cli_authenticate(freerdp* instance, char** username,
                              char** password, char** domain)
 {
+	if (instance->settings->SmartcardLogon)
+	{
+		WLog_INFO(TAG, "Authentication via smartcard");
+		return TRUE;
+	}
+
 	return client_cli_authenticate_raw(instance, FALSE, username, password, domain);
 }
 
@@ -542,6 +551,66 @@ DWORD client_cli_verify_changed_certificate(freerdp* instance,
 	       "This may indicate that the certificate has been tampered with.\n"
 	       "Please contact the administrator of the RDP server and clarify.\n");
 	return client_cli_accept_certificate(instance->settings);
+}
+
+BOOL client_auto_reconnect(freerdp* instance)
+{
+	return client_auto_reconnect_ex(instance, NULL);
+}
+
+BOOL client_auto_reconnect_ex(freerdp* instance, BOOL(*window_events)(freerdp* instance))
+{
+	UINT32 maxRetries;
+	UINT32 numRetries = 0;
+	rdpSettings* settings;
+
+	if (!instance || !instance->settings)
+		return FALSE;
+
+	settings = instance->settings;
+	maxRetries = settings->AutoReconnectMaxRetries;
+
+	/* Only auto reconnect on network disconnects. */
+	if (freerdp_error_info(instance) != 0)
+		return FALSE;
+
+	/* A network disconnect was detected */
+	WLog_INFO(TAG, "Network disconnect!");
+
+	if (!settings->AutoReconnectionEnabled)
+	{
+		/* No auto-reconnect - just quit */
+		return FALSE;
+	}
+
+	/* Perform an auto-reconnect. */
+	while (TRUE)
+	{
+		UINT32 x;
+
+		/* Quit retrying if max retries has been exceeded */
+		if ((maxRetries > 0) && (numRetries++ >= maxRetries))
+		{
+			return FALSE;
+		}
+
+		/* Attempt the next reconnect */
+		WLog_INFO(TAG, "Attempting reconnect (%"PRIu32" of %"PRIu32")", numRetries, maxRetries);
+
+		if (freerdp_reconnect(instance))
+			return TRUE;
+
+		for (x = 0; x < 50; x++)
+		{
+			if (!IFCALLRESULT(TRUE, window_events, instance))
+				return FALSE;
+
+			Sleep(100);
+		}
+	}
+
+	WLog_ERR(TAG, "Maximum reconnect retries exceeded");
+	return FALSE;
 }
 
 
