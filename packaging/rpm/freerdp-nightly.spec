@@ -24,7 +24,6 @@ Summary:        Free implementation of the Remote Desktop Protocol (RDP)
 Url:            http://www.freerdp.com
 Group:          Productivity/Networking/Other
 Source0:        %{name}-%{version}.tar.bz2
-#Source1:        %{name}-rpmlintrc
 Source1:        source_version
 BuildRequires:   gcc-c++
 BuildRequires:  cmake >= 2.8.12
@@ -55,7 +54,6 @@ BuildRequires: pkg-config
 BuildRequires: libopenssl-devel
 BuildRequires: alsa-devel
 BuildRequires: libpulse-devel
-BuildRequires: libgsm-devel
 BuildRequires: libusb-1_0-devel
 BuildRequires: libudev-devel
 BuildRequires: dbus-1-glib-devel
@@ -64,6 +62,8 @@ BuildRequires: gstreamer-plugins-base-devel
 BuildRequires: wayland-devel
 BuildRequires: libjpeg-devel
 BuildRequires: libavutil-devel
+BuildRequires: libavcodec-devel
+BuildRequires: libswresample-devel
 %endif
 # fedora 21+
 %if 0%{?fedora} >= 21 || 0%{?rhel} >= 7
@@ -73,7 +73,6 @@ BuildRequires: pkgconfig
 BuildRequires: openssl-devel
 BuildRequires: alsa-lib-devel
 BuildRequires: pulseaudio-libs-devel
-BuildRequires: gsm-devel
 BuildRequires: libusbx-devel
 BuildRequires: systemd-devel
 BuildRequires: dbus-glib-devel
@@ -116,9 +115,11 @@ cp %{_topdir}/SOURCES/source_version freerdp-nightly-%{version}/.source_version
         -DWITH_CUPS=ON \
         -DWITH_PCSC=ON \
         -DWITH_JPEG=ON \
-        -DWITH_GSTREAMER_0_10=ON \
-        -DWITH_GSM=ON \
-%if %{defined rhel} && 0%{?rhel} <= 7
+%if %{defined suse_version}
+        -DWITH_FFMPEG=ON \
+        -DWITH_DSP_FFMPEG=ON \
+%endif
+%if 0%{?fedora} < 21 || 0%{?rhel} < 8
         -DWITH_WAYLAND=OFF \
 %endif
         -DWITH_GSSAPI=ON \

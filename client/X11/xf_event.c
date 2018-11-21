@@ -183,6 +183,7 @@ BOOL xf_event_action_script_init(xfContext* xfc)
 
 		if (!xevent || ArrayList_Add(xfc->xevents, xevent) < 0)
 		{
+			pclose(actionScript);
 			ArrayList_Free(xfc->xevents);
 			xfc->xevents = NULL;
 			return FALSE;
@@ -365,6 +366,9 @@ static BOOL xf_event_MotionNotify(xfContext* xfc, XEvent* event, BOOL app)
 {
 	if (xfc->use_xinput)
 		return TRUE;
+
+	if(xfc->floatbar && !(app))
+		xf_floatbar_set_root_y(xfc, event->xmotion.y);
 
 	return xf_generic_MotionNotify(xfc, event->xmotion.x, event->xmotion.y,
 	                               event->xmotion.state, event->xmotion.window, app);
@@ -828,6 +832,15 @@ static BOOL xf_event_PropertyNotify(xfContext* xfc, XEvent* event, BOOL app)
 		unsigned long nitems;
 		unsigned long bytes;
 		unsigned char* prop;
+		xfAppWindow* appWindow = NULL;
+
+		if (app)
+		{
+			appWindow = xf_AppWindowFromX11Window(xfc, event->xany.window);
+
+			if (!appWindow)
+				return TRUE;
+		}
 
 		if ((Atom) event->xproperty.atom == xfc->_NET_WM_STATE)
 		{
@@ -875,12 +888,6 @@ static BOOL xf_event_PropertyNotify(xfContext* xfc, XEvent* event, BOOL app)
 
 		if (app)
 		{
-			xfAppWindow* appWindow;
-			appWindow = xf_AppWindowFromX11Window(xfc, event->xany.window);
-
-			if (!appWindow)
-				return TRUE;
-
 			if (maxVert && maxHorz && !minimized
 			    && (appWindow->rail_state != WINDOW_SHOW_MAXIMIZED))
 			{
@@ -1011,6 +1018,12 @@ BOOL xf_event_process(freerdp* instance, XEvent* event)
 		}
 	}
 
+	if (xfc->floatbar && xf_floatbar_check_event(xfc, event))
+	{
+		xf_floatbar_event_process(xfc, event);
+		return TRUE;
+	}
+
 	xf_event_execute_action_script(xfc, event);
 
 	if (event->type != MotionNotify)
@@ -1099,7 +1112,7 @@ BOOL xf_event_process(freerdp* instance, XEvent* event)
 			break;
 
 		default:
-			if (settings->SupportDisplayControl && xfc->xfDisp)
+			if (settings->SupportDisplayControl)
 				xf_disp_handle_xevent(xfc, event);
 
 			break;

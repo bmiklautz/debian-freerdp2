@@ -33,6 +33,7 @@
 #define PROTOCOL_RDP	0x00000000
 #define PROTOCOL_TLS	0x00000001
 #define PROTOCOL_NLA	0x00000002
+#define PROTOCOL_RDS	0x00000004
 #define PROTOCOL_EXT	0x00000008
 
 #define PROTOCOL_FAILED_NEGO	0x80000000 /* only used internally, not on the wire */
@@ -44,7 +45,8 @@ enum RDP_NEG_FAILURE_FAILURECODES
 	SSL_NOT_ALLOWED_BY_SERVER = 0x00000002,
 	SSL_CERT_NOT_ON_SERVER = 0x00000003,
 	INCONSISTENT_FLAGS = 0x00000004,
-	HYBRID_REQUIRED_BY_SERVER = 0x00000005
+	HYBRID_REQUIRED_BY_SERVER = 0x00000005,
+	SSL_WITH_USER_AUTH_REQUIRED_BY_SERVER = 0x00000006
 };
 
 /* Authorization Result */
@@ -85,6 +87,7 @@ enum RDP_NEG_MSG
 #define PRECONNECTION_PDU_V2					2
 
 #define RESTRICTED_ADMIN_MODE_REQUIRED				0x01
+#define REDIRECTED_AUTHENTICATION_MODE_REQUIRED		0x02
 #define CORRELATION_INFO_PRESENT				0x08
 
 struct rdp_nego
@@ -120,22 +123,10 @@ typedef struct rdp_nego rdpNego;
 FREERDP_LOCAL BOOL nego_connect(rdpNego* nego);
 FREERDP_LOCAL BOOL nego_disconnect(rdpNego* nego);
 
-FREERDP_LOCAL BOOL nego_send_preconnection_pdu(rdpNego* nego);
-
-FREERDP_LOCAL void nego_attempt_ext(rdpNego* nego);
-FREERDP_LOCAL void nego_attempt_nla(rdpNego* nego);
-FREERDP_LOCAL void nego_attempt_tls(rdpNego* nego);
-FREERDP_LOCAL void nego_attempt_rdp(rdpNego* nego);
-
-FREERDP_LOCAL void nego_send(rdpNego* nego);
 FREERDP_LOCAL int nego_recv(rdpTransport* transport, wStream* s, void* extra);
-FREERDP_LOCAL BOOL nego_recv_response(rdpNego* nego);
 FREERDP_LOCAL BOOL nego_read_request(rdpNego* nego, wStream* s);
 
 FREERDP_LOCAL BOOL nego_send_negotiation_request(rdpNego* nego);
-FREERDP_LOCAL void nego_process_negotiation_request(rdpNego* nego, wStream* s);
-FREERDP_LOCAL void nego_process_negotiation_response(rdpNego* nego, wStream* s);
-FREERDP_LOCAL void nego_process_negotiation_failure(rdpNego* nego, wStream* s);
 FREERDP_LOCAL BOOL nego_send_negotiation_response(rdpNego* nego);
 
 FREERDP_LOCAL rdpNego* nego_new(rdpTransport* transport);

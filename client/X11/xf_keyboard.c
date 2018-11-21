@@ -160,7 +160,7 @@ void xf_keyboard_key_release(xfContext* xfc, BYTE keycode, KeySym keysym)
 
 void xf_keyboard_release_all_keypress(xfContext* xfc)
 {
-	int keycode;
+	size_t keycode;
 	DWORD rdp_scancode;
 
 	for (keycode = 0; keycode < ARRAYSIZE(xfc->KeyboardState); keycode++)
@@ -317,6 +317,26 @@ UINT32 xf_keyboard_get_toggle_keys_state(xfContext* xfc)
 	return toggleKeysState;
 }
 
+static void xk_keyboard_update_modifier_keys(xfContext* xfc)
+{
+	int state;
+	size_t i;
+	KeyCode keycode;
+	int keysyms[] = {XK_Shift_L, XK_Shift_R, XK_Alt_L, XK_Alt_R,
+	                 XK_Control_L, XK_Control_R, XK_Super_L, XK_Super_R
+	                };
+	state = xf_keyboard_read_keyboard_state(xfc);
+
+	for (i = 0; i < ARRAYSIZE(keysyms); i++)
+	{
+		if (xf_keyboard_get_key_state(xfc, state, keysyms[i]))
+		{
+			keycode = XKeysymToKeycode(xfc->display, keysyms[i]);
+			xfc->KeyboardState[keycode] = TRUE;
+		}
+	}
+}
+
 void xf_keyboard_focus_in(xfContext* xfc)
 {
 	rdpInput* input;
@@ -330,6 +350,7 @@ void xf_keyboard_focus_in(xfContext* xfc)
 	input = xfc->context.input;
 	syncFlags = xf_keyboard_get_toggle_keys_state(xfc);
 	input->FocusInEvent(input, syncFlags);
+	xk_keyboard_update_modifier_keys(xfc);
 
 	/* finish with a mouse pointer position like mstsc.exe if required */
 
@@ -359,7 +380,7 @@ static int xf_keyboard_execute_action_script(xfContext* xfc,
 	BOOL match = FALSE;
 	char* keyCombination;
 	char buffer[1024] = { 0 };
-	char command[1024] = { 0 };
+	char command[2048] = { 0 };
 	char combination[1024] = { 0 };
 
 	if (!xfc->actionScriptExists)
@@ -387,6 +408,9 @@ static int xf_keyboard_execute_action_script(xfContext* xfc,
 
 	if (mod->Alt)
 		strcat(combination, "Alt+");
+
+	if (mod->Super)
+		strcat(combination, "Super+");
 
 	strcat(combination, keyStr);
 	count = ArrayList_Count(xfc->keyCombinations);
@@ -447,7 +471,6 @@ BOOL xf_keyboard_handle_special_keys(xfContext* xfc, KeySym keysym)
 {
 	XF_MODIFIER_KEYS mod = { 0 };
 	xk_keyboard_get_modifier_keys(xfc, &mod);
-	rdpContext* ctx = &xfc->context;
 
 	// remember state of RightCtrl to ungrab keyboard if next action is release of RightCtrl
 	// do not return anything such that the key could be used by client if ungrab is not the goal
@@ -500,6 +523,8 @@ BOOL xf_keyboard_handle_special_keys(xfContext* xfc, KeySym keysym)
 
 	if (!xfc->remote_app && xfc->settings->MultiTouchGestures)
 	{
+		rdpContext* ctx = &xfc->context;
+
 		if (mod.Ctrl && mod.Alt)
 		{
 			int pdx = 0;
@@ -597,6 +622,7 @@ void xf_keyboard_handle_special_keys_release(xfContext* xfc, KeySym keysym)
 			xf_toggle_control(xfc);
 		}
 
+		xfc->mouse_active = FALSE;
 		XUngrabKeyboard(xfc->display, CurrentTime);
 	}
 

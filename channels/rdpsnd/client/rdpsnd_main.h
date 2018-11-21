@@ -35,6 +35,4 @@
 #define DEBUG_SND(...) do { } while (0)
 #endif
 
-UINT rdpsnd_virtual_channel_write(rdpsndPlugin* rdpsnd, wStream* s);
-
 #endif /* FREERDP_CHANNEL_RDPSND_CLIENT_MAIN_H */

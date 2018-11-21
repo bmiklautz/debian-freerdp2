@@ -159,7 +159,23 @@ static HANDLE_OPS ops =
 	ThreadIsHandled,
 	ThreadCloseHandle,
 	ThreadGetFd,
-	ThreadCleanupHandle
+	ThreadCleanupHandle,
+	NULL,
+	NULL,
+	NULL,
+	NULL,
+	NULL,
+	NULL,
+	NULL,
+	NULL,
+	NULL,
+	NULL,
+	NULL,
+	NULL,
+	NULL,
+	NULL,
+	NULL,
+	NULL
 };
 
 
@@ -269,10 +285,10 @@ static BOOL reset_event(WINPR_THREAD* thread)
 	return status;
 }
 
-static BOOL thread_compare(void* a, void* b)
+static BOOL thread_compare(const void* a, const void* b)
 {
-	pthread_t* p1 = a;
-	pthread_t* p2 = b;
+	const pthread_t* p1 = a;
+	const pthread_t* p2 = b;
 	BOOL rc = pthread_equal(*p1, *p2);
 	return rc;
 }
@@ -282,10 +298,9 @@ static BOOL thread_compare(void* a, void* b)
  * in thread function. */
 static void* thread_launcher(void* arg)
 {
-	void* rc = NULL;
+	DWORD rc = 0;
 	WINPR_THREAD* thread = (WINPR_THREAD*) arg;
-	typedef void* (*fkt_t)(void*);
-	fkt_t fkt;
+	LPTHREAD_START_ROUTINE fkt;
 
 	if (!thread)
 	{
@@ -293,7 +308,7 @@ static void* thread_launcher(void* arg)
 		goto exit;
 	}
 
-	if (!(fkt = (fkt_t)thread->lpStartAddress))
+	if (!(fkt = thread->lpStartAddress))
 	{
 		WLog_ERR(TAG, "Thread function argument is %p", (void*)fkt);
 		goto exit;
@@ -322,7 +337,7 @@ exit:
 	if (thread)
 	{
 		if (!thread->exited)
-			thread->dwExitCode = (DWORD)(size_t)rc;
+			thread->dwExitCode = rc;
 
 		set_event(thread);
 
@@ -330,7 +345,7 @@ exit:
 			cleanup_handle(thread);
 	}
 
-	return rc;
+	return NULL;
 }
 
 static BOOL winpr_StartThread(WINPR_THREAD* thread)

@@ -45,7 +45,7 @@
  *
  */
 
-int CommandLineParseArgumentsA(int argc, LPCSTR* argv, COMMAND_LINE_ARGUMENT_A* options,
+int CommandLineParseArgumentsA(int argc, LPSTR* argv, COMMAND_LINE_ARGUMENT_A* options,
                                DWORD flags,
                                void* context, COMMAND_LINE_PRE_FILTER_FN_A preFilter, COMMAND_LINE_POST_FILTER_FN_A postFilter)
 {
@@ -56,11 +56,11 @@ int CommandLineParseArgumentsA(int argc, LPCSTR* argv, COMMAND_LINE_ARGUMENT_A* 
 	BOOL notescaped;
 	const char* sigil;
 	size_t sigil_length;
-	const char* keyword;
+	char* keyword;
 	SSIZE_T keyword_length;
 	SSIZE_T keyword_index;
 	char* separator;
-	const char* value;
+	char* value;
 	int toggle;
 	status = 0;
 	notescaped = FALSE;
@@ -289,6 +289,9 @@ int CommandLineParseArgumentsA(int argc, LPCSTR* argv, COMMAND_LINE_ARGUMENT_A* 
 
 				if (value)
 				{
+					if (options[j].Flags & (COMMAND_LINE_VALUE_FLAG | COMMAND_LINE_VALUE_BOOL))
+						return COMMAND_LINE_ERROR_UNEXPECTED_VALUE;
+
 					options[j].Value = value;
 					options[j].Flags |= COMMAND_LINE_VALUE_PRESENT;
 				}
@@ -353,7 +356,7 @@ int CommandLineParseArgumentsA(int argc, LPCSTR* argv, COMMAND_LINE_ARGUMENT_A* 
 	return status;
 }
 
-int CommandLineParseArgumentsW(int argc, LPCWSTR* argv, COMMAND_LINE_ARGUMENT_W* options,
+int CommandLineParseArgumentsW(int argc, LPWSTR* argv, COMMAND_LINE_ARGUMENT_W* options,
                                DWORD flags,
                                void* context, COMMAND_LINE_PRE_FILTER_FN_W preFilter, COMMAND_LINE_POST_FILTER_FN_W postFilter)
 {
@@ -427,6 +430,10 @@ COMMAND_LINE_ARGUMENT_W* CommandLineFindArgumentW(COMMAND_LINE_ARGUMENT_W* optio
 COMMAND_LINE_ARGUMENT_A* CommandLineFindNextArgumentA(COMMAND_LINE_ARGUMENT_A* argument)
 {
 	COMMAND_LINE_ARGUMENT_A* nextArgument;
+
+	if (!argument || !argument->Name)
+		return NULL;
+
 	nextArgument = &argument[1];
 
 	if (nextArgument->Name == NULL)

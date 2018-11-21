@@ -484,7 +484,7 @@ static void urbdrc_udevman_register_devices(UDEVMAN* udevman, char* devices)
 		dev_number = 0;
 		idVendor = 0;
 		idProduct = 0;
-		strcpy(hardware_id, token);
+		sprintf_s(hardware_id, ARRAYSIZE(hardware_id), "%s", token);
 		token = strtok(NULL, "#");
 
 		if (udevman->flags & UDEVMAN_FLAG_ADD_BY_VID_PID)
@@ -513,7 +513,7 @@ static void urbdrc_udevman_parse_addin_args(UDEVMAN* udevman, ADDIN_ARGV* args)
 	DWORD flags;
 	COMMAND_LINE_ARGUMENT_A* arg;
 	flags = COMMAND_LINE_SIGIL_NONE | COMMAND_LINE_SEPARATOR_COLON;
-	status = CommandLineParseArgumentsA(args->argc, (const char**) args->argv,
+	status = CommandLineParseArgumentsA(args->argc, args->argv,
 	                                    urbdrc_udevman_args, flags, udevman, NULL, NULL);
 	arg = urbdrc_udevman_args;
 

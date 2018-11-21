@@ -385,7 +385,7 @@ static void nsc_encode_subsampling_sse2(NSC_CONTEXT* context)
 	}
 }
 
-static void nsc_encode_sse2(NSC_CONTEXT* context, const BYTE* data,
+static BOOL nsc_encode_sse2(NSC_CONTEXT* context, const BYTE* data,
                             UINT32 scanline)
 {
 	nsc_encode_argb_to_aycocg_sse2(context, data, scanline);
@@ -394,6 +394,8 @@ static void nsc_encode_sse2(NSC_CONTEXT* context, const BYTE* data,
 	{
 		nsc_encode_subsampling_sse2(context);
 	}
+
+	return TRUE;
 }
 
 void nsc_init_sse2(NSC_CONTEXT* context)
@@ -401,6 +403,6 @@ void nsc_init_sse2(NSC_CONTEXT* context)
 	if (!IsProcessorFeaturePresent(PF_XMMI64_INSTRUCTIONS_AVAILABLE))
 		return;
 
-	IF_PROFILER(context->priv->prof_nsc_encode->name = "nsc_encode_sse2");
+	PROFILER_RENAME(context->priv->prof_nsc_encode, "nsc_encode_sse2");
 	context->encode = nsc_encode_sse2;
 }

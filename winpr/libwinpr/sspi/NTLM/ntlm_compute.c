@@ -21,6 +21,8 @@
 #include "config.h"
 #endif
 
+#include <assert.h>
+
 #include "ntlm.h"
 #include "../sspi.h"
 
@@ -130,7 +132,12 @@ int ntlm_read_ntlm_v2_client_challenge(wStream* s, NTLMv2_CLIENT_CHALLENGE* chal
 	Stream_Read(s, challenge->ClientChallenge, 8);
 	Stream_Read_UINT32(s, challenge->Reserved3);
 	size = Stream_Length(s) - Stream_GetPosition(s);
-	challenge->AvPairs = (NTLM_AV_PAIR*) malloc(size);
+
+	if (size > UINT32_MAX)
+		return -1;
+
+	challenge->cbAvPairs = size;
+	challenge->AvPairs = (NTLM_AV_PAIR*) malloc(challenge->cbAvPairs);
 
 	if (!challenge->AvPairs)
 		return -1;
@@ -149,7 +156,7 @@ int ntlm_write_ntlm_v2_client_challenge(wStream* s, NTLMv2_CLIENT_CHALLENGE* cha
 	Stream_Write(s, challenge->Timestamp, 8);
 	Stream_Write(s, challenge->ClientChallenge, 8);
 	Stream_Write_UINT32(s, challenge->Reserved3);
-	length = ntlm_av_pair_list_length(challenge->AvPairs);
+	length = ntlm_av_pair_list_length(challenge->AvPairs, challenge->cbAvPairs);
 	Stream_Write(s, challenge->AvPairs, length);
 	return 1;
 }
@@ -242,6 +249,7 @@ int ntlm_fetch_ntlm_v2_hash(NTLM_CONTEXT* context, BYTE* hash)
 	}
 	else
 	{
+		SamClose(sam);
 		WLog_ERR(TAG, "Error: Could not find user in SAM database");
 		return 0;
 	}
@@ -257,8 +265,8 @@ int ntlm_convert_password_hash(NTLM_CONTEXT* context, BYTE* hash)
 	char* PasswordHash = NULL;
 	UINT32 PasswordHashLength = 0;
 	SSPI_CREDENTIALS* credentials = context->credentials;
-	/* Password contains a password hash of length (PasswordLength / SSPI_CREDENTIALS_HASH_LENGTH_FACTOR) */
-	PasswordHashLength = credentials->identity.PasswordLength / SSPI_CREDENTIALS_HASH_LENGTH_FACTOR;
+	/* Password contains a password hash of length (PasswordLength - SSPI_CREDENTIALS_HASH_LENGTH_OFFSET) */
+	PasswordHashLength = credentials->identity.PasswordLength - SSPI_CREDENTIALS_HASH_LENGTH_OFFSET;
 	status = ConvertFromUnicode(CP_UTF8, 0, (LPCWSTR) credentials->identity.Password,
 	                            PasswordHashLength, &PasswordHash, 0, NULL, NULL);
 
@@ -278,7 +286,7 @@ int ntlm_convert_password_hash(NTLM_CONTEXT* context, BYTE* hash)
 	return 1;
 }
 
-int ntlm_compute_ntlm_v2_hash(NTLM_CONTEXT* context, BYTE* hash)
+static int ntlm_compute_ntlm_v2_hash(NTLM_CONTEXT* context, BYTE* hash)
 {
 	SSPI_CREDENTIALS* credentials = context->credentials;
 #ifdef WITH_DEBUG_NTLM
@@ -314,7 +322,7 @@ int ntlm_compute_ntlm_v2_hash(NTLM_CONTEXT* context, BYTE* hash)
 		                 (LPWSTR) credentials->identity.Domain, credentials->identity.DomainLength * 2,
 		                 (BYTE*) hash);
 	}
-	else if (credentials->identity.PasswordLength > 256)
+	else if (credentials->identity.PasswordLength > SSPI_CREDENTIALS_HASH_LENGTH_OFFSET)
 	{
 		/* Special case for WinPR: password hash */
 		if (ntlm_convert_password_hash(context, context->NtlmHash) < 0)
@@ -346,8 +354,9 @@ int ntlm_compute_ntlm_v2_hash(NTLM_CONTEXT* context, BYTE* hash)
 		}
 
 		ret = context->HashCallback(context->HashCallbackArg, &credentials->identity, &proofValue,
-		                            context->EncryptedRandomSessionKey, context->MessageIntegrityCheck, &micValue,
-		                            hash);
+		                            context->EncryptedRandomSessionKey,
+		                            (&context->AUTHENTICATE_MESSAGE)->MessageIntegrityCheck,
+		                            &micValue, hash);
 		sspi_SecBufferFree(&proofValue);
 		sspi_SecBufferFree(&micValue);
 		return ret ? 1 : -1;
@@ -720,13 +729,14 @@ void ntlm_init_rc4_seal_states(NTLM_CONTEXT* context)
 	}
 }
 
-void ntlm_compute_message_integrity_check(NTLM_CONTEXT* context)
+void ntlm_compute_message_integrity_check(NTLM_CONTEXT* context, BYTE* mic, UINT32 size)
 {
 	/*
 	 * Compute the HMAC-MD5 hash of ConcatenationOf(NEGOTIATE_MESSAGE,
 	 * CHALLENGE_MESSAGE, AUTHENTICATE_MESSAGE) using the ExportedSessionKey
 	 */
 	WINPR_HMAC_CTX* hmac = winpr_HMAC_New();
+	assert(size >= WINPR_MD5_DIGEST_LENGTH);
 
 	if (!hmac)
 		return;
@@ -739,7 +749,7 @@ void ntlm_compute_message_integrity_check(NTLM_CONTEXT* context)
 		                  context->ChallengeMessage.cbBuffer);
 		winpr_HMAC_Update(hmac, (BYTE*) context->AuthenticateMessage.pvBuffer,
 		                  context->AuthenticateMessage.cbBuffer);
-		winpr_HMAC_Final(hmac, context->MessageIntegrityCheck, WINPR_MD5_DIGEST_LENGTH);
+		winpr_HMAC_Final(hmac, mic, WINPR_MD5_DIGEST_LENGTH);
 	}
 
 	winpr_HMAC_Free(hmac);

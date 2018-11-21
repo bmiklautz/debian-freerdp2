@@ -48,6 +48,16 @@
 #include <freerdp/log.h>
 #define TAG CLIENT_TAG("common.cmdline")
 
+static BOOL copy_value(const char* value, char** dst)
+{
+	if (!dst || !value)
+		return FALSE;
+
+	free(*dst);
+	(*dst) = _strdup(value);
+	return (*dst) != NULL;
+}
+
 BOOL freerdp_client_print_version(void)
 {
 	printf("This is FreeRDP version %s (%s)\n", FREERDP_VERSION_FULL,
@@ -106,7 +116,7 @@ static void freerdp_client_print_command_line_args(COMMAND_LINE_ARGUMENT_A* arg)
 		{
 			printf("    %s", arg->Default ? "-" : "+");
 			printf("%-20s", arg->Name);
-			printf("\t%s (default:%s)\n", arg->Text, arg->Default ? "on" : "off");
+			printf("\t%s %s\n", arg->Default ? "Disable" : "Enable", arg->Text);
 		}
 	}
 	while ((arg = CommandLineFindNextArgumentA(arg)) != NULL);
@@ -172,13 +182,13 @@ BOOL freerdp_client_print_command_line_help_ex(int argc, char** argv,
 }
 
 static int freerdp_client_command_line_pre_filter(void* context, int index,
-        int argc, LPCSTR* argv)
+        int argc, LPSTR* argv)
 {
 	if (index == 1)
 	{
-		int length;
+		size_t length;
 		rdpSettings* settings;
-		length = (int) strlen(argv[index]);
+		length = strlen(argv[index]);
 
 		if (length > 4)
 		{
@@ -186,7 +196,7 @@ static int freerdp_client_command_line_pre_filter(void* context, int index,
 			{
 				settings = (rdpSettings*) context;
 
-				if (!(settings->ConnectionFile = _strdup(argv[index])))
+				if (!copy_value(argv[index], &settings->ConnectionFile))
 					return COMMAND_LINE_ERROR_MEMORY;
 
 				return 1;
@@ -199,7 +209,7 @@ static int freerdp_client_command_line_pre_filter(void* context, int index,
 			{
 				settings = (rdpSettings*) context;
 
-				if (!(settings->AssistanceFile = _strdup(argv[index])))
+				if (!copy_value(argv[index], &settings->AssistanceFile))
 					return COMMAND_LINE_ERROR_MEMORY;
 
 				return 1;
@@ -209,6 +219,7 @@ static int freerdp_client_command_line_pre_filter(void* context, int index,
 
 	return 0;
 }
+
 
 BOOL freerdp_client_add_device_channel(rdpSettings* settings, int count,
                                        char** params)
@@ -585,11 +596,14 @@ static char** freerdp_command_line_parse_comma_separated_values_ex(const char* n
 	{
 		if (name)
 		{
-			p = (char**) calloc(1UL, sizeof(char*));
+			size_t len = strlen(name);
+			p = (char**) calloc(2UL + len, sizeof(char*));
 
 			if (p)
 			{
-				p[0] = name;
+				char* dst = (char*)&p[1];
+				p[0] = dst;
+				sprintf_s(dst, len + 1, "%s", name);
 				*count = 1;
 				return p;
 			}
@@ -659,6 +673,7 @@ static int freerdp_client_command_line_post_filter(void* context,
 {
 	rdpSettings* settings = (rdpSettings*) context;
 	BOOL status = TRUE;
+	BOOL enable = arg->Value ? TRUE : FALSE;
 	CommandLineSwitchStart(arg)
 	CommandLineSwitchCase(arg, "a")
 	{
@@ -745,32 +760,32 @@ static int freerdp_client_command_line_post_filter(void* context,
 	}
 	CommandLineSwitchCase(arg, "multitouch")
 	{
-		settings->MultiTouchInput = TRUE;
+		settings->MultiTouchInput = enable;
 	}
 	CommandLineSwitchCase(arg, "gestures")
 	{
-		settings->MultiTouchGestures = TRUE;
+		settings->MultiTouchGestures = enable;
 	}
 	CommandLineSwitchCase(arg, "echo")
 	{
-		settings->SupportEchoChannel = TRUE;
+		settings->SupportEchoChannel = enable;
 	}
 	CommandLineSwitchCase(arg, "ssh-agent")
 	{
-		settings->SupportSSHAgentChannel = TRUE;
+		settings->SupportSSHAgentChannel = enable;
 	}
 	CommandLineSwitchCase(arg, "disp")
 	{
-		settings->SupportDisplayControl = TRUE;
+		settings->SupportDisplayControl = enable;
 	}
 	CommandLineSwitchCase(arg, "geometry")
 	{
-		settings->SupportGeometryTracking = TRUE;
+		settings->SupportGeometryTracking = enable;
 	}
 	CommandLineSwitchCase(arg, "video")
 	{
-		settings->SupportGeometryTracking = TRUE; /* this requires geometry tracking */
-		settings->SupportVideoOptimized = TRUE;
+		settings->SupportGeometryTracking = enable; /* this requires geometry tracking */
+		settings->SupportVideoOptimized = enable;
 	}
 	CommandLineSwitchCase(arg, "sound")
 	{
@@ -801,17 +816,21 @@ static int freerdp_client_command_line_post_filter(void* context,
 	}
 	CommandLineSwitchCase(arg, "heartbeat")
 	{
-		settings->SupportHeartbeatPdu = TRUE;
+		settings->SupportHeartbeatPdu = enable;
 	}
 	CommandLineSwitchCase(arg, "multitransport")
 	{
-		settings->SupportMultitransport = TRUE;
-		settings->MultitransportFlags = (TRANSPORT_TYPE_UDP_FECR |
-		                                 TRANSPORT_TYPE_UDP_FECL | TRANSPORT_TYPE_UDP_PREFERRED);
+		settings->SupportMultitransport = enable;
+
+		if (settings->SupportMultitransport)
+			settings->MultitransportFlags = (TRANSPORT_TYPE_UDP_FECR |
+			                                 TRANSPORT_TYPE_UDP_FECL | TRANSPORT_TYPE_UDP_PREFERRED);
+		else
+			settings->MultitransportFlags = 0;
 	}
 	CommandLineSwitchCase(arg, "password-is-pin")
 	{
-		settings->PasswordIsSmartcardPin = TRUE;
+		settings->PasswordIsSmartcardPin = enable;
 	}
 	CommandLineSwitchEnd(arg)
 	return status ? 1 : -1;
@@ -976,6 +995,10 @@ BOOL freerdp_set_connection_type(rdpSettings* settings, int type)
 		settings->DisableThemes = FALSE;
 		settings->NetworkAutoDetect = TRUE;
 	}
+	else
+	{
+		return FALSE;
+	}
 
 	return TRUE;
 }
@@ -996,7 +1019,7 @@ int freerdp_map_keyboard_layout_name_to_id(char* name)
 			id = layouts[i].code;
 	}
 
-	free(layouts);
+	freerdp_keyboard_layouts_free(layouts);
 
 	if (id)
 		return id;
@@ -1012,7 +1035,7 @@ int freerdp_map_keyboard_layout_name_to_id(char* name)
 			id = layouts[i].code;
 	}
 
-	free(layouts);
+	freerdp_keyboard_layouts_free(layouts);
 
 	if (id)
 		return id;
@@ -1028,7 +1051,7 @@ int freerdp_map_keyboard_layout_name_to_id(char* name)
 			id = layouts[i].code;
 	}
 
-	free(layouts);
+	freerdp_keyboard_layouts_free(layouts);
 
 	if (id)
 		return id;
@@ -1037,7 +1060,7 @@ int freerdp_map_keyboard_layout_name_to_id(char* name)
 }
 
 static int freerdp_detect_command_line_pre_filter(void* context, int index,
-        int argc, LPCSTR* argv)
+        int argc, LPSTR* argv)
 {
 	int length;
 
@@ -1083,7 +1106,7 @@ static int freerdp_detect_windows_style_command_line_syntax(int argc, char** arg
 	*count = 0;
 	detect_status = 0;
 	CommandLineClearArgumentsA(args);
-	status = CommandLineParseArgumentsA(argc, (const char**) argv, args, flags,
+	status = CommandLineParseArgumentsA(argc, argv, args, flags,
 	                                    NULL, freerdp_detect_command_line_pre_filter, NULL);
 
 	if (status < 0)
@@ -1125,7 +1148,7 @@ int freerdp_detect_posix_style_command_line_syntax(int argc, char** argv,
 	*count = 0;
 	detect_status = 0;
 	CommandLineClearArgumentsA(args);
-	status = CommandLineParseArgumentsA(argc, (const char**) argv, args, flags,
+	status = CommandLineParseArgumentsA(argc, argv, args, flags,
 	                                    NULL, freerdp_detect_command_line_pre_filter, NULL);
 
 	if (status < 0)
@@ -1237,7 +1260,7 @@ int freerdp_client_settings_command_line_status_print_ex(rdpSettings* settings,
 			for (i = 0; layouts[i].code; i++)
 				printf("0x%08"PRIX32"\t%s\n", layouts[i].code, layouts[i].name);
 
-			free(layouts);
+			freerdp_keyboard_layouts_free(layouts);
 			layouts = freerdp_keyboard_get_layouts(RDP_KEYBOARD_LAYOUT_TYPE_VARIANT);
 			//if (!layouts) /* FIXME*/
 			printf("\nKeyboard Layout Variants\n");
@@ -1245,7 +1268,7 @@ int freerdp_client_settings_command_line_status_print_ex(rdpSettings* settings,
 			for (i = 0; layouts[i].code; i++)
 				printf("0x%08"PRIX32"\t%s\n", layouts[i].code, layouts[i].name);
 
-			free(layouts);
+			freerdp_keyboard_layouts_free(layouts);
 			layouts = freerdp_keyboard_get_layouts(RDP_KEYBOARD_LAYOUT_TYPE_IME);
 			//if (!layouts) /* FIXME*/
 			printf("\nKeyboard Input Method Editors (IMEs)\n");
@@ -1253,7 +1276,7 @@ int freerdp_client_settings_command_line_status_print_ex(rdpSettings* settings,
 			for (i = 0; layouts[i].code; i++)
 				printf("0x%08"PRIX32"\t%s\n", layouts[i].code, layouts[i].name);
 
-			free(layouts);
+			freerdp_keyboard_layouts_free(layouts);
 			printf("\n");
 		}
 
@@ -1285,6 +1308,53 @@ static BOOL ends_with(const char* str, const char* ext)
 
 	return strncmp(&str[strLen - extLen], ext, extLen) == 0;
 }
+
+static void activate_smartcard_logon_rdp(rdpSettings* settings)
+{
+	settings->SmartcardLogon = TRUE;
+	/* TODO: why not? settings->UseRdpSecurityLayer = TRUE; */
+	freerdp_set_param_bool(settings, FreeRDP_PasswordIsSmartcardPin, TRUE);
+}
+
+/**
+ * parses a string value with the format <v1>x<v2>
+ * @param input: input string
+ * @param v1: pointer to output v1
+ * @param v2: pointer to output v2
+ * @return if the parsing was successful
+ */
+static BOOL parseSizeValue(const char *input, unsigned long *v1, unsigned long *v2)
+{
+	const char *xcharpos;
+	char *endPtr;
+	unsigned long v;
+
+	errno = 0;
+	v = strtoul(input, &endPtr, 10);
+
+	if ((v == 0 || v == ULONG_MAX) && (errno != 0))
+		return FALSE;
+	if (v1)
+		*v1 = v;
+
+	xcharpos = strchr(input, 'x');
+	if (!xcharpos || xcharpos != endPtr)
+		return FALSE;
+
+	errno = 0;
+	v = strtoul(xcharpos + 1, &endPtr, 10);
+
+	if ((v == 0 || v == ULONG_MAX) && (errno != 0))
+		return FALSE;
+
+	if (*endPtr !=  '\0')
+		return FALSE;
+	if (v2)
+		*v2 = v;
+
+	return TRUE;
+}
+
 int freerdp_client_settings_parse_command_line_arguments(rdpSettings* settings,
         int argc, char** argv, BOOL allowUnknown)
 {
@@ -1315,7 +1385,11 @@ int freerdp_client_settings_parse_command_line_arguments(rdpSettings* settings,
 		                allowUnknown);
 	else
 		compatibility = freerdp_client_detect_command_line(argc - 1, &argv[1], &flags,
-						allowUnknown);
+		                allowUnknown);
+
+	settings->ProxyHostname = NULL;
+	settings->ProxyUsername = NULL;
+	settings->ProxyPassword = NULL;
 
 	if (compatibility)
 	{
@@ -1341,7 +1415,7 @@ int freerdp_client_settings_parse_command_line_arguments(rdpSettings* settings,
 		}
 
 		CommandLineClearArgumentsA(args);
-		status = CommandLineParseArgumentsA(argc, (const char**) argv, args, flags,
+		status = CommandLineParseArgumentsA(argc, argv, args, flags,
 		                                    settings,
 		                                    freerdp_client_command_line_pre_filter,
 		                                    freerdp_client_command_line_post_filter);
@@ -1356,6 +1430,8 @@ int freerdp_client_settings_parse_command_line_arguments(rdpSettings* settings,
 
 	do
 	{
+		BOOL enable = arg->Value ? TRUE : FALSE;
+
 		if (!(arg->Flags & COMMAND_LINE_ARGUMENT_PRESENT))
 			continue;
 
@@ -1423,14 +1499,48 @@ int freerdp_client_settings_parse_command_line_arguments(rdpSettings* settings,
 		}
 		CommandLineSwitchCase(arg, "spn-class")
 		{
-			free(settings->AuthenticationServiceClass);
-
-			if (!(settings->AuthenticationServiceClass = _strdup(arg->Value)))
+			if (!copy_value(arg->Value, &settings->AuthenticationServiceClass))
 				return COMMAND_LINE_ERROR_MEMORY;
+		}
+		CommandLineSwitchCase(arg, "redirect-prefer")
+		{
+			size_t count = 0;
+			char* cur = arg->Value;
+			settings->RedirectionPreferType = 0;
+
+			do
+			{
+				UINT32 mask;
+				char* next = strchr(cur, ',');
+
+				if (next)
+				{
+					*next = '\0';
+					next++;
+				}
+
+				if (_strnicmp(cur, "fqdn", 5) == 0)
+					mask = 0x06U;
+				else if (_strnicmp(cur, "ip", 3) == 0)
+					mask = 0x05U;
+				else if (_strnicmp(cur, "netbios", 8) == 0)
+					mask = 0x03U;
+				else
+					return COMMAND_LINE_ERROR_UNEXPECTED_VALUE;
+
+				cur = next;
+				mask = (mask & 0x07);
+				settings->RedirectionPreferType |= mask << (count * 3);
+				count++;
+			}
+			while (cur != NULL);
+
+			if (count > 3)
+				return COMMAND_LINE_ERROR_UNEXPECTED_VALUE;
 		}
 		CommandLineSwitchCase(arg, "credentials-delegation")
 		{
-			settings->DisableCredentialsDelegation = arg->Value ? FALSE : TRUE;
+			settings->DisableCredentialsDelegation = !enable;
 		}
 		CommandLineSwitchCase(arg, "vmconnect")
 		{
@@ -1441,9 +1551,8 @@ int freerdp_client_settings_parse_command_line_arguments(rdpSettings* settings,
 			if (arg->Flags & COMMAND_LINE_VALUE_PRESENT)
 			{
 				settings->SendPreconnectionPdu = TRUE;
-				free(settings->PreconnectionBlob);
 
-				if (!(settings->PreconnectionBlob = _strdup(arg->Value)))
+				if (!copy_value(arg->Value, &settings->PreconnectionBlob))
 					return COMMAND_LINE_ERROR_MEMORY;
 			}
 		}
@@ -1467,39 +1576,23 @@ int freerdp_client_settings_parse_command_line_arguments(rdpSettings* settings,
 		}
 		CommandLineSwitchCase(arg, "size")
 		{
-			if (!(str = _strdup(arg->Value)))
-				return COMMAND_LINE_ERROR_MEMORY;
 
-			p = strchr(str, 'x');
+			p = strchr(arg->Value, 'x');
 
 			if (p)
 			{
-				*p = '\0';
-				{
-					long val = strtol(str, NULL, 0);
+				unsigned long w, h;
+				if (!parseSizeValue(arg->Value, &w, &h) || (w > UINT16_MAX) || (h > UINT16_MAX))
+					return COMMAND_LINE_ERROR_UNEXPECTED_VALUE;
 
-					if ((errno != 0) || (val <= 0) || (val > UINT16_MAX))
-					{
-						free(str);
-						return COMMAND_LINE_ERROR_UNEXPECTED_VALUE;
-					}
-
-					settings->DesktopWidth = val;
-				}
-				{
-					long val = strtol(&p[1], NULL, 0);
-
-					if ((errno != 0) || (val <= 0) || (val > UINT16_MAX))
-					{
-						free(str);
-						return COMMAND_LINE_ERROR_UNEXPECTED_VALUE;
-					}
-
-					settings->DesktopHeight = val;
-				}
+				settings->DesktopWidth = w;
+				settings->DesktopHeight = h;
 			}
 			else
 			{
+				if (!(str = _strdup(arg->Value)))
+					return COMMAND_LINE_ERROR_MEMORY;
+
 				p = strchr(str, '%');
 
 				if (p)
@@ -1537,13 +1630,13 @@ int freerdp_client_settings_parse_command_line_arguments(rdpSettings* settings,
 						settings->PercentScreen = val;
 					}
 				}
-			}
 
-			free(str);
+				free(str);
+			}
 		}
 		CommandLineSwitchCase(arg, "f")
 		{
-			settings->Fullscreen = TRUE;
+			settings->Fullscreen = enable;
 		}
 		CommandLineSwitchCase(arg, "multimon")
 		{
@@ -1559,11 +1652,11 @@ int freerdp_client_settings_parse_command_line_arguments(rdpSettings* settings,
 		}
 		CommandLineSwitchCase(arg, "span")
 		{
-			settings->SpanMonitors = TRUE;
+			settings->SpanMonitors = enable;
 		}
 		CommandLineSwitchCase(arg, "workarea")
 		{
-			settings->Workarea = TRUE;
+			settings->Workarea = enable;
 		}
 		CommandLineSwitchCase(arg, "monitors")
 		{
@@ -1597,18 +1690,16 @@ int freerdp_client_settings_parse_command_line_arguments(rdpSettings* settings,
 		}
 		CommandLineSwitchCase(arg, "monitor-list")
 		{
-			settings->ListMonitors = TRUE;
+			settings->ListMonitors = enable;
 		}
 		CommandLineSwitchCase(arg, "t")
 		{
-			free(settings->WindowTitle);
-
-			if (!(settings->WindowTitle = _strdup(arg->Value)))
+			if (!copy_value(arg->Value, &settings->WindowTitle))
 				return COMMAND_LINE_ERROR_MEMORY;
 		}
 		CommandLineSwitchCase(arg, "decorations")
 		{
-			settings->Decorations = arg->Value ? TRUE : FALSE;
+			settings->Decorations = enable;
 		}
 		CommandLineSwitchCase(arg, "dynamic-resolution")
 		{
@@ -1633,34 +1724,13 @@ int freerdp_client_settings_parse_command_line_arguments(rdpSettings* settings,
 
 			if (arg->Value)
 			{
-				if (!(str = _strdup(arg->Value)))
-					return COMMAND_LINE_ERROR_MEMORY;
+				unsigned long w, h;
 
-				if ((p = strchr(str, 'x')))
-				{
-					unsigned long w, h;
-					*p = '\0';
-					w = strtoul(str, NULL, 0);
+				if (!parseSizeValue(arg->Value, &w, &h) || (w > UINT16_MAX) || (h > UINT16_MAX))
+					return COMMAND_LINE_ERROR_UNEXPECTED_VALUE;
 
-					if ((errno != 0) || (w == 0) || (w > UINT16_MAX))
-					{
-						free(str);
-						return COMMAND_LINE_ERROR_UNEXPECTED_VALUE;
-					}
-
-					h = strtoul(&p[1], NULL, 0);
-
-					if ((errno != 0) || (h == 0) || (h > UINT16_MAX))
-					{
-						free(str);
-						return COMMAND_LINE_ERROR_UNEXPECTED_VALUE;
-					}
-
-					settings->SmartSizingWidth = w;
-					settings->SmartSizingHeight = h;
-				}
-
-				free(str);
+				settings->SmartSizingWidth = w;
+				settings->SmartSizingHeight = h;
 			}
 		}
 		CommandLineSwitchCase(arg, "bpp")
@@ -1687,27 +1757,28 @@ int freerdp_client_settings_parse_command_line_arguments(rdpSettings* settings,
 		}
 		CommandLineSwitchCase(arg, "admin")
 		{
-			settings->ConsoleSession = TRUE;
+			settings->ConsoleSession = enable;
+		}
+		CommandLineSwitchCase(arg, "relax-order-checks")
+		{
+			settings->AllowUnanouncedOrdersFromServer = enable;
 		}
 		CommandLineSwitchCase(arg, "restricted-admin")
 		{
-			settings->ConsoleSession = TRUE;
-			settings->RestrictedAdminModeRequired = TRUE;
+			settings->ConsoleSession = enable;
+			settings->RestrictedAdminModeRequired = enable;
 		}
 		CommandLineSwitchCase(arg, "pth")
 		{
 			settings->ConsoleSession = TRUE;
 			settings->RestrictedAdminModeRequired = TRUE;
-			free(settings->PasswordHash);
 
-			if (!(settings->PasswordHash = _strdup(arg->Value)))
+			if (!copy_value(arg->Value, &settings->PasswordHash))
 				return COMMAND_LINE_ERROR_MEMORY;
 		}
 		CommandLineSwitchCase(arg, "client-hostname")
 		{
-			free(settings->ClientHostname);
-
-			if (!(settings->ClientHostname = _strdup(arg->Value)))
+			if (!copy_value(arg->Value, &settings->ClientHostname))
 				return COMMAND_LINE_ERROR_MEMORY;
 		}
 		CommandLineSwitchCase(arg, "kbd")
@@ -1765,16 +1836,12 @@ int freerdp_client_settings_parse_command_line_arguments(rdpSettings* settings,
 		}
 		CommandLineSwitchCase(arg, "d")
 		{
-			free(settings->Domain);
-
-			if (!(settings->Domain = _strdup(arg->Value)))
+			if (!copy_value(arg->Value, &settings->Domain))
 				return COMMAND_LINE_ERROR_MEMORY;
 		}
 		CommandLineSwitchCase(arg, "p")
 		{
-			free(settings->Password);
-
-			if (!(settings->Password = _strdup(arg->Value)))
+			if (!copy_value(arg->Value, &settings->Password))
 				return COMMAND_LINE_ERROR_MEMORY;
 		}
 		CommandLineSwitchCase(arg, "g")
@@ -1819,25 +1886,74 @@ int freerdp_client_settings_parse_command_line_arguments(rdpSettings* settings,
 		}
 		CommandLineSwitchCase(arg, "proxy")
 		{
+			/* initial value */
+			settings->ProxyType = PROXY_TYPE_HTTP;
+
 			if (arg->Flags & COMMAND_LINE_VALUE_PRESENT)
 			{
+				char* atPtr;
+				/* value is [scheme://][user:password@]hostname:port */
 				p = strstr(arg->Value, "://");
 
 				if (p)
 				{
 					*p = '\0';
 
-					if (!strcmp("http", arg->Value))
-					{
+					if (_stricmp("no_proxy", arg->Value) == 0)
+						settings->ProxyType = PROXY_TYPE_IGNORE;
+
+					if (_stricmp("http", arg->Value) == 0)
 						settings->ProxyType = PROXY_TYPE_HTTP;
-					}
+					else if (_stricmp("socks5", arg->Value) == 0)
+						settings->ProxyType = PROXY_TYPE_SOCKS;
 					else
 					{
-						WLog_ERR(TAG, "Only HTTP proxys supported by now");
+						WLog_ERR(TAG, "Only HTTP and SOCKS5 proxies supported by now");
 						return COMMAND_LINE_ERROR_UNEXPECTED_VALUE;
 					}
 
 					arg->Value = p + 3;
+				}
+
+				/* arg->Value is now [user:password@]hostname:port */
+				atPtr = strrchr(arg->Value, '@');
+
+				if (atPtr)
+				{
+					/* got a login / password,
+					 *               atPtr
+					 *               v
+					 * [user:password@]hostname:port
+					 *      ^
+					 *      colonPtr
+					 */
+					char* colonPtr = strchr(arg->Value, ':');
+
+					if (!colonPtr || (colonPtr > atPtr))
+					{
+						WLog_ERR(TAG, "invalid syntax for proxy, expected syntax is user:password@host:port");
+						return COMMAND_LINE_ERROR_UNEXPECTED_VALUE;
+					}
+
+					*colonPtr = '\0';
+					settings->ProxyUsername = _strdup(arg->Value);
+
+					if (!settings->ProxyUsername)
+					{
+						WLog_ERR(TAG, "unable to allocate proxy username");
+						return COMMAND_LINE_ERROR_MEMORY;
+					}
+
+					*atPtr = '\0';
+					settings->ProxyPassword = _strdup(colonPtr + 1);
+
+					if (!settings->ProxyPassword)
+					{
+						WLog_ERR(TAG, "unable to allocate proxy password");
+						return COMMAND_LINE_ERROR_MEMORY;
+					}
+
+					arg->Value = atPtr + 1;
 				}
 
 				p = strchr(arg->Value, ':');
@@ -1854,7 +1970,6 @@ int freerdp_client_settings_parse_command_line_arguments(rdpSettings* settings,
 					settings->ProxyHostname = (char*) malloc(length + 1);
 					strncpy(settings->ProxyHostname, arg->Value, length);
 					settings->ProxyHostname[length] = '\0';
-					settings->ProxyType = PROXY_TYPE_HTTP;
 				}
 			}
 			else
@@ -1872,18 +1987,14 @@ int freerdp_client_settings_parse_command_line_arguments(rdpSettings* settings,
 		}
 		CommandLineSwitchCase(arg, "gd")
 		{
-			free(settings->GatewayDomain);
-
-			if (!(settings->GatewayDomain = _strdup(arg->Value)))
+			if (!copy_value(arg->Value, &settings->GatewayDomain))
 				return COMMAND_LINE_ERROR_MEMORY;
 
 			settings->GatewayUseSameCredentials = FALSE;
 		}
 		CommandLineSwitchCase(arg, "gp")
 		{
-			free(settings->GatewayPassword);
-
-			if (!(settings->GatewayPassword = _strdup(arg->Value)))
+			if (!copy_value(arg->Value, &settings->GatewayPassword))
 				return COMMAND_LINE_ERROR_MEMORY;
 
 			settings->GatewayUseSameCredentials = FALSE;
@@ -1908,39 +2019,35 @@ int freerdp_client_settings_parse_command_line_arguments(rdpSettings* settings,
 		}
 		CommandLineSwitchCase(arg, "gat")
 		{
-			free(settings->GatewayAccessToken);
-
-			if (!(settings->GatewayAccessToken = _strdup(arg->Value)))
+			if (!copy_value(arg->Value, &settings->GatewayAccessToken))
 				return COMMAND_LINE_ERROR_MEMORY;
 		}
 		CommandLineSwitchCase(arg, "gateway-usage-method")
 		{
-			long type;
+			long type = 0;
 			char* pEnd;
-			type = strtol(arg->Value, &pEnd, 10);
 
-			if (errno != 0)
-				return COMMAND_LINE_ERROR_UNEXPECTED_VALUE;
-
-			if (type == 0)
+			if (_stricmp(arg->Value, "none") == 0)
+				type = TSC_PROXY_MODE_NONE_DIRECT;
+			else if (_stricmp(arg->Value, "direct") == 0)
+				type = TSC_PROXY_MODE_DIRECT;
+			else if (_stricmp(arg->Value, "detect") == 0)
+				type = TSC_PROXY_MODE_DETECT;
+			else if (_stricmp(arg->Value, "default") == 0)
+				type = TSC_PROXY_MODE_DEFAULT;
+			else
 			{
-				if (_stricmp(arg->Value, "none") == 0)
-					type = TSC_PROXY_MODE_NONE_DIRECT;
-				else if (_stricmp(arg->Value, "direct") == 0)
-					type = TSC_PROXY_MODE_DIRECT;
-				else if (_stricmp(arg->Value, "detect") == 0)
-					type = TSC_PROXY_MODE_DETECT;
-				else if (_stricmp(arg->Value, "default") == 0)
-					type = TSC_PROXY_MODE_DEFAULT;
+				type = strtol(arg->Value, &pEnd, 10);
+
+				if (errno != 0)
+					return COMMAND_LINE_ERROR_UNEXPECTED_VALUE;
 			}
 
 			freerdp_set_gateway_usage_method(settings, (UINT32) type);
 		}
 		CommandLineSwitchCase(arg, "app")
 		{
-			free(settings->RemoteApplicationProgram);
-
-			if (!(settings->RemoteApplicationProgram = _strdup(arg->Value)))
+			if (!copy_value(arg->Value, &settings->RemoteApplicationProgram))
 				return COMMAND_LINE_ERROR_MEMORY;
 
 			settings->RemoteApplicationMode = TRUE;
@@ -1951,9 +2058,7 @@ int freerdp_client_settings_parse_command_line_arguments(rdpSettings* settings,
 		}
 		CommandLineSwitchCase(arg, "load-balance-info")
 		{
-			free(settings->LoadBalanceInfo);
-
-			if (!(settings->LoadBalanceInfo = (BYTE*) _strdup(arg->Value)))
+			if (!copy_value(arg->Value, (char**)&settings->LoadBalanceInfo))
 				return COMMAND_LINE_ERROR_MEMORY;
 
 			settings->LoadBalanceInfoLength = (UINT32) strlen((char*)
@@ -1961,46 +2066,36 @@ int freerdp_client_settings_parse_command_line_arguments(rdpSettings* settings,
 		}
 		CommandLineSwitchCase(arg, "app-name")
 		{
-			free(settings->RemoteApplicationName);
-
-			if (!(settings->RemoteApplicationName = _strdup(arg->Value)))
+			if (!copy_value(arg->Value, &settings->RemoteApplicationName))
 				return COMMAND_LINE_ERROR_MEMORY;
 		}
 		CommandLineSwitchCase(arg, "app-icon")
 		{
-			free(settings->RemoteApplicationIcon);
-
-			if (!(settings->RemoteApplicationIcon = _strdup(arg->Value)))
+			if (!copy_value(arg->Value, &settings->RemoteApplicationIcon))
 				return COMMAND_LINE_ERROR_MEMORY;
 		}
 		CommandLineSwitchCase(arg, "app-cmd")
 		{
-			free(settings->RemoteApplicationCmdLine);
-
-			if (!(settings->RemoteApplicationCmdLine = _strdup(arg->Value)))
+			if (!copy_value(arg->Value, &settings->RemoteApplicationCmdLine))
 				return COMMAND_LINE_ERROR_MEMORY;
 		}
 		CommandLineSwitchCase(arg, "app-file")
 		{
-			free(settings->RemoteApplicationFile);
-
-			if (!(settings->RemoteApplicationFile = _strdup(arg->Value)))
+			if (!copy_value(arg->Value, &settings->RemoteApplicationFile))
 				return COMMAND_LINE_ERROR_MEMORY;
 		}
 		CommandLineSwitchCase(arg, "app-guid")
 		{
-			free(settings->RemoteApplicationGuid);
-
-			if (!(settings->RemoteApplicationGuid = _strdup(arg->Value)))
+			if (!copy_value(arg->Value, &settings->RemoteApplicationGuid))
 				return COMMAND_LINE_ERROR_MEMORY;
 		}
 		CommandLineSwitchCase(arg, "compression")
 		{
-			settings->CompressionEnabled = arg->Value ? TRUE : FALSE;
+			settings->CompressionEnabled = enable;
 		}
 		CommandLineSwitchCase(arg, "compression-level")
 		{
-			unsigned long val = strtol(arg->Value, NULL, 0);
+			unsigned long val = strtoul(arg->Value, NULL, 0);
 
 			if ((errno != 0) || (val > UINT32_MAX))
 				return COMMAND_LINE_ERROR_UNEXPECTED_VALUE;
@@ -2009,32 +2104,28 @@ int freerdp_client_settings_parse_command_line_arguments(rdpSettings* settings,
 		}
 		CommandLineSwitchCase(arg, "drives")
 		{
-			settings->RedirectDrives = arg->Value ? TRUE : FALSE;
+			settings->RedirectDrives = enable;
 		}
 		CommandLineSwitchCase(arg, "home-drive")
 		{
-			settings->RedirectHomeDrive = arg->Value ? TRUE : FALSE;
+			settings->RedirectHomeDrive = enable;
 		}
 		CommandLineSwitchCase(arg, "ipv6")
 		{
-			settings->PreferIPv6OverIPv4 = TRUE;
+			settings->PreferIPv6OverIPv4 = enable;
 		}
 		CommandLineSwitchCase(arg, "clipboard")
 		{
-			settings->RedirectClipboard = arg->Value ? TRUE : FALSE;
+			settings->RedirectClipboard = enable;
 		}
 		CommandLineSwitchCase(arg, "shell")
 		{
-			free(settings->AlternateShell);
-
-			if (!(settings->AlternateShell = _strdup(arg->Value)))
+			if (!copy_value(arg->Value, &settings->AlternateShell))
 				return COMMAND_LINE_ERROR_MEMORY;
 		}
 		CommandLineSwitchCase(arg, "shell-dir")
 		{
-			free(settings->ShellWorkingDirectory);
-
-			if (!(settings->ShellWorkingDirectory = _strdup(arg->Value)))
+			if (!copy_value(arg->Value, &settings->ShellWorkingDirectory))
 				return COMMAND_LINE_ERROR_MEMORY;
 		}
 		CommandLineSwitchCase(arg, "audio-mode")
@@ -2060,33 +2151,33 @@ int freerdp_client_settings_parse_command_line_arguments(rdpSettings* settings,
 		}
 		CommandLineSwitchCase(arg, "network")
 		{
-			long type;
+			long type = 0;
 			char* pEnd;
-			type = strtol(arg->Value, &pEnd, 10);
 
-			if (errno != 0)
-				return COMMAND_LINE_ERROR_UNEXPECTED_VALUE;
-
-			if (type == 0)
+			if (_stricmp(arg->Value, "modem") == 0)
+				type = CONNECTION_TYPE_MODEM;
+			else if (_stricmp(arg->Value, "broadband") == 0)
+				type = CONNECTION_TYPE_BROADBAND_HIGH;
+			else if (_stricmp(arg->Value, "broadband-low") == 0)
+				type = CONNECTION_TYPE_BROADBAND_LOW;
+			else if (_stricmp(arg->Value, "broadband-high") == 0)
+				type = CONNECTION_TYPE_BROADBAND_HIGH;
+			else if (_stricmp(arg->Value, "wan") == 0)
+				type = CONNECTION_TYPE_WAN;
+			else if (_stricmp(arg->Value, "lan") == 0)
+				type = CONNECTION_TYPE_LAN;
+			else if ((_stricmp(arg->Value, "autodetect") == 0) ||
+			         (_stricmp(arg->Value, "auto") == 0) ||
+			         (_stricmp(arg->Value, "detect") == 0))
 			{
-				if (_stricmp(arg->Value, "modem") == 0)
-					type = CONNECTION_TYPE_MODEM;
-				else if (_stricmp(arg->Value, "broadband") == 0)
-					type = CONNECTION_TYPE_BROADBAND_HIGH;
-				else if (_stricmp(arg->Value, "broadband-low") == 0)
-					type = CONNECTION_TYPE_BROADBAND_LOW;
-				else if (_stricmp(arg->Value, "broadband-high") == 0)
-					type = CONNECTION_TYPE_BROADBAND_HIGH;
-				else if (_stricmp(arg->Value, "wan") == 0)
-					type = CONNECTION_TYPE_WAN;
-				else if (_stricmp(arg->Value, "lan") == 0)
-					type = CONNECTION_TYPE_LAN;
-				else if ((_stricmp(arg->Value, "autodetect") == 0) ||
-				         (_stricmp(arg->Value, "auto") == 0) ||
-				         (_stricmp(arg->Value, "detect") == 0))
-				{
-					type = CONNECTION_TYPE_AUTODETECT;
-				}
+				type = CONNECTION_TYPE_AUTODETECT;
+			}
+			else
+			{
+				type = strtol(arg->Value, &pEnd, 10);
+
+				if (errno != 0)
+					return COMMAND_LINE_ERROR_UNEXPECTED_VALUE;
 			}
 
 			if (!freerdp_set_connection_type(settings, type))
@@ -2094,27 +2185,43 @@ int freerdp_client_settings_parse_command_line_arguments(rdpSettings* settings,
 		}
 		CommandLineSwitchCase(arg, "fonts")
 		{
-			settings->AllowFontSmoothing = arg->Value ? TRUE : FALSE;
+			settings->AllowFontSmoothing = enable;
 		}
 		CommandLineSwitchCase(arg, "wallpaper")
 		{
-			settings->DisableWallpaper = arg->Value ? FALSE : TRUE;
+			settings->DisableWallpaper = !enable;
 		}
 		CommandLineSwitchCase(arg, "window-drag")
 		{
-			settings->DisableFullWindowDrag = arg->Value ? FALSE : TRUE;
+			settings->DisableFullWindowDrag = !enable;
+		}
+		CommandLineSwitchCase(arg, "window-position")
+		{
+			unsigned long x, y;
+
+			if (!arg->Value)
+				return COMMAND_LINE_ERROR_MISSING_ARGUMENT;
+
+			if (!parseSizeValue(arg->Value, &x, &y) || x > UINT16_MAX || y > UINT16_MAX)
+			{
+				WLog_ERR(TAG, "invalid window-position argument");
+				return COMMAND_LINE_ERROR_MISSING_ARGUMENT;
+			}
+
+			settings->DesktopPosX = x;
+			settings->DesktopPosY = y;
 		}
 		CommandLineSwitchCase(arg, "menu-anims")
 		{
-			settings->DisableMenuAnims = arg->Value ? FALSE : TRUE;
+			settings->DisableMenuAnims = !enable;
 		}
 		CommandLineSwitchCase(arg, "themes")
 		{
-			settings->DisableThemes = arg->Value ? FALSE : TRUE;
+			settings->DisableThemes = !enable;
 		}
 		CommandLineSwitchCase(arg, "aero")
 		{
-			settings->AllowDesktopComposition = arg->Value ? TRUE : FALSE;
+			settings->AllowDesktopComposition = enable;
 		}
 		CommandLineSwitchCase(arg, "gdi")
 		{
@@ -2131,24 +2238,24 @@ int freerdp_client_settings_parse_command_line_arguments(rdpSettings* settings,
 			{
 #ifdef WITH_GFX_H264
 
-				if (_strnicmp("AVC444", arg->Value, 6) == 0)
+				if (_strnicmp("AVC444", arg->Value, 7) == 0)
 				{
 					settings->GfxH264 = TRUE;
 					settings->GfxAVC444 = TRUE;
 				}
-				else if (_strnicmp("AVC420", arg->Value, 6) == 0)
+				else if (_strnicmp("AVC420", arg->Value, 7) == 0)
 				{
 					settings->GfxH264 = TRUE;
 				}
 				else
 #endif
-					if (_strnicmp("RFX", arg->Value, 3) != 0)
+					if (_strnicmp("RFX", arg->Value, 4) != 0)
 						return COMMAND_LINE_ERROR;
 			}
 		}
 		CommandLineSwitchCase(arg, "gfx-thin-client")
 		{
-			settings->GfxThinClient = arg->Value ? TRUE : FALSE;
+			settings->GfxThinClient = enable;
 
 			if (settings->GfxThinClient)
 				settings->GfxSmallCache = TRUE;
@@ -2157,14 +2264,18 @@ int freerdp_client_settings_parse_command_line_arguments(rdpSettings* settings,
 		}
 		CommandLineSwitchCase(arg, "gfx-small-cache")
 		{
-			settings->GfxSmallCache = arg->Value ? TRUE : FALSE;
-			settings->SupportGraphicsPipeline = TRUE;
+			settings->GfxSmallCache = enable;
+
+			if (enable)
+				settings->SupportGraphicsPipeline = TRUE;
 		}
 		CommandLineSwitchCase(arg, "gfx-progressive")
 		{
-			settings->GfxProgressive = arg->Value ? TRUE : FALSE;
-			settings->GfxThinClient = settings->GfxProgressive ? FALSE : TRUE;
-			settings->SupportGraphicsPipeline = TRUE;
+			settings->GfxProgressive = enable;
+			settings->GfxThinClient = !enable;
+
+			if (enable)
+				settings->SupportGraphicsPipeline = TRUE;
 		}
 #ifdef WITH_GFX_H264
 		CommandLineSwitchCase(arg, "gfx-h264")
@@ -2174,18 +2285,18 @@ int freerdp_client_settings_parse_command_line_arguments(rdpSettings* settings,
 
 			if (arg->Value)
 			{
-				if (_strnicmp("AVC444", arg->Value, 6) == 0)
+				if (_strnicmp("AVC444", arg->Value, 7) == 0)
 				{
 					settings->GfxAVC444 = TRUE;
 				}
-				else if (_strnicmp("AVC420", arg->Value, 6) != 0)
+				else if (_strnicmp("AVC420", arg->Value, 7) != 0)
 					return COMMAND_LINE_ERROR;
 			}
 		}
 #endif
 		CommandLineSwitchCase(arg, "rfx")
 		{
-			settings->RemoteFxCodec = TRUE;
+			settings->RemoteFxCodec = enable;
 		}
 		CommandLineSwitchCase(arg, "rfx-mode")
 		{
@@ -2205,12 +2316,12 @@ int freerdp_client_settings_parse_command_line_arguments(rdpSettings* settings,
 		}
 		CommandLineSwitchCase(arg, "nsc")
 		{
-			settings->NSCodec = TRUE;
+			settings->NSCodec = enable;
 		}
 #if defined(WITH_JPEG)
 		CommandLineSwitchCase(arg, "jpeg")
 		{
-			settings->JpegCodec = TRUE;
+			settings->JpegCodec = enable;
 			settings->JpegQuality = 75;
 		}
 		CommandLineSwitchCase(arg, "jpeg-quality")
@@ -2225,14 +2336,13 @@ int freerdp_client_settings_parse_command_line_arguments(rdpSettings* settings,
 #endif
 		CommandLineSwitchCase(arg, "nego")
 		{
-			settings->NegotiateSecurityLayer = arg->Value ? TRUE : FALSE;
+			settings->NegotiateSecurityLayer = enable;
 		}
 		CommandLineSwitchCase(arg, "pcb")
 		{
 			settings->SendPreconnectionPdu = TRUE;
-			free(settings->PreconnectionBlob);
 
-			if (!(settings->PreconnectionBlob = _strdup(arg->Value)))
+			if (!copy_value(arg->Value, &settings->PreconnectionBlob))
 				return COMMAND_LINE_ERROR_MEMORY;
 		}
 		CommandLineSwitchCase(arg, "pcid")
@@ -2333,19 +2443,19 @@ int freerdp_client_settings_parse_command_line_arguments(rdpSettings* settings,
 		}
 		CommandLineSwitchCase(arg, "sec-rdp")
 		{
-			settings->RdpSecurity = arg->Value ? TRUE : FALSE;
+			settings->RdpSecurity = enable;
 		}
 		CommandLineSwitchCase(arg, "sec-tls")
 		{
-			settings->TlsSecurity = arg->Value ? TRUE : FALSE;
+			settings->TlsSecurity = enable;
 		}
 		CommandLineSwitchCase(arg, "sec-nla")
 		{
-			settings->NlaSecurity = arg->Value ? TRUE : FALSE;
+			settings->NlaSecurity = enable;
 		}
 		CommandLineSwitchCase(arg, "sec-ext")
 		{
-			settings->ExtSecurity = arg->Value ? TRUE : FALSE;
+			settings->ExtSecurity = enable;
 		}
 		CommandLineSwitchCase(arg, "tls-ciphers")
 		{
@@ -2367,44 +2477,55 @@ int freerdp_client_settings_parse_command_line_arguments(rdpSettings* settings,
 					return COMMAND_LINE_ERROR_MEMORY;
 			}
 		}
+		CommandLineSwitchCase(arg, "tls-seclevel")
+		{
+			unsigned long val = strtoul(arg->Value, NULL, 0);
+
+			if ((errno != 0) || (val > 5))
+				return COMMAND_LINE_ERROR_UNEXPECTED_VALUE;
+
+			settings->TlsSecLevel = val;
+		}
 		CommandLineSwitchCase(arg, "cert-name")
 		{
-			free(settings->CertificateName);
-
-			if (!(settings->CertificateName = _strdup(arg->Value)))
+			if (!copy_value(arg->Value, &settings->CertificateName))
 				return COMMAND_LINE_ERROR_MEMORY;
 		}
 		CommandLineSwitchCase(arg, "cert-ignore")
 		{
-			settings->IgnoreCertificate = TRUE;
+			settings->IgnoreCertificate = enable;
 		}
 		CommandLineSwitchCase(arg, "cert-tofu")
 		{
-			settings->AutoAcceptCertificate = TRUE;
+			settings->AutoAcceptCertificate = enable;
 		}
 		CommandLineSwitchCase(arg, "authentication")
 		{
-			settings->Authentication = arg->Value ? TRUE : FALSE;
+			settings->Authentication = enable;
 		}
 		CommandLineSwitchCase(arg, "encryption")
 		{
-			settings->UseRdpSecurityLayer = arg->Value ? FALSE : TRUE;
+			settings->UseRdpSecurityLayer = !enable;
 		}
 		CommandLineSwitchCase(arg, "grab-keyboard")
 		{
-			settings->GrabKeyboard = arg->Value ? TRUE : FALSE;
+			settings->GrabKeyboard = enable;
 		}
 		CommandLineSwitchCase(arg, "unmap-buttons")
 		{
-			settings->UnmapButtons = arg->Value ? TRUE : FALSE;
+			settings->UnmapButtons = enable;
 		}
 		CommandLineSwitchCase(arg, "toggle-fullscreen")
 		{
-			settings->ToggleFullscreen = arg->Value ? TRUE : FALSE;
+			settings->ToggleFullscreen = enable;
+		}
+		CommandLineSwitchCase(arg, "floatbar")
+		{
+			settings->Floatbar = enable;
 		}
 		CommandLineSwitchCase(arg, "mouse-motion")
 		{
-			settings->MouseMotion = arg->Value ? TRUE : FALSE;
+			settings->MouseMotion = enable;
 		}
 		CommandLineSwitchCase(arg, "parent-window")
 		{
@@ -2417,11 +2538,11 @@ int freerdp_client_settings_parse_command_line_arguments(rdpSettings* settings,
 		}
 		CommandLineSwitchCase(arg, "bitmap-cache")
 		{
-			settings->BitmapCacheEnabled = arg->Value ? TRUE : FALSE;
+			settings->BitmapCacheEnabled = enable;
 		}
 		CommandLineSwitchCase(arg, "offscreen-cache")
 		{
-			settings->OffscreenSupportLevel = arg->Value ? TRUE : FALSE;
+			settings->OffscreenSupportLevel = enable;
 		}
 		CommandLineSwitchCase(arg, "glyph-cache")
 		{
@@ -2454,8 +2575,8 @@ int freerdp_client_settings_parse_command_line_arguments(rdpSettings* settings,
 		}
 		CommandLineSwitchCase(arg, "fast-path")
 		{
-			settings->FastPathInput = arg->Value ? TRUE : FALSE;
-			settings->FastPathOutput = arg->Value ? TRUE : FALSE;
+			settings->FastPathInput = enable;
+			settings->FastPathOutput = enable;
 		}
 		CommandLineSwitchCase(arg, "max-fast-path-size")
 		{
@@ -2488,43 +2609,35 @@ int freerdp_client_settings_parse_command_line_arguments(rdpSettings* settings,
 		}
 		CommandLineSwitchCase(arg, "async-input")
 		{
-			settings->AsyncInput = arg->Value ? TRUE : FALSE;
+			settings->AsyncInput = enable;
 		}
 		CommandLineSwitchCase(arg, "async-update")
 		{
-			settings->AsyncUpdate = arg->Value ? TRUE : FALSE;
+			settings->AsyncUpdate = enable;
 		}
 		CommandLineSwitchCase(arg, "async-channels")
 		{
-			settings->AsyncChannels = arg->Value ? TRUE : FALSE;
-		}
-		CommandLineSwitchCase(arg, "async-transport")
-		{
-			settings->AsyncTransport = arg->Value ? TRUE : FALSE;
+			settings->AsyncChannels = enable;
 		}
 		CommandLineSwitchCase(arg, "wm-class")
 		{
-			free(settings->WmClass);
-
-			if (!(settings->WmClass = _strdup(arg->Value)))
+			if (!copy_value(arg->Value, &settings->WmClass))
 				return COMMAND_LINE_ERROR_MEMORY;
 		}
 		CommandLineSwitchCase(arg, "play-rfx")
 		{
-			free(settings->PlayRemoteFxFile);
-
-			if (!(settings->PlayRemoteFxFile = _strdup(arg->Value)))
+			if (!copy_value(arg->Value, &settings->PlayRemoteFxFile))
 				return COMMAND_LINE_ERROR_MEMORY;
 
 			settings->PlayRemoteFx = TRUE;
 		}
 		CommandLineSwitchCase(arg, "auth-only")
 		{
-			settings->AuthenticationOnly = arg->Value ? TRUE : FALSE;
+			settings->AuthenticationOnly = enable;
 		}
 		CommandLineSwitchCase(arg, "auto-reconnect")
 		{
-			settings->AutoReconnectionEnabled = arg->Value ? TRUE : FALSE;
+			settings->AutoReconnectionEnabled = enable;
 		}
 		CommandLineSwitchCase(arg, "auto-reconnect-max-retries")
 		{
@@ -2540,7 +2653,7 @@ int freerdp_client_settings_parse_command_line_arguments(rdpSettings* settings,
 		}
 		CommandLineSwitchCase(arg, "reconnect-cookie")
 		{
-			BYTE* base64;
+			BYTE* base64 = NULL;
 			int length;
 			crypto_base64_decode((const char*)(arg->Value), (int) strlen(arg->Value),
 			                     &base64, &length);
@@ -2548,23 +2661,23 @@ int freerdp_client_settings_parse_command_line_arguments(rdpSettings* settings,
 			if ((base64 != NULL) && (length == sizeof(ARC_SC_PRIVATE_PACKET)))
 			{
 				memcpy(settings->ServerAutoReconnectCookie, base64, length);
-				free(base64);
 			}
 			else
 			{
 				WLog_ERR(TAG, "reconnect-cookie:  invalid base64 '%s'", arg->Value);
 			}
+
+			free(base64);
 		}
 		CommandLineSwitchCase(arg, "print-reconnect-cookie")
 		{
-			settings->PrintReconnectCookie = arg->Value ? TRUE : FALSE;
+			settings->PrintReconnectCookie = enable;
 		}
 		CommandLineSwitchCase(arg, "assistance")
 		{
 			settings->RemoteAssistanceMode = TRUE;
-			free(settings->RemoteAssistancePassword);
 
-			if (!(settings->RemoteAssistancePassword = _strdup(arg->Value)))
+			if (!copy_value(arg->Value, &settings->RemoteAssistancePassword))
 				return COMMAND_LINE_ERROR_MEMORY;
 		}
 		CommandLineSwitchCase(arg, "pwidth")
@@ -2593,6 +2706,10 @@ int freerdp_client_settings_parse_command_line_arguments(rdpSettings* settings,
 				return COMMAND_LINE_ERROR_UNEXPECTED_VALUE;
 
 			settings->DesktopOrientation = val;
+		}
+		CommandLineSwitchCase(arg, "old-license")
+		{
+			settings->OldLicenseBehaviour = TRUE;
 		}
 		CommandLineSwitchCase(arg, "scale")
 		{
@@ -2649,14 +2766,17 @@ int freerdp_client_settings_parse_command_line_arguments(rdpSettings* settings,
 		}
 		CommandLineSwitchCase(arg, "action-script")
 		{
-			free(settings->ActionScript);
-
-			if (!(settings->ActionScript = _strdup(arg->Value)))
+			if (!copy_value(arg->Value, &settings->ActionScript))
 				return COMMAND_LINE_ERROR_MEMORY;
 		}
 		CommandLineSwitchCase(arg, "fipsmode")
 		{
-			settings->FIPSMode = TRUE;
+			settings->FIPSMode = enable;
+		}
+		CommandLineSwitchCase(arg, "smartcard-logon")
+		{
+			if (!settings->SmartcardLogon)
+				activate_smartcard_logon_rdp(settings);
 		}
 		CommandLineSwitchDefault(arg)
 		{

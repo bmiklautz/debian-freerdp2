@@ -196,13 +196,13 @@ struct rdp_license
 	LICENSE_BLOB* PlatformChallenge;
 	LICENSE_BLOB* EncryptedPremasterSecret;
 	LICENSE_BLOB* EncryptedPlatformChallenge;
+	LICENSE_BLOB *EncryptedPlatformChallengeResponse;
 	LICENSE_BLOB* EncryptedHardwareId;
 	SCOPE_LIST* ScopeList;
 	UINT32 PacketHeaderLength;
 };
 
 FREERDP_LOCAL int license_recv(rdpLicense* license, wStream* s);
-FREERDP_LOCAL BOOL license_send(rdpLicense* license, wStream* s, BYTE type);
 
 FREERDP_LOCAL BOOL license_send_valid_client_error_packet(rdpLicense* license);
 
