@@ -159,16 +159,20 @@ libfreerdp2.so.2 libfreerdp2-2 #MINVER#
  freerdp_addin_set_argument_value@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  freerdp_assistance_bin_to_hex_string@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  freerdp_assistance_construct_expert_blob@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- freerdp_assistance_decrypt@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
+#MISSING: 2.0.0~git20190204.1.2693389a+dfsg1# freerdp_assistance_decrypt@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  freerdp_assistance_encrypt_pass_stub@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  freerdp_assistance_file_free@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  freerdp_assistance_file_new@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  freerdp_assistance_generate_pass_stub@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
+ freerdp_assistance_get_encrypted_pass_stub@Base 2.0.0~git20190204.1.2693389a+dfsg1
  freerdp_assistance_hex_string_to_bin@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- freerdp_assistance_parse_connection_string1@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- freerdp_assistance_parse_connection_string2@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
+#MISSING: 2.0.0~git20190204.1.2693389a+dfsg1# freerdp_assistance_parse_connection_string1@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
+#MISSING: 2.0.0~git20190204.1.2693389a+dfsg1# freerdp_assistance_parse_connection_string2@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  freerdp_assistance_parse_file@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  freerdp_assistance_parse_file_buffer@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
+ freerdp_assistance_populate_settings_from_assistance_file@Base 2.0.0~git20190204.1.2693389a+dfsg1
+ freerdp_assistance_print_file@Base 2.0.0~git20190204.1.2693389a+dfsg1
+ freerdp_assistance_set_connection_string2@Base 2.0.0~git20190204.1.2693389a+dfsg1
  freerdp_bitmap_compress@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  freerdp_bitmap_compress_planar@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  freerdp_bitmap_planar_context_free@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
@@ -195,7 +199,7 @@ libfreerdp2.so.2 libfreerdp2-2 #MINVER#
  freerdp_check_fds@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  freerdp_client_codecs_prepare@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  freerdp_client_codecs_reset@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- freerdp_client_populate_settings_from_assistance_file@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
+#MISSING: 2.0.0~git20190204.1.2693389a+dfsg1# freerdp_client_populate_settings_from_assistance_file@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  freerdp_connect@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  freerdp_context_free@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  freerdp_context_new@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
@@ -382,6 +386,7 @@ libfreerdp2.so.2 libfreerdp2-2 #MINVER#
  interleaved_compress@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  interleaved_decompress@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  jpeg_decompress@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
+ license_send_valid_client_error_packet@Base 2.0.0~git20190204.1.2693389a+dfsg1
  metrics_free@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  metrics_new@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  metrics_write_bytes@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
@@ -527,13 +532,13 @@ libfreerdp2.so.2 libfreerdp2-2 #MINVER#
  tls_accept@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  tls_connect@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  tls_free@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- tls_match_hostname@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
+#MISSING: 2.0.0~git20190204.1.2693389a+dfsg1# tls_match_hostname@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  tls_new@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- tls_print_certificate_error@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- tls_print_certificate_name_mismatch_error@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
+#MISSING: 2.0.0~git20190204.1.2693389a+dfsg1# tls_print_certificate_error@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
+#MISSING: 2.0.0~git20190204.1.2693389a+dfsg1# tls_print_certificate_name_mismatch_error@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  tls_send_alert@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  tls_set_alert_code@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- tls_verify_certificate@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
+#MISSING: 2.0.0~git20190204.1.2693389a+dfsg1# tls_verify_certificate@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  tls_write_all@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  x509_verify_certificate@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  xcrush_compress@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
