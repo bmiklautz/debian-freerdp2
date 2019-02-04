@@ -1,4 +1,5 @@
 libwinpr2.so.2 libwinpr2-2 #MINVER#
+* Build-Depends-Package: libwinpr2-dev
  ASN1DecSetError@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  ASN1EncSetError@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  ASN1_CloseEncoder@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
@@ -10,12 +11,16 @@ libwinpr2.so.2 libwinpr2-2 #MINVER#
  ASN1_Encode@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  ASN1_FreeDecoded@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  ASN1_FreeEncoded@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
+ AcceptSecurityContext@Base 2.0.0~git20181120.1.e21b72c95+dfsg1
+ AcquireCredentialsHandleA@Base 2.0.0~git20181120.1.e21b72c95+dfsg1
+ AcquireCredentialsHandleW@Base 2.0.0~git20181120.1.e21b72c95+dfsg1
  AcquireSRWLockExclusive@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  AcquireSRWLockShared@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  AddDllDirectory@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  AddVectoredContinueHandler@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  AddVectoredExceptionHandler@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  AppendTailList@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
+ ApplyControlToken@Base 2.0.0~git20181120.1.e21b72c95+dfsg1
  ArrayList_Add@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  ArrayList_Capacity@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  ArrayList_Clear@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
@@ -126,6 +131,7 @@ libwinpr2.so.2 libwinpr2-2 #MINVER#
  CommandLineParseArgumentsW@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  CommandLineToArgvA@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  CommandLineToArgvW@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
+ CompleteAuthToken@Base 2.0.0~git20181120.1.e21b72c95+dfsg1
  ConnectNamedPipe@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  ConvertFromUnicode@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  ConvertLineEndingToCRLF@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
@@ -231,11 +237,13 @@ libwinpr2.so.2 libwinpr2-2 #MINVER#
  CryptUnprotectMemory@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  DceErrorInqTextA@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  DceErrorInqTextW@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
+ DecryptMessage@Base 2.0.0~git20181120.1.e21b72c95+dfsg1
  DefWindowProcA@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  DefWindowProcW@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  DeleteCriticalSection@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  DeleteFileA@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  DeleteFileW@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
+ DeleteSecurityContext@Base 2.0.0~git20181120.1.e21b72c95+dfsg1
  DeleteTimerQueue@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  DeleteTimerQueueEx@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  DeleteTimerQueueTimer@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
@@ -249,13 +257,17 @@ libwinpr2.so.2 libwinpr2-2 #MINVER#
  DsMakeSpnA@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  DsMakeSpnW@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  DuplicateHandle@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
+ EncryptMessage@Base 2.0.0~git20181120.1.e21b72c95+dfsg1
  EnterCriticalSection@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  EnumDynamicTimeZoneInformation@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
+ EnumerateSecurityPackagesA@Base 2.0.0~git20181120.1.e21b72c95+dfsg1
+ EnumerateSecurityPackagesW@Base 2.0.0~git20181120.1.e21b72c95+dfsg1
  EnvironmentBlockToEnvpA@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  ExitProcess@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  ExitThread@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  ExpandEnvironmentStringsA@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  ExpandEnvironmentStringsW@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
+ ExportSecurityContext@Base 2.0.0~git20181120.1.e21b72c95+dfsg1
  FilePatternFindNextWildcardA@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  FilePatternMatchA@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  FileTimeToSystemTime@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
@@ -272,6 +284,8 @@ libwinpr2.so.2 libwinpr2-2 #MINVER#
  FindWindowW@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  FlushFileBuffers@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  FlushViewOfFile@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
+ FreeContextBuffer@Base 2.0.0~git20181120.1.e21b72c95+dfsg1
+ FreeCredentialsHandle@Base 2.0.0~git20181120.1.e21b72c95+dfsg1
  FreeEnvironmentStringsA@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  FreeEnvironmentStringsW@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  FreeLibrary@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
@@ -394,6 +408,9 @@ libwinpr2.so.2 libwinpr2-2 #MINVER#
  HeapFree@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  HeapReAlloc@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  ImpersonateNamedPipeClient@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
+ ImpersonateSecurityContext@Base 2.0.0~git20181120.1.e21b72c95+dfsg1
+ ImportSecurityContextA@Base 2.0.0~git20181120.1.e21b72c95+dfsg1
+ ImportSecurityContextW@Base 2.0.0~git20181120.1.e21b72c95+dfsg1
  IniFile_Free@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  IniFile_GetKeyValueInt@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  IniFile_GetKeyValueString@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
@@ -406,14 +423,18 @@ libwinpr2.so.2 libwinpr2-2 #MINVER#
  IniFile_SetKeyValueString@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  IniFile_WriteBuffer@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  IniFile_WriteFile@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
+ InitSecurityInterfaceA@Base 2.0.0~git20181120.1.e21b72c95+dfsg1
  InitSecurityInterfaceExA@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  InitSecurityInterfaceExW@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
+ InitSecurityInterfaceW@Base 2.0.0~git20181120.1.e21b72c95+dfsg1
  InitializeCriticalSection@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  InitializeCriticalSectionAndSpinCount@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  InitializeCriticalSectionEx@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  InitializeListHead@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  InitializeSListHead@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  InitializeSRWLock@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
+ InitializeSecurityContextA@Base 2.0.0~git20181120.1.e21b72c95+dfsg1
+ InitializeSecurityContextW@Base 2.0.0~git20181120.1.e21b72c95+dfsg1
  InitializeSecurityDescriptor@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  InsertHeadList@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  InsertTailList@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
@@ -530,6 +551,7 @@ libwinpr2.so.2 libwinpr2-2 #MINVER#
  LinkedList_Free@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  LinkedList_Last@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  LinkedList_New@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
+ LinkedList_Object@Base 2.0.0~git20181120.1.e21b72c95+dfsg1
  LinkedList_Remove@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  LinkedList_RemoveFirst@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  LinkedList_RemoveLast@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
@@ -558,6 +580,7 @@ libwinpr2.so.2 libwinpr2-2 #MINVER#
  LogonUserW@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  MIDL_user_allocate@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  MIDL_user_free@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
+ MakeSignature@Base 2.0.0~git20181120.1.e21b72c95+dfsg1
  MapViewOfFile@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  MapViewOfFileEx@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  MergeEnvironmentStrings@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
@@ -614,7 +637,6 @@ libwinpr2.so.2 libwinpr2-2 #MINVER#
  PCSC_GetOpenCardNameA@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  PCSC_GetOpenCardNameW@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  PCSC_SCardAccessStartedEvent@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- PCSC_SCardAddReaderName@Base 2.0.0~git20170725.1.1648deb+dfsg1
  PCSC_SCardAddReaderToGroupA@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  PCSC_SCardAddReaderToGroupW@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  PCSC_SCardAudit@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
@@ -778,7 +800,14 @@ libwinpr2.so.2 libwinpr2-2 #MINVER#
  PubSub_Unlock@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  PubSub_Unsubscribe@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  PushEntryList@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
+ QueryContextAttributesA@Base 2.0.0~git20181120.1.e21b72c95+dfsg1
+ QueryContextAttributesW@Base 2.0.0~git20181120.1.e21b72c95+dfsg1
+ QueryCredentialsAttributesA@Base 2.0.0~git20181120.1.e21b72c95+dfsg1
+ QueryCredentialsAttributesW@Base 2.0.0~git20181120.1.e21b72c95+dfsg1
  QueryDepthSList@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
+ QuerySecurityContextToken@Base 2.0.0~git20181120.1.e21b72c95+dfsg1
+ QuerySecurityPackageInfoA@Base 2.0.0~git20181120.1.e21b72c95+dfsg1
+ QuerySecurityPackageInfoW@Base 2.0.0~git20181120.1.e21b72c95+dfsg1
  Queue_Clear@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  Queue_Contains@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  Queue_Count@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
@@ -863,6 +892,7 @@ libwinpr2.so.2 libwinpr2-2 #MINVER#
  RestoreLastError@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  ResumeThread@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  ReverseBits32@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
+ RevertSecurityContext@Base 2.0.0~git20181120.1.e21b72c95+dfsg1
  RpcBindingCopy@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  RpcBindingFree@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  RpcBindingFromStringBindingA@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
@@ -974,7 +1004,6 @@ libwinpr2.so.2 libwinpr2-2 #MINVER#
  RpcStringFreeW@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  RpcTestCancel@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  SCardAccessStartedEvent@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
- SCardAddReaderName@Base 2.0.0~git20170725.1.1648deb+dfsg1
  SCardAddReaderToGroupA@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  SCardAddReaderToGroupW@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  SCardAudit@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
@@ -1073,6 +1102,8 @@ libwinpr2.so.2 libwinpr2-2 #MINVER#
  SendMessageW@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  SendNotifyMessageA@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  SendNotifyMessageW@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
+ SetContextAttributesA@Base 2.0.0~git20181120.1.e21b72c95+dfsg1
+ SetContextAttributesW@Base 2.0.0~git20181120.1.e21b72c95+dfsg1
  SetCriticalSectionSpinCount@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  SetCurrentDirectoryA@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  SetCurrentDirectoryW@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
@@ -1143,6 +1174,7 @@ libwinpr2.so.2 libwinpr2-2 #MINVER#
  Stream_Free@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  Stream_New@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  Stream_Release@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
+ Stream_StaticInit@Base 2.0.0~git20181120.1.e21b72c95+dfsg1
  SuspendThread@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  SwitchToThread@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  SystemTimeToFileTime@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
@@ -1187,6 +1219,7 @@ libwinpr2.so.2 libwinpr2-2 #MINVER#
  UuidToStringA@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  UuidToStringW@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  ValidFileNameComponent@Base 2.0.0~git20170725.1.1648deb+dfsg1
+ VerifySignature@Base 2.0.0~git20181120.1.e21b72c95+dfsg1
  WLog_AddStringLogFilters@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  WLog_CloseAppender@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  WLog_ConfigureAppender@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
@@ -1392,6 +1425,7 @@ libwinpr2.so.2 libwinpr2-2 #MINVER#
  _wcscmp@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  _wcsdup@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  _wcslen@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
+ _wcsnlen@Base 2.0.0~git20190204.1.2693389a+dfsg1
  _wcsrchr@Base 2.0.0~git20170725.1.1648deb+dfsg1
  closesocket@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  lstrcmpA@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
@@ -1405,6 +1439,11 @@ libwinpr2.so.2 libwinpr2-2 #MINVER#
  sspi_SecBufferAlloc@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  sspi_SecBufferFree@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  sspi_SetAuthIdentity@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
+ sspi_SetAuthIdentityWithUnicodePassword@Base 2.0.0~git20180411.1.7a7b1802+dfsg1
+ string_list_copy@Base 2.0.0~git20181120.1.e21b72c95+dfsg1
+ string_list_free@Base 2.0.0~git20181120.1.e21b72c95+dfsg1
+ string_list_length@Base 2.0.0~git20181120.1.e21b72c95+dfsg1
+ string_list_print@Base 2.0.0~git20181120.1.e21b72c95+dfsg1
  strtok_s@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  wcstok_s@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  winpr_BinToHexString@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
@@ -1431,13 +1470,16 @@ libwinpr2.so.2 libwinpr2-2 #MINVER#
  winpr_CreateThreadpoolWork@Base 2.0.0~git20161130.1.e60d0d5+dfsg1
  winpr_DeleteSynchronizationBarrier@Base 2.0.0~git20161130.1.e60d0d5+dfsg1
  winpr_Digest@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
+ winpr_Digest_Allow_FIPS@Base 2.0.0~git20180411.1.7a7b1802+dfsg1
  winpr_Digest_Final@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  winpr_Digest_Free@Base 2.0.0~git20161130.1.e60d0d5+dfsg1
  winpr_Digest_Init@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
+ winpr_Digest_Init_Allow_FIPS@Base 2.0.0~git20180411.1.7a7b1802+dfsg1
  winpr_Digest_New@Base 2.0.0~git20161130.1.e60d0d5+dfsg1
  winpr_Digest_Update@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  winpr_DisassociateCurrentThreadFromCallback@Base 2.0.0~git20161130.1.e60d0d5+dfsg1
  winpr_EnterSynchronizationBarrier@Base 2.0.0~git20161130.1.e60d0d5+dfsg1
+ winpr_FIPSMode@Base 2.0.0~git20180411.1.7a7b1802+dfsg1
  winpr_FreeLibraryWhenCallbackReturns@Base 2.0.0~git20161130.1.e60d0d5+dfsg1
  winpr_GetTickCount64@Base 2.0.0~git20161130.1.e60d0d5+dfsg1
  winpr_HMAC@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
@@ -1459,10 +1501,12 @@ libwinpr2.so.2 libwinpr2-2 #MINVER#
  winpr_RAND_pseudo@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  winpr_RC4_Free@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  winpr_RC4_New@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
+ winpr_RC4_New_Allow_FIPS@Base 2.0.0~git20180411.1.7a7b1802+dfsg1
  winpr_RC4_Update@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  winpr_ReleaseMutexWhenCallbackReturns@Base 2.0.0~git20161130.1.e60d0d5+dfsg1
  winpr_ReleaseSemaphoreWhenCallbackReturns@Base 2.0.0~git20161130.1.e60d0d5+dfsg1
  winpr_SetEventWhenCallbackReturns@Base 2.0.0~git20161130.1.e60d0d5+dfsg1
+ winpr_SetThreadpoolCallbackCleanupGroup@Base 2.0.0~git20180411.1.7a7b1802+dfsg1
  winpr_SetThreadpoolThreadMaximum@Base 2.0.0~git20161130.1.e60d0d5+dfsg1
  winpr_SetThreadpoolThreadMinimum@Base 2.0.0~git20161130.1.e60d0d5+dfsg1
  winpr_SetThreadpoolTimer@Base 2.0.0~git20161130.1.e60d0d5+dfsg1
@@ -1490,9 +1534,9 @@ libwinpr2.so.2 libwinpr2-2 #MINVER#
  winpr_image_read_buffer@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  winpr_image_write@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  winpr_log_backtrace@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
+ winpr_log_backtrace_ex@Base 2.0.0~git20190204.1.2693389a+dfsg1
  winpr_strerror@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  wmemmove_s@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  wprintfx@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  wvprintfx@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
  wvsnprintfx@Base 2.0.0~git20160317.1.75ae3f5+dfsg1
-*Build-Depends-Package: libwinpr2-dev
