@@ -25,8 +25,14 @@ include_directories(${CMAKE_SOURCE_DIR}/uwac/include)
 set(${MODULE_PREFIX}_SRCS
     wlfreerdp.c
 	wlfreerdp.h
+	wlf_disp.c
+	wlf_disp.h
+	wlf_pointer.c
+	wlf_pointer.h
 	wlf_input.c
 	wlf_input.h
+	wlf_cliprdr.c
+	wlf_cliprdr.h
 	wlf_channels.c
 	wlf_channels.h
 	)

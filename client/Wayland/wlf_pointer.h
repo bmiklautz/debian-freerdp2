@@ -1,8 +1,9 @@
 /**
  * FreeRDP: A Remote Desktop Protocol Implementation
- * DirectFB Event Handling
+ * Wayland Mouse Pointer
  *
- * Copyright 2011 Marc-Andre Moreau <marcandre.moreau@gmail.com>
+ * Copyright 2019 Armin Novak <armin.novak@thincast.com>
+ * Copyright 2019 Thincast Technologies GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,12 +18,11 @@
  * limitations under the License.
  */
 
-#ifndef FREERDP_CLIENT_DF_EVENT_H
-#define FREERDP_CLIENT_DF_EVENT_H
+#ifndef FREERDP_CLIENT_WAYLAND_POINTER_H
+#define FREERDP_CLIENT_WAYLAND_POINTER_H
 
-#include "dfreerdp.h"
+#include <freerdp/graphics.h>
 
-void df_keyboard_init(void);
-BOOL df_event_process(freerdp* instance, DFBEvent* event);
+BOOL wlf_register_pointer(rdpGraphics* graphics);
 
-#endif /* FREERDP_CLIENT_DF_EVENT_H */
+#endif /* FREERDP_CLIENT_WAYLAND_POINTER_H */

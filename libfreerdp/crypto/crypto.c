@@ -573,7 +573,7 @@ static char* object_string(ASN1_TYPE* object)
 		return 0;
 	}
 
-	result = (char*)strdup((char*)utf8String);
+	result = (char*)_strdup((char*)utf8String);
 	OPENSSL_free(utf8String);
 	return result;
 }
@@ -638,7 +638,7 @@ char* crypto_cert_get_email(X509* x509)
 		return 0;
 	}
 
-	result = strdup(list.strings[0]);
+	result = _strdup(list.strings[0]);
 	OPENSSL_free(list.strings[0]);
 	string_list_free(&list);
 	return result;
@@ -754,7 +754,7 @@ char* crypto_cert_issuer(X509* xcert)
 	return crypto_print_name(X509_get_issuer_name(xcert));
 }
 
-BOOL x509_verify_certificate(CryptoCert cert, char* certificate_store_path)
+BOOL x509_verify_certificate(CryptoCert cert, const char* certificate_store_path)
 {
 	X509_STORE_CTX* csc;
 	BOOL status = FALSE;
@@ -800,6 +800,8 @@ BOOL x509_verify_certificate(CryptoCert cert, char* certificate_store_path)
 	if (!X509_STORE_CTX_init(csc, cert_ctx, xcert, cert->px509chain))
 		goto end;
 
+	X509_STORE_CTX_set_purpose(csc, X509_PURPOSE_SSL_SERVER);
+
 	if (X509_verify_cert(csc) == 1)
 		status = TRUE;
 
@@ -809,7 +811,7 @@ end:
 	return status;
 }
 
-rdpCertificateData* crypto_get_certificate_data(X509* xcert, char* hostname, UINT16 port)
+rdpCertificateData* crypto_get_certificate_data(X509* xcert, const char* hostname, UINT16 port)
 {
 	char* issuer;
 	char* subject;
