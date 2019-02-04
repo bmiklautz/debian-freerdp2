@@ -1,0 +1,14 @@
+Description: Minor typo fix.
+Author: Mike Gabriel <mike.gabriel@das-netzwerkteam.de>
+
+--- a/client/common/cmdline.h
++++ b/client/common/cmdline.h
+@@ -40,7 +40,7 @@
+ 	{ "async-update", COMMAND_LINE_VALUE_BOOL, NULL, BoolValueFalse, NULL, -1, NULL, "Asynchronous update" },
+ 	{ "audio-mode", COMMAND_LINE_VALUE_REQUIRED, "<mode>", NULL, NULL, -1, NULL, "Audio output mode" },
+ 	{ "auth-only", COMMAND_LINE_VALUE_BOOL, NULL, BoolValueFalse, NULL, -1, NULL, "Authenticate only" },
+-	{ "authentication", COMMAND_LINE_VALUE_BOOL, NULL, BoolValueTrue, NULL, -1, NULL, "Authentication (expermiental)" },
++	{ "authentication", COMMAND_LINE_VALUE_BOOL, NULL, BoolValueTrue, NULL, -1, NULL, "Authentication (experimental)" },
+ 	{ "auto-reconnect", COMMAND_LINE_VALUE_BOOL, NULL, BoolValueFalse, NULL, -1, NULL, "Automatic reconnection" },
+ 	{ "auto-reconnect-max-retries", COMMAND_LINE_VALUE_REQUIRED, "<retries>", NULL, NULL, -1, NULL, "Automatic reconnection maximum retries, 0 for unlimited [0,1000]" },
+ 	{ "bitmap-cache", COMMAND_LINE_VALUE_BOOL, NULL, BoolValueTrue, NULL, -1, NULL, "bitmap cache" },
