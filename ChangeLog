@@ -1,3 +1,1376 @@
+2019-02-01 08:37:24 +0100 akallabeth (2693389a1) 
+
+	* Merge pull request #5236 from chipitsine/master
+
+2019-02-01 03:50:51 +0500 Ilya Shipitsin (d1939cfc4) 
+
+	* client/Wayland/wlf_cliprdr.c: resolve possible null pointer
+          dereference found by cppcheck
+
+2019-01-30 18:22:45 +0100 David Fort (85161c718) 
+
+	* Merge pull request #5223 from akallabeth/scanbuild_null_fixes
+
+2019-01-30 16:26:41 +0100 Bernhard Miklautz (acebd43ac) 
+
+	* Merge pull request #5147 from jphein/master
+
+2019-01-28 10:56:48 +0100 Armin Novak (2dab77810) 
+
+	* Fixed NULL dereferences and uninitialized values
+
+2019-01-28 10:56:23 +0100 Armin Novak (ef1728faf) 
+
+	* Fixed NULL dereferences and uninitialized values
+
+2019-01-28 10:55:56 +0100 Armin Novak (2a582ed19) 
+
+	* Fixed NULL dereferences and uninitialized values
+
+2019-01-28 10:55:24 +0100 Armin Novak (fe9dcfacc) 
+
+	* Fixed NULL dereferences and uninitialized values
+
+2019-01-30 00:08:55 +0100 David Fort (138a83b47) 
+
+	* Merge pull request #5227 from akallabeth/compiler_warnings_fixes
+
+2019-01-29 17:46:47 +0100 Armin Novak (9033df501) 
+
+	* Fixed compiler warnings for TRIO_CONST and limited data type.
+
+2019-01-29 17:48:05 +0100 Armin Novak (79416f5d3) 
+
+	* Fixed missing initializers
+
+2019-01-29 17:24:29 +0100 Armin Novak (87c7ddeda) 
+
+	* Asserting arg->Value to silence clang analyzer NULL argument
+          checks.
+
+2019-01-29 17:16:46 +0100 Armin Novak (2e5fd8d16) 
+
+	* Fixed clang analyzer false positive memory leaks.
+
+2019-01-29 17:06:08 +0100 Armin Novak (d5720b799) 
+
+	* Fixed clang scanbuild false positive memory leak.
+
+2019-01-29 16:53:30 +0100 Armin Novak (0dae6933c) 
+
+	* Fixed uninitialized return value.
+
+2019-01-29 16:22:46 +0100 Armin Novak (6a1ff5c48) 
+
+	* Fixed compiler warnings #5210
+
+2019-01-29 16:15:33 +0100 Armin Novak (5c930dc4a) 
+
+	* Fixed compiler warnings #5210
+
+2019-01-29 16:15:23 +0100 Armin Novak (51039f653) 
+
+	* Fixed compiler warnings #5210
+
+2019-01-29 16:14:55 +0100 Armin Novak (9d680904c) 
+
+	* Fixed compiler warnings #5210
+
+2019-01-29 16:14:29 +0100 Armin Novak (03ec36440) 
+
+	* Fixed compiler warnings #5210
+
+2019-01-29 15:18:53 +0100 David Fort (70805402b) 
+
+	* Merge pull request #5140 from akallabeth/print_custom_component
+
+2019-01-29 15:11:38 +0100 David Fort (72ad4af35) 
+
+	* Merge pull request #5221 from akallabeth/wayland_mouse_cursor
+
+2019-01-29 14:21:58 +0100 Armin Novak (dd9814df8) 
+
+	* Fixed review remarks.
+
+2019-01-29 13:34:27 +0100 Armin Novak (32d539b70) 
+
+	* Removed debug messages.
+
+2019-01-29 11:07:44 +0100 Armin Novak (f64db12a2) 
+
+	* Fixed uninitialized value.
+
+2019-01-29 10:47:36 +0100 akallabeth (4b95bcfa6) 
+
+	* Merge pull request #5224 from hardening/serverStatusInfo
+
+2019-01-29 10:46:21 +0100 akallabeth (0a8ebcfca) 
+
+	* Merge pull request #5187 from astrand/mingw-part1
+
+2019-01-29 10:33:06 +0100 David Fort (53c74bead) 
+
+	* rdp: add a callback for ServerStatusInfo
+
+2019-01-28 15:46:12 +0100 Armin Novak (99c92308a) 
+
+	* Fixed wayland library detection.
+
+2019-01-28 15:29:30 +0100 Armin Novak (2418c43ca) 
+
+	* Fixed pointer image update.
+
+2019-01-25 15:46:55 +0100 Armin Novak (52ef8079e) 
+
+	* Added O_TMPFILE support for uwac tempfile generation.
+
+2019-01-25 15:38:56 +0100 Armin Novak (34adfd571) 
+
+	* Added UWAC_EVENT_OUTPUT_GEOMETRY event
+
+2019-01-25 13:05:51 +0100 Armin Novak (23fa6b918) 
+
+	* Added mouse cursor callback stubs.
+
+2019-01-25 16:59:33 +0100 David Fort (05d9d8979) 
+
+	* Merge pull request #5149 from akallabeth/cert_deny
+
+2019-01-25 12:33:18 +0100 MartinHaimberger (0f68ed390) 
+
+	* Merge pull request #5150 from akallabeth/gw_consent_callback
+
+2019-01-25 12:19:56 +0100 akallabeth (7d226ca59) 
+
+	* Merge pull request #5218 from ckelsel/master
+
+2019-01-25 11:42:38 +0100 David Fort (343bc8c6e) 
+
+	* Merge pull request #5213 from akallabeth/wayland_and_warning_fixes
+
+2019-01-25 17:54:25 +0800 xie.kunming (b8c64b6bf) 
+
+	* May crash if GetCommandLineW failed
+
+2019-01-25 10:50:07 +0100 Armin Novak (b1e6e232e) 
+
+	* Fixed buffer submit and callback cleanup.
+
+2019-01-24 15:10:08 +0100 Armin Novak (823411c2f) 
+
+	* Fixed wayland buffer updates
+
+2019-01-24 13:15:40 +0100 Armin Novak (0fd27e0e3) 
+
+	* Fixed wayland clipboard registration, retry if seat is detected
+          before.
+
+2019-01-25 10:01:30 +0100 akallabeth (8ed0b9292) 
+
+	* Merge pull request #5216 from ckelsel/master
+
+2019-01-25 16:45:52 +0800 xie.kunming (84493d003) 
+
+	* If uElapse is less than USER_TIMER_MINIMUM (0x0000000A), the
+          timeout is set to USER_TIMER_MINIMUM.
+
+2019-01-24 12:01:40 +0100 Armin Novak (86e20d764) 
+
+	* Removed buffer damage tracking in client, let UWAC handle that.
+
+2019-01-24 11:19:20 +0100 Armin Novak (0cf898e72) 
+
+	* Fixed warnings found by compiler and static analysis.
+
+2019-01-24 11:14:06 +0100 Armin Novak (728cdfd68) 
+
+	* Fixed warnings found by compiler and static analysis.
+
+2019-01-24 11:03:36 +0100 Armin Novak (7b92b91d9) 
+
+	* Fixed warnings found by compiler and static analysis.
+
+2019-01-24 11:00:48 +0100 Armin Novak (ac12adda9) 
+
+	* Fixed warnings found by compiler and static analysis.
+
+2019-01-24 10:33:59 +0100 Armin Novak (4ba73e0c7) 
+
+	* Fixed warnings found by compiler and static analysis.
+
+2019-01-24 11:53:37 +0100 akallabeth (58f616b68) 
+
+	* Merge pull request #5212 from hardening/ddm_fix
+
+2019-01-24 10:30:04 +0100 David Fort (713e9cd5a) 
+
+	* uwac: fix initialization of data_device_manager
+
+2019-01-23 17:15:59 +0100 David Fort (281c85598) 
+
+	* Merge pull request #5160 from akallabeth/wayland_clipboard
+
+2019-01-23 16:22:29 +0100 Armin Novak (087390b30) 
+
+	* Refactored client clipboard function callbacks for const data
+          pointers.
+
+2019-01-23 16:22:04 +0100 Armin Novak (65812bdbc) 
+
+	* Clipboard data pointer arguments are now const.
+
+2019-01-23 16:01:36 +0100 Armin Novak (891d9760d) 
+
+	* Ignore clipboard events if channel not loaded.
+
+2019-01-22 11:04:50 +0100 Armin Novak (c8e85338b) 
+
+	* Fixed missing return.
+
+2019-01-22 10:56:10 +0100 Armin Novak (d5b355840) 
+
+	* Added log messages for unusual error events.
+
+2019-01-22 10:52:24 +0100 Armin Novak (ceeccd34e) 
+
+	* Added assert
+
+2019-01-22 10:50:34 +0100 Armin Novak (68b5d47d9) 
+
+	* Removed internal checks.
+
+2019-01-22 10:48:32 +0100 Armin Novak (9eb897ea6) 
+
+	* Fixed a log message.
+
+2019-01-22 10:47:26 +0100 Armin Novak (9cdddb772) 
+
+	* Fixed some log messages / missing asserts.
+
+2019-01-16 15:01:49 +0100 Armin Novak (1cec0e034) 
+
+	* Fixed NULL dereference.
+
+2018-12-19 16:18:13 +0100 Armin Novak (ca2e8e4bc) 
+
+	* Implemented wayland clipboard.
+
+2018-12-19 16:17:59 +0100 Armin Novak (0cba9edc9) 
+
+	* Implemented UWAC clipboard handling.
+
+2019-01-23 15:41:42 +0100 David Fort (2843f1ad6) 
+
+	* Merge pull request #5159 from akallabeth/wayland_display
+
+2019-01-23 14:30:31 +0100 David Fort (b18ba3326) 
+
+	* Merge pull request #5192 from akallabeth/dynamic_openh264
+
+2019-01-23 10:02:07 +0100 David Fort (4c465e7f1) 
+
+	* Merge pull request #5209 from
+          akallabeth/wayland_protocol_update_and_keyboard_inhibit
+
+2019-01-22 18:09:53 +0100 Armin Novak (9a0c8a5c5) 
+
+	* Removed unused label.
+
+2019-01-22 11:06:11 +0100 Armin Novak (97dfa0757) 
+
+	* Fixed duplicated check.
+
+2018-12-18 12:30:31 +0100 Armin Novak (42ad7a884) 
+
+	* Implemented wayland display resize channel.
+
+2019-01-22 17:20:19 +0100 Armin Novak (3cd3490fd) 
+
+	* Fixed initialization of window decorations.
+
+2019-01-22 16:13:08 +0100 Armin Novak (5c422b7c9) 
+
+	* Added KDE server side window decoration interface as fallback.
+
+2019-01-22 17:04:37 +0100 Martin Fleisz (b6f2a3f43) 
+
+	* Merge pull request #5201 from akallabeth/wayland_refresh_fix
+
+2019-01-22 16:55:46 +0100 Armin Novak (f2fd78512) 
+
+	* Fixed comment.
+
+2019-01-22 16:43:32 +0100 Martin Fleisz (2095fc3eb) 
+
+	* Merge pull request #5156 from akallabeth/flatpak_support
+
+2019-01-22 16:27:57 +0100 akallabeth (4cbd5e166) 
+
+	* Merge pull request #5202 from hardening/server_side_license1
+
+2019-01-22 15:45:15 +0100 Armin Novak (afd4baf4d) 
+
+	* Added wayland server side decorations.
+
+2019-01-22 15:18:59 +0100 Armin Novak (84d4ff0f0) 
+
+	* Updated flatpak build
+
+2019-01-22 13:46:46 +0100 Armin Novak (81f1fb934) 
+
+	* Implemented keyboard shortcut inhibit support.
+
+2019-01-22 13:09:59 +0100 Armin Novak (0ef64f8a8) 
+
+	* Updated fullscreen shell to current protocol level.
+
+2019-01-22 13:05:46 +0100 Armin Novak (7f158b97b) 
+
+	* Update to xdg-shell stable.
+
+2019-01-22 10:29:08 +0100 Armin Novak (5ef6b7197) 
+
+	* Implemented DesktopResize callback for wayland client.
+
+2018-11-01 11:02:54 +0100 David Fort (f4b7a27c2) 
+
+	* license: implement server-side management
+
+2019-01-18 18:04:23 +0100 David Fort (ad75ae512) 
+
+	* Merge pull request #5200 from akallabeth/os2_fixes
+
+2019-01-18 14:39:14 +0100 Armin Novak (a5cee1751) 
+
+	* Resubmit buffer if necessary.
+
+2019-01-18 14:38:51 +0100 Armin Novak (0b17406ee) 
+
+	* Unified buffer update and screen refresh on focus
+
+2019-01-18 13:13:41 +0100 Armin Novak (4f1462b73) 
+
+	* Added fix for OS2 paths.
+
+2019-01-18 13:04:34 +0100 Armin Novak (c8587cea8) 
+
+	* Fixed WINDOW_ORDER_INFO copy.
+
+2019-01-18 13:03:36 +0100 Armin Novak (f65b94ed8) 
+
+	* Yield in connection wait loops to reduce processor use.
+
+2019-01-18 13:02:30 +0100 Armin Novak (b08505cbe) 
+
+	* Fixed return check in SwitchToThread
+
+2019-01-18 11:18:34 +0100 Martin Fleisz (cf6348939) 
+
+	* Merge pull request #5199 from llyzs/freerdp_rdpsnd_winmm
+
+2019-01-18 17:48:06 +0800 Vic Lee (e2df67ab3) 
+
+	* rdpsnd/winmm: remove an unnecessary blocking event.
+
+2019-01-18 09:11:48 +0100 Martin Fleisz (6dc179ce4) 
+
+	* Merge pull request #5197 from akallabeth/leak_fix_lodepng
+
+2019-01-17 14:46:55 +0100 Martin Fleisz (b131d8d52) 
+
+	* Merge pull request #5191 from akallabeth/mac_mouse_support
+
+2019-01-17 13:44:04 +0100 Armin Novak (4f99c2946) 
+
+	* Unified mouse coordinate scaling.
+
+2019-01-16 15:23:12 +0100 Armin Novak (4d4f3617b) 
+
+	* Fixed memory leak in lodepng.
+
+2019-01-16 14:13:27 +0100 akallabeth (0e5fe9e11) 
+
+	* Merge pull request #5196 from bmiklautz/winprhash
+
+2019-01-16 12:05:47 +0100 Bernhard Miklautz (3498e7694) 
+
+	* fix [winpr/hash]: initialize ssl
+
+2019-01-15 09:49:48 +0100 Armin Novak (8c41bd21e) 
+
+	* Added version check for dynamic OpenH264 use.
+
+2019-01-14 23:25:26 +0100 David Fort (ac0c91300) 
+
+	* Merge pull request #5194 from akallabeth/drive_file_size_fix2
+
+2019-01-14 14:54:33 +0100 Armin Novak (805741bdf) 
+
+	* Fixed #5185 broken file size initialization.
+
+2019-01-11 11:40:31 +0100 Armin Novak (1c855068a) 
+
+	* Using runtime linking for OpenH264.
+
+2019-01-10 11:09:57 +0100 Armin Novak (a3cfef4e0) 
+
+	* Implemented full mouse support for mac client.
+
+2019-01-09 11:13:38 +0100 Peter Åstrand (astrand) (a7f4b90f3) 
+
+	* Pointer arithmetics require lvalue
+
+2019-01-09 10:04:38 +0100 Peter Åstrand (astrand) (32ba90ec0) 
+
+	* Avoid building POSIX clipboard if WIN32
+
+2019-01-09 10:01:44 +0100 Peter Åstrand (astrand) (ea35e2387) 
+
+	* Check MSVC_RUNTIME only if MSVC is defined
+
+2019-01-09 09:54:31 +0100 Peter Åstrand (astrand) (6619de070) 
+
+	* freerdp_client_set_window_size should not be static
+
+2019-01-09 09:52:27 +0100 Peter Åstrand (astrand) (fcf59b9c4) 
+
+	* Add msimg32 library through CMake
+
+2019-01-09 09:36:28 +0100 Peter Åstrand (astrand) (30cd1ba1a) 
+
+	* Use lowercase for includes and libs
+
+2019-01-09 09:30:31 +0100 Peter Åstrand (astrand) (9c19c7361) 
+
+	* Support Unix Makefiles
+
+2019-01-08 13:42:42 +0100 David Fort (6be3ba4df) 
+
+	* Merge pull request #5186 from akallabeth/test_leak_fix
+
+2019-01-08 11:20:00 +0100 Armin Novak (6a175d588) 
+
+	* Fixed #5167: Memory leak in unit test.
+
+2019-01-08 10:18:06 +0100 Martin Fleisz (7bc69cd61) 
+
+	* Merge pull request #5155 from akallabeth/ext_debug_functions
+
+2019-01-08 09:45:25 +0100 Martin Fleisz (f8a200462) 
+
+	* Merge pull request #5178 from fodinabor/rds-connectionstring
+
+2019-01-08 09:13:52 +0100 akallabeth (56a01469f) 
+
+	* Merge pull request #5184 from chipitsine/master
+
+2019-01-08 08:06:28 +0100 Martin Fleisz (b0b0d5ede) 
+
+	* Merge pull request #5183 from akallabeth/libressl_version_fix
+
+2019-01-07 23:01:31 +0500 Ilya Shipitsin (f422fe63c) 
+
+	* identical code for both branches, found by coverity
+
+2019-01-07 22:55:08 +0500 Ilya Shipitsin (4403448a7) 
+
+	* client/Windows/wf_cliprdr.c: remove redundant check found by
+          cppcheck
+
+2019-01-07 15:21:46 +0100 Martin Fleisz (aa442de05) 
+
+	* Merge pull request #5174 from chipitsine/master
+
+2019-01-07 15:21:03 +0100 Martin Fleisz (abd5cf51f) 
+
+	* Merge pull request #5180 from chipitsine/coverity
+
+2019-01-07 14:18:14 +0100 Armin Novak (0c83efa75) 
+
+	* Fix #5170: Disable custom TLS alert for libressl > 2.8.3
+
+2019-01-07 13:00:48 +0100 Joachim Meyer (c8358fdda) 
+
+	* Reject assistance input if not a RA invitation or connection string
+          2.
+
+2019-01-07 10:47:48 +0100 David Fort (6cc13303b) 
+
+	* Merge pull request #5182 from akallabeth/mouse_hwheel_direction_fix
+
+2019-01-07 10:38:55 +0100 Joachim Meyer (7efbae282) 
+
+	* Set the username setting again, if it exists.
+
+2019-01-07 10:02:04 +0100 Armin Novak (b2ef3e69c) 
+
+	* Fixed Wayland horizontal mouse wheel direction.
+
+2019-01-07 10:01:46 +0100 Armin Novak (2dcc2614d) 
+
+	* Fixed X11 horizontal mouse wheel direction.
+
+2019-01-07 08:39:08 +0100 Martin Fleisz (e034d3552) 
+
+	* Merge pull request #5173 from hendwolt/master
+
+2019-01-04 20:56:57 +0500 Ilya Shipitsin (05462d27f) 
+
+	* remove identical code, found by coverity
+
+2019-01-04 20:55:28 +0500 Ilya Shipitsin (e14ba2018) 
+
+	* remove identical code, found by coverity
+
+2019-01-03 20:58:40 +0100 Joachim Meyer (8d50c4ce2) 
+
+	* Add support for standard Remote Assistance Connection String 2
+          without the extensions of the invitation file format.
+
+2019-01-02 21:20:39 +0000 Bernhard Miklautz (bab79a995) 
+
+	* Merge pull request #5176 from chipitsine/ninja_gitignore
+
+2019-01-02 21:22:51 +0500 Ilya Shipitsin (43a16a3e5) 
+
+	* add ninja to gitignore
+
+2019-01-02 20:35:24 +0500 Ilya Shipitsin (bdc039e71) 
+
+	* resolve several issues found by cppcheck
+
+2019-01-02 12:51:40 +0100 akallabeth (442ba916b) 
+
+	* Merge pull request #5166 from informatimago/detect-kerberos-version
+
+2019-01-02 11:34:27 +0100 David Fort (4d086c0e4) 
+
+	* Merge pull request #5175 from simon04/patch-1
+
+2019-01-02 08:18:07 +0100 Simon Legner (ff375d238) 
+
+	* fix(crypto/tls): typo
+
+2018-12-29 09:16:05 +0100 Hendrik Woltersdorf (f561ef957) 
+
+	* enable fonts smoothing per default
+
+2018-12-24 11:17:16 +0100 David Fort (15fd55ded) 
+
+	* Merge pull request #5168 from ckelsel/master
+
+2018-12-24 14:52:59 +0800 kunming.xie (3ef6dd2f7) 
+
+	* fix button_set_locked no return statement
+
+2018-12-21 11:59:04 +0100 Pascal J. Bourguignon (7d07bce64) 
+
+	* cmake: made FindGSSAPI.cmake able to detect kerberos versions such
+          as: "Kerberos 5 release 1.18-prerelease".
+
+2018-12-18 15:38:41 +0100 David Fort (5b24dc1ac) 
+
+	* Merge pull request #5158 from akallabeth/wayland_mouse
+
+2018-12-17 10:36:55 +0100 Armin Novak (8bf601902) 
+
+	* Feature #4841: Added flatpak manifest.
+
+2018-12-18 13:30:13 +0100 Armin Novak (1984f73db) 
+
+	* Implemented horizontal mouse wheel for wayland.
+
+2018-12-18 13:43:17 +0100 Armin Novak (f647e5cc3) 
+
+	* Implemented mouse buttons 4 and 5 for wayland.
+
+2018-12-17 09:09:02 +0100 Armin Novak (5dea64a46) 
+
+	* Added backtrace function working on allocated logger.
+
+2018-12-14 14:13:38 +0100 David Fort (faff639ad) 
+
+	* Merge pull request #5148 from akallabeth/cert_accepted_fail
+
+2018-12-14 10:17:52 +0100 Armin Novak (b60045af2) 
+
+	* New option to disable user certificate dialog
+
+2018-12-14 09:52:25 +0100 Armin Novak (6906efa35) 
+
+	* Fixed return value for already accepted certificate.
+
+2018-12-14 08:13:42 +0000 Bernhard Miklautz (da819bf77) 
+
+	* Merge pull request #5146 from oshogbo/master
+
+2018-12-13 14:02:38 -0800 Jeffrey Hein (d316e7fa1) 
+
+	* Clarified defaults of /floatbar flag
+
+2018-12-13 14:16:50 +0100 Mariusz Zaborski (4974af1f7) 
+
+	* There is only one primary monitor do not look for more.
+
+2018-12-13 13:48:44 +0100 akallabeth (6c6f08482) 
+
+	* Merge pull request #5145 from bmiklautz/sshagent_server
+
+2018-12-13 10:21:11 +0100 David Fort (b619ba542) 
+
+	* Merge pull request #5144 from ondrejholy/coverity2
+
+2018-12-13 10:17:46 +0100 Bernhard Miklautz (9f6abd270) 
+
+	* fix [channels]: remove sshagent server side
+
+2018-12-13 09:47:26 +0100 Ondrej Holy (24cdcbccc) 
+
+	* uwac: Do not return destroyed UwacSeat
+
+2018-12-12 21:25:14 +0100 David Fort (3d4b195c4) 
+
+	* Merge pull request #5143 from jphein/master
+
+2018-12-12 11:29:58 -0800 Jeffrey Hein (1e84f00ef) 
+
+	* Added help description for /drive:hotplug,*
+
+2018-12-12 15:40:50 +0100 Armin Novak (34c9404c9) 
+
+	* Added OpenSSL include path globally.
+
+2018-12-12 15:36:39 +0100 akallabeth (b8cfa0f02) 
+
+	* Merge pull request #5142 from astrand/master
+
+2018-12-12 14:42:50 +0100 Armin Novak (31d5a3b0c) 
+
+	* Don't reset configuration and driver name when supplied via command
+          line.
+
+2018-12-12 14:10:46 +0100 Armin Novak (d13bd66f5) 
+
+	* Implemented printer name based backend to remember settings.
+
+2018-12-12 12:08:34 +0000 Bernhard Miklautz (7be596a5f) 
+
+	* Merge pull request #5133 from akallabeth/enable_fonts_by_default
+
+2018-12-12 11:43:03 +0100 Peter Åstrand (astrand) (9aced5945) 
+
+	* Define scancodes for virtual keys, used by VNC servers
+
+2018-12-12 10:06:41 +0100 Armin Novak (192680a00) 
+
+	* Added callback to handle printer custom components in printer
+          backend.
+
+2018-12-11 15:24:24 +0100 Armin Novak (8ddabd265) 
+
+	* Fix #1195: Implement callback for Gateway Messages
+
+2018-12-11 14:40:58 +0100 Martin Fleisz (4dac07667) 
+
+	* Merge pull request #5134 from oshogbo/master
+
+2018-12-11 13:34:31 +0100 Mariusz Zaborski (269002f0a) 
+
+	* Respect settings while sending the input capabilities.
+
+2018-12-11 13:02:26 +0100 Armin Novak (717b0eac9) 
+
+	* Enable smooth fonts by default.
+
+2018-12-11 10:30:39 +0100 Martin Fleisz (5bff8bf69) 
+
+	* Merge pull request #5125 from
+          akallabeth/clipboard_string_length_fix
+
+2018-12-11 09:12:24 +0000 Bernhard Miklautz (2fe1c786c) 
+
+	* Merge pull request #5075 from akallabeth/clipboard_channel_cleanup
+
+2018-12-11 08:53:39 +0000 Bernhard Miklautz (6f6c8473a) 
+
+	* Merge pull request #5126 from akallabeth/x11_button_mapping
+
+2018-12-11 09:32:11 +0100 Armin Novak (0fa9f0656) 
+
+	* Modified flag checks to avoid invalid flag sets.
+
+2018-12-11 09:19:46 +0100 Martin Fleisz (29e2e2221) 
+
+	* Merge pull request #5083 from akallabeth/mac_client_fixes
+
+2018-12-10 18:03:53 +0100 Bernhard Miklautz (b3ff75b59) 
+
+	* fix [client/Mac]: UI API needs to be called in main thread
+
+2018-12-10 17:07:16 +0000 Bernhard Miklautz (531b1b63e) 
+
+	* Merge pull request #5128 from akallabeth/rail_crashes
+
+2018-12-10 15:41:20 +0100 Armin Novak (2ce04069c) 
+
+	* Fixed crashes in rail mode after merge of floatbar fixes.
+
+2018-12-10 14:25:07 +0100 Armin Novak (710292754) 
+
+	* X11 extended button remapping support.
+
+2018-12-10 14:45:10 +0100 Martin Fleisz (b82c4f779) 
+
+	* Merge pull request #5020 from akallabeth/floatbar_fixes
+
+2018-12-10 14:31:38 +0100 Armin Novak (15011b478) 
+
+	* Fixed variable hiding by not redeclaring it in subscope.
+
+2018-12-10 14:02:57 +0100 Armin Novak (66e71ef96) 
+
+	* Added missing define for _wcsnlen for windows.
+
+2018-12-10 13:41:06 +0100 David Fort (9940c0002) 
+
+	* Merge pull request #5123 from akallabeth/rail_hash_function
+
+2018-12-10 12:23:13 +0000 Bernhard Miklautz (27ca916cf) 
+
+	* Merge pull request #5124 from akallabeth/cert_accept_fix
+
+2018-12-10 12:41:04 +0100 Armin Novak (d198f7308) 
+
+	* Fix #5121: Determine actual string length for input data
+
+2018-12-10 12:39:32 +0100 Armin Novak (1e644fc37) 
+
+	* Added _wcsnlen function for WCHAR string length.
+
+2018-12-10 12:03:55 +0100 Armin Novak (d2ac7acdd) 
+
+	* Fixed certificate accept
+
+2018-12-10 11:58:43 +0100 Martin Fleisz (97c5210db) 
+
+	* Merge pull request #5096 from akallabeth/dsp_channel_mix
+
+2018-12-10 11:16:43 +0100 Armin Novak (0d3192b9f) 
+
+	* Fixed rail window key hash function to work with UINT32
+
+2018-12-10 10:26:52 +0100 akallabeth (2927114e7) 
+
+	* Merge pull request #5117 from hardening/rail_hash
+
+2018-12-07 10:33:07 +0100 David Fort (88e361fa0) 
+
+	* rails: allow a window with id == 0
+
+2018-12-07 15:45:05 +0100 Armin Novak (9166df355) 
+
+	* Fixed windows floatbar title.
+
+2018-12-07 15:45:59 +0100 Martin Fleisz (fc12b9336) 
+
+	* Merge pull request #5109 from akallabeth/gw_logging
+
+2018-11-21 09:54:09 +0100 Armin Novak (4fd8987f5) 
+
+	* Unified windows client window title settings.
+
+2018-11-21 09:49:50 +0100 Armin Novak (594d10620) 
+
+	* Fixed #5040: Unified xfreerdp window title setting.
+
+2018-11-16 10:33:29 +0100 Armin Novak (6a9fa3dcb) 
+
+	* Refactored floatbar, extended command line settings.
+
+2016-06-22 14:58:39 -0400 Don Caton (68c34d5ab) 
+
+	* Windows client: Suppress minimize and restore buttons in float bar
+          when toggle-fullscreen is false, added window title to
+          float bar, improved overall appearance with gradients,
+          shadow and transparent icons.
+
+2016-06-14 14:15:08 -0400 Don Caton (352a65b49) 
+
+	* Updated .gitignore to exclude Visual Studio 2015 db files
+
+2018-11-15 17:58:00 +0100 Armin Novak (ac702e073) 
+
+	* Updated settings.h
+
+2018-11-15 17:53:28 +0100 Armin Novak (e7724cb8c) 
+
+	* Fixed a compiler warning for iterator type
+
+2018-11-15 17:35:52 +0100 Armin Novak (5343f6931) 
+
+	* Fixed monitor width and height checks.
+
+2018-11-15 14:42:31 +0100 Armin Novak (56156d217) 
+
+	* Floatbar self contained.
+
+2018-12-06 10:07:15 +0100 Armin Novak (aa12026ef) 
+
+	* Added additional gateway error logging.
+
+2018-12-07 13:03:46 +0000 Bernhard Miklautz (6c88c2173) 
+
+	* Merge pull request #5099 from akallabeth/floatbar_close_window
+
+2018-12-07 12:30:55 +0000 Bernhard Miklautz (62515cfd4) 
+
+	* Merge pull request #5118 from akallabeth/pem_warn_fix
+
+2018-12-07 12:36:18 +0100 Armin Novak (d05217454) 
+
+	* Fix #5115: Cast PEM data from BYTE* to char* to silence warnings.
+
+2018-12-07 11:30:58 +0100 David Fort (696fa22fb) 
+
+	* Merge pull request #5116 from akallabeth/drive_ts_fix
+
+2018-12-07 11:28:22 +0100 Martin Fleisz (d0688f058) 
+
+	* Merge pull request #5102 from akallabeth/rail_cleanups
+
+2018-12-07 10:59:52 +0100 Armin Novak (fdf9ca327) 
+
+	* Fixed #5113: The timestamps for FileFullDirectoryInformation were
+          inverted.
+
+2018-11-30 11:35:40 +0100 Armin Novak (ace9bfffd) 
+
+	* Moved to extended certificate verification API
+
+2018-11-29 18:35:20 +0100 Armin Novak (ec8cc65a1) 
+
+	* Fixed compile issue
+
+2018-11-29 18:13:31 +0100 Armin Novak (730b6f02c) 
+
+	* Fixed glitches with certificate dialog.
+
+2018-11-29 17:23:09 +0100 Armin Novak (ec34657ff) 
+
+	* Added certificate dialog.
+
+2018-11-29 16:29:07 +0100 Armin Novak (4dd6e7577) 
+
+	* Added client callbacks.
+
+2018-11-29 15:50:43 +0100 Armin Novak (e3c85eb3d) 
+
+	* removed strcpy
+
+2018-11-29 15:46:37 +0100 Armin Novak (c8938c357) 
+
+	* Updated mac build.
+
+2018-12-06 10:08:17 +0100 Martin Fleisz (8c7f8eb39) 
+
+	* Merge pull request #5085 from akallabeth/cert_callbacks_update
+
+2018-12-06 09:39:50 +0100 Armin Novak (0aaf14bed) 
+
+	* Fixe accidental removal of certificate_data_replace
+
+2018-12-05 16:27:05 +0100 Martin Fleisz (f678a91d6) 
+
+	* Merge pull request #5106 from hardening/wayland_seat7
+
+2018-12-05 15:21:00 +0100 David Fort (b9ceb1305) 
+
+	* uwac: handle wl_seat with version >= 7
+
+2018-12-05 15:20:11 +0100 David Fort (42c083eae) 
+
+	* script: add a usefull script to create code snippets from
+          specification blobs
+
+2018-12-05 11:24:51 +0100 akallabeth (5e0fef582) 
+
+	* Merge pull request #5104 from hardening/license_2k3
+
+2018-12-05 11:20:34 +0100 Martin Fleisz (7db6ac063) 
+
+	* Merge pull request #5036 from akallabeth/auth_fixes
+
+2018-12-05 11:19:53 +0100 Martin Fleisz (bb187d8ea) 
+
+	* Merge pull request #5103 from akallabeth/android_timezone
+
+2018-12-05 10:57:43 +0100 Martin Fleisz (30b31b7fb) 
+
+	* Merge pull request #5062 from
+          akallabeth/init_freerdp_image_copy_from_pointer_data
+
+2018-11-20 18:01:13 +0100 Armin Novak (e49adfc51) 
+
+	* Updated error info from spec.
+
+2018-11-20 17:27:47 +0100 Armin Novak (8110c391b) 
+
+	* Fixed requested protocol define names according to spec.
+
+2018-11-20 17:03:50 +0100 Armin Novak (b1d2a4767) 
+
+	* Fixed warnings in nego.
+
+2018-11-20 16:48:59 +0100 Armin Novak (82863a851) 
+
+	* Refactored NLA to be self contained.
+
+2018-11-20 16:40:42 +0100 Armin Novak (80d246283) 
+
+	* Hide redirection implementation details.
+
+2018-11-20 16:38:06 +0100 Armin Novak (5ca8eca18) 
+
+	* Made nego self contained.
+
+2018-12-05 10:50:47 +0100 David Fort (635b17d0a) 
+
+	* license: fix licencing against windows 2003 server
+
+2018-12-05 10:20:21 +0100 Armin Novak (3d487d071) 
+
+	* Fixed #5093: Try to read timezone from java TimeZone first
+
+2018-12-05 09:13:04 +0100 Armin Novak (f5e449a4f) 
+
+	* Cleaned up xf_rail_server_handshake
+
+2018-12-05 08:58:08 +0100 akallabeth (1b4ee6594) 
+
+	* Merge pull request #5100 from wintersandroid/master
+
+2018-12-04 22:42:25 +0100 David Fort (46ffa611c) 
+
+	* Merge pull request #5097 from hualet/master
+
+2018-12-05 07:56:05 +1300 Mathew Winters (bd7ff9b10) 
+
+	* Add jni interface for get_last_error_string
+
+2018-12-04 16:56:22 +0100 Armin Novak (0c13c3199) 
+
+	* Follow up to #4959: Lock gdi_UpdateSurfaces like xf_UpdateSurfaces
+
+2018-12-04 16:42:28 +0100 Armin Novak (d260d4e29) 
+
+	* Fixed #5098: Abort connection and let the application clean up
+          resources before exit.
+
+2018-12-04 16:40:44 +0100 Martin Fleisz (df6d045f4) 
+
+	* Merge pull request #5087 from hardening/remotefx_chunks
+
+2018-12-04 14:38:11 +0100 David Fort (a1c203322) 
+
+	* Merge pull request #5094 from akallabeth/suppress_output_setting
+
+2018-12-04 14:29:59 +0100 Martin Fleisz (5510f9304) 
+
+	* Merge pull request #4959 from akallabeth/gfx_lock_fix
+
+2018-12-04 20:28:32 +0800 Hualet Wang (e33efccf4) 
+
+	* Fixed RAIL window can't show again once hidden
+
+2018-12-04 11:38:02 +0100 Armin Novak (e46575671) 
+
+	* Fix #5019: Added channel up/downmixing code for mono/stereo.
+
+2018-11-30 11:37:23 +0100 David Fort (579a13b05) 
+
+	* remotefx: don't require data messages to come all in one chunk
+
+2018-12-04 10:31:01 +0100 Martin Fleisz (4108fc51a) 
+
+	* Merge pull request #5077 from akallabeth/win_client_fixes
+
+2018-11-30 11:41:51 +0100 Armin Novak (b27470405) 
+
+	* Duplicate PEM when accepted.
+
+2018-11-30 11:04:20 +0100 Armin Novak (e04c319d2) 
+
+	* Added new default certificate callbacks with extended information.
+
+2018-11-30 10:36:15 +0100 Armin Novak (a8823fdf9) 
+
+	* Cleaned up certificate verification code.
+
+2018-11-30 10:25:06 +0100 Armin Novak (7ab07ab98) 
+
+	* Added certificate callbacks with source indications.
+
+2018-11-30 09:55:10 +0100 Armin Novak (dd3276d66) 
+
+	* Prefer VerifyX509Certificate and fixed const arguments
+
+2018-12-03 16:15:51 +0100 Armin Novak (1398fa5b2) 
+
+	* Fixed missing NULL check for thread handle.
+
+2018-11-28 16:09:38 +0100 Armin Novak (0831c34fc) 
+
+	* Fix #4730: Add git revision, architecture and minimum os support to
+          file properties.
+
+2018-11-28 14:44:26 +0100 Armin Novak (c5512de26) 
+
+	* Fix #4999: Increase reference count
+
+2018-11-28 13:12:28 +0100 Armin Novak (53b018bfe) 
+
+	* Fix callback function return types.
+
+2018-11-28 13:12:04 +0100 Armin Novak (22be8f21a) 
+
+	* Fix length type, use size_t
+
+2018-11-29 18:42:32 +0000 Alessandro Muggianu (9b1c9da6a) 
+
+	* Make "suppress output" setting available on command line
+
+2018-12-04 08:23:14 +0000 Bernhard Miklautz (1e27c3d19) 
+
+	* Merge pull request #5091 from akallabeth/ios_compiles_again
+
+2018-12-03 17:23:55 +0100 Armin Novak (d27cd1b19) 
+
+	* Fixed unit tests, use uniqe file names
+
+2018-12-03 17:06:43 +0100 Armin Novak (6a75bc806) 
+
+	* Updated OpenSSL version for iOS
+
+2018-12-03 16:54:56 +0100 Armin Novak (4c3626340) 
+
+	* Set minimum deployment target to 10.0
+
+2018-12-03 14:45:16 +0100 Martin Fleisz (47066c25e) 
+
+	* Merge pull request #5082 from akallabeth/win_env_fix
+
+2018-11-29 16:24:28 +0100 David Fort (7ad24b606) 
+
+	* Merge pull request #5080 from akallabeth/scanbuild-ex-warn
+
+2018-11-29 13:44:21 +0100 Armin Novak (edd6d49f2) 
+
+	* Fix #4909: Do not initialize HOME environment variable as it is no
+          longer used.
+
+2018-11-29 13:22:23 +0100 David Fort (06e2651b4) 
+
+	* Merge pull request #5081 from akallabeth/kerberos_config_option
+
+2018-11-29 13:00:22 +0100 Armin Novak (b8b308af7) 
+
+	* Add WITH_GSSAPI config option, defaults to OFF
+
+2018-11-29 12:14:20 +0100 Armin Novak (aeeaba5bc) 
+
+	* Fixed a memory leak.
+
+2018-11-29 11:07:46 +0100 Armin Novak (d975fd045) 
+
+	* Fixed zero sized allocation.
+
+2018-11-29 11:06:41 +0100 Armin Novak (7ec9e942f) 
+
+	* Fixed zero sized allocation.
+
+2018-11-29 11:05:13 +0100 Armin Novak (16a761319) 
+
+	* Fixed zero sized allocation.
+
+2018-11-29 11:10:14 +0000 Bernhard Miklautz (1a33b3383) 
+
+	* Merge pull request #5070 from akallabeth/gw_fixes_redirection
+
+2018-10-23 11:52:06 +0200 Armin Novak (2e019b2fd) 
+
+	* Implemented GFX locking and enforce return value checks.
+
+2018-11-29 10:57:46 +0100 Armin Novak (c97d4eec6) 
+
+	* Fixed uninitialized value.
+
+2018-11-29 09:50:12 +0000 Bernhard Miklautz (62d982b62) 
+
+	* Merge pull request #5073 from akallabeth/trust_settings
+
+2018-11-29 10:02:28 +0100 David Fort (7478a938a) 
+
+	* Merge pull request #5074 from akallabeth/ycbcr_padding_fix
+
+2018-11-28 17:46:18 +0100 David Fort (e7a44bc43) 
+
+	* Merge pull request #5057 from
+          akallabeth/order_settings_init_generic
+
+2018-11-28 09:32:28 +0100 Armin Novak (f3e1ffb12) 
+
+	* Fix #4764: Second try, use X509_STORE_CTX_set_purpose
+
+2018-11-28 11:40:15 +0100 Armin Novak (81a0cd701) 
+
+	* Fixed clipboard channel cleanup.
+
+2018-11-28 11:05:45 +0100 Armin Novak (98bc4358e) 
+
+	* Fixed padding of general_yCbCrToRGB_16s8u_P3AC4R* functions.
+
+2018-11-26 14:11:29 +0100 Armin Novak (263cc7458) 
+
+	* Fixed buffer reset in fields_present_to_string
+
+2018-11-26 13:01:00 +0000 Bernhard Miklautz (657087e3a) 
+
+	* Merge pull request #5066 from akallabeth/ssl_verify_fix
+
+2018-11-26 11:10:59 +0000 Bernhard Miklautz (52d1b35a6) 
+
+	* Merge pull request #5046 from akallabeth/silence_wlog
+
+2018-11-26 11:03:42 +0000 Bernhard Miklautz (e06ed191a) 
+
+	* Merge pull request #5067 from akallabeth/gfx_log_fix
+
+2018-11-26 08:12:51 +0100 Armin Novak (77744200a) 
+
+	* Fix #4768: Set SSL verify purpose to ANY
+
+2018-11-26 10:57:20 +0000 Bernhard Miklautz (0b8010f8d) 
+
+	* Merge pull request #5065 from akallabeth/tcp_connect_multi_fix
+
+2018-11-26 11:33:23 +0100 Armin Novak (d06c3980a) 
+
+	* Fixed error log for avc420_decompress failures.
+
+2018-11-23 09:16:23 +0100 Armin Novak (0d8a1e108) 
+
+	* Fix #5061: Initialize output buffer transparent.
+
+2018-11-23 10:49:00 +0100 MartinHaimberger (8ae6b463e) 
+
+	* Merge pull request #5064 from akallabeth/rdg_length_check_fix
+
+2018-11-23 10:32:52 +0100 Armin Novak (5623a4761) 
+
+	* Fixed a possible NULL dereference.
+
+2018-11-22 16:54:42 +0100 Armin Novak (7d89ea22d) 
+
+	* Unified initialization of OrderSupport
+
+2018-11-23 10:03:56 +0100 Martin Fleisz (394bc6286) 
+
+	* Merge pull request #5035 from akallabeth/better_cmdline_format
+
+2018-11-23 09:48:08 +0100 Martin Fleisz (9684a06f8) 
+
+	* Merge pull request #5053 from akallabeth/sample_client_update
+
+2018-11-23 09:45:09 +0100 Armin Novak (391528f40) 
+
+	* Fixed a broken length check in rdg_process_packet
+
+2018-11-22 22:22:57 +0000 Bernhard Miklautz (4c4e5b887) 
+
+	* Merge pull request #5060 from akallabeth/small_fixes
+
+2018-11-22 19:10:05 +0100 akallabeth (effa8b856) 
+
+	* Fix #5049: Libressl declares OPENSSL_VERSION_NUMBER too high
+
+2018-11-22 19:08:25 +0100 akallabeth (d0d414dfa) 
+
+	* Fix #5059: Changed return type of peer_free to void.
+
+2018-11-22 17:53:00 +0100 David Fort (edcff62ff) 
+
+	* Merge pull request #5058 from akallabeth/wtsapi_warning_fix
+
+2018-11-22 17:28:31 +0100 Armin Novak (96fe23193) 
+
+	* Initialize WtsApi32_WtsApiFunctionTable NULL
+
+2018-11-22 16:28:30 +0100 Armin Novak (e6e87eb3b) 
+
+	* Unified strto[u]l in cmdline.c
+
+2018-11-20 14:11:10 +0100 Armin Novak (2f8737d97) 
+
+	* Improved formatting of terminal help messages.
+
+2018-11-22 15:50:52 +0100 David Fort (8d62ced6a) 
+
+	* Merge pull request #5056 from akallabeth/direct_fb_remove
+
+2018-11-22 15:10:58 +0100 Martin Fleisz (6c97d318e) 
+
+	* Merge pull request #5022 from akallabeth/gw_rdg_error_mapping
+
+2018-11-22 14:37:10 +0100 Armin Novak (fff22f027) 
+
+	* Removed DirectFB client as it is unmaintained
+
+2018-11-22 14:29:22 +0100 Armin Novak (3110b5f5c) 
+
+	* Simplified string empty check.
+
+2018-11-22 14:03:01 +0100 Martin Fleisz (3610ab0ac) 
+
+	* Merge pull request #5054 from akallabeth/spelling_fix
+
+2018-11-22 12:06:30 +0100 Armin Novak (a471fc593) 
+
+	* Spelling fix in log message.
+
+2018-11-22 11:47:58 +0100 Martin Fleisz (1331d0b77) 
+
+	* Merge pull request #4998 from akallabeth/assistance_v2
+
+2018-11-22 11:21:57 +0100 Armin Novak (7ba34962e) 
+
+	* Removed duplcate NULL checks.
+
+2018-11-22 11:19:12 +0100 Armin Novak (f79eeb744) 
+
+	* Fixed NULL access checks.
+
+2018-11-22 11:17:13 +0100 Armin Novak (f904d8463) 
+
+	* Fixed freerdp_assistance_parse_address_list
+
+2018-11-22 11:16:43 +0100 Armin Novak (3f655db3c) 
+
+	* Fixed test_msrsc_incident_file_type1 return checks.
+
+2018-11-21 15:03:30 +0100 Armin Novak (59e9abc73) 
+
+	* Fixed memory leak in reallocate.
+
+2018-11-12 13:40:40 +0100 Armin Novak (c8908c8be) 
+
+	* Updated windows shadow server assistance usage.
+
+2018-11-12 12:37:33 +0100 Armin Novak (8df39fdad) 
+
+	* Use blocking sockets in freerdp_tcp_connect_multi
+
+2018-11-12 11:16:24 +0100 Armin Novak (1ed436c8f) 
+
+	* Fixed socket cleanup in connect multi.
+
+2018-11-12 10:34:21 +0100 Armin Novak (a531930f3) 
+
+	* Disable NLA for remote assistance.
+
+2018-11-12 10:33:46 +0100 Armin Novak (6c02a1c7d) 
+
+	* Fixed version check for remote assistance channel.
+
+2018-11-12 09:19:38 +0100 Armin Novak (484ceaed3) 
+
+	* Fixed assistance unit test.
+
+2018-11-09 15:21:13 +0100 Armin Novak (4b3f4cc2f) 
+
+	* Fixed event check in freerdp_tcp_connect_multi
+
+2018-11-09 15:20:37 +0100 Armin Novak (e1555662d) 
+
+	* Set username from assistance file.
+
+2018-11-09 14:42:10 +0100 Armin Novak (35c1eac6e) 
+
+	* Unified address parsing for assistance files.
+
+2018-11-08 09:27:57 +0100 Armin Novak (6de2129a9) 
+
+	* assistance v2 support
+
+2018-11-22 10:45:12 +0100 Martin Fleisz (a1712a6c9) 
+
+	* Merge pull request #5051 from akallabeth/libressl_fix
+
+2018-11-22 10:22:40 +0100 Armin Novak (6ab3d3e8f) 
+
+	* Fix #5052: Updated client sample
+
+2018-11-22 09:23:46 +0100 Armin Novak (649f49fa6) 
+
+	* Fix #5049: LibreSSL does not have SSL_CTX_set_security_level
+
+2018-11-21 16:03:18 +0100 David Fort (5e7ac925f) 
+
+	* Merge pull request #5045 from akallabeth/license_double_free_fix
+
+2018-11-21 16:02:47 +0100 Martin Fleisz (947aa8003) 
+
+	* Merge pull request #5016 from akallabeth/windows_server_build_fix
+
+2018-11-21 15:36:31 +0100 Armin Novak (17bbe7a23) 
+
+	* Do not compile extended authentication debugging by default.
+
+2018-11-21 15:03:42 +0100 Armin Novak (feb993b94) 
+
+	* Fixed double free in license_free_binary_blob
+
+2018-11-21 15:06:58 +0100 MartinHaimberger (66733e9c3) 
+
+	* Merge pull request #5041 from akallabeth/compile_fix
+
+2018-11-21 14:32:07 +0100 Armin Novak (cdf1ee61f) 
+
+	* Proper field to string debug functions for each response in RDG
+
+2018-11-21 11:49:45 +0100 akallabeth (1cc739f10) 
+
+	* Merge pull request #5039 from mcsong/master
+
+2018-11-21 09:55:38 +0100 Armin Novak (a97bf2110) 
+
+	* Fixed broken DEBUG_RDP log message.
+
+2018-11-21 09:18:38 +0100 Armin Novak (d8d30a055) 
+
+	* Fix #5037: Fix calls to ntlm_print_av_pair_list
+
+2018-11-20 13:11:14 -0800 mcsong (34e8b9271) 
+
+	* Fixed recreate activity issue when a bluetooth device connected or
+          disconnected
+
+2018-11-20 12:57:07 -0800 mcsong (1d7fd201b) 
+
+	* Fixed recreate activity issue when a bluetooth device connected or
+          disconnected.
+
+2018-11-20 12:14:28 +0100 akallabeth (3cea4bfb5) 
+
+	* Merge pull request #5008 from wintersandroid/master
+
+2018-11-20 12:05:47 +0100 akallabeth (bfbe0cb3d) 
+
+	* Merge pull request #5033 from bmiklautz/dev5
+
+2018-11-20 11:49:34 +0100 Bernhard Miklautz (58091dc13) 
+
+	* new: development cycle dev5
+
 2018-11-20 11:43:51 +0100 akallabeth (e21b72c95) 
 
 	* Merge pull request #5032 from bmiklautz/rc4
@@ -98,6 +1471,10 @@
 
 	* Merge pull request #5025 from DustPuppyNet/openssl_1_1_1
 
+2018-11-19 08:27:36 +1300 Mathew Winters (eceb107dd) 
+
+	* Revert store password variable
+
 2018-11-18 14:09:37 +0000 Christian Gall (fffe4f077) 
 
 	* * remove obsolete SSLv23_client_method in tls_connect() * set min
@@ -111,6 +1488,14 @@
 
 	* call xf_SetWindowTitle before XMapWindow, so window manager can act
           on window name
+
+2018-11-16 15:48:10 +0100 Armin Novak (7839091f8) 
+
+	* Skip redirection resolve test if we're connecting via gateway.
+
+2018-11-16 15:41:19 +0100 Armin Novak (870b7025b) 
+
+	* Improved error mapping and tightened checks in rdg_process_packet
 
 2018-11-15 17:52:43 +0100 Armin Novak (d2e1248b0) 
 
@@ -153,6 +1538,14 @@
 
 	* Merge pull request #5012 from akallabeth/rail_app_icons
 
+2018-11-14 15:13:11 +0100 Armin Novak (26b83ea74) 
+
+	* Reenabled and fixed windows server compile.
+
+2018-11-14 14:59:58 +0100 Armin Novak (a2cd93418) 
+
+	* Fixed windows build warnings.
+
 2018-11-15 08:43:54 +0100 akallabeth (cf2c8ef6a) 
 
 	* Merge pull request #5015 from chipitsine/cleanup
@@ -164,6 +1557,10 @@
 2018-11-15 01:51:44 +0500 Ilya Shipitsin (be8f70998) 
 
 	* remove not needed check
+
+2018-11-15 08:29:51 +1300 Mathew Winters (0e88eb5a9) 
+
+	* Fixes as per merge request
 
 2018-11-14 13:45:31 +0100 akallabeth (268a2c0cf) 
 
@@ -276,6 +1673,10 @@
 
 	* Updated RDP_VERSION definitions.
 
+2018-11-14 15:25:38 +1300 Mathew Winters (f91a4d0b6) 
+
+	* Resolve thread not exiting when remote lost or disconnected.
+
 2018-11-13 14:39:39 +0100 akallabeth (ca6d1d591) 
 
 	* Merge pull request #5005 from bmiklautz/nightly_build
@@ -364,6 +1765,14 @@
 2018-10-24 10:59:54 +0200 Armin Novak (71036fe0b) 
 
 	* Fixed #2039: Check for overflow in calculations.
+
+2018-11-09 15:20:52 +1300 Mathew (2ff19597d) 
+
+	* fix scripts to build with ndk r15c, cache dependancies so we are
+          not hitting github often update android dependancies to
+          latest and compile. ./android-build-freerdp.sh --ndk
+          ~/Programming/android-ndk-r15c --relWithDebug --jpeg Still
+          an error compiling openh264
 
 2018-11-08 17:41:56 +0100 Armin Novak (cf8bc72dc) 
 

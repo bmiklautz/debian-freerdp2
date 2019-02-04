@@ -605,7 +605,12 @@ BOOL license_generate_hwid(rdpLicense* license)
 	}
 	else
 	{
+		wStream s;
 		const char *hostname = license->rdp->settings->ClientHostname;
+		Stream_StaticInit(&s, license->HardwareId, 4);
+		Stream_Write_UINT32(&s, PLATFORMID);
+		Stream_Free(&s, TRUE);
+
 		hashTarget = (const BYTE *)hostname;
 		targetLen = strlen(hostname);
 	}
@@ -689,13 +694,11 @@ static BOOL license_rc4_with_licenseKey(const rdpLicense* license, const BYTE *i
 	target->length = len;
 
 	if (!winpr_RC4_Update(rc4, len, input, buffer))
-		goto error_update;
+		goto error_buffer;
 
 	winpr_RC4_Free(rc4);
 	return TRUE;
 
-error_update:
-	free(buffer);
 error_buffer:
 	winpr_RC4_Free(rc4);
 	return FALSE;
@@ -1167,8 +1170,7 @@ static BOOL license_read_encrypted_blob(const rdpLicense *license, wStream *s, L
 	Stream_Read_UINT16(s, wBlobType);
 	if (wBlobType != BB_ENCRYPTED_DATA_BLOB)
 	{
-		WLog_ERR(TAG, "expecting BB_ENCRYPTED_DATA_BLOB blob");
-		return FALSE;
+		WLog_DBG(TAG, "expecting BB_ENCRYPTED_DATA_BLOB blob, probably a windows 2003 server, continuing...");
 	}
 
 	Stream_Read_UINT16(s, wBlobLen);
@@ -1396,11 +1398,17 @@ BOOL license_answer_license_request(rdpLicense* license)
 
 		license->EncryptedHardwareId->type = BB_ENCRYPTED_DATA_BLOB;
 		if (!license_encrypt_and_MAC(license, license->HardwareId, HWID_LENGTH, license->EncryptedHardwareId, signature))
+		{
+			free(license_data);
 			return FALSE;
+		}
 
 		calBlob = license_new_binary_blob(BB_DATA_BLOB);
 		if (!calBlob)
+		{
+			free(license_data);
 			return FALSE;
+		}
 		calBlob->data = license_data;
 		calBlob->length = license_size;
 
@@ -1548,8 +1556,9 @@ BOOL license_send_platform_challenge_response_packet(rdpLicense* license)
  * @param license license module
  */
 
-BOOL license_send_valid_client_error_packet(rdpLicense* license)
+BOOL license_send_valid_client_error_packet(rdpRdp* rdp)
 {
+	rdpLicense *license = rdp->license;
 	wStream* s = license_send_stream_init(license);
 	if (!s)
 		return FALSE;

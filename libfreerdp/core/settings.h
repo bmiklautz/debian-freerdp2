@@ -1,8 +1,9 @@
 /**
  * FreeRDP: A Remote Desktop Protocol Implementation
- * DirectFB Graphical Objects
+ * Internal settings header for functions not exported
  *
- * Copyright 2011 Marc-Andre Moreau <marcandre.moreau@gmail.com>
+ * Copyright 2018 Armin Novak <armin.novak@thincast.com>
+ * Copyright 2018 Thincast Technologies GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,11 +18,13 @@
  * limitations under the License.
  */
 
-#ifndef FREERDP_CLIENT_DF_GRAPHICS_H
-#define FREERDP_CLIENT_DF_GRAPHICS_H
+#ifndef FREERDP_LIB_CORE_SETTINGS_H
+#define FREERDP_LIB_CORE_SETTINGS_H
 
-#include "dfreerdp.h"
+#include <freerdp/types.h>
+#include <freerdp/settings.h>
+#include <freerdp/api.h>
 
-void df_register_graphics(rdpGraphics* graphics);
+FREERDP_LOCAL BOOL freerdp_settings_set_default_order_support(rdpSettings* settings);
 
-#endif /* FREERDP_CLIENT_DF_GRAPHICS_H */
+#endif /* FREERDP_LIB_CORE_SETTINGS_H */

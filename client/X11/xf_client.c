@@ -501,6 +501,37 @@ static BOOL xf_process_x_events(freerdp* instance)
 	return status;
 }
 
+static char* xf_window_get_title(rdpSettings* settings)
+{
+	BOOL port;
+	char* windowTitle;
+	size_t size;
+	char* name;
+	const char* prefix = "FreeRDP:";
+
+	if (!settings)
+		return NULL;
+
+	name = settings->ServerHostname;
+
+	if (settings->WindowTitle)
+		return _strdup(settings->WindowTitle);
+
+	port = (settings->ServerPort != 3389);
+	size = strlen(name) + 16;
+	windowTitle = calloc(size, sizeof(char));
+
+	if (!windowTitle)
+		return NULL;
+
+	if (!port)
+		sprintf_s(windowTitle, size, "%s %s", prefix, name);
+	else
+		sprintf_s(windowTitle, size, "%s %s:%i", prefix, name, settings->ServerPort);
+
+	return windowTitle;
+}
+
 BOOL xf_create_window(xfContext* xfc)
 {
 	XGCValues gcv;
@@ -532,37 +563,10 @@ BOOL xf_create_window(xfContext* xfc)
 		xfc->offset_x = 0;
 		xfc->offset_y = 0;
 #endif
+		windowTitle = xf_window_get_title(settings);
 
-		if (settings->WindowTitle)
-		{
-			windowTitle = _strdup(settings->WindowTitle);
-
-			if (!windowTitle)
-				return FALSE;
-		}
-		else if (settings->ServerPort == 3389)
-		{
-			size_t size = 1 + sizeof("FreeRDP: ") + strlen(
-			                  settings->ServerHostname);
-			windowTitle = malloc(size);
-
-			if (!windowTitle)
-				return FALSE;
-
-			sprintf_s(windowTitle, size, "FreeRDP: %s", settings->ServerHostname);
-		}
-		else
-		{
-			size_t size = 1 + sizeof("FreeRDP: ") + strlen(settings->ServerHostname)
-			              + sizeof(":00000");
-			windowTitle = malloc(size);
-
-			if (!windowTitle)
-				return FALSE;
-
-			sprintf_s(windowTitle, size, "FreeRDP: %s:%i", settings->ServerHostname,
-			          settings->ServerPort);
-		}
+		if (!windowTitle)
+			return FALSE;
 
 #ifdef WITH_XRENDER
 
@@ -1032,26 +1036,55 @@ static void xf_get_x11_button_map(xfContext* xfc, unsigned char* x11_map)
 
 /* Assignment of physical (not logical) mouse buttons to wire flags. */
 /* Notice that the middle button is 2 in X11, but 3 in RDP.          */
-static const int xf_button_flags[NUM_BUTTONS_MAPPED] =
+static const button_map xf_button_flags[NUM_BUTTONS_MAPPED] =
 {
-	PTR_FLAGS_BUTTON1,
-	PTR_FLAGS_BUTTON3,
-	PTR_FLAGS_BUTTON2
+	{Button1, PTR_FLAGS_BUTTON1},
+	{Button2, PTR_FLAGS_BUTTON3},
+	{Button3, PTR_FLAGS_BUTTON2},
+	{Button4, PTR_FLAGS_WHEEL | 0x78},
+	{Button5, PTR_FLAGS_WHEEL | PTR_FLAGS_WHEEL_NEGATIVE | 0x78},
+	{6, PTR_FLAGS_HWHEEL | PTR_FLAGS_WHEEL_NEGATIVE | 0x78},
+	{7, PTR_FLAGS_HWHEEL | 0x78},
+	{8, PTR_XFLAGS_BUTTON1},
+	{9, PTR_XFLAGS_BUTTON2},
+	{97, PTR_XFLAGS_BUTTON1},
+	{112, PTR_XFLAGS_BUTTON2}
 };
+
+static UINT16 get_flags_for_button(int button)
+{
+	size_t x;
+
+	for (x = 0; x < ARRAYSIZE(xf_button_flags); x++)
+	{
+		const button_map* map = &xf_button_flags[x];
+
+		if (map->button == button)
+			return map->flags;
+	}
+
+	return 0;
+}
 
 static void xf_button_map_init(xfContext* xfc)
 {
+	size_t pos = 0;
 	/* loop counter for array initialization */
-	int physical;
-	int logical;
+	size_t physical;
 	/* logical mouse button which is used for each physical mouse  */
 	/* button (indexed from zero). This is the default map.        */
-	unsigned char x11_map[NUM_BUTTONS_MAPPED] =
-	{
-		Button1,
-		Button2,
-		Button3
-	};
+	unsigned char x11_map[112] = { 0 };
+	x11_map[0] = Button1;
+	x11_map[1] = Button2;
+	x11_map[2] = Button3;
+	x11_map[3] = Button4;
+	x11_map[4] = Button5;
+	x11_map[5] = 6;
+	x11_map[6] = 7;
+	x11_map[7] = 8;
+	x11_map[8] = 9;
+	x11_map[96] = 97;
+	x11_map[111] = 112;
 
 	/* query system for actual remapping */
 	if (!xfc->context.settings->UnmapButtons)
@@ -1062,18 +1095,23 @@ static void xf_button_map_init(xfContext* xfc)
 	/* iterate over all (mapped) physical buttons; for each of them */
 	/* find the logical button in X11, and assign to this the       */
 	/* appropriate value to send over the RDP wire.                 */
-	for (physical = 0; physical < NUM_BUTTONS_MAPPED; ++physical)
+	for (physical = 0; physical < ARRAYSIZE(x11_map); ++physical)
 	{
-		logical = x11_map[physical];
+		const unsigned char logical = x11_map[physical];
+		const UINT16 flags = get_flags_for_button(logical);
 
-		if (Button1 <= logical && logical <= Button3)
+		if ((logical != 0) && (flags != 0))
 		{
-			xfc->button_map[logical - BUTTON_BASE] = xf_button_flags[physical];
-		}
-		else
-		{
-			WLog_ERR(TAG, "Mouse physical button %d is mapped to logical button %d",
-			         physical, logical);
+			if (pos >= NUM_BUTTONS_MAPPED)
+			{
+				WLog_ERR(TAG, "Failed to map mouse button to RDP button, no space");
+			}
+			else
+			{
+				button_map* map = &xfc->button_map[pos++];
+				map->button = physical + Button1;
+				map->flags = get_flags_for_button(logical);
+			}
 		}
 	}
 }
@@ -1100,31 +1138,6 @@ static BOOL xf_pre_connect(freerdp* instance)
 	channels = context->channels;
 	settings->OsMajorType = OSMAJORTYPE_UNIX;
 	settings->OsMinorType = OSMINORTYPE_NATIVE_XSERVER;
-	ZeroMemory(settings->OrderSupport, 32);
-	settings->OrderSupport[NEG_DSTBLT_INDEX] = TRUE;
-	settings->OrderSupport[NEG_PATBLT_INDEX] = TRUE;
-	settings->OrderSupport[NEG_SCRBLT_INDEX] = TRUE;
-	settings->OrderSupport[NEG_OPAQUE_RECT_INDEX] = TRUE;
-	settings->OrderSupport[NEG_DRAWNINEGRID_INDEX] = FALSE;
-	settings->OrderSupport[NEG_MULTIDSTBLT_INDEX] = FALSE;
-	settings->OrderSupport[NEG_MULTIPATBLT_INDEX] = FALSE;
-	settings->OrderSupport[NEG_MULTISCRBLT_INDEX] = FALSE;
-	settings->OrderSupport[NEG_MULTIOPAQUERECT_INDEX] = TRUE;
-	settings->OrderSupport[NEG_MULTI_DRAWNINEGRID_INDEX] = FALSE;
-	settings->OrderSupport[NEG_LINETO_INDEX] = TRUE;
-	settings->OrderSupport[NEG_POLYLINE_INDEX] = TRUE;
-	settings->OrderSupport[NEG_MEMBLT_INDEX] = settings->BitmapCacheEnabled;
-	settings->OrderSupport[NEG_MEM3BLT_INDEX] = settings->BitmapCacheEnabled;
-	settings->OrderSupport[NEG_MEMBLT_V2_INDEX] = settings->BitmapCacheEnabled;
-	settings->OrderSupport[NEG_MEM3BLT_V2_INDEX] = settings->BitmapCacheEnabled;
-	settings->OrderSupport[NEG_SAVEBITMAP_INDEX] = FALSE;
-	settings->OrderSupport[NEG_GLYPH_INDEX_INDEX] = settings->GlyphSupportLevel != GLYPH_SUPPORT_NONE;
-	settings->OrderSupport[NEG_FAST_INDEX_INDEX] = settings->GlyphSupportLevel != GLYPH_SUPPORT_NONE;
-	settings->OrderSupport[NEG_FAST_GLYPH_INDEX] = settings->GlyphSupportLevel != GLYPH_SUPPORT_NONE;
-	settings->OrderSupport[NEG_POLYGON_SC_INDEX] = FALSE;
-	settings->OrderSupport[NEG_POLYGON_CB_INDEX] = FALSE;
-	settings->OrderSupport[NEG_ELLIPSE_SC_INDEX] = FALSE;
-	settings->OrderSupport[NEG_ELLIPSE_CB_INDEX] = FALSE;
 	PubSub_SubscribeChannelConnected(instance->context->pubSub,
 	                                 xf_OnChannelConnectedEventHandler);
 	PubSub_SubscribeChannelDisconnected(instance->context->pubSub,
@@ -1189,7 +1202,6 @@ static BOOL xf_pre_connect(freerdp* instance)
 	xfc->decorations = settings->Decorations;
 	xfc->grab_keyboard = settings->GrabKeyboard;
 	xfc->fullscreen_toggle = settings->ToggleFullscreen;
-	xfc->floatbar = settings->Floatbar;
 	xf_button_map_init(xfc);
 	return TRUE;
 }
@@ -1571,8 +1583,8 @@ static DWORD WINAPI xf_client_thread(LPVOID param)
 			nCount += tmp;
 		}
 
-		if (xfc->floatbar && xfc->fullscreen && !xfc->remote_app)
-			xf_floatbar_hide_and_show(xfc);
+		if (xfc->window)
+			xf_floatbar_hide_and_show(xfc->window->floatbar);
 
 		waitStatus = WaitForMultipleObjects(nCount, handles, FALSE, INFINITE);
 
@@ -1788,8 +1800,8 @@ static BOOL xfreerdp_client_new(freerdp* instance, rdpContext* context)
 	instance->PostDisconnect = xf_post_disconnect;
 	instance->Authenticate = client_cli_authenticate;
 	instance->GatewayAuthenticate = client_cli_gw_authenticate;
-	instance->VerifyCertificate = client_cli_verify_certificate;
-	instance->VerifyChangedCertificate = client_cli_verify_changed_certificate;
+	instance->VerifyCertificateEx = client_cli_verify_certificate_ex;
+	instance->VerifyChangedCertificateEx = client_cli_verify_changed_certificate_ex;
 	instance->LogonErrorInfo = xf_logon_error_info;
 	PubSub_SubscribeTerminate(context->pubSub,
 	                          xf_TerminateEventHandler);
@@ -1884,7 +1896,7 @@ static BOOL xfreerdp_client_new(freerdp* instance, rdpContext* context)
 	xfc->_NET_WM_WINDOW_TYPE_POPUP = XInternAtom(xfc->display,
 	                                 "_NET_WM_WINDOW_TYPE_POPUP", False);
 	xfc->_NET_WM_WINDOW_TYPE_POPUP_MENU = XInternAtom(xfc->display,
-	                                 "_NET_WM_WINDOW_TYPE_POPUP_MENU", False);
+	                                      "_NET_WM_WINDOW_TYPE_POPUP_MENU", False);
 	xfc->_NET_WM_WINDOW_TYPE_UTILITY = XInternAtom(xfc->display,
 	                                   "_NET_WM_WINDOW_TYPE_UTILITY", False);
 	xfc->_NET_WM_WINDOW_TYPE_DROPDOWN_MENU = XInternAtom(xfc->display,

@@ -765,6 +765,10 @@ static BOOL rdp_recv_server_status_info_pdu(rdpRdp* rdp, wStream* s)
 		return FALSE;
 
 	Stream_Read_UINT32(s, statusCode); /* statusCode (4 bytes) */
+
+	if (rdp->update->ServerStatusInfo)
+		return rdp->update->ServerStatusInfo(rdp->context, statusCode);
+
 	return TRUE;
 }
 
@@ -1388,7 +1392,7 @@ int rdp_recv_callback(rdpTransport* transport, wStream* s, void* extra)
 	switch (rdp->state)
 	{
 		case CONNECTION_STATE_NLA:
-			if (rdp->nla->state < NLA_STATE_AUTH_INFO)
+			if (nla_get_state(rdp->nla) < NLA_STATE_AUTH_INFO)
 			{
 				if (nla_recv_pdu(rdp->nla, s) < 1)
 				{
@@ -1396,37 +1400,45 @@ int rdp_recv_callback(rdpTransport* transport, wStream* s, void* extra)
 					return -1;
 				}
 			}
-			else if (rdp->nla->state == NLA_STATE_POST_NEGO)
+			else if (nla_get_state(rdp->nla) == NLA_STATE_POST_NEGO)
 			{
 				nego_recv(rdp->transport, s, (void*) rdp->nego);
 
-				if (rdp->nego->state != NEGO_STATE_FINAL)
+				if (nego_get_state(rdp->nego) != NEGO_STATE_FINAL)
 				{
 					WLog_ERR(TAG, "rdp_recv_callback: CONNECTION_STATE_NLA - nego_recv() fail");
 					return -1;
 				}
 
-				rdp->nla->state = NLA_STATE_FINAL;
+				if (!nla_set_state(rdp->nla, NLA_STATE_FINAL))
+					return -1;
 			}
 
-			if (rdp->nla->state == NLA_STATE_AUTH_INFO)
+			if (nla_get_state(rdp->nla) == NLA_STATE_AUTH_INFO)
 			{
 				transport_set_nla_mode(rdp->transport, FALSE);
 
 				if (rdp->settings->VmConnectMode)
 				{
-					rdp->nego->state = NEGO_STATE_NLA;
-					rdp->nego->RequestedProtocols = PROTOCOL_NLA | PROTOCOL_TLS;
+					if (!nego_set_state(rdp->nego, NEGO_STATE_NLA))
+						return -1;
+
+					if (!nego_set_requested_protocols(rdp->nego, PROTOCOL_HYBRID | PROTOCOL_SSL))
+						return -1;
+
 					nego_send_negotiation_request(rdp->nego);
-					rdp->nla->state = NLA_STATE_POST_NEGO;
+
+					if (!nla_set_state(rdp->nla, NLA_STATE_POST_NEGO))
+						return -1;
 				}
 				else
 				{
-					rdp->nla->state = NLA_STATE_FINAL;
+					if (!nla_set_state(rdp->nla, NLA_STATE_FINAL))
+						return -1;
 				}
 			}
 
-			if (rdp->nla->state == NLA_STATE_FINAL)
+			if (nla_get_state(rdp->nla) == NLA_STATE_FINAL)
 			{
 				nla_free(rdp->nla);
 				rdp->nla = NULL;

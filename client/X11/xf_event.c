@@ -213,7 +213,7 @@ static BOOL xf_event_execute_action_script(xfContext* xfc, XEvent* event)
 	char buffer[1024] = { 0 };
 	char command[1024] = { 0 };
 
-	if (!xfc->actionScriptExists || !xfc->xevents)
+	if (!xfc->actionScriptExists || !xfc->xevents || !xfc->window)
 		return FALSE;
 
 	if (event->type > LASTEvent)
@@ -367,79 +367,58 @@ static BOOL xf_event_MotionNotify(xfContext* xfc, XEvent* event, BOOL app)
 	if (xfc->use_xinput)
 		return TRUE;
 
-	if(xfc->floatbar && !(app))
-		xf_floatbar_set_root_y(xfc, event->xmotion.y);
+	if (xfc->window)
+		xf_floatbar_set_root_y(xfc->window->floatbar, event->xmotion.y);
 
 	return xf_generic_MotionNotify(xfc, event->xmotion.x, event->xmotion.y,
 	                               event->xmotion.state, event->xmotion.window, app);
 }
-BOOL xf_generic_ButtonPress(xfContext* xfc, int x, int y, int button,
-                            Window window, BOOL app)
+
+BOOL xf_generic_ButtonEvent(xfContext* xfc, int x, int y, int button,
+                            Window window, BOOL app, BOOL down)
 {
-	int flags;
-	BOOL wheel;
-	BOOL extended;
+	UINT16 flags = 0;
 	rdpInput* input;
 	Window childWindow;
-	wheel = FALSE;
-	extended = FALSE;
-	input = xfc->context.input;
+	size_t i;
 
-	switch (button)
+	for (i = 0; i < ARRAYSIZE(xfc->button_map); i++)
 	{
-		case Button1:
-		case Button2:
-		case Button3:
-			flags = PTR_FLAGS_DOWN | xfc->button_map[button - BUTTON_BASE];
-			break;
+		const button_map* cur = &xfc->button_map[i];
 
-		case 4:
-			wheel = TRUE;
-			flags = PTR_FLAGS_WHEEL | 0x0078;
+		if (cur->button == button)
+		{
+			flags = cur->flags;
 			break;
-
-		case 5:
-			wheel = TRUE;
-			flags = PTR_FLAGS_WHEEL | PTR_FLAGS_WHEEL_NEGATIVE | 0x0078;
-			break;
-
-		case 8:		/* back */
-		case 97:	/* Xming */
-			extended = TRUE;
-			flags = PTR_XFLAGS_DOWN | PTR_XFLAGS_BUTTON1;
-			break;
-
-		case 9:		/* forward */
-		case 112:	/* Xming */
-			extended = TRUE;
-			flags = PTR_XFLAGS_DOWN | PTR_XFLAGS_BUTTON2;
-			break;
-
-		case 6:		/* wheel left */
-			wheel = TRUE;
-			flags = PTR_FLAGS_HWHEEL | PTR_FLAGS_WHEEL_NEGATIVE | 0x0078;
-			break;
-
-		case 7:		/* wheel right */
-			wheel = TRUE;
-			flags = PTR_FLAGS_HWHEEL | 0x0078;
-			break;
-
-		default:
-			x = 0;
-			y = 0;
-			flags = 0;
-			break;
+		}
 	}
+
+	input = xfc->context.input;
 
 	if (flags != 0)
 	{
-		if (wheel)
+		if (flags & (PTR_FLAGS_WHEEL | PTR_FLAGS_HWHEEL))
 		{
-			freerdp_input_send_mouse_event(input, flags, 0, 0);
+			if (down)
+				freerdp_input_send_mouse_event(input, flags, 0, 0);
 		}
 		else
 		{
+			BOOL extended = FALSE;
+
+			if (flags & (PTR_XFLAGS_BUTTON1 | PTR_XFLAGS_BUTTON2))
+			{
+				extended = TRUE;
+
+				if (down)
+					flags |= PTR_XFLAGS_DOWN;
+			}
+			else if (flags & (PTR_FLAGS_BUTTON1 | PTR_FLAGS_BUTTON2 | PTR_FLAGS_BUTTON3))
+			{
+				if (down)
+					flags |= PTR_FLAGS_DOWN;
+			}
+
 			if (app)
 			{
 				/* make sure window exists */
@@ -468,80 +447,17 @@ static BOOL xf_event_ButtonPress(xfContext* xfc, XEvent* event, BOOL app)
 	if (xfc->use_xinput)
 		return TRUE;
 
-	return xf_generic_ButtonPress(xfc, event->xbutton.x, event->xbutton.y,
-	                              event->xbutton.button, event->xbutton.window, app);
+	return xf_generic_ButtonEvent(xfc, event->xbutton.x, event->xbutton.y,
+	                              event->xbutton.button, event->xbutton.window, app, TRUE);
 }
-BOOL xf_generic_ButtonRelease(xfContext* xfc, int x, int y, int button,
-                              Window window, BOOL app)
-{
-	int flags = 0;
-	BOOL extended = FALSE;
-	rdpInput* input;
-	Window childWindow;
 
-	if (!xfc || !xfc->context.input)
-		return FALSE;
-
-	input = xfc->context.input;
-
-	switch (button)
-	{
-		case Button1:
-		case Button2:
-		case Button3:
-			flags = xfc->button_map[button - BUTTON_BASE];
-			break;
-
-		case 6:
-		case 8:
-		case 97:
-			extended = TRUE;
-			flags = PTR_XFLAGS_BUTTON1;
-			break;
-
-		case 7:
-		case 9:
-		case 112:
-			extended = TRUE;
-			flags = PTR_XFLAGS_BUTTON2;
-			break;
-
-		default:
-			flags = 0;
-			break;
-	}
-
-	if (flags != 0)
-	{
-		if (app)
-		{
-			/* make sure window exists */
-			if (!xf_AppWindowFromX11Window(xfc, window))
-				return TRUE;
-
-			/* Translate to desktop coordinates */
-			XTranslateCoordinates(xfc->display, window,
-			                      RootWindowOfScreen(xfc->screen),
-			                      x, y, &x, &y, &childWindow);
-		}
-
-		xf_event_adjust_coordinates(xfc, &x, &y);
-
-		if (extended)
-			freerdp_input_send_extended_mouse_event(input, flags, x, y);
-		else
-			freerdp_input_send_mouse_event(input, flags, x, y);
-	}
-
-	return TRUE;
-}
 static BOOL xf_event_ButtonRelease(xfContext* xfc, XEvent* event, BOOL app)
 {
 	if (xfc->use_xinput)
 		return TRUE;
 
-	return xf_generic_ButtonRelease(xfc, event->xbutton.x, event->xbutton.y,
-	                                event->xbutton.button, event->xbutton.window, app);
+	return xf_generic_ButtonEvent(xfc, event->xbutton.x, event->xbutton.y,
+	                              event->xbutton.button, event->xbutton.window, app, FALSE);
 }
 static BOOL xf_event_KeyPress(xfContext* xfc, XEvent* event, BOOL app)
 {
@@ -561,6 +477,9 @@ static BOOL xf_event_KeyRelease(xfContext* xfc, XEvent* event, BOOL app)
 }
 static BOOL xf_event_FocusIn(xfContext* xfc, XEvent* event, BOOL app)
 {
+	if (!xfc->window)
+		return FALSE;
+
 	if (event->xfocus.mode == NotifyGrab)
 		return TRUE;
 
@@ -644,6 +563,9 @@ static BOOL xf_event_ClientMessage(xfContext* xfc, XEvent* event, BOOL app)
 }
 static BOOL xf_event_EnterNotify(xfContext* xfc, XEvent* event, BOOL app)
 {
+	if (!xfc->window)
+		return FALSE;
+
 	if (!app)
 	{
 		xfc->mouse_active = TRUE;
@@ -685,7 +607,12 @@ static BOOL xf_event_ConfigureNotify(xfContext* xfc, XEvent* event, BOOL app)
 {
 	Window childWindow;
 	xfAppWindow* appWindow;
-	rdpSettings* settings = xfc->context.settings;
+	rdpSettings* settings;
+	
+	if (!xfc->window)
+		return FALSE;
+
+	settings = xfc->context.settings;
 
 	if (!app)
 	{
@@ -900,7 +827,7 @@ static BOOL xf_event_PropertyNotify(xfContext* xfc, XEvent* event, BOOL app)
 				xf_rail_send_client_system_command(xfc, appWindow->windowId, SC_MINIMIZE);
 			}
 			else if (!minimized && !maxVert && !maxHorz
-			         && (appWindow->rail_state != WINDOW_SHOW))
+			         && (appWindow->rail_state != WINDOW_SHOW) && (appWindow->rail_state != WINDOW_HIDE))
 			{
 				appWindow->rail_state = WINDOW_SHOW;
 				xf_rail_send_client_system_command(xfc, appWindow->windowId, SC_RESTORE);
@@ -1018,10 +945,13 @@ BOOL xf_event_process(freerdp* instance, XEvent* event)
 		}
 	}
 
-	if (xfc->floatbar && xf_floatbar_check_event(xfc, event))
+	if (xfc->window)
 	{
-		xf_floatbar_event_process(xfc, event);
-		return TRUE;
+		if (xf_floatbar_check_event(xfc->window->floatbar, event))
+		{
+			xf_floatbar_event_process(xfc->window->floatbar, event);
+			return TRUE;
+		}
 	}
 
 	xf_event_execute_action_script(xfc, event);

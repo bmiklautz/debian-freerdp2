@@ -682,6 +682,7 @@ typedef struct _RDPDR_PARALLEL RDPDR_PARALLEL;
 #define FreeRDP_PrivateKeyContent                                  (1417)
 #define FreeRDP_RdpKeyContent                                      (1418)
 #define FreeRDP_AutoAcceptCertificate                              (1419)
+#define FreeRDP_AutoDenyCertificate                                (1420)
 #define FreeRDP_Workarea                                           (1536)
 #define FreeRDP_Fullscreen                                         (1537)
 #define FreeRDP_PercentScreen                                      (1538)
@@ -709,6 +710,7 @@ typedef struct _RDPDR_PARALLEL RDPDR_PARALLEL;
 #define FreeRDP_AuthenticationOnly                                 (1603)
 #define FreeRDP_CredentialsFromStdin                               (1604)
 #define FreeRDP_UnmapButtons                                       (1605)
+#define FreeRDP_OldLicenseBehaviour                                (1606)
 #define FreeRDP_ComputerName                                       (1664)
 #define FreeRDP_ConnectionFile                                     (1728)
 #define FreeRDP_AssistanceFile                                     (1729)
@@ -1135,7 +1137,8 @@ struct rdp_settings
 	ALIGN64 char*           PrivateKeyContent;             /* 1417 */
 	ALIGN64 char*           RdpKeyContent;                 /* 1418 */
 	ALIGN64 BOOL            AutoAcceptCertificate;         /* 1419 */
-	UINT64 padding1472[1472 - 1420]; /* 1420 */
+	ALIGN64 BOOL            AutoDenyCertificate;           /* 1420 */
+	UINT64 padding1472[1472 - 1421]; /* 1421 */
 	UINT64 padding1536[1536 - 1472]; /* 1472 */
 
 	/**
@@ -1518,7 +1521,7 @@ struct rdp_settings
 	ALIGN64 BYTE*
 	SettingsModified;  /* byte array marking fields that have been modified from their default value */
 	ALIGN64 char* ActionScript;
-	ALIGN64 BOOL   Floatbar;
+	ALIGN64 DWORD  Floatbar;
 
 };
 typedef struct rdp_settings rdpSettings;
