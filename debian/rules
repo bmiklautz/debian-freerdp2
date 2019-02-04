@@ -77,7 +77,10 @@ override_dh_auto_configure:
 override_dh_install:
 	rm -rf debian/tmp/usr/lib/$(DEB_HOST_MULTIARCH)/*.a
 	mkdir -p debian/tmp/usr/lib/$(DEB_HOST_MULTIARCH)/freerdp/
-	dh_install --fail-missing
+	dh_install
+
+override_dh_missing:
+	dh_missing --fail-missing
 
 override_dh_strip:
 	dh_strip -plibfreerdp2-2 --dbgsym-migration='libfreerdp2-dbg (<< 2.0.0~git20161130.1.e60d0d5+dfsg1-1~exp1~)'
