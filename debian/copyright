@@ -21,12 +21,6 @@ Files: channels/client/addin.h
  channels/rdpei/client/rdpei_main.h
  channels/rdpgfx/client/rdpgfx_main.h
  channels/remdesk/server/remdesk_main.h
- client/DirectFB/df_event.c
- client/DirectFB/df_event.h
- client/DirectFB/df_graphics.c
- client/DirectFB/df_graphics.h
- client/DirectFB/dfreerdp.c
- client/DirectFB/dfreerdp.h
  client/Wayland/wlf_channels.c
  client/Wayland/wlf_channels.h
  client/X11/xf_channels.c
@@ -477,8 +471,7 @@ Copyright: 2009, Marc-Andre Moreau <marcandre.moreau@gmail.com>
   2015, Marc-Andre Moreau <marcandre.moreau@gmail.com>
 License: Apache-2.0
 
-Files: client/Sample/freerdp.c
- client/X11/xf_gdi.h
+Files: client/X11/xf_gdi.h
  client/X11/xf_gfx.c
  client/X11/xf_gfx.h
  client/X11/xf_graphics.c
@@ -1572,18 +1565,6 @@ Files: include/freerdp/client/sshagent.h
 Copyright: 2017, Ben Cohen
 License: Apache-2.0
 
-Files: channels/sshagent/client/sshagent_main.h
-Copyright: 2013, Christian Hofstaedtler
-  2017, Ben Cohen
-License: Apache-2.0
-
-Files: channels/sshagent/client/sshagent_main.c
-Copyright: 2013, Christian Hofstaedtler
-  2015, DI (FH) Martin Haimberger <martin.haimberger@thincast.com>
-  2015, Thincast Technologies GmbH
-  2017, Ben Cohen
-License: Apache-2.0
-
 Files: winpr/libwinpr/file/file.c
 Copyright: 2015, Bernhard Miklautz <bernhard.miklautz@thincast.com>
   2015, Thincast Technologies GmbH
@@ -1885,12 +1866,6 @@ Copyright: 2011, Samsung, Author Jiten Pathy
   2012, Vic Lee
 License: Apache-2.0
 
-Files: channels/sshagent/server/sshagent_main.c
-Copyright: 2012-2013, Jay Sorg
-  2012-2013, Laxmikant Rashinkar
-  2017, Ben Cohen
-License: Apache-2.0 and BSD-2-clause
-
 Files: libfreerdp/codec/progressive.h
 Copyright: 2017, Armin Novak <anovak@thincast.com>
   2017, Thincast Technologies GmbH
@@ -1969,12 +1944,6 @@ License: Apache-2.0
 Files: cmake/FindDevD.cmake
 Copyright: 2015, Rozhuk Ivan <rozhuk.im@gmail.com>
 License: BSD-3-clause
-
-Files: cmake/FindDirectFB.cmake
-Copyright: 2011 O.S. Systems Software Ltda.
-  2011, Otavio Salvador <otavio@ossystems.com.br>
-	2011, Marc-Andre Moreau <marcandre.moreau@gmail.com>
-License: Apache-2.0
 
 Files: cmake/FindDocBookXSL.cmake
 Copyright: 2010, Luigi Toscano, <luigi.toscano@tiscali.it>
@@ -2084,18 +2053,6 @@ Files: uwac/protocols/ivi-application.xml
 Copyright: 2013, DENSO CORPORATION
  2013, BMW Car IT GmbH
 License: Expat
-
-Files: uwac/protocols/fullscreen-shell.xml
-Copyright: 2008-2013, Kristian Høgsberg
- 2010-2013, Intel Corporation
- 2013, Rafael Antognolli
- 2013, Jasper St. Pierre
- 2014, Jonas Ådahl
- 2014, Jason Ekstrand
- 2014-2015, Collabora, Ltd.
- 2015, Red Hat Inc.
-License: Expat
-Comment: Copyright from wayland-protocols COPYING file
 
 Files: cmake/compat_2.8.11/CMakePackageConfigHelpers.cmake
 Copyright: 2012, Alexander Neundorf <neundorf@kde.org>
