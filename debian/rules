@@ -82,20 +82,6 @@ override_dh_install:
 override_dh_missing:
 	dh_missing --fail-missing
 
-override_dh_strip:
-	dh_strip -plibfreerdp2-2 --dbgsym-migration='libfreerdp2-dbg (<< 2.0.0~git20161130.1.e60d0d5+dfsg1-1~exp1~)'
-	dh_strip -plibfreerdp-server2-2 --dbgsym-migration='libfreerdp-server2-dbg (<< 2.0.0~git20161130.1.e60d0d5+dfsg1-1~exp1~)'
-	dh_strip -plibfreerdp-shadow2-2 --dbgsym-migration='libfreerdp-shadow2-dbg (<< 2.0.0~git20161130.1.e60d0d5+dfsg1-1~exp1~)'
-	dh_strip -plibfreerdp-shadow-subsystem2-2 --dbgsym-migration='libfreerdp-shadow2-dbg (<< 2.0.0~git20161130.1.e60d0d5+dfsg1-1~exp1~)'
-	dh_strip -plibfreerdp-client2-2 --dbgsym-migration='libfreerdp-client2-dbg (<< 2.0.0~git20161130.1.e60d0d5+dfsg1-1~exp1~)'
-	dh_strip -plibwinpr2-2 --dbgsym-migration='libwinpr2-dbg (<< 2.0.0~git20161130.1.e60d0d5+dfsg1-1~exp1~)'
-	dh_strip -plibwinpr-tools2-2 --dbgsym-migration='libwinpr-tools2-dbg (<< 2.0.0~git20161130.1.e60d0d5+dfsg1-1~exp1~)'
-	dh_strip -pfreerdp2-x11 --dbgsym-migration='freerdp2-x11-dbg (<< 2.0.0~git20161130.1.e60d0d5+dfsg1-1~exp1~)'
-	dh_strip -pfreerdp2-shadow-x11 --dbgsym-migration='freerdp2-shadow-x11-dbg (<< 2.0.0~git20161130.1.e60d0d5+dfsg1-1~exp1~)'
-	dh_strip -pwinpr-utils --dbgsym-migration='winpr-utils-dbg (<< 2.0.0~git20161130.1.e60d0d5+dfsg1-1~exp1~)'
-	dh_strip -pfreerdp2-wayland --dbgsym-migration='freerdp2-wayland-dbg (<< 2.0.0~git20161130.1.e60d0d5+dfsg1-1~exp1~)'
-	dh_strip -plibuwac0-0 --dbgsym-migration='libuwac0-dbg (<< 2.0.0~git20161130.1.e60d0d5+dfsg1-1~exp1~)'
-
 include /usr/share/dpkg/pkg-info.mk
 
 PKD   = $(word 1,$(abspath $(dir $(MAKEFILE_LIST))))
