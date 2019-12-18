@@ -1,2 +1,3 @@
 1001_spelling-fixes.patch
 0001_CVE-2019-17177.patch
+0002_fix-channels-smartcard-fix-statusw-call.patch

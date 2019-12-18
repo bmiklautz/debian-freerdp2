@@ -1,0 +1,46 @@
+From a311075202865d22b87ec2ea8d1e32fa11868012 Mon Sep 17 00:00:00 2001
+From: Bernhard Miklautz <bernhard.miklautz@thincast.com>
+Date: Wed, 10 Jul 2019 18:36:34 +0200
+Subject: [PATCH] fix [channels/smartcard]: fix StatusW_Call
+
+According to 2.2.2.18 Status_Call cbAtrLen is unused an must be ignored
+upon receipt.
+---
+ channels/smartcard/client/smartcard_operations.c | 13 ++++++++-----
+ 1 file changed, 8 insertions(+), 5 deletions(-)
+
+--- a/channels/smartcard/client/smartcard_operations.c
++++ b/channels/smartcard/client/smartcard_operations.c
+@@ -1204,15 +1204,19 @@
+ 	Status_Call* call = operation->call;
+ 	DWORD cbAtrLen;
+ 
+-	if (call->cbAtrLen > 32)
+-		call->cbAtrLen = 32;
++	/**
++	 * [MS-RDPESC]
++	 * According to 2.2.2.18 Status_Call cbAtrLen is unused an must be ignored upon receipt.
++	 */
++	cbAtrLen = call->cbAtrLen = 32;
++
++	call->cchReaderLen;
+ 
+ 	if (call->fmszReaderNamesIsNULL)
+ 		cchReaderLen = 0;
+ 	else
+ 		cchReaderLen = SCARD_AUTOALLOCATE;
+ 
+-	cbAtrLen = call->cbAtrLen;
+ 	ZeroMemory(ret.pbAtr, 32);
+ 	status = ret.ReturnCode = SCardStatusW(operation->hCard,
+ 	                                       call->fmszReaderNamesIsNULL ? NULL : (LPWSTR) &mszReaderNames,
+@@ -1231,8 +1235,7 @@
+ 		ret.cBytes = cchReaderLen;
+ #endif
+ 
+-		if (call->cbAtrLen)
+-			ret.cbAtrLen = cbAtrLen;
++		ret.cbAtrLen = cbAtrLen;
+ 	}
+ 
+ 	smartcard_trace_status_return(smartcard, &ret, TRUE);
