@@ -1,3 +1,33 @@
+freerdp2 (2.0.0~git20190204.1.2693389a+dfsg1-3) unstable; urgency=medium
+
+  * debian/patches - security releated backports from upstream
+    * Add 0003-Fixed-6007-Boundary-checks-in-rdp_read_flow_control.patch
+    * Add 0004-Fixed-6009-Bounds-checks-in-autodetect_recv_bandwidt.patch
+    * Add 0005-Fixed-6006-bounds-checks-in-update_read_synchronize.patch
+    * Add 0006-Fixed-6005-Bounds-checks-in-update_read_bitmap_data.patch
+    * Add 0007-Fixed-6011-Bounds-check-in-rdp_read_font_capability.patch
+    * Add 0008-Fixed-6013-Check-new-length-is-0.patch
+    * Add 0009-Fix-6010-Check-length-in-read_icon_info.patch
+    * Add 0010-Use-substreams-to-parse-gcc_read_server_data_blocks.patch
+    * Add 0011-Fixed-Stream_-macros-bracing-arguments.patch
+    * Add 0012-Use-safe-seek-for-capability-parsing.patch
+    * Add 0013-Fixed-CVE-2020-11525-Out-of-bounds-read-in-bitmap_ca.patch
+      (CVE-2020-11525).
+    * Add 0014-Fixed-6012-CVE-2020-11526-Out-of-bounds-read-in-upda.patch
+      (CVE-2020-11526).
+    * Add 0015-Fix-CVE-2020-11523-clamp-invalid-rectangles-to-size-.patch
+      (CVE-2020-11523).
+    * Add 0016-Fix-CVE-2020-11524-out-of-bounds-access-in-interleav.patch
+      (CVE-2020-11524).
+    * Add 0017-Fixed-CVE-2020-11522-Limit-number-of-DELTA_RECT-to-4.patch
+      (CVE-2020-11522).
+    * Add 0018-Fixed-CVE-2020-11521-Out-of-bounds-write-in-planar-c.patch
+      (CVE-2020-11521).
+    * Add 0019-Fixed-possible-NULL-access.patch
+    * Add 0020-Check-for-int-overflow-in-gdi_InvalidateRegion.patch
+
+ -- Bernhard Miklautz <bernhard.miklautz@shacknet.at>  Mon, 13 Apr 2020 21:31:35 +0000
+
 freerdp2 (2.0.0~git20190204.1.2693389a+dfsg1-2) unstable; urgency=medium
 
   * debian/control:

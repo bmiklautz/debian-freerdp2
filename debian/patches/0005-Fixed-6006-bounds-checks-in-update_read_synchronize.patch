@@ -1,0 +1,28 @@
+--- a/libfreerdp/core/update.c
++++ b/libfreerdp/core/update.c
+@@ -292,13 +292,13 @@ fail:
+ 	return NULL;
+ }
+ 
+-static void update_read_synchronize(rdpUpdate* update, wStream* s)
++static BOOL update_read_synchronize(rdpUpdate* update, wStream* s)
+ {
+-	Stream_Seek_UINT16(s); /* pad2Octets (2 bytes) */
+ 	/**
+ 	 * The Synchronize Update is an artifact from the
+ 	 * T.128 protocol and should be ignored.
+ 	 */
++	return Stream_SafeSeek(s, 2); /* pad2Octets (2 bytes) */
+ }
+ 
+ static BOOL update_read_play_sound(wStream* s, PLAY_SOUND_UPDATE* play_sound)
+@@ -676,7 +676,8 @@ BOOL update_recv(rdpUpdate* update, wStream* s)
+ 			break;
+ 
+ 		case UPDATE_TYPE_SYNCHRONIZE:
+-			update_read_synchronize(update, s);
++			if (!update_read_synchronize(update, s))
++				return FALSE;
+ 			rc = IFCALLRESULT(TRUE, update->Synchronize, context);
+ 			break;
+ 
